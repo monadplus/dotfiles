@@ -1,19 +1,16 @@
 # Keybindings
 
+<M-?> means Meta/Super key
+
 ## Plugins
 
 ### [vim-surround](https://github.com/tpope/vim-surround)
+
 cs"'  replace surrouding " for '
 ds"   remove surrounding "
 yss"  add surrounding "
 ysiw" add surround " on current word/object
 [visual] S
-
-### [Snippets](https://github.com/neoclide/coc-snippets)
-You must add them at `.config/nvim/snippets/`.
-<C-j> next placeholder
-<C-k> previous placeholder
-:CocList snippets
 
 ### [gitgutter](https://github.com/airblade/vim-gitgutter)
 
@@ -23,7 +20,10 @@ You must add them at `.config/nvim/snippets/`.
 
 ### [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
-:Git command        Raw commands
+gf                  :Gstatus
+gv                  :Gvdiff
+
+:Git command           Raw commands
 :Gwrite                :Git add %
 :Gread                 :Git checkout %
 :Gremove               :Git rm %
@@ -47,7 +47,7 @@ You must add them at `.config/nvim/snippets/`.
   :do                      :diffget
   :dp                      :diffput
   :.diffget                only current line
-  [visual] :'<,'>diffget   only some lines
+  [visual] :`<,`>diffget   only some lines
 
 Merging:
   :Gmerge
@@ -164,13 +164,13 @@ K             show documentation
 <leader>hf    Format haskell code with both
 
 
-### Switching
+### Switch Window
 <M-h>
 <M-j>
 <M-k>
 <M-l>
 
-### Moving
+### Movie Window
 <M-H>
 <M-J>
 <M-K>

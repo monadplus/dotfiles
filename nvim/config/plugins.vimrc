@@ -12,7 +12,7 @@ let g:airline_powerline_fonts=1
 filetype plugin on
 
 " Nerdtree git plugin symbols
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "m",
     \ "Staged"    : "s",
     \ "Untracked" : "u",
@@ -38,7 +38,7 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeShowHidden = 1
 
-let g:NERDTreeShowGitStatus = 1
+let g:NERDTreeGitStatusEnable = 1
 
 " Rainbow brackets
 let g:rainbow_active = 1
@@ -58,17 +58,36 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 
 " ----- hindent & stylish-haskell -----
 
-let g:stylishask_config_file = "~/.stylish-haskell.yaml"
-let g:stylishask_on_save = 0
-let g:hindent_on_save    = 0
+" Deprecated in favour of ormolu
 
-" ----- w0rp/ale -----
-"  I prefer ghcid over ghc-mod for large projects
-"  ghcid integration: https://github.com/aiya000/vim-ghcid-quickfix
+"let g:stylishask_config_file = "~/.stylish-haskell.yaml"
+"let g:stylishask_on_save = 0
+"let g:hindent_on_save    = 0
+
+"function! HaskellFormat(which) abort
+  "if a:which ==# 'hindent' || a:which ==# 'both'
+    ":Hindent
+  "endif
+  "if a:which ==# 'stylish' || a:which ==# 'both'
+    "silent! exe 'undojoin'
+    "silent! exe 'keepjumps %!stylish-haskell'
+  "endif
+"endfunction
+
+"augroup haskellStylish
+  "au!
+  "" Just hindent
+  "au FileType haskell nnoremap <leader>hi :Hindent<CR>
+  "" Just stylish-haskell
+  "au FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
+  "" First hindent, then stylish-haskell
+  "au FileType haskell nnoremap <leader>hf :call HaskellFormat('both')<CR>
+"augroup END
+
+" ----- ale -----
+
+" I prefer ghcid over ghc-mod for large projects
 "let g:ale_linters = {'haskell': ['ghc-mod', 'hlint']}
-
-" -- Deactivated
-"let g:ale_linters = {'haskell': ['hlint']}
 
 " Create/Update tags on save file
 augroup tags

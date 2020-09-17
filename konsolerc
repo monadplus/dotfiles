@@ -5,12 +5,12 @@ DefaultProfile=Arnau.profile
 Favorites=Arnau.profile
 
 [KonsoleWindow]
-RemoveWindowTitleBarAndFrame=true
 ShowMenuBarByDefault=false
 
 [MainWindow]
-Height 1080=1016
+Height 1080=978
 MenuBar=Disabled
-State=AAAA/wAAAAD9AAAAAAAAA8AAAAP4AAAABAAAAAQAAAAIAAAACPwAAAAA
+State=AAAA/wAAAAD9AAAAAAAAA8AAAALUAAAABAAAAAQAAAAIAAAACPwAAAAA
 ToolBarsMovable=Disabled
-Width 1920=960
+Width 1920=776
+Window-Maximized 1080x1920=true

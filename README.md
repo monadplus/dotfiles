@@ -3,13 +3,15 @@ Dotfiles
 
 ### TODO
 
-- xmonad + xmobar
 - aws
 - dmenu, htop, psql, trans-shell
-- clipmenud as a service:w
 - .cabal and .stack
 - latex + lualatex(vim render command)
 - rust, cargo and friends
+
+- tile manager ?
+- Learn tmux
+- Emacs
 
 --------------------------------------
 
@@ -47,8 +49,22 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 ln -s ~/dotfiles/.zshrc ~/.zshrc # link
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k # Install theme and configure using the promp
 
-- Install xmonad & xmobar
+- (This time I am not installing xmonad. It is a lot of work and I prefer a simpler configuration) Install xmonad & xmobar & stalonetray & dmenu
+
+```bash
+# Install
+sudo apt install xmonad xmobar stalonetray libghc-xmonad-dev libghc-xmonad-contrib-dev libghc-xmonad-extras-dev libghc-xmonad-wallpaper-dev
+
+# Link the files
+sudo mv -n /usr/share/xsessions/xmonad.desktop /usr/share/xsessions/xmonad.desktop.original # mv old
+...
+
+TODO
+
+I was following this tutorial repo https://github.com/davidbrewer/xmonad-ubuntu-conf
 ```
+
+- Install Clipboard Indicator: https://extensions.gnome.org/extension/779/clipboard-indicator/
 
 ### Window Manager
 

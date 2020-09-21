@@ -28,3 +28,7 @@ Eventually do:
 START_CHARGE_THRESH_BAT0=70
 STOP_CHARGE_THRESH_BAT0=85
 ```
+
+### doom-emacs
+
+requires: git, emacs, ripgrep gnu find, fd

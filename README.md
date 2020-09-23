@@ -66,6 +66,12 @@ sudo pacman -Syy zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-cb
 
 clipmenu and clipmenud
 
+### Redshift
+
+```bash
+ln -s ~/dotfiles/redshift ~/.config/redshift
+```
+
 ### Bugs & Solutions
 
 Left click on the touchpad is not working properly

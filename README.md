@@ -11,6 +11,18 @@ Add these files to dotfiles:
 - ~/.xmonad
 - ~/.config/polybar/
 
+### .config
+
+The list of configurations directories/files that must be placed in ~/.config are:
+
+- alacritty.yml
+- autostart
+- htop
+- neofetch
+- nvim
+- polybar
+- redshift
+
 ### Text Editor
 
 Follow [nvim instructions](./nvim/README.md)

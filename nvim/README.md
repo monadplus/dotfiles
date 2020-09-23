@@ -8,55 +8,27 @@ See [keybindings](./keybindings.md)
 
 Execute the following commands:
 
-!!! TODO update for arch linux
-
 ```bash
-# Some utilities that we will need
-sudo apt install git curl -y
+# Install neovim and its dependencies
+sudo pacman -Syy neovim python-pynvim
 
-# Clone this repo
-git clone git@github.com:monadplus/dotfiles.git ~/dotfiles
-cd dotfiles
+# Check python support (python is not supported)
+:python3 import sys; print(sys.version) # Should print python version
 
 # Link this directory to neovim's init.vim directory
-mkdir ~/.config
 ln -s ~/dotfiles/nvim ~/.config/nvim/
 
-# According to the official documentation https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu
-#
-# First we install neovim python dependencies
-sudo apt-get install python3 python3-dev python3-pip python3-neovim -y
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install neovim
-# Check :python3 import sys; print(sys.version)
-# Otherwise something went wrong
+# Install vim-plug plugin manager
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Some plugins require node, yarn and python installed in the system.
-# `pynvim` is also required for some python plugins
-# Not sure if this is required anymore
-pip3 install pynvim
-sudo apt install nodejs yarn -y
+sudo apt install nodejs yarn python -y
 
 # Install Nix
 sudo curl -L https://nixos.org/nix/install | sh
 
 # Install fast-tags (for ctags in neovim)
-# fast-tags are used to generate ctags from Haskell sources
-# In the configuration, every save on a haskell project, runs fast-tags to create the ctags or update them.
 nix-env -iA nixpkgs.haskellPackages.fast-tags
-
-# (Optional) Install ghc, cabal and stack
-nix-env -iA nixpkgs.haskell.compiler.ghcXXX
-nix-env -iA nixpkgs.haskellPackages.cabal-install
-nix-env -iA nixpkgs.haskellPackages.stack
-
-# Install vim-plug plugin manager
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-
-# (Optional) Alias vim -> nvim
-echo "alias vim='nvim'" >> ~/.bashrc
 
 # Enter Neovim and install plugins
 nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall' # will take some minutes
@@ -65,11 +37,14 @@ nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall' # will take some min
 
 # YouCompleteMe
 cd ~/.local/share/nvim/plugged/YouCompleteMe
-sudo apt install cmake -y
+sudo pacman -Syy cmake
+# Installing autocomplete for rust:
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # Install Rustup
 ./install.py --rust-completer # This only enables support for rust (and python by default)
 
 # direnv
-sudo apt install direnv -y
+sudo yay -Syy direnv
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc # echo 'eval "$(direnv hook zsh)"' >> ~/.bashrc
 
 # hoogle
 nix-env -iA nixpkgs.haskellPackages.hoogle
@@ -77,4 +52,12 @@ hoogle generate # this takes some minutes
 
 # ghcid
 nix-env -iA nixpkgs.haskellPackages.ghcid
+
+# (Optional) Alias vim -> nvim
+echo "alias vim='nvim'" >> ~/.bashrc
+
+# (Optional) Install ghc, cabal and stack
+nix-env -iA nixpkgs.haskell.compiler.ghcXXX
+nix-env -iA nixpkgs.haskellPackages.cabal-install
+nix-env -iA nixpkgs.haskellPackages.stack
 ```

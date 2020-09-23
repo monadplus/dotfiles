@@ -122,6 +122,7 @@ augroup END
 
 " Fuzzy finder shortcut
 nnoremap <C-p> :FZF<CR>
+let $FZF_DEFAULT_COMMAND='rg --hidden --files'
 
 " Dash
 " :nmap <silent> <leader>d <Plug>DashSearch

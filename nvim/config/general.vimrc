@@ -37,13 +37,13 @@ let maplocalleader = ','
 
 set backspace=2
 
+" Solarized dark looks shit (not sure why)
 set background=dark
 "Fix https://github.com/dracula/vim/issues/161
 au VimEnter * colorscheme dracula "colorscheme dracula
 let g:airline_theme='dracula'
-"let g:solarized_termcolors=256
-"colorscheme solarized
 
+syntax enable
 syntax on
 filetype plugin indent on
 

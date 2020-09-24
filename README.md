@@ -45,7 +45,9 @@ echo $SHELL # check shell is zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" # Install oh-my-zsh
 # Install a powerline font: https://github.com/powerline/fonts
 ln -s ~/dotfiles/.zshrc ~/.zshrc # link
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+# ~/.zshrc
+ZSH_THEME="powerlevel10k/powerlevel10k"
 # Oppen the shell and follow the powerlevel10k wizard
 ```
 
@@ -86,7 +88,7 @@ ln -s ~/dotfiles/redshift ~/.config/redshift
 
 ### Bugs & Solutions
 
-Left click on the touchpad is not working properly
+#### Left click on the touchpad is not working properly
 
 ```bash
 # Check what's happening
@@ -97,7 +99,7 @@ sudo modprobe -r psmouse
 sudo modprobe psmouse proto=imps
 ```
 
-Failed to start Load/Save Screen Backlight Brightness (**neither of these works**):
+#### Failed to start Load/Save Screen Backlight Brightness (**neither of these works**):
 
 ```bash
 # check
@@ -109,3 +111,11 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet acpi_backlight=vendor" # acpi_osi=Linux
 # Then
 sudo grub-mkconfig
 ```
+
+#### GHC and xmonad
+
+When installing xmonad with pacman, it will also install the newest ghc.
+
+If you install a new ghc (i.e. nix-env -iA ghcXXX), calling `xmonad --recompile` will fail.
+
+You need to remove the installed ghc

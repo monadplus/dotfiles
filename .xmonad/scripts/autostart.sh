@@ -32,7 +32,6 @@ xsetroot -cursor_name left_ptr &
 #run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 
 #Some ways to set your wallpaper besides variety or nitrogen
-# feh --bg-fill /usr/share/backgrounds/arcolinux/megumin.png &
 feh --bg-fill /home/arnau/wallpapers/megumin.png &
 #start the conky to learn the shortcuts
 #(conky -c $HOME/.xmonad/scripts/system-overview) &

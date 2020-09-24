@@ -1,3 +1,15 @@
+# Everything that I/O with the console needs to be placed before the Instant Prompt
+
+# The fancy Arch Linux ASCII art
+neofetch
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -5,13 +17,13 @@
 #installation via script from github
 #export ZSH="/home/$USER/.oh-my-zsh"
 #installation via yay -S oh-my-zsh-git
-export ZSH=/usr/share/oh-my-zsh/
+export ZSH=/usr/share/oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="random"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -115,53 +127,20 @@ if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
 
-#list
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias ll='ls -la'
-alias l='ls'
-alias l.="ls -A | egrep '^\.'"
-
 #fix obvious typo's
 alias cd..='cd ..'
 alias pdw="pwd"
 alias udpate='sudo pacman -Syyu'
 alias upate='sudo pacman -Syyu'
 
-## Colorize the grep command output for ease of use (good for log files)##
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-
 #readable output
 alias df='df -h'
-
-#pacman unlock
-alias unlock="sudo rm /var/lib/pacman/db.lck"
-
-#free
-alias free="free -mt"
-
-#use all cores
-alias uac="sh ~/.bin/main/000*"
-
-#continue download
-alias wget="wget -c"
 
 #userlist
 alias userlist="cut -d: -f1 /etc/passwd"
 
 #merge new settings
 alias merge="xrdb -merge ~/.Xresources"
-
-# Aliases for software managment
-# pacman or pm
-alias pacman='sudo pacman --color auto'
-alias update='sudo pacman -Syyu'
-
-# yay as aur helper - updates everything
-alias pksyua="yay -Syu --noconfirm"
-alias upall="yay -Syu --noconfirm"
 
 #ps
 alias psa="ps auxf"
@@ -173,29 +152,8 @@ alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 #add new fonts
 alias update-fc='sudo fc-cache -fv'
 
-#copy/paste all content of /etc/skel over to home folder - backup of config created - beware
-alias skel='cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rf /etc/skel/* ~'
-#backup contents of /etc/skel to hidden backup folder in home/user
-alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
-
-#copy bashrc-latest over on bashrc - cb= copy bashrc
-#alias cb='sudo cp /etc/skel/.bashrc ~/.bashrc && source ~/.bashrc'
-#copy /etc/skel/.zshrc over on ~/.zshrc - cb= copy zshrc
-alias cz='sudo cp /etc/skel/.zshrc ~/.zshrc && source ~/.zshrc'
-
-#switch between bash and zsh
-alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
-alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-
-#quickly kill conkies
-alias kc='killall conky'
-
 #hardware info --short
 alias hw="hwinfo --short"
-
-#skip integrity check
-alias yayskip='yay -S --mflags --skipinteg'
-alias trizenskip='trizen -S --skipinteg'
 
 #check vulnerabilities microcode
 alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
@@ -205,17 +163,6 @@ alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacma
 alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
 alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
-
-#mounting the folder Public for exchange between host and guest on virtualbox
-alias vbm="sudo /usr/local/bin/arcolinux-vbox-share"
-
-#shopt
-#shopt -s autocd # change to named directory
-#shopt -s cdspell # autocorrects cd misspellings
-#shopt -s cmdhist # save multi-line commands in history as single line
-#shopt -s dotglob
-#shopt -s histappend # do not overwrite history
-#shopt -s expand_aliases # expand aliases
 
 #youtube-dl
 alias yta-aac="youtube-dl --extract-audio --audio-format aac "
@@ -229,29 +176,23 @@ alias yta-wav="youtube-dl --extract-audio --audio-format wav "
 
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 
-#Recent Installed Packages
-alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
-
-#iso and version used to install ArcoLinux
-#alias iso="cat /etc/dev-rel | awk -F '=' '/ISO/ {print $2}'"
-
 #Cleanup orphaned packages
 alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-#nano for important configration files
-#know what you do in these files
-alias nlightdm="sudo nano /etc/lightdm/lightdm.conf"
-alias npacman="sudo nano /etc/pacman.conf"
-alias ngrub="sudo nano /etc/default/grub"
-alias nmkinitcpio="sudo nano /etc/mkinitcpio.conf"
-alias nslim="sudo nano /etc/slim.conf"
-alias noblogout="sudo nano /etc/oblogout.conf"
-alias nmirrorlist="sudo nano /etc/pacman.d/mirrorlist"
-alias nconfgrub="sudo nano /boot/grub/grub.cfg"
+alias vlightdm="sudo vim /etc/lightdm/lightdm.conf"
+alias vpacman="sudo vim /etc/pacman.conf"
+alias vgrub="sudo vim /etc/default/grub"
+alias vmkinitcpio="sudo vim /etc/mkinitcpio.conf"
+alias vslim="sudo vim /etc/slim.conf"
+alias voblogout="sudo vim /etc/oblogout.conf"
+alias vmirrorlist="sudo vim /etc/pacman.d/mirrorlist"
+alias vconfgrub="sudo vim /boot/grub/grub.cfg"
+alias vpoly="vim $HOME/dotfiles/polybar/config"
+alias vzshrc="vim $HOME/dotfiles/.zshrc"
+alias vxmonad="vim $HOME/dotfiles/.xmonad/xmonad.hs"
 
 #gpg
 #verify signature for isos
@@ -260,11 +201,14 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 #shutdown or reboot
-alias ssn="sudo shutdown now"
-alias sr="sudo reboot"
+alias shutdownNow="sudo shutdown now"
+alias shutdownReboot="sudo reboot"
 
 #editor
 alias vim="nvim"
+
+#Git related
+alias gs="git status"
 
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
@@ -312,9 +256,6 @@ compinit
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
 
-# The fancy Arch Linux ASCII art
-neofetch
-
 if [ -e /home/arnau/.nix-profile/etc/profile.d/nix.sh ]; then . /home/arnau/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -334,3 +275,6 @@ if [ "$(command -v bat)" ]; then
 fi
 
 eval "$(direnv hook zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

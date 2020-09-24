@@ -7,5 +7,5 @@ Comment=
 Exec=am-conky-session
 StartupNotify=false
 Terminal=false
-Hidden=false
+Hidden=true
 

@@ -130,8 +130,8 @@ fi
 #fix obvious typo's
 alias cd..='cd ..'
 alias pdw="pwd"
-alias udpate='sudo pacman -Syyu'
 alias upate='sudo pacman -Syyu'
+alias install='sudo pacman -Syy'
 
 #readable output
 alias df='df -h'

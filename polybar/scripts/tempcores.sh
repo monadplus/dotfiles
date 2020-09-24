@@ -26,7 +26,8 @@ do
     total=$(( ${tempCore[$iCore]} + total ));
 done
 
-sum=$(( $total/${#tempCore[*]} ))
+# FIXME
+#sum=$(( $total/${#tempCore[@]} ))
 
 for iTemp in ${!temperaturesValues[*]}
 do

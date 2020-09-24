@@ -123,6 +123,19 @@ clipmenu and clipmenud
 ln -s ~/dotfiles/redshift ~/.config/redshift
 ```
 
+### Java
+
+See [wiki](https://wiki.archlinux.org/index.php/Java)
+
+```bash
+sudo pacman -Syy jre-openjdk
+#sudo pacman -Syy jdk-openjdk # For development
+
+# Common packages
+sudo pacman -Syy java-runtime-common
+sudo pacman -Syy java-environment-common
+```
+
 ### Bugs & Solutions
 
 #### Left click on the touchpad is not working properly

@@ -111,17 +111,19 @@ module-margin-right = 3
 ; See the Messaging wiki page for more details.
 enable-ipc = true
 
-;https://github.com/jaagr/polybar/wiki/Fonts
+; https://github.com/polybar/polybar/wiki/Fonts
+; Mononoki and Iosevka look like shit.
 font-0 = "Noto Sans:size=10;0"
 font-1 = "FontAwesome:size=13;0"
-font-2 = "Noto Sans:size=10;0"
-font-3 = "Noto Sans Mono:size=10;0"
-font-4 = "FontAwesome5Brands:size=13;0"
+;font-2 = "Noto Sans:size=10;0"
+;font-3 = "Noto Sans Mono:size=10;0"
+;font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh date weather
 modules-center = wired-network powermenu wireless-network networkspeeddown networkspeedup
 modules-right = pavolume backlight battery battery_left memory2 cpu2
-; sometimes fails temperature2
+; temperature2 (removed because it has a bug in the bash script)
+; Not enough bash knowledge to fix it
 
 tray-detached = false
 tray-offset-x = 0
@@ -445,9 +447,12 @@ card = amdgpu_bl0
 ;   <label> (default)
 ;   <ramp>
 ;   <bar>
-format = Brightness <label>
+format = <label>
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
+format-prefix = "   "
+format-prefix-foreground = #FFFF00
+;format-underline = #FFFF00
 
 ; Available tokens:
 ;   %percentage% (default)
@@ -458,7 +463,7 @@ ramp-0 = 🌕
 ramp-1 = 🌔
 ramp-2 = 🌓
 ramp-3 = 🌒
-ramp-4 = 🌑
+ramp-4 = 
 
 ; Only applies if <bar> is used
 bar-width = 10
@@ -475,7 +480,7 @@ type = internal/battery
 ;ls -1 /sys/class/power_supply/
 battery = BAT0
 adapter = AC
-full-at = 84
+full-at = 80
 
 time-format = %H:%M
 
@@ -483,17 +488,17 @@ format-charging = <animation-charging> <label-charging>
 label-charging = %percentage%%
 format-charging-foreground = ${colors.foreground}
 format-charging-background = ${colors.background}
-format-charging-underline = #a3c725
+;format-charging-underline = #a3c725
 
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = %percentage%%
-format-discharging-underline = #c7ae25
+;format-discharging-underline = #c7ae25
 format-discharging-foreground = ${colors.foreground}
 format-discharging-background = ${colors.background}
 
 format-full-prefix = " "
 format-full-prefix-foreground = #a3c725
-format-full-underline = #a3c725
+;format-full-underline = #a3c725
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
@@ -590,7 +595,7 @@ format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 format-prefix = "  "
 format-prefix-foreground = #cd1f3f
-format-underline = #cd1f3f
+;format-underline = #cd1f3f
 
 label-font = 3
 
@@ -624,7 +629,7 @@ time = %H:%M
 time-alt = %H:%M
 format-prefix = " "
 format-prefix-foreground = #c1941a
-format-underline = #c1941a
+;format-underline = #c1941a
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 label = %date%   %time%
@@ -866,7 +871,7 @@ label = %percentage_used%%
 format = Mem <label>
 format-prefix = "  "
 format-prefix-foreground = #3384d0
-format-underline = #3384d0
+;format-underline = #3384d0
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
@@ -994,7 +999,7 @@ click-right = exec pavucontrol
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
 scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
 scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
-format-underline = #3EC13F
+;format-underline = #3EC13F
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
@@ -1095,7 +1100,6 @@ ramp-foreground =${colors.foreground}
 
 [module/temperature2]
 type = custom/script
-; TODO there is an error in the script
 exec = ~/.config/polybar/scripts/tempcores.sh
 interval = 2
 format-padding = 1
@@ -1177,8 +1181,8 @@ type = custom/script
 interval = 10
 format = <label>
 format-prefix = " "
-format-prefix-foreground = #3EC13F
-format-underline = #3EC13F
+format-prefix-foreground = #0000FF
+;format-underline = #0000FF
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 exec = python -u ~/.config/polybar/scripts/weather.py
@@ -1207,7 +1211,7 @@ label-disconnected = %ifname% disconnected
 
 format-connected-foreground = ${colors.foreground}
 format-connected-background = ${colors.background}
-format-connected-underline = #55aa55
+;format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = #55aa55
 format-connected-prefix-background = ${colors.background}
@@ -1233,7 +1237,7 @@ format-connected-background = ${colors.background}
 format-connected-prefix = "  "
 format-connected-prefix-foreground = #7e52c6
 format-connected-prefix-background = ${colors.background}
-format-connected-underline = #7e52c6
+;format-connected-underline = #7e52c6
 
 label-disconnected = %ifname% disconnected
 label-disconnected-foreground = ${colors.alert}

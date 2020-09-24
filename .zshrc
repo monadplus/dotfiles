@@ -204,6 +204,9 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 alias shutdownNow="sudo shutdown now"
 alias shutdownReboot="sudo reboot"
 
+# Kills all users programs and brings you to lightdm
+alias logout-ligthdm="kill -9 -1"
+
 #editor
 alias vim="nvim"
 

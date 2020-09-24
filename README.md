@@ -136,6 +136,18 @@ sudo pacman -Syy java-runtime-common
 sudo pacman -Syy java-environment-common
 ```
 
+### Docker
+
+```bash
+sudo pacman -Syy docker
+sudo usermod -aG docker $USER # add user to docker group
+systemctl enable docker.service
+systemctl start docker.service
+# (optional) logout and login to reload your permissions
+kill -9 -1
+docker info # should work
+```
+
 ### Bugs & Solutions
 
 #### Left click on the touchpad is not working properly
@@ -172,6 +184,12 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet acpi_backlight=vendor" # acpi_osi=Linux
 
 # Then
 sudo grub-mkconfig
+```
+
+### Software
+
+```bash
+sudo pacman -Syy macho
 ```
 
 #### GHC and xmonad

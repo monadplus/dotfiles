@@ -94,7 +94,7 @@ myManageHook =
     my1Shifts = []
     my2Shifts = []
     my3Shifts = ["Firefox", "Chromium-browser"]
-    my4Shifts = ["Discord", "Slack", "zoom"]
+    my4Shifts = ["Discord", "Slack", "zoom", "obs"]
     my5Shifts = ["Mail"] -- i.e. thunderbird
     myShifts = [my1Shifts, my2Shifts, my3Shifts, my4Shifts, my5Shifts]
 

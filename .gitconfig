@@ -2,6 +2,9 @@
 	email = arnauabella@gmail.com
 	name = Arnau Abella
 	username = monadplus
+[pager]
+  diff = less
+  show = less
 [core]
 	editor = nvim
 [web]

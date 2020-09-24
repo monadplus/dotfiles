@@ -1,7 +1,9 @@
 Dotfiles
 ========
 
-The following instructions are only for Arch Linux.
+The following dotfiles were tested on Arch Linux.
+
+For a basic good on how to install Arc Linux: [here](./arch-linux.md).
 
 ## Configuration
 
@@ -148,7 +150,37 @@ kill -9 -1
 docker info # should work
 ```
 
-### Bugs & Solutions
+### BitTorrent Clients
+
+Install `Deluge` bittorrent client:
+
+```bash
+sudo pacman -Syy  deluge deluge-gtk
+systemctl enable deluged.service
+systemctl start deluged.service
+```
+
+### Utils
+
+- macho: better man
+- fd: better find
+- ncdu: disk space analyzer (really good)
+- zeal: programming language offline docs
+- rtv: reddit from terminal
+- youtube-dl: youtube download video/audio
+- pgcli: better psql
+- lazydocker: terminal ui for docker (be careful, the PKGBUILD uninstall go :rofl:)
+- autorandr
+
+```bash
+sudo pacman -Syy macho fd obs-studio ncdu aws-cli docker-compose pandoc
+yay -S pgcli lazydocker
+nix-env -iA nixpkgs.haskellPackages.pandoc
+nix-env -iA nixpkgs.haskellPackages.hlint
+```
+
+
+### Issues and Solutions
 
 #### Left click on the touchpad is not working properly
 
@@ -184,12 +216,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet acpi_backlight=vendor" # acpi_osi=Linux
 
 # Then
 sudo grub-mkconfig
-```
-
-### Software
-
-```bash
-sudo pacman -Syy macho
 ```
 
 #### GHC and xmonad

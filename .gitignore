@@ -1,4 +1,14 @@
+# tmp files
 *~
+
+# ctags
 tags
-# About exposing credentials
+
+# Avoid exposing credentials
 credentials
+
+# xmonad related
+*.hi
+*.o
+xmonad-x86_64-linux
+*.errors

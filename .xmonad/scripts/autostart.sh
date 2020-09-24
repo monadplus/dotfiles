@@ -22,47 +22,43 @@ function run {
 # This is a dirty trick to reload polybar after boot.
 (sleep 40; polybar-msg cmd restart) &
 
-#change your keyboard if you need it
-#setxkbmap -layout be
+#setxkbmap -layout be #keyboard layout
+xsetroot -cursor_name left_ptr & #cursor active at boot
 
-#cursor active at boot
-xsetroot -cursor_name left_ptr &
 
-#start ArcoLinux Welcome App
+#################################
+# Starting utility at boot time #
+#################################
+
+# Wallpaper: feh, nitrogen, variety
+# feh --bg-fill /home/arnau/wallpapers/megumin.png &
+feh --bg-fill /home/arnau/wallpapers/purple.jpg &
+#nitrogen --restore &
+#run variety &
+
 #run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
+#(conky -c $HOME/.xmonad/scripts/system-overview) & #start the conky to learn the shortcuts
 
-#Some ways to set your wallpaper besides variety or nitrogen
-feh --bg-fill /home/arnau/wallpapers/megumin.png &
-#start the conky to learn the shortcuts
-#(conky -c $HOME/.xmonad/scripts/system-overview) &
-
-#starting utility applications at boot time
-run variety &
 run nm-applet & # NetworkManager systray
-run pamac-tray &
-# run xfce4-power-manager & # xfce4-power-manager-settings
-run clipmenud &
-# run volumeicon & # There is already the polybar icon
-# numlockx on &
-blueberry-tray & # bluetooth
-picom --config $HOME/.xmonad/scripts/picom.conf &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+run pamac-tray & # Package Manager at Tray
+run clipmenud & # Clipboard Manager
+blueberry-tray & # Bluetooth
+picom --config $HOME/.xmonad/scripts/picom.conf & # Window Composer
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # TODO
 /usr/lib/xfce4/notifyd/xfce4-notifyd & # Notifications as pop-ups - xfce4-notifyd-config
 udiskie & # Auto-mount disk
+# run xfce4-power-manager & # xfce4-power-manager-settings
+# run volumeicon & # There is already the polybar icon
+# numlockx on &
 
-#starting user applications at boot time
-#nitrogen --restore &
-#run caffeine &
-#run vivaldi-stable &
-run firefox &
-#run thunar &
-#run spotify &
-#run atom &
+###########################################
+# Starting user applications at boot time #
+###########################################
 
-#run telegram-desktop &
-#run discord &
 run dropbox &
 run enpass &
-#run insync start &
-#run ckb-next -b &
 run thunderbird &
+run firefox &
+#run thunar & # File Manager
+#run spotify &
+#run discord &

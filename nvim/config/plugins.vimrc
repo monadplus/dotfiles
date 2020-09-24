@@ -56,34 +56,6 @@ let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
-" ----- hindent & stylish-haskell -----
-
-" Deprecated in favour of ormolu
-
-"let g:stylishask_config_file = "~/.stylish-haskell.yaml"
-"let g:stylishask_on_save = 0
-"let g:hindent_on_save    = 0
-
-"function! HaskellFormat(which) abort
-  "if a:which ==# 'hindent' || a:which ==# 'both'
-    ":Hindent
-  "endif
-  "if a:which ==# 'stylish' || a:which ==# 'both'
-    "silent! exe 'undojoin'
-    "silent! exe 'keepjumps %!stylish-haskell'
-  "endif
-"endfunction
-
-"augroup haskellStylish
-  "au!
-  "" Just hindent
-  "au FileType haskell nnoremap <leader>hi :Hindent<CR>
-  "" Just stylish-haskell
-  "au FileType haskell nnoremap <leader>hs :call HaskellFormat('stylish')<CR>
-  "" First hindent, then stylish-haskell
-  "au FileType haskell nnoremap <leader>hf :call HaskellFormat('both')<CR>
-"augroup END
-
 " ----- ale -----
 
 " I prefer ghcid over ghc-mod for large projects

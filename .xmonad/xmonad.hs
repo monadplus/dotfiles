@@ -60,7 +60,7 @@ myModMask = mod4Mask
 encodeCChar = map fromIntegral . B.unpack
 myFocusFollowsMouse = True
 myBorderWidth = 2
-myWorkspaces    = ["\61508","\61787","\61612","\61787","\61787","\63163"]
+myWorkspaces    = ["\61508","\61897","\61612","\61788","\61664"]
 --myWorkspaces    = ["1","2","3","4","5","6","7","8","9","10"]
 --myWorkspaces    = ["I","II","III","IV","V","VI","VII","VIII","IX","X"]
 

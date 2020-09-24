@@ -119,7 +119,7 @@ font-3 = "Noto Sans Mono:size=10;0"
 font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh date weather
-modules-center = wired-network wireless-network networkspeeddown networkspeedup
+modules-center = wired-network powermenu wireless-network networkspeeddown networkspeedup
 modules-right = pavolume backlight battery battery_left memory2 cpu2
 ; sometimes fails temperature2
 
@@ -1317,5 +1317,17 @@ label-maxlen = 50
 
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
+
+###############################################################################
+
+[module/powermenu]
+type = custom/text
+content = 
+content-padding = 2
+content-background = ${color.acolor}
+content-foreground = ${color.fg}
+click-left = $HOME/.config/polybar/scripts/sysmenu
+click-right = $HOME/.config/polybar/scripts/sysmenu
+tail = true
 
 ###############################################################################

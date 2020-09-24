@@ -101,10 +101,22 @@ sudo modprobe psmouse proto=imps
 
 #### Failed to start Load/Save Screen Backlight Brightness (**neither of these works**):
 
+This is a known issue (https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_T495s)
+
 ```bash
 # check
 systemctl status systemd-backlight@backlight:acpi_video0.service
+```
 
+The solution is to mask (ignore) the error:
+
+```bash
+systemctl status systemd-backlight@backlight:acpi_video0.service
+```
+
+I tried to fix the error (instead of masking it) but it has no (visible) effect:
+
+```bash
 #/etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet acpi_backlight=vendor" # acpi_osi=Linux
 

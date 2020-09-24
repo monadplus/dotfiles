@@ -40,7 +40,7 @@ feh --bg-fill /home/arnau/wallpapers/megumin.png &
 run variety &
 run nm-applet & # NetworkManager systray
 run pamac-tray &
-run xfce4-power-manager & # xfce4-power-manager-settings
+# run xfce4-power-manager & # xfce4-power-manager-settings
 run clipmenud &
 # run volumeicon & # There is already the polybar icon
 # numlockx on &

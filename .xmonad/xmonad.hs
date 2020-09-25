@@ -103,15 +103,17 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) =
     [ -- Floating Windows:
       -- M + Mouse Left: move
       -- M + shift + Mouse Left: resize
+      -- M + Mouse Right: resize
       ((modMask, 1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster)),
       ((modMask .|. mod1Mask, 1), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster)),
+      ((modMask, 3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster)),
       -- M + Mouse Middle: raise the window to the top of the stack
       ((modMask, 2), (\w -> focus w >> windows W.shiftMaster))
     ]
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) =
   M.fromList $
-    [ ((modMask, xK_n), spawn $ "alacritty -e htop"),
+    [ ((modMask, xK_g), spawn $ "alacritty -e htop"),
       ((modMask, xK_v), spawn $ "pavucontrol"),
       ((modMask, xK_Return), spawn $ "alacritty"),
       ((modMask .|. shiftMask, xK_Return), spawn $ "thunar"),
@@ -119,7 +121,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((controlMask .|. shiftMask, xK_v), spawn $ "clipmenu"),
       ((modMask .|. shiftMask, xK_r), spawn $ "xmonad --recompile && xmonad --restart"),
       ((modMask .|. shiftMask, xK_o), spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"),
-      ((controlMask .|. modMask, xK_p), spawn $ "pamac-manager"),
+      ((modMask .|. shiftMask, xK_p), spawn $ "pamac-manager"),
       ((modMask, xK_c), spawn $ "conky-toggle"),
       -- Focus
       ((modMask, xK_j), windows W.focusDown),
@@ -150,8 +152,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((modMask, xK_q), kill),
       -- Floating Window
       ((modMask, xK_f), withFocused (sendMessage . maximizeRestore)),
-      ((modMask, xK_e), toggleFloatNext),
-      ((modMask .|. shiftMask, xK_e), toggleFloatAllNew), -- toggle fullscreen
+      --((modMask, xK_e), toggleFloatNext),
+      --((modMask .|. shiftMask, xK_e), toggleFloatAllNew), -- toggle fullscreen
       ((modMask, xK_equal), withFocused (keysMoveWindow (-1, -30))),
       ((modMask, xK_apostrophe), withFocused (keysMoveWindow (-1, 30))),
       ((modMask, xK_bracketright), withFocused (keysMoveWindow (30, 0))),

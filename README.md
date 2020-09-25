@@ -179,6 +179,15 @@ nix-env -iA nixpkgs.haskellPackages.pandoc
 nix-env -iA nixpkgs.haskellPackages.hlint
 ```
 
+### Latex
+
+```bash
+# This takes a looooooooong time
+sudo pacman -Syy texlive-most texlive-lang-extra biber
+```
+
+This should be enough, otherwise have a look at the [Wiki](https://wiki.archlinux.org/index.php/TeX_Live)
+
 
 ### Issues and Solutions
 

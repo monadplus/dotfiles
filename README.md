@@ -188,6 +188,46 @@ sudo pacman -Syy texlive-most texlive-lang-extra biber
 
 This should be enough, otherwise have a look at the [Wiki](https://wiki.archlinux.org/index.php/TeX_Live)
 
+### Power Management
+
+See [wiki](https://wiki.archlinux.org/index.php/Power_management#Power_management_with_systemd)
+
+Power management through systemd:
+
+```bash
+systemctl suspend
+```
+
+Hibernate requires [some tweaking](https://wiki.archlinux.org/index.php/Power_management/Suspend_and_hibernate#Hibernation).
+For arcolinux, it seems to work out of the box:
+
+```bash
+systemctl hibernate
+```
+
+How to change PowerKey to suspend instead of poweroff
+
+```bash
+# Pick one:
+#   $ sudo vim /etc/systemd/logind.conf
+#   $ sudo vim /etc/systemd/logind.conf.d/*.conf
+> [Login]
+> HandlePowerKey=suspend
+
+# Restart logind
+systemctl kill -s HUP systemd-logind
+```
+
+### Kernel parameter
+
+Loadable modules are set via `.conf` files in `/etc/modprobe.d/`
+
+For example, to disable beep:
+
+```bash
+# sudo vim /etc/modprobe.d/nobeep.conf
+> blacklist pcspkr
+```
 
 ### Issues and Solutions
 

@@ -120,7 +120,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((modMask, xK_p), spawn $ "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'Noto Sans:bold:pixelsize=14'"),
       ((controlMask .|. shiftMask, xK_v), spawn $ "clipmenu"),
       ((modMask .|. shiftMask, xK_r), spawn $ "xmonad --recompile && xmonad --restart"),
-      ((modMask .|. shiftMask, xK_o), spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"),
+      ((modMask, xK_o), spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"),
       ((modMask .|. shiftMask, xK_p), spawn $ "pamac-manager"),
       ((modMask, xK_c), spawn $ "conky-toggle"),
       -- Focus
@@ -152,8 +152,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((modMask, xK_q), kill),
       -- Floating Window
       ((modMask, xK_f), withFocused (sendMessage . maximizeRestore)),
+      -- It seems they have no effect..
       --((modMask, xK_e), toggleFloatNext),
-      --((modMask .|. shiftMask, xK_e), toggleFloatAllNew), -- toggle fullscreen
+      --((modMask .|. shiftMask, xK_e), toggleFloatAllNew),
       ((modMask, xK_equal), withFocused (keysMoveWindow (-1, -30))),
       ((modMask, xK_apostrophe), withFocused (keysMoveWindow (-1, 30))),
       ((modMask, xK_bracketright), withFocused (keysMoveWindow (30, 0))),
@@ -168,8 +169,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       -- Backlight Control
       ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl set +10%"),
       ((0, xF86XK_MonBrightnessDown), spawn "brightnessctl set 10%-"),
-      -- TODO set screensaver daemon
       -- Session Lock
+      ((modMask .|. shiftMask, xK_s), spawn "kill -9 -1"),
+      -- TODO set screensaver daemon
       --((modMask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off"),
       -- Screenshots
       ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -q 100 ~/screenshots/$(date +'%Y-%b-%d-%s').png"),

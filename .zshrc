@@ -203,6 +203,8 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 #shutdown or reboot
 alias shutdownNow="sudo shutdown now"
 alias shutdownReboot="sudo reboot"
+alias suspend="systemctl suspend"
+alias hibernate="systemctl hibernate"
 
 # Kills all users programs and brings you to lightdm
 alias logout-ligthdm="kill -9 -1"

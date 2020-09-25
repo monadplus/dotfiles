@@ -215,6 +215,9 @@ alias vim="nvim"
 #Git related
 alias gs="git status"
 
+#Printer
+alias printpdf="lpr"
+
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()

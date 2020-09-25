@@ -228,6 +228,20 @@ For example, to disable beep:
 # sudo vim /etc/modprobe.d/nobeep.conf
 > blacklist pcspkr
 ```
+### Media Player
+
+There is a lot of free media players.
+
+I am currently using [vlc](https://wiki.archlinux.org/index.php/VLC_media_player)
+
+```bash
+sudo pacman -Syy vlc playerctl
+
+# playerctl provices command line tool to send commands to MPRIS clients (VLC)
+playerctl play-pause --player=vlc
+```
+
+VLC can stream to chromecast!
 
 ### Issues and Solutions
 

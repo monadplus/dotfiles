@@ -18,7 +18,7 @@ Documentation [here](https://github.com/hlissner/doom-emacs/blob/develop/docs/ge
 First install `emacs` (current version 27.1), `git`, `ripgrep` and `find` (or `fd`):
 
 ```bash
-sudo pacman -Syy emacs git find ripgrep fd
+sudo pacman -Syy emacs git find ripgrep fd shellcheck
 ```
 
 Then, install `Doom Emacs`:
@@ -57,3 +57,13 @@ Configuration files:
 - `init.el`: `doom!` block that controls what Doom modules are enabled.
 - `packages.el`: package management is done from this file (don't do it manually!)
 - `config.el`: configuration. Evaluated after all the modules have loaded.
+
+Macros can be found [here](https://github.com/hlissner/doom-emacs/blob/develop/docs/api.org#map)
+
+Change leader:
+
+```elisp
+;;; add to ~/.doom.d/config.el
+(setq doom-leader-key ","
+      doom-localleader-key "\\")
+```

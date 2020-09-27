@@ -56,6 +56,8 @@ I am currently using doom-emacs as my editor
 - vim (nvim): follow [instructions](./nvim/README.md)
 - emacs (doom-emacs): follow [instructions](./emacs/README.md)
 
+The directory `org` contains org files. And should be `ln -s ~/dotfiles/org ~/org`
+
 ### ZSH and oh-my-zsh
 
 ```bash

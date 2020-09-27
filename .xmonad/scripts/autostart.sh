@@ -31,8 +31,7 @@ xsetroot -cursor_name left_ptr & #cursor active at boot
 #################################
 
 # Wallpaper: feh, nitrogen, variety
-# feh --bg-fill /home/arnau/wallpapers/megumin.png &
-feh --bg-fill /home/arnau/wallpapers/purple.jpg &
+feh --bg-fill /home/arnau/wallpapers/megumin_purple.png &
 #nitrogen --restore &
 #run variety &
 

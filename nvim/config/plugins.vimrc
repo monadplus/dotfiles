@@ -82,7 +82,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0 " closed on open, not displayed until the file is saved
 let g:syntastic_check_on_wq = 0
 """" Ignore hs - annoying
-let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["haskell", "hs"] }
+let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["haskell", "hs", "rust", "rs"] }
 
 """" Pointfree Configuration (:help pointfree)
 au BufNewFile,BufRead *.hs nmap pf <Plug>Pointfree
@@ -119,3 +119,21 @@ let g:rust_cargo_avoid_whole_workspace = 0
 
 " vim-ormolu
 let g:ormolu_options=["-o -XTypeApplications"]
+
+""" YouCompleteMe
+
+" It works by default (notice on diagnostic that it is using a rust that it
+" installed on .isntall.py
+
+"let g:ycm_language_server += [
+  "\   { 'name': 'rust',
+  "\     'filetypes': [ 'rust' ],
+  ""\     'cmdline': [ expand( g:ycm_lsp_dir .  '/rust/rust-analyzer/target/release/rust-analyzer' ) ],
+  "\     'cmdline': ['rust-analyzer'],
+  "\     'project_root_files': [ 'Cargo.toml' ],
+  "\   },
+  "\ ]
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+set completeopt-=preview " don't show preview (doc) popup

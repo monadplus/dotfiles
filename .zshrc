@@ -127,6 +127,12 @@ if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$HOME/.emacs.d/bin" ] ;
+  then PATH="$HOME/.emacs.d/bin:$PATH"
+fi
+
+export DOOMDIR=$HOME/.doom.d
+
 #fix obvious typo's
 alias cd..='cd ..'
 alias pdw="pwd"
@@ -217,6 +223,8 @@ alias gs="git status"
 
 #Printer
 alias printpdf="lpr"
+
+alias find="fd"
 
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>

@@ -24,21 +24,14 @@ endfunction
 :nnoremap <leader>tt :%s/\t/  /g<CR>
 
 nnoremap <Esc><Esc> :w<CR>
-"nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wa<CR>
 
 nnoremap Y y$
 
 " Delete without copying
-nnoremap <leader>d "_d
-xnoremap <leader>d "_d
-xnoremap <leader>p "_dP
-
-" Move
-"noremap j h
-"noremap k j
-"noremap l k
-"noremap ; l
+"nnoremap <leader>d "_d
+"xnoremap <leader>d "_d
+"xnoremap <leader>p "_dP
 
 " Switching buffer
 nnoremap <M-h> <C-w>h
@@ -145,3 +138,9 @@ nnoremap <leader>o :only<CR>
 "imap <buffer> \Sigma Σ
 "imap <buffer> \exists ∃
 "imap <buffer> \equiv ≡
+
+" YouCompleteMe
+map <leader>d :YcmCompleter GetDoc<CR>
+map <leader>D :pc<CR>
+map <leader>g :YcmCompleter GoTo<CR>
+map <leader>t :YcmCompleter GetType<CR>

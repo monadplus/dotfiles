@@ -51,7 +51,10 @@ ln -s ~/dotfiles/konsolerc ~/.config/konsolerc
 
 ### Text Editor
 
-Follow [nvim instructions](./nvim/README.md)
+I am currently using doom-emacs as my editor
+
+- vim (nvim): follow [instructions](./nvim/README.md)
+- emacs (doom-emacs): follow [instructions](./emacs/README.md)
 
 ### ZSH and oh-my-zsh
 

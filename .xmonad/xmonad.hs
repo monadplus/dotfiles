@@ -167,7 +167,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master 5%-"),
       ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master 5%+"),
       ((modMask, xK_a), spawn "playerctl play-pause --player=vlc"),
-      ((modMask .|. shiftMaster, xK_a), spawn "playerctl next --player=vlc"),
+      ((modMask .|. shiftMask, xK_a), spawn "playerctl next --player=vlc"),
       -- Backlight Control
       ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl set +10%"),
       ((0, xF86XK_MonBrightnessDown), spawn "brightnessctl set 10%-"),

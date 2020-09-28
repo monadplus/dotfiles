@@ -248,6 +248,16 @@ playerctl play-pause --player=vlc
 
 VLC can stream to chromecast!
 
+### LLVM
+
+This install llvm compiler and (optional) toolchain.
+
+```bash
+install llvm clang lld lldb libc++
+```
+
+Seems to be installed at `/usr/include/llvm`
+
 ### Issues and Solutions
 
 #### Left click on the touchpad is not working properly

@@ -226,6 +226,8 @@ alias printpdf="lpr"
 
 alias find="fd"
 
+alias libs="ldconfig -p"
+
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()

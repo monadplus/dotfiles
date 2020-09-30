@@ -108,9 +108,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " TODO
 "let g:UltiSnipsSnippetDirectories=['/etc/nixos/dotfiles/neovim/UltiSnips']
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-" ^^^^^^^^^^^ required to make tab complete snippets
 
 " rust.vim
 let g:rustfmt_autosave = 1
@@ -136,4 +133,8 @@ let g:ormolu_options=["-o -XTypeApplications"]
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_global_ycm_extra_conf = "~/dotfiles/nvim/.ycm_extra_conf.py"
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+" ^^^^^^^^^^^ required to make tab complete snippets
 set completeopt-=preview " don't show preview (doc) popup

@@ -144,3 +144,5 @@ map <leader>d :YcmCompleter GetDoc<CR>
 map <leader>D :pc<CR>
 map <leader>g :YcmCompleter GoTo<CR>
 map <leader>t :YcmCompleter GetType<CR>
+map <leader>f :YcmCompleter Format<CR>
+map <leader>rr :YcmCompleter RefactorRename<CR>

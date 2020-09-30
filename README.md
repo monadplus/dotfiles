@@ -16,6 +16,7 @@ The list of configurations directories/files that must be placed in ~/.config ar
 - nvim
 - polybar
 - redshift
+- nixpkgs (the directory)
 
 ### Touchpad (Synaptic)
 

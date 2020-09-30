@@ -47,6 +47,6 @@ Plug 'ycm-core/YouCompleteMe'                                      " Completitio
 Plug 'rust-lang/rust.vim'                                          " Rust syntax and syntastic integration
 Plug 'derekelkins/agda-vim'                                        " Agda vim
 Plug 'sdiehl/vim-ormolu'                                           " Opinionated Haskell code formatter
-
+Plug 'rhysd/vim-llvm'                                              " Syntax for LLVM
 
 call plug#end()

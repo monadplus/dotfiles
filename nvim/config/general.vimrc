@@ -94,4 +94,3 @@ set expandtab       " Expand TABs to spaces
 
 " Disable mouse / touchpad (only in vim)
 set mouse=nicr
-

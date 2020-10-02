@@ -40,7 +40,7 @@ cd ~/.local/share/nvim/plugged/YouCompleteMe
 sudo pacman -Syy cmake
 # Installing autocomplete for rust:
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # Install Rustup
-./install.py --rust-completer # This only enables support for rust (and python by default)
+./install.py --rust-completer --cland-completer # This only enables support for rust (and python by default)
 
 # direnv
 sudo yay -Syy direnv

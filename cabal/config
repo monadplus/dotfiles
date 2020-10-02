@@ -80,7 +80,7 @@ extra-prog-path: /home/arnau/.cabal/bin
 -- allow-older: False
 -- allow-newer: False
 -- write-ghc-environment-files:
--- documentation: False
+documentation: True
 -- doc-index-file: $datadir/doc/$arch-$os-$compiler/index.html
 -- target-package-db:
 -- max-backjumps: 4000

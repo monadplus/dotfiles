@@ -18,29 +18,29 @@
 :set editor nvim
 
 -- Be careful, if you develop using ghcid - a file may compile on repl but not on ghc because you are adding explicit extensions.
--- :set -XTypeApplications
--- :set -XTypeFamilies
--- :set -XOverloadedStrings
--- :set -XOverloadedLabels
--- :set -XBangPatterns
--- :set -XConstraintKinds
--- :set -XDataKinds
--- :set -XDefaultSignatures
--- :set -XDeriveAnyClass
--- :set -XDeriveGeneric
--- :set -XRankNTypes
--- :set -XFlexibleInstances
--- :set -XFlexibleContexts
--- :set -XGADTs
--- :set -XMultiParamTypeClasses
--- :set -XKindSignatures
--- :set -XNamedFieldPuns
--- :set -XPackageImports
--- :set -XPatternSynonyms
--- :set -XPolyKinds
--- :set -XRoleAnnotations
--- :set -XScopedTypeVariables
--- :set -XStandaloneDeriving
--- :set -XTemplateHaskell
--- :set -XTupleSections
--- :set -XTypeOperators
+:set -XTypeApplications
+:set -XTypeFamilies
+:set -XOverloadedStrings
+:set -XOverloadedLabels
+:set -XBangPatterns
+:set -XConstraintKinds
+:set -XDataKinds
+:set -XDefaultSignatures
+:set -XDeriveAnyClass
+:set -XDeriveGeneric
+:set -XRankNTypes
+:set -XFlexibleInstances
+:set -XFlexibleContexts
+:set -XGADTs
+:set -XMultiParamTypeClasses
+:set -XKindSignatures
+:set -XNamedFieldPuns
+:set -XPackageImports
+:set -XPatternSynonyms
+:set -XPolyKinds
+:set -XRoleAnnotations
+:set -XScopedTypeVariables
+:set -XStandaloneDeriving
+:set -XTemplateHaskell
+:set -XTupleSections
+:set -XTypeOperators

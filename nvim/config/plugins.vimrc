@@ -56,11 +56,6 @@ let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
-" ----- ale -----
-
-" I prefer ghcid over ghc-mod for large projects
-"let g:ale_linters = {'haskell': ['ghc-mod', 'hlint']}
-
 " Create/Update tags on save file
 augroup tags
 au BufWritePost *.hs            silent !fast-tags -R . --nomerge
@@ -102,7 +97,9 @@ let g:livepreview_engine = 'lualatex' . ' -shell-escape'
 let g:livepreview_cursorhold_recompile = 0 " do not recompile on cursor hold over.
 
 """" UltiSnips
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"
 "let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -138,3 +135,10 @@ let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 " ^^^^^^^^^^^ required to make tab complete snippets
 set completeopt-=preview " don't show preview (doc) popup
+
+map <leader>d :YcmCompleter GetDoc<CR>
+map <leader>D :pc<CR>
+map <leader>g :YcmCompleter GoTo<CR>
+map <leader>t :YcmCompleter GetType<CR>
+map <leader>f :YcmCompleter Format<CR>
+map <leader>rr :YcmCompleter RefactorRename<CR>

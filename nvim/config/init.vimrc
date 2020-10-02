@@ -21,7 +21,6 @@ Plug 'itchyny/lightline.vim'                                      " configurable
 Plug 'Xuyuanp/nerdtree-git-plugin'                                " Shows files git status on the NerdTree
 Plug 'airblade/vim-gitgutter'                                     " Show file git status
 Plug 'neovimhaskell/haskell-vim'                                  " Haskell Syntax and Identation
-Plug 'alx741/vim-hindent'                                         " Haskell Formatting
 Plug 'tpope/vim-unimpaired'                                       " better navigation
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'LnL7/vim-nix'                                               " Nix expressions in vim
@@ -48,5 +47,6 @@ Plug 'rust-lang/rust.vim'                                          " Rust syntax
 Plug 'derekelkins/agda-vim'                                        " Agda vim
 Plug 'sdiehl/vim-ormolu'                                           " Opinionated Haskell code formatter
 Plug 'rhysd/vim-llvm'                                              " Syntax for LLVM
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}                    " LSP
 
 call plug#end()

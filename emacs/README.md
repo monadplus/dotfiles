@@ -67,3 +67,7 @@ Change leader:
 (setq doom-leader-key ","
       doom-localleader-key "\\")
 ```
+
+### Bugs
+
+- vterm + exa --icons

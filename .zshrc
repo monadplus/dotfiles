@@ -283,8 +283,9 @@ if [ "$(command -v exa)" ]; then
     unalias -m 'l'
     unalias -m 'la'
     unalias -m 'ls'
-    alias ls='exa -G  --color auto --icons -a -s type'
-    alias ll='exa -l --color always --icons -a -s type'
+    # I removed the flag --icons because it lags emacs so badly.
+    alias ls='exa -G  --color auto -a -s type' # --icons
+    alias ll='exa -l --color always -a -s type' # --icons
 fi
 
 if [ "$(command -v bat)" ]; then

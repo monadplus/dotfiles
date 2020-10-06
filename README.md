@@ -185,6 +185,21 @@ nix-env -iA nixpkgs.haskellPackages.pandoc
 nix-env -iA nixpkgs.haskellPackages.hlint
 ```
 
+### Cachix
+
+```bash
+$ nix-env -iA cachix -f https://cachix.org/api/v1/install
+$ cachix use ghcide-nix
+```
+
+### Haskell
+
+There is an environment prepared to install ghc, cabal, stack and ghcide.
+
+```bash
+nix-env -f '<nixpkgs>' -iA myHaskellEnv
+```
+
 ### Latex
 
 ```bash

@@ -68,6 +68,10 @@ Change leader:
       doom-localleader-key "\\")
 ```
 
+### Everything you need to install
+
+markdown: [+grip](https://github.com/seagle0128/grip-mode)
+
 ### Bugs
 
 - vterm + exa --icons

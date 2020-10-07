@@ -42,14 +42,18 @@ More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXB
 - status: `SPC g g` (press `?` for help)
 - quit git status: `q`
 - fold/unfold section, file: `TAB`
-- stage: `s` (you can `TAB` into a file an stage a section)
-- unstage: `u`
+
+Tips:
 
 - You can stage/unstage some region by VISUALly selecting it and `s`(stage)/`x`(discard).
 
 ### [Neotree]()
 
 Open: `SPC o p`
+
+### Markdown
+
+`SPC <localleader>` localleader = `m`
 
 ### [evil-snipe](https://github.com/hlissner/evil-snipe)
 
@@ -76,21 +80,21 @@ There are more commands not mapped:
 - avy-goto-line
 - avy-goto-word
 
-### [editor::multiple-cursors](https://github.com/hlissner/doom-emacs/blob/develop/modules/editor/multiple-cursors/packages.el)
+### multiple-cursors (collection of packages)
 
-The main package is [evil-multiedit](https://github.com/hlissner/evil-multiedit)
+- [evil-mc](https://github.com/gabesoft/evil-mc)
+
+`g z +key`
+
+`g z I`: evil-mc-make-cursor-in-visual-selection-beg
+`g z A`: evil-mc-make-cursor-in-visual-selection-end
+
+- [evil-multiedit](https://github.com/hlissner/evil-multiedit):
 
 `M d`: upwards
 `M D`: downwards
 `C n` and `C p` to navigate and `RET` to select/unselect entry
 (Same for :v)
-
-### [Company]()
-TODO
-
-### [Ivy]()
-
-TODO
 
 ### [Dired](https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf)
 
@@ -121,51 +125,8 @@ TODO there is more
 - Recent files `SPC f r`
 - Recent files (project) `SPC f R`
 
-### [vc-gutter]()
-
-TODO
-
-### [workspaces]()
-
-TODO
-
 ### zen
 
 Remove all distractions
 
 - Active/Deactive: `SPC t z`
-
-### eval +overlay
-
-TODO
-
-### [file-templates]()
-
-TODO
-
-### [fold]()
-
-TODO
-
-### [multiple-cursors]()
-
-TODO
-
-### [snippets]()
-
-TODO
-
-### Haskell
-
-### Markdown
-
-``` 
-SPC m '         markdown-edit-code-block (TODO how it works?)
-SPC m e         markdown-export (html)
-SPC m o         markdown-open (download file)
-SPC m p         markdown-preview (display in browser)
-
-SPC m i i       markdown-insert-image
-SPC m i l       markdown-insert-link
-SPC m i t       markdown-toc-generate-toc (i.e index)
-```

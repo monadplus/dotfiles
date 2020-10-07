@@ -319,3 +319,23 @@ When installing xmonad with pacman, it will also install the newest ghc.
 If you install a new ghc (i.e. nix-env -iA ghcXXX), calling `xmonad --recompile` will fail.
 
 You need to remove the installed ghc
+
+#### Pacman: can't update because of corrupted pgp
+
+Error message:
+
+```bash
+error: arcolinux_repo: key "79B328FBCB2C2E8C3B1983244B1B49F7186D8731" is unknown
+:: Import PGP key 79B328FBCB2C2E8C3B1983244B1B49F7186D8731? [Y/n] y
+error: key "79B328FBCB2C2E8C3B1983244B1B49F7186D8731" could not be looked up remotely
+error: failed to update arcolinux_repo (invalid or corrupted database (PGP signature))
+error: failed to synchronize all databases
+```
+
+Solution found at: https://arcolinuxforum.com/viewtopic.php?f=79&t=2214
+
+The files to watch are:
+
+- /etc/pacman.conf
+- /etc/pacman.d/mirrorXXX
+- /etc/pacman.d/gnupg/gpg.conf

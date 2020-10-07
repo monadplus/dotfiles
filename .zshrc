@@ -217,6 +217,7 @@ alias logout-ligthdm="kill -9 -1"
 
 #editor
 alias vim="nvim"
+alias sudovim="sudo -E nvim"
 
 #Git related
 alias gs="git status"

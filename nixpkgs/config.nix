@@ -42,6 +42,8 @@
 
         ghcid = self.haskell.packages.${compilerVersion}.ghcid;
 
+        haskell-language-server = self.haskell.packages.${compilerVersion}.haskell-language-server;
+
         ghcide = ghcide-nix;
       };
 }

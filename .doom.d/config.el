@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Arnau Abella"
+      user-mail-address "arnauabella@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -50,12 +50,22 @@
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
 ;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+;;
+;; ;; after-call to load package before hook
+;; ;; defer-incrementally to load dependencies incrementally on idle periods.
+;; (use-package! recentf
+;;   :defer-incrementally easymenu tree-widget timer
+;;   :after-call after-find-file)
 
 ;; Projectile
 (setq projectile-project-search-path '("~"))
+
+;; Enable Gravatars on magit
+(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+
+;; Neotree
+(map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
+(map! "C-f" #'+neotree/open)
+(map! "C-s" #'+neotree/find-this-file)

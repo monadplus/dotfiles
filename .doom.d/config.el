@@ -104,14 +104,45 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; evil ****
-;;
+;; **** General ****
+
+(setq-default line-spacing 1)
+
 (map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
+
 (map! :n "M-]" 'evil-window-increase-width
       :n "M-[" 'evil-window-decrease-width
       :n "M-=" 'evil-window-decrease-height
       :n "M-'" 'evil-window-increase-height
       )
+
+;; (map! :n "..." '+workspace/swap-left
+;;       :n "..." '+workspace/swap-right
+;;       :n "..." '+workspace/switch-left
+;;       :n "..." '+workspace/switch-right
+;;       :n "..." (lambda () (interactive) (+workspace/new (concat (+workspace-current-name) "-copy") t))
+;;       :n "..." '+workspace/rename)
+
+
+(defun show-workspaces ()
+        (interactive)
+        (when (and (not (minibufferp))
+                        (or (not (current-message))
+                        (equal "Quit" (current-message))))
+        (+workspace/display)))
+
+(defvar workspace-timer nil
+  "Show workspace timer.")
+(setq workspace-timer (run-with-idle-timer 0.5 t 'show-workspaces)) ;; run-with-idle-timer returns a timer that can be cancelled with cancel-timer
+(add-variable-watcher 'workspace-timer (lambda (&rest _) (cancel-timer workspace-timer))) ;; cancel old timer
+(add-hook 'pre-command-hook 'show-workspaces) ;; Adding this will prevent the workspaces from hiding
+
+(after! which-key
+  (which-key-setup-minibuffer) ;; take over the minibuffer
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-idle-secondary-delay 0.05)
+  (setq which-key-show-transient-maps t)
+  )
 
 ;; **** projectile ****
 

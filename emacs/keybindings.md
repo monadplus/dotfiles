@@ -37,6 +37,10 @@ I couldn't find how to paste in :insert
 
 More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&index=10
 
+### [flycheck]()
+
+- `C-c !`
+
 ### [magit]()
 
 - status: `SPC g g` (press `?` for help)

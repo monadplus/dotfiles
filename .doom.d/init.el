@@ -28,7 +28,7 @@
        :ui
        ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
-       ;; TODO customize
+       ;; Can be customized
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column       ; a `fill-column' indicator
@@ -46,8 +46,8 @@
        ;;treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
-       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       ;;window-select     ; visually switch windows
+       ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB https://github.com/syl20bnr/vi-tilde-fringe
+       (window-select +switch-window)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
 
@@ -68,7 +68,7 @@
        :emacs
        (dired +icons)    ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       ;;ibuffer         ; interactive buffer management
+       ibuffer         ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
@@ -79,8 +79,7 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       ;; This uses flychecks, ...
-       syntax              ; tasing you for every semicolon you forget
+       syntax ;;flycheck   ; tasing you for every semicolon you forget
        ;;spell             ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
@@ -92,8 +91,9 @@
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
+       ;; TODO
        ;;gist              ; interacting with github gists
-       ;; TODO lookup + docsets
+       ;; TODO (lookup + docsets)
        lookup              ; navigate your code and its documentation
        lsp
        (magit +forge)      ; a git porcelain for Emacs
@@ -114,6 +114,7 @@
        ;;tty               ; improve the terminal Emacs experience
 
        :lang
+       ;; TODO
        agda              ; types of types of types of types...
        ;; (cc +lsp)                ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
@@ -141,6 +142,7 @@
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
+       ;; TODO
        ;;latex             ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
@@ -152,7 +154,7 @@
        ;;nim               ; python + lisp at the speed of c
        nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       ;; TODO See flags
+       ;; TODO see flags
        org               ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
@@ -176,6 +178,7 @@
        yaml              ; JSON, but readable
 
        :email
+       ;; TODO
        ;;(mu4e +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
@@ -189,7 +192,6 @@
        :config
        ;;literate
 
-       ;; TODO
-       ;;   +smartparens are enabled by default somehow
-       ;;   Enabling this makes the {-# #-}} bug in haskell-mode
+       ;; +smartparens are enabled by default somehow
+       ;; Enabling this makes the {-# #-}} bug in haskell-mode
        (default +bindings))

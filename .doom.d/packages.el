@@ -48,3 +48,12 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+(package! ghcid
+  :recipe (:local-repo "~/elisp/ghcid/"))
+
+(package! hlint
+  :recipe (:local-repo "~/elisp/hs-lint/"))
+
+(package! ormolu)
+;; (package! magithub)

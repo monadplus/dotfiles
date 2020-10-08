@@ -79,6 +79,7 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
+       ;; This uses flychecks, ...
        syntax              ; tasing you for every semicolon you forget
        ;;spell             ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
@@ -132,7 +133,7 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-       (haskell +lsp +ghcide) ; a language that's lazier than I am
+       (haskell +lsp +ghcide)      ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;;json              ; At least it ain't XML
@@ -187,4 +188,8 @@
 
        :config
        ;;literate
-       (default +bindings +smartparens))
+
+       ;; TODO
+       ;;   +smartparens are enabled by default somehow
+       ;;   Enabling this makes the {-# #-}} bug in haskell-mode
+       (default +bindings))

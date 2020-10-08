@@ -74,4 +74,6 @@ markdown: [+grip](https://github.com/seagle0128/grip-mode)
 
 ### Bugs
 
-- vterm + exa --icons
+- vterm very slow: the problem was related to `exa ... --icons`. Removing `--icons` worked.
+
+- Projectile not working: I somehow introduced a bad route which couldn't be parsed. I had to manually edit the file `~/.emacs.d/.local/cache/projectile.projects`

@@ -86,6 +86,8 @@ There are more commands not mapped:
 
 `g z +key`
 
+In :v mode:
+
 `g z I`: evil-mc-make-cursor-in-visual-selection-beg
 `g z A`: evil-mc-make-cursor-in-visual-selection-end
 
@@ -95,6 +97,10 @@ There are more commands not mapped:
 `M D`: downwards
 `C n` and `C p` to navigate and `RET` to select/unselect entry
 (Same for :v)
+
+- [iedit](https://github.com/victorhge/iedit) 
+
+I dont use this
 
 ### [Dired](https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf)
 

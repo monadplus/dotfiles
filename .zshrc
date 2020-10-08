@@ -291,7 +291,7 @@ fi
 
 if [ "$(command -v bat)" ]; then
   unalias -m 'cat'
-  alias cat='bat -pp --theme="Nord"'
+  alias cat='bat -pp --theme="Dracula"'
 fi
 
 eval "$(direnv hook zsh)"

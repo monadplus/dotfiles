@@ -104,6 +104,15 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; evil ****
+;;
+(map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
+(map! :n "M-]" 'evil-window-increase-width
+      :n "M-[" 'evil-window-decrease-width
+      :n "M-=" 'evil-window-decrease-height
+      :n "M-'" 'evil-window-increase-height
+      )
+
 ;; **** projectile ****
 
 (setq projectile-project-search-path '("~"))
@@ -114,7 +123,6 @@
 
 ;; **** neotree ****
 
-(map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
 (map! "C-f" #'+neotree/open)
 (map! "C-s" #'+neotree/find-this-file)
 

@@ -1,57 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "Arnau Abella"
-      user-mail-address "arnauabella@gmail.com")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-;; (setq doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans"))
- (setq doom-font (font-spec :family "mononoki" :size 14 :weight 'medium )
-          doom-variable-pitch-font (font-spec :family "mononoki" :size 14 :weight 'regular))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dracula)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "/home/arnau/dotfiles/org/")
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
-
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
 ;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', relative to
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -104,113 +56,200 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; **** General ****
-
-(setq-default line-spacing 1)
-
-(map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
-
-(map! :n "M-]" 'evil-window-increase-width
-      :n "M-[" 'evil-window-decrease-width
-      :n "M-=" 'evil-window-decrease-height
-      :n "M-'" 'evil-window-increase-height
-      )
-
-;; (map! :n "..." '+workspace/swap-left
-;;       :n "..." '+workspace/swap-right
-;;       :n "..." '+workspace/switch-left
-;;       :n "..." '+workspace/switch-right
-;;       :n "..." (lambda () (interactive) (+workspace/new (concat (+workspace-current-name) "-copy") t))
-;;       :n "..." '+workspace/rename)
+;; Copied from kcsongor/doom-config
+(defmacro defsection (name &optional description &rest body)
+  "Set up the general structure of this config file"
+  (declare (doc-string 2))
+  (unless
+      (and description (char-or-string-p description))
+    (warn (concat "Section " (prin1-to-string name) " has no docstring.")))
+  `(progn ,@body))
 
 
-(defun show-workspaces ()
-        (interactive)
-        (when (and (not (minibufferp))
-                        (or (not (current-message))
-                        (equal "Quit" (current-message))))
-        (+workspace/display)))
+(defsection general
+  "General configuration."
 
-(defvar workspace-timer nil
-  "Show workspace timer.")
-(setq workspace-timer (run-with-idle-timer 0.5 t 'show-workspaces)) ;; run-with-idle-timer returns a timer that can be cancelled with cancel-timer
-(add-variable-watcher 'workspace-timer (lambda (&rest _) (cancel-timer workspace-timer))) ;; cancel old timer
-(add-hook 'pre-command-hook 'show-workspaces) ;; Adding this will prevent the workspaces from hiding
+  (setq user-full-name "Arnau Abella"
+        user-mail-address "arnauabella@gmail.com")
 
-(after! which-key
-  (which-key-setup-minibuffer) ;; take over the minibuffer
-  (setq which-key-idle-delay 0.5)
-  (setq which-key-idle-secondary-delay 0.05)
-  (setq which-key-show-transient-maps t)
-  )
+  ;; `doom-font'
+  ;; `doom-variable-pitch-font'
+  ;; `doom-big-font' -- used for `doom-big-font-mode'; use this for presentations or streaming.
+  (setq doom-font (font-spec :family "mononoki" :size 14 :weight 'medium )
+        doom-variable-pitch-font (font-spec :family "mononoki" :size 14 :weight 'regular))
 
-;; **** projectile ****
+  (setq doom-theme 'doom-dracula)
+  (setq display-line-numbers-type t)
+  (setq-default line-spacing 1)
 
-(setq projectile-project-search-path '("~"))
+  ;; force emacs to use ~/.zshrc path and aliases
+  ;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
+  ;;   (setenv "PATH" path)
+  ;;   (setq exec-path
+  ;;         (append
+  ;;          (split-string-and-unquote path ":")
+  ;;          exec-path)))
+  ;;         
+  ;; (add-to-list 'exec-path
+  ;;   "/usr/local/bin"
+  ;; )
 
-;; **** magit ****
+  ;; Transparency
+  ;; (set-frame-parameter (selected-frame) 'alpha '(95 . 50))
+  ;; (add-to-list 'default-frame-alist '(alpha . (95 . 50)))
+  ;; (defun toggle-transparency ()
+  ;;   (interactive)
+  ;;   (let ((alpha (frame-parameter nil 'alpha)))
+  ;;     (set-frame-parameter
+  ;;      nil 'alpha
+  ;;      (if (eql (cond ((numberp alpha) alpha)
+  ;;                     ((numberp (cdr alpha)) (cdr alpha))
+  ;;                     ;; Also handle undocumented (<active> <inactive>) form.
+  ;;                     ((numberp (cadr alpha)) (cadr alpha)))
+  ;;               100)
+  ;;          '(85 . 50) '(100 . 100)))))
+  ;; (global-set-key (kbd "C-c t") 'toggle-transparency)
 
-(setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")) ;; Enable Gravatars on magit
+  ;; Set transparency of emacs
+  (defun transparency (value)
+    "Sets the transparency of the frame window. 0=transparent/100=opaque"
+    (interactive "nTransparency Value 0 - 100 opaque:")
+    (set-frame-parameter (selected-frame) 'alpha value))
 
-;; **** neotree ****
+  ;; Display workspaces ALL the time.
+  (defun show-workspaces ()
+    (interactive)
+    (when (and (not (minibufferp))
+               (or (not (current-message))
+                   (equal "Quit" (current-message))))
+      (+workspace/display)))
 
-(map! "C-f" #'+neotree/open)
-(map! "C-s" #'+neotree/find-this-file)
+  (defvar workspace-timer nil
+    "Show workspace timer.")
 
-;; **** firefox ****
+  (setq workspace-timer (run-with-idle-timer 0.5 t 'show-workspaces)) ;; run-with-idle-timer returns a timer that can be cancelled with cancel-timer
 
-;; (map! (:when (executable-find "firefox") :map evil-normal-state-map "g b" 'browse-url-firefox))
-;; (when (executable-find "firefox") (map! :map evil-normal-state-map "g b" 'browse-url-firefox))
-(map! :map evil-normal-state-map "g b" #'browse-url)
+  (add-variable-watcher 'workspace-timer (lambda (&rest _) (cancel-timer workspace-timer))) ;; cancel old timer
 
-;; **** haskell *****
+  (add-hook 'pre-command-hook 'show-workspaces) ;; Adding this will prevent the workspaces from hiding
 
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method) ;; unicode support
+  (after! which-key
+    (which-key-setup-side-window-bottom)
+    (setq which-key-idle-delay 0.5)
+    (setq which-key-idle-secondary-delay 0.05)
+    (setq which-key-show-transient-maps t))
 
-(remove-hook 'haskell-mode-hook 'interactive-haskell-mode)
-(remove-hook 'haskell-mode-hook 'structured-haskell-mode)
+  ;; Latex
+  (setq +latex-viewers '(pdf-tools))
+  (map! (:when (featurep! :lang latex)
+         (:map LaTeX-mode-map
+            :localleader
+              :n "p" #'preview-at-point
+              :n "d" #'preview-document
+              :n "m" #'latex-preview-pane-mode
+            )))
+  (when (featurep! :lang latex)
+    (customize-set-variable 'shell-escape-mode "-shell-escape"))
 
-(setq haskell-interactive-popup-errors nil)
-(setq haskell-process-suggest-language-pragmas nil)
+  ;; Projectile
+  (setq projectile-project-search-path '("~"))
 
-(after! smartparens
-  (require 'smartparens-haskell))
+  ;; Magit
+  (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
 
-(use-package! ormolu
-  ;; :demand t
-  ;; :hook (haskell-mode . ormolu-format-on-save-mode)
-  ;; :bind
-  ;; (:map haskell-mode-map
-  ;;  ("C-c f" . ormolu-format-buffer))
-  :config
-  (setq ormolu-process-path "ormolu"))
-(map! :map haskell-mode-map "C-c f" #'ormolu-format-buffer)
+(defsection keybinds
+  "All my custom keybindings."
 
-(use-package! lsp-haskell
- :ensure t
- :config
- (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+  (map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
+  (map! :n "M-]" 'evil-window-increase-width
+        :n "M-[" 'evil-window-decrease-width
+        :n "M-=" 'evil-window-decrease-height
+        :n "M-'" 'evil-window-increase-height)
 
-(after! lsp-mode
-  (map! :n "g ?" 'lsp-ui-doc-glance
-        :n "g ]" 'lsp-find-definition
-        :n "g r" 'lsp-restart-workspace)
-  (setq lsp-ui-sideline-enable nil))
-(setq lsp-lens-enable t)
+  ;; (map! :n "..." '+workspace/swap-left
+  ;;       :n "..." '+workspace/swap-right
+  ;;       :n "..." '+workspace/switch-left
+  ;;       :n "..." '+workspace/switch-right
+  ;;       :n "..." (lambda () (interactive) (+workspace/new (concat (+workspace-current-name) "-copy") t))
+  ;;       :n "..." '+workspace/rename)
 
-(use-package! hs-lint
-  :bind
-  (:map haskell-mode-map
-   ("C-c l" . hs-lint)))
+  (map! :map pdf-view-mode-map
+        :n "TAB" 'pdf-outline)
 
-(after! flycheck
+  (map! "C-f" #'+neotree/open)
+  (map! "C-s" #'+neotree/find-this-file)
+
+  ;; (map! (:when (executable-find "firefox") :map evil-normal-state-map "g b" 'browse-url-firefox))
+  ;; (when (executable-find "firefox") (map! :map evil-normal-state-map "g b" 'browse-url-firefox))
+  (map! :map evil-normal-state-map "g b" #'browse-url))
+
+(defsection haskell-mode
+  "Haskell settings."
+
+  ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method) ;; unicode support
+
+  (remove-hook 'haskell-mode-hook 'interactive-haskell-mode)
+  (remove-hook 'haskell-mode-hook 'structured-haskell-mode)
+
+  (setq haskell-interactive-popup-errors nil)
+  (setq haskell-process-suggest-language-pragmas nil)
+
+  (after! smartparens
+    (require 'smartparens-haskell))
+
+  (use-package! ormolu
+    ;; :demand t
+    ;; :hook (haskell-mode . ormolu-format-on-save-mode)
+    ;; :bind
+    ;; (:map haskell-mode-map
+    ;;  ("C-c f" . ormolu-format-buffer))
+    :config
+    (setq ormolu-process-path "ormolu"))
+
+  (map! :map haskell-mode-map "C-c f" #'ormolu-format-buffer)
+
+  (use-package! lsp-haskell
+    :ensure t
+    :config
+    (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+
+  (after! lsp-mode
+    (map! :n "g ?" 'lsp-ui-doc-glance
+          :n "g ]" 'lsp-find-definition
+          :n "g r" 'lsp-restart-workspace)
+    (setq lsp-ui-sideline-enable nil))
+
+  (setq lsp-lens-enable t)
+
+  (use-package! hs-lint
+    :bind
+    (:map haskell-mode-map
+     ("C-c l" . hs-lint)))
+
+  (after! flycheck
     (setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc haskell-hlint)))
-;; TODO
-;; https://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-chains
-;; (flycheck-add-next-checker 'lsp 'haskell-hlint)
-(map! :map haskell-mode-map
-      :n "C-j" 'flycheck-next-error
-      :n "C-k" 'flycheck-previous-error
-      :n "M-n" 'next-error
-      :n "M-p" 'previous-error
-      :n "M-RET" 'flycheck-buffer)
+
+  ;; TODO
+  ;; https://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-chains
+  ;; (flycheck-add-next-checker 'lsp 'haskell-hlint)
+  (map! :map haskell-mode-map
+        :n "C-j" 'flycheck-next-error
+        :n "C-k" 'flycheck-previous-error
+        :n "M-n" 'next-error
+        :n "M-p" 'previous-error
+        :n "M-RET" 'flycheck-buffer))
+
+(defsection org-mode
+  "Org."
+
+  ;; This is just a default location to look for Org files.  There is no need
+  ;; at all to put your files into this directory.  It is used in the
+  ;; following situations:
+  ;;
+  ;; 1. When a capture template specifies a target file that is not an
+  ;;    absolute path.  The path will then be interpreted relative to
+  ;;    org-directory
+  ;; 2. When the value of variable org-agenda-files is a single file, any
+  ;;    relative paths in this file will be taken as relative to
+  ;;    org-directory.
+  (setq org-directory "/home/arnau/dotfiles/org/"))

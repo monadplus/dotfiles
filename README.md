@@ -204,8 +204,10 @@ nix-env -f '<nixpkgs>' -iA myHaskellEnv
 
 ```bash
 # This takes a looooooooong time
-sudo pacman -Syy texlive-most texlive-lang-extra biber
+sudo pacman -Syy texlive-most texlive-lang biber
 ```
+
+To determine which CTAN packages are included in each texlive- package, look up the files `/var/lib/texmf/arch/installedpkgs/<package>_<revnr>.pkgs.`
 
 This should be enough, otherwise have a look at the [Wiki](https://wiki.archlinux.org/index.php/TeX_Live)
 

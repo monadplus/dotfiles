@@ -188,17 +188,17 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-alias vlightdm="sudo vim /etc/lightdm/lightdm.conf"
-alias vpacman="sudo vim /etc/pacman.conf"
-alias vgrub="sudo vim /etc/default/grub"
-alias vmkinitcpio="sudo vim /etc/mkinitcpio.conf"
-alias vslim="sudo vim /etc/slim.conf"
-alias voblogout="sudo vim /etc/oblogout.conf"
-alias vmirrorlist="sudo vim /etc/pacman.d/mirrorlist"
-alias vconfgrub="sudo vim /boot/grub/grub.cfg"
-alias vpoly="vim $HOME/dotfiles/polybar/config"
-alias vzshrc="vim $HOME/dotfiles/.zshrc"
-alias vxmonad="vim $HOME/dotfiles/.xmonad/xmonad.hs"
+alias elightdm="sudo emacs /etc/lightdm/lightdm.conf"
+alias epacman="sudo emacs /etc/pacman.conf"
+alias egrub="sudo emacs /etc/default/grub"
+alias emkinitcpio="sudo emacs /etc/mkinitcpio.conf"
+alias eslim="sudo emacs /etc/slim.conf"
+alias eoblogout="sudo emacs /etc/oblogout.conf"
+alias emirrorlist="sudo emacs /etc/pacman.d/mirrorlist"
+alias econfgrub="sudo emacs /boot/grub/grub.cfg"
+alias epoly="emacs $HOME/dotfiles/polybar/config"
+alias ezshrc="emacs $HOME/dotfiles/.zshrc"
+alias exmonad="emacs $HOME/dotfiles/.xmonad/xmonad.hs"
 
 #gpg
 #verify signature for isos
@@ -218,6 +218,7 @@ alias logout-ligthdm="kill -9 -1"
 #editor
 alias vim="nvim"
 alias sudovim="sudo -E nvim"
+alias sudoemacs="sudo -E emacs"
 
 #Git related
 alias gs="git status"

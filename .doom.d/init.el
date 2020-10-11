@@ -45,6 +45,7 @@
        ;;tabs              ; a tab bar for Emacs
        ;;treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
+       ;; TODO
        vc-gutter         ; vcs diff in the fringe
        ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB https://github.com/syl20bnr/vi-tilde-fringe
        (window-select +switch-window)     ; visually switch windows
@@ -70,6 +71,7 @@
        electric          ; smarter, keyword-based electric-indent
        ibuffer         ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
+       ;; TODO
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
@@ -79,9 +81,9 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax ;;flycheck   ; tasing you for every semicolon you forget
-       ;;spell             ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
+       syntax            ; (flycheck) tasing you for every semicolon you forget
+       (spell +aspell)   ; tasing you for misspelling mispelling
+       ; grammar         ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -91,8 +93,7 @@
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
-       ;; TODO
-       ;;gist              ; interacting with github gists
+       gist              ; interacting with github gists
        ;; TODO (lookup + docsets)
        lookup              ; navigate your code and its documentation
        lsp
@@ -101,7 +102,7 @@
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        ;; TODO
-       ;;pdf               ; pdf enhancements
+       pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects
@@ -142,8 +143,7 @@
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       ;; TODO
-       ;;latex             ; writing papers in Emacs has never been so fun
+       (latex +lsp +fold)             ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
        ;;ledger            ; an accounting system in Emacs

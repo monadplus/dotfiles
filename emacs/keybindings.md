@@ -2,8 +2,9 @@
 
 Core bindings(leader, localleader): https://github.com/hlissner/doom-emacs/blob/4bc70a8537022eef078fdff43c2df9c145cb6377/core/core-keybinds.el
 
+## TODO
 
-I couldn't find how to paste in :insert
+- [ ] Paste in insert mode
 
 ### Buffers
 
@@ -24,6 +25,11 @@ I couldn't find how to paste in :insert
 - Horizontal Increase/Decrease: `C-w < >`
 - Vertical Increase/Decrease: `C-w + -`
 
+### Evaluating emacs lisp
+
+1. Go to a scratch buffer, swap to emacs-lisp-mode and `SPC m e b`
+2. Eval using `SPC ;`
+
 ### [org-mode]()
 
 - Change to `org-mode`
@@ -37,9 +43,60 @@ I couldn't find how to paste in :insert
 
 More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&index=10
 
+### [LaTeX]()
+
+- `auctex` is the major plugin
+- `+lsp`: Install [texlab](https://github.com/latex-lsp/texlab) and enjoy!
+- `+fold`: Write `M-x +fold` or `z`
+- `preview-latex`: preview math formulas and floats in your .tex file.
+- [latex-preview-pane](https://github.com/jsinglet/latex-preview-pane): `SPC m m` to open this minor mode. (No good documentation, just look at the sources)
+- [cdlatex](https://github.com/cdominik/cdlatex): 
+- [company-reftex](https://github.com/TheBB/company-reftex): This package provides two backends for Company for completing label references and citations in LaTeX
+
+#### preview-latex
+
+Available previews: `SPC h v preview-default-options-list` ("displaymath" "floats" "graphics" "textmath" "sections" "footnotes")
+
+How to include additional environments like enumerate:
+
+```tex
+\usepackage[displaymath,textmath,sections,graphics,floats]{preview}
+\PreviewEnvironment{enumerate}
+\PreviewEnvironment{tabular}
+```
+
+### pdf
+
+Once `pdf` is added to `init.el`, [pdf-tools](https://github.com/politza/pdf-tools) is installed. pdf-tools is a replacement for `DocView` (the default pdf viewer in eamcs). Once installed, run `M-x pdf-tools help` and it will trigger the installation of `pdfinfo` (in Arch Linux works out of the box).
+
+(optional) `sudo pacman -Syy imagemagick`
+
+TODO change keybindings: https://github.com/politza/pdf-tools#some-keybindings
+
 ### [flycheck]()
 
 - `C-c !`
+
+### grammar
+
+(Disabled) Too much errors. It may be useful for writing a document or a book but not for org/markdown files.
+
+First install the back-end `sudo pacman -Syy languagetool`
+
+Check:
+
+- [emacs-langtool](https://github.com/mhayashi1120/Emacs-langtool)
+- [writegood mode](https://github.com/bnbeckwith/writegood-mode)
+
+### spell
+
+Spellcheck is automatically loaded in many text-mode derivatives, which includes org-mode, markdown-mode, the Git Commit buffer (from magit), mu4e-compose-mode, and others.
+
+First install the back-end `sudo pacman -Syy aspell aspell-en`
+
+Uses the package [emacs-spell-flu](https://gitlab.com/ideasman42/emacs-spell-fu) 
+
+Fix a word: `z =`
 
 ### [magit]()
 
@@ -50,6 +107,28 @@ More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXB
 Tips:
 
 - You can stage/unstage some region by VISUALly selecting it and `s`(stage)/`x`(discard).
+
+#### +forge
+
+
+First you need to generate a github token with permissions: repo, user and read:org.
+
+Then you need to create the file `~/.authinfo.gpg` (opening the file with emacs will automatically allow you to edit it, and once saved, it will encrypt it!) with the following line: 
+
+```
+machine api.github.com login monadplus^forge password **********
+```
+
+Validate it using: `M-; (auth-source-search :host "api.github.com" :user "monadplus^forge")`
+
+The variable `auth-sources` contains the list of files that are searched and used during authentication.
+
+Keybindings:
+- `M-x forge-pull`: to start/update
+- `C-c C-e`: edit section (issue title, state, etc)
+- `C-c C-n`: create new comment
+
+- How to merge a pull request? Create a local branch `b y` from the pull-request and then `m i` (merge into)
 
 ### [Neotree]()
 
@@ -88,7 +167,7 @@ There are more commands not mapped:
 
 - [evil-mc](https://github.com/gabesoft/evil-mc)
 
-`g z +key`
+`g z`
 
 In :v mode:
 
@@ -104,11 +183,9 @@ In :v mode:
 
 - [iedit](https://github.com/victorhge/iedit) 
 
-I dont use this
-
 ### [Dired](https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf)
 
-TODO there is more
+TODO
 
 - Open: `SPC o -` or open a directory
 - Go in: `RET`

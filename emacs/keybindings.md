@@ -53,6 +53,19 @@ More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXB
 - [cdlatex](https://github.com/cdominik/cdlatex): 
 - [company-reftex](https://github.com/TheBB/company-reftex): This package provides two backends for Company for completing label references and citations in LaTeX
 
+Keybindings:
+
+- `LaTeX-section`: `C-c C-s`
+- `LaTeX-environment`: `C-c C-e`
+- `LaTeX-macro`: `C-c C-m`
+- `TeX-font`: `C-c C-f C-b/C-i/C-e/...`
+- Compile: `C-c C-c` (errors `C-c \``)
+- Compile region: `C-c C-r`
+
+- Open/close fold: `z a`
+- Open all fold: `z r`
+- Close all fold: `z m`
+
 #### preview-latex
 
 Available previews: `SPC h v preview-default-options-list` ("displaymath" "floats" "graphics" "textmath" "sections" "footnotes")
@@ -129,6 +142,30 @@ Keybindings:
 - `C-c C-n`: create new comment
 
 - How to merge a pull request? Create a local branch `b y` from the pull-request and then `m i` (merge into)
+
+### [gist](https://github.com/defunkt/gist.el)
+
+Configuration:
+
+```bash
+git config --global github.user <your-github-user-name>
+# The token requires `gist` permission
+git config --global github.oauth-token <your-personal-access-token-with-gist-scope>
+# ^^^^ Stored in plain text in .gitconfig ...
+```
+
+Keybindings:
+
+- `M-x gist-list`: to show your gists.
+- `c` to create a gist from a buffer (alternative `M-x gist-buffer-private`)
+- `d` delete a gist
+- `e` edit description
+- `TAB` to open the gist
+- Once the gist is opened, you can edit it and press `SPC f s` to save it.
+
+There are more functions but the documentation is really bad.
+
+More here https://github.com/hlissner/doom-emacs/blob/develop/modules/tools/gist/config.el
 
 ### [Neotree]()
 

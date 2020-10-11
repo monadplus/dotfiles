@@ -50,6 +50,12 @@ ln -s ~/dotfiles/konsolerc ~/.config/konsolerc
 # Add them by hand (copy/paste,clear, etc)
 ```
 
+### SSH
+
+All information here https://wiki.archlinux.org/index.php/SSH_keys
+
+I recommend using `keychain` (sudo pacman -S keychain) which reuses ssh-agents for all connections. `keychain` is configured in `.bashrc`/`.zshrc`
+
 ### Text Editor
 
 I am currently using doom-emacs as my editor

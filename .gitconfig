@@ -31,3 +31,4 @@
 	prompt = false
 [github]
 	user = monadplus
+	oauth-token = 2aebe4697435a636948a1e33c3a790828b4bd9cd

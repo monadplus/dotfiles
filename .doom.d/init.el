@@ -98,11 +98,9 @@
        lookup              ; navigate your code and its documentation
        lsp
        (magit +forge)      ; a git porcelain for Emacs
-       ;; TODO
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
-       ;; TODO
-       pdf               ; pdf enhancements
+       pdf                 ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;taskrunner        ; taskrunner for all your projects

@@ -82,6 +82,10 @@
   (setq display-line-numbers-type t)
   (setq-default line-spacing 1)
 
+  ; Keychain saves the agents' environment variables to files inside ~/.keychain/, so that subsequent shells can source these files.
+  ; When Emacs is started under X11 and not directly from a terminal these variables are not set.
+  (keychain-refresh-environment)
+
   ;; force emacs to use ~/.zshrc path and aliases
   ;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
   ;;   (setenv "PATH" path)
@@ -150,6 +154,9 @@
             )))
   (when (featurep! :lang latex)
     (customize-set-variable 'shell-escape-mode "-shell-escape"))
+  (after! latex
+    (setf (nth 1 (assoc "LaTeX" TeX-command-list))
+      "%`%l -interaction=nonstopmode -shell-escape %(mode)%' %t"))
 
   ;; Projectile
   (setq projectile-project-search-path '("~"))

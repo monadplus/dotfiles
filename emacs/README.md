@@ -72,8 +72,12 @@ Change leader:
 
 markdown: [+grip](https://github.com/seagle0128/grip-mode)
 
-### Bugs
+### Issues
 
-- vterm very slow: the problem was related to `exa ... --icons`. Removing `--icons` worked.
+1. When Emacs is started under X11 and not directly from a terminal some variables are not set:
+   - keychain
+   - some PATH directories
 
-- Projectile not working: I somehow introduced a bad route which couldn't be parsed. I had to manually edit the file `~/.emacs.d/.local/cache/projectile.projects`
+2. vterm very slow: the problem was related to `exa ... --icons`. Removing `--icons` worked.
+
+3. Projectile not working: I somehow introduced a bad route which couldn't be parsed. I had to manually edit the file `~/.emacs.d/.local/cache/projectile.projects`

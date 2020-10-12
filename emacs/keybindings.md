@@ -1,10 +1,36 @@
 # Keybindings for emacs
 
-Core bindings(leader, localleader): https://github.com/hlissner/doom-emacs/blob/4bc70a8537022eef078fdff43c2df9c145cb6377/core/core-keybinds.el
+## General
 
-## TODO
+### [Motions](https://vimhelp.org/motion.txt.html)
 
-- [ ] Paste in insert mode
+- change: `c`
+- delete: `d`
+- yank: `y`
+- case: `g~`(swap), `gu` (upper), `gU` (lower)
+- shift: `>` and `<`
+
+Word motions:
+- next word: `w`
+- next WORD: `W`
+- start of word: `b`
+- start of WORD: `B`
+- end of word: `e`
+- end of WORD: `E`
+
+### Text Objects 
+
+`a` includes white spaces or delimiters (e.g. "[]")
+
+- word: `aw` or `iw`
+- sentence: `as` or `is`
+- paragraph: `as` or `is`
+- single/double quote: `a"`/`a'`/`a\``
+- [] block: `a]` or `i]`
+- () block: `a)` or `i)`
+- {} block: `a}` or `i}`
+- <> block: `a>` or `i>`
+- tag: `at` or `it` (e.g. <a></a>)
 
 ### Buffers
 
@@ -18,7 +44,7 @@ Core bindings(leader, localleader): https://github.com/hlissner/doom-emacs/blob/
 
 - Split vertical: `C-w s`
 - Split horizontal: `C-w s`
-- Move: `C-w hjkl`
+- Move: `C-w h/j/k/l`
 - Move next: `C-w C-w`
 - Close: `C-w q`
 - Close others: `C-w C-o` or `SPC w O`
@@ -30,7 +56,52 @@ Core bindings(leader, localleader): https://github.com/hlissner/doom-emacs/blob/
 1. Go to a scratch buffer, swap to emacs-lisp-mode and `SPC m e b`
 2. Eval using `SPC ;`
 
-### [org-mode]()
+## [emacs-evil](https://github.com/emacs-evil/evil)
+
+### [evil-nerd-commenter](https://github.com/redguardtoo/evil-nerd-commenter)
+
+
+
+### [evil-surround](https://github.com/emacs-evil/evil-surround)
+
+- Add :v `S`
+- Add :n `ys<textobject>`
+- Delete :n `ds<textobject>`
+- Change :n `cs<textobject>`
+
+### [evil-snipe](https://github.com/hlissner/evil-snipe)
+
+(also works in visual mode)
+
+Find: `f` + letter
+Find: `s` + letter + letter
+Backwards: `F` or `S`
+
+Move forward `;` and backwards `,`
+
+After editing, the search is remembered, so you can press `; or ,` again.
+
+### multiple-cursors (collection of packages)
+
+- [evil-mc](https://github.com/gabesoft/evil-mc)
+
+`g z`
+
+In :v mode:
+
+`g z I`: evil-mc-make-cursor-in-visual-selection-beg
+`g z A`: evil-mc-make-cursor-in-visual-selection-end
+
+- [evil-multiedit](https://github.com/hlissner/evil-multiedit):
+
+`M d`: upwards
+`M D`: downwards
+`C n` and `C p` to navigate and `RET` to select/unselect entry
+(Same for :v)
+
+- [iedit](https://github.com/victorhge/iedit) 
+
+## org
 
 - Change to `org-mode`
 - `Tab` to fold/unfold
@@ -43,7 +114,7 @@ Core bindings(leader, localleader): https://github.com/hlissner/doom-emacs/blob/
 
 More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&index=10
 
-### [LaTeX]()
+## LaTeX
 
 - `auctex` is the major plugin
 - `+lsp`: Install [texlab](https://github.com/latex-lsp/texlab) and enjoy!
@@ -66,7 +137,7 @@ Keybindings:
 - Open all fold: `z r`
 - Close all fold: `z m`
 
-#### preview-latex
+### preview-latex
 
 Available previews: `SPC h v preview-default-options-list` ("displaymath" "floats" "graphics" "textmath" "sections" "footnotes")
 
@@ -78,7 +149,7 @@ How to include additional environments like enumerate:
 \PreviewEnvironment{tabular}
 ```
 
-### pdf
+## pdf
 
 Once `pdf` is added to `init.el`, [pdf-tools](https://github.com/politza/pdf-tools) is installed. pdf-tools is a replacement for `DocView` (the default pdf viewer in eamcs). Once installed, run `M-x pdf-tools help` and it will trigger the installation of `pdfinfo` (in Arch Linux works out of the box).
 
@@ -86,11 +157,11 @@ Once `pdf` is added to `init.el`, [pdf-tools](https://github.com/politza/pdf-too
 
 TODO change keybindings: https://github.com/politza/pdf-tools#some-keybindings
 
-### [flycheck]()
+## flycheck
 
 - `C-c !`
 
-### grammar
+## grammar
 
 (Disabled) Too much errors. It may be useful for writing a document or a book but not for org/markdown files.
 
@@ -101,7 +172,7 @@ Check:
 - [emacs-langtool](https://github.com/mhayashi1120/Emacs-langtool)
 - [writegood mode](https://github.com/bnbeckwith/writegood-mode)
 
-### spell
+## spell
 
 Spellcheck is automatically loaded in many text-mode derivatives, which includes org-mode, markdown-mode, the Git Commit buffer (from magit), mu4e-compose-mode, and others.
 
@@ -111,7 +182,7 @@ Uses the package [emacs-spell-flu](https://gitlab.com/ideasman42/emacs-spell-fu)
 
 Fix a word: `z =`
 
-### [magit]()
+## magit
 
 - status: `SPC g g` (press `?` for help)
 - quit git status: `q`
@@ -121,7 +192,7 @@ Tips:
 
 - You can stage/unstage some region by VISUALly selecting it and `s`(stage)/`x`(discard).
 
-#### +forge
+### +forge
 
 
 First you need to generate a github token with permissions: repo, user and read:org.
@@ -143,7 +214,7 @@ Keybindings:
 
 - How to merge a pull request? Create a local branch `b y` from the pull-request and then `m i` (merge into)
 
-### [gist](https://github.com/defunkt/gist.el)
+## [gist](https://github.com/defunkt/gist.el)
 
 Configuration:
 
@@ -167,27 +238,16 @@ There are more functions but the documentation is really bad.
 
 More here https://github.com/hlissner/doom-emacs/blob/develop/modules/tools/gist/config.el
 
-### [Neotree]()
+## Neotree
 
-Open: `SPC o p`
+Open/close neotree: `C-f`
+Open current file in neotree: `C-s`
 
-### Markdown
+## Markdown
 
-`SPC <localleader>` localleader = `m`
+`SPC <localleader>`
 
-### [evil-snipe](https://github.com/hlissner/evil-snipe)
-
-(also works in visual mode)
-
-Find: `f` + letter
-Find: `s` + letter + letter
-Backwards: `F` or `S`
-
-Move forward `;` and backwards `,`
-
-After editing, the search is remembered, so you can press `; or ,` again.
-
-### [Avy](https://github.com/abo-abo/avy)
+## [Avy](https://github.com/abo-abo/avy)
 
 Search (jump to word): `gs SPC`
 
@@ -200,29 +260,7 @@ There are more commands not mapped:
 - avy-goto-line
 - avy-goto-word
 
-### multiple-cursors (collection of packages)
-
-- [evil-mc](https://github.com/gabesoft/evil-mc)
-
-`g z`
-
-In :v mode:
-
-`g z I`: evil-mc-make-cursor-in-visual-selection-beg
-`g z A`: evil-mc-make-cursor-in-visual-selection-end
-
-- [evil-multiedit](https://github.com/hlissner/evil-multiedit):
-
-`M d`: upwards
-`M D`: downwards
-`C n` and `C p` to navigate and `RET` to select/unselect entry
-(Same for :v)
-
-- [iedit](https://github.com/victorhge/iedit) 
-
-### [Dired](https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf)
-
-TODO
+## [Dired](https://www.gnu.org/software/emacs/refcards/pdf/dired-ref.pdf)
 
 - Open: `SPC o -` or open a directory
 - Go in: `RET`
@@ -238,7 +276,7 @@ TODO
 - Move/Rename: `R`
 - Rename: `i` and then save the buffer `:w`
 
-### [Projectile](https://github.com/bbatsov/projectile)
+## [Projectile](https://github.com/bbatsov/projectile)
 
 - Discover projects: `SPC : projectile-discover-projects-in-directory`
 
@@ -249,8 +287,6 @@ TODO
 - Recent files `SPC f r`
 - Recent files (project) `SPC f R`
 
-### zen
+## zen-mode
 
-Remove all distractions
-
-- Active/Deactive: `SPC t z`
+- Active/Deactivate: `SPC t z`

@@ -186,6 +186,12 @@
   (map! "C-f" #'+neotree/open)
   (map! "C-s" #'+neotree/find-this-file)
 
+  (map! :desc "Paste in insert mode" :i "C-v" #'clipboard-yank)
+
+  ; https://github.com/redguardtoo/evil-nerd-commenter
+  (map! :nv "gc" #'evilnc-comment-or-uncomment-lines)
+  (map! :nv "gC" #'evilnc-copy-and-comment-lines)
+
   ;; (map! (:when (executable-find "firefox") :map evil-normal-state-map "g b" 'browse-url-firefox))
   ;; (when (executable-find "firefox") (map! :map evil-normal-state-map "g b" 'browse-url-firefox))
   (map! :map evil-normal-state-map "g b" #'browse-url))

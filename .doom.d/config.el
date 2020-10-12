@@ -103,9 +103,15 @@
     (setq which-key-idle-secondary-delay 0.05)
     (setq which-key-show-transient-maps t))
 
-  ; hl-line-mode overrides the color highlighting of `rainbow-mode'.
-  (add-hook! 'rainbow-mode-hook
-    (hl-line-mode (if rainbow-mode -1 +1)))
+  ;; You don't want to disable the current line highlight
+  ;; hl-line-mode overrides the color highlighting of `rainbow-mode'.
+  ;; (add-hook! 'rainbow-mode-hook
+  ;;   (hl-line-mode (if rainbow-mode -1 +1)))
+
+  ;; rainbow-mode hook
+  (defun my-rainbow-mode-hook ()
+    (rainbow-mode 1))
+  (add-hook! '(markdown-mode-hook org-mode-hook yaml-mode-hook) 'my-rainbow-mode-hook)
 
   ; Default directory for projectile
   (setq projectile-project-search-path '("~")))
@@ -183,18 +189,26 @@
 (defsection haskell-mode
   "Haskell settings."
 
+  (remove-hook 'haskell-mode-hook 'interactive-haskell-mode)
+  (remove-hook 'haskell-mode-hook 'structured-haskell-mode)
+
   ;; It's bad because the replaced unicodes cannot be use in substitution of the original word.
   ;; For example, `map1 ∪ map2' won't compile
   ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method) ;; unicode support
 
-  (remove-hook 'haskell-mode-hook 'interactive-haskell-mode)
-  (remove-hook 'haskell-mode-hook 'structured-haskell-mode)
-
+  (setq lsp-lens-enable t)
   (setq haskell-interactive-popup-errors nil)
-  (setq haskell-process-suggest-language-pragmas nil)
+  ; (setq haskell-process-suggest-language-pragmas nil)
 
   (after! smartparens
     (require 'smartparens-haskell))
+
+  (use-package! ghcid :after compile)
+  (after! ghcid
+    (map! :localleader
+          :map haskell-mode-map
+          :desc "ghcid start" "g" #'ghcid
+          :desc "ghcid stop" "G" #'ghcid))
 
   (use-package! ormolu
     ;; FIXME
@@ -205,6 +219,16 @@
     ;;  ("C-c f" . ormolu-format-buffer))
     :config
     (setq ormolu-process-path "ormolu"))
+
+  ; hoogle
+  (map! (:when (featurep! :lang haskell)
+         (:after haskell ; overload definitions
+           :localleader
+           :map haskell-mode-map
+           ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
+           ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
+           :desc "hoogle" "h" #'haskell-hoogle
+           :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local)))
 
   (map! :map haskell-mode-map "C-c f" #'ormolu-format-buffer)
 
@@ -218,8 +242,6 @@
           :n "g ]" 'lsp-find-definition
           :n "g r" 'lsp-restart-workspace)
     (setq lsp-ui-sideline-enable nil))
-
-  (setq lsp-lens-enable t)
 
   (use-package! hs-lint
     :bind

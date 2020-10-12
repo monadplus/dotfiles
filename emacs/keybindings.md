@@ -115,6 +115,11 @@ Make a visual selection `v` or `V`, and then hit `*`
 - goto definition: `g ]`
 - restart lsp: `g r`
 
+## rgb
+
+- [rainbow-mode](https://elpa.gnu.org/packages/rainbow-mode.html)
+- [kurecolor](https://github.com/alphapapa/kurecolor) - Why is this so complicated?
+
 ## multiple-cursors
 
 - [evil-mc](https://github.com/gabesoft/evil-mc)

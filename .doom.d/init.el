@@ -118,7 +118,7 @@
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
-       data                ; config/data formats
+       data                ; (.csv only) config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
@@ -184,7 +184,7 @@
        ;;twitter           ; twitter client https://twitter.com/vnought
 
        :config
-       ;;literate
+       ;;literate          ; A literate config consists of a DOOMDIR/config.org
 
        ;; +smartparens are enabled by default somehow
        ;; Enabling this makes the {-# #-}} bug in haskell-mode

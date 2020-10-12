@@ -140,6 +140,17 @@ In :v mode:
 
 More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&index=10
 
+## ivy
+
+- Jump to file in project: `SPC SPC`
+- Jump to file from current directory: `SPC .`
+- Jump to symbol in file: `SPC s i`
+- Search project: `SPC s p`
+- Search another project: `SPC s P`
+- Search directory: `SPC s d`
+- Search another directory: `SPC s D`
+- ...
+
 ## LaTeX
 
 - `auctex` is the major plugin

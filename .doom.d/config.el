@@ -81,6 +81,7 @@
   (setq doom-theme 'doom-dracula)
   (setq display-line-numbers-type t)
   (setq-default line-spacing 1)
+  (setq fancy-splash-image "~/wallpapers/megumin_2.png") ; Change doom-dashboard wallpaper
 
   ; Keychain saves the agents' environment variables to files inside ~/.keychain/, so that subsequent shells can source these files.
   ; When Emacs is started under X11 and not directly from a terminal these variables are not set.

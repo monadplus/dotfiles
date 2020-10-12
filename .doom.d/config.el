@@ -189,26 +189,25 @@
 (defsection haskell-mode
   "Haskell settings."
 
-  (remove-hook 'haskell-mode-hook 'interactive-haskell-mode)
+  ; https://github.com/projectional-haskell/structured-haskell-mode
   (remove-hook 'haskell-mode-hook 'structured-haskell-mode)
+  (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+  (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+  ; http://haskell.github.io/haskell-mode/manual/latest/Interactive-Haskell.html#Interactive-Haskell
+  (customize-set-variable 'haskell-process-auto-import-loaded-modules t)
 
   ;; It's bad because the replaced unicodes cannot be use in substitution of the original word.
   ;; For example, `map1 ∪ map2' won't compile
   ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method) ;; unicode support
 
-  (setq lsp-lens-enable t)
+  ; `haskell-compile' use stack instead of cabal
+  ; (setq haskell-compile-cabal-build-command "stack build")
   (setq haskell-interactive-popup-errors nil)
-  ; (setq haskell-process-suggest-language-pragmas nil)
+  (setq haskell-process-suggest-language-pragmas nil) ; haskell-interactive-mode only
+  (setq lsp-lens-enable t)
 
   (after! smartparens
     (require 'smartparens-haskell))
-
-  (use-package! ghcid :after compile)
-  (after! ghcid
-    (map! :localleader
-          :map haskell-mode-map
-          :desc "ghcid start" "g" #'ghcid
-          :desc "ghcid stop" "G" #'ghcid))
 
   (use-package! ormolu
     ;; FIXME
@@ -219,38 +218,57 @@
     ;;  ("C-c f" . ormolu-format-buffer))
     :config
     (setq ormolu-process-path "ormolu"))
+  (map! :map haskell-mode-map :localleader :desc "format" "f" #'ormolu-format-buffer)
 
-  ; hoogle
-  (map! (:when (featurep! :lang haskell)
-         (:after haskell ; overload definitions
-           :localleader
-           :map haskell-mode-map
-           ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
-           ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
-           :desc "hoogle" "h" #'haskell-hoogle
-           :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local)))
+  ; ghcid
+  (use-package! ghcid :after compile)
+  (after! ghcid
+    (map! :localleader
+          :map haskell-mode-map
+          :map haskell-cabal-mode-map
+          :desc "ghcid: start" "g" #'ghcid
+          :desc "ghcid: stop" "G" #'ghcid-stop))
 
-  (map! :map haskell-mode-map "C-c f" #'ormolu-format-buffer)
+  ; haskell-mode
+  (map! (:after haskell-mode
+         :map haskell-mode-map
+          :localleader
+          :desc "ghci: load file" "l" #'haskell-process-load-or-reload
+          :desc "ghci: clear" "k" #'haskell-interactive-mode-clear
+          :desc "ghci" "i" #'haskell-interactive-bring
+          :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
+          :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
+          ; :desc "doc" "?" 'lsp-ui-doc-glance
+          ; :desc "type" "t" 'haskell-process-do-type
+          :desc "show doc" "t" '+lookup/documentation
+          :desc "ghc: compile" "B" #'haskell-compile ; override
+          ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
+          ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
+          :desc "hoogle" "h" #'haskell-hoogle
+          :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local))
 
+  ; lsp
   (use-package! lsp-haskell
     :ensure t
     :config
     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
-
   (after! lsp-mode
-    (map! :n "g ?" 'lsp-ui-doc-glance
-          :n "g ]" 'lsp-find-definition
-          :n "g r" 'lsp-restart-workspace)
+    (map! :map haskell-mode-map
+          :localleader
+            :desc "definition" "d" 'lsp-find-definition
+            :desc "restart lsp" "r" 'lsp-restart-workspace)
     (setq lsp-ui-sideline-enable nil))
 
-  (use-package! hs-lint
-    :bind
-    (:map haskell-mode-map
-     ("C-c l" . hs-lint)))
+  ; hlint
+  (use-package! hs-lint)
+  (map! (:after hs-lint
+         :map haskell-mode-map
+         :localleader
+           :desc "hlint" "?" #'hs-lint))
 
+  ; flycheck
   (after! flycheck
     (setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc haskell-hlint)))
-
   ;; TODO
   ;; https://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-chains
   ;; (flycheck-add-next-checker 'lsp 'haskell-hlint)

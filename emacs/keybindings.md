@@ -107,6 +107,14 @@ After editing, the search is remembered, so you can press `; or ,` again.
 
 Make a visual selection `v` or `V`, and then hit `*`
 
+## haskell
+
+- Ormolu format: `C-c f`
+- Hlint: `C-c l`
+- doc: `g ?`
+- goto definition: `g ]`
+- restart lsp: `g r`
+
 ## multiple-cursors
 
 - [evil-mc](https://github.com/gabesoft/evil-mc)
@@ -285,7 +293,7 @@ More here https://github.com/hlissner/doom-emacs/blob/develop/modules/tools/gist
 
 ## Neotree
 
-Open/close neotree: `C-f`
+Toggle neotree: `C-f`
 Open current file in neotree: `C-s`
 
 ## Markdown

@@ -16,6 +16,7 @@ The list of configurations directories/files that must be placed in ~/.config ar
 - polybar
 - redshift
 - nixpkgs (the directory)
+- ...
 
 ### Touchpad (Synaptic)
 
@@ -54,6 +55,21 @@ ln -s ~/dotfiles/konsolerc ~/.config/konsolerc
 All information here https://wiki.archlinux.org/index.php/SSH_keys
 
 I recommend using `keychain` (sudo pacman -S keychain) which reuses ssh-agents for all connections. `keychain` is configured in `.bashrc`/`.zshrc`
+
+### Font
+
+Fonts are installed at 
+
+- system-wide `/usr/share/fonts/`
+- single user `~/.local/share/fonts/`
+
+Use `fc-list` to display all available fonts.
+
+Fonts can be installed from [pacman/AUR](https://wiki.archlinux.org/index.php/Fonts#Font_packages). Example:
+
+- `yay -S ttf-iosevka`
+
+A list of available fonts
 
 ### Text Editor
 

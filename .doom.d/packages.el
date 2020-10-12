@@ -46,4 +46,5 @@
 
 (package! ormolu)
 (package! keychain-environment) ; Fix the bug with keychain not found https://github.com/tarsius/keychain-environment
+
 ;; (package! magithub)

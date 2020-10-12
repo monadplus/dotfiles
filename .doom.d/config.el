@@ -1,60 +1,10 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; - `load!' for loading external *.el files relative to this one
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; ;; after-call to load package before hook
-;; ;; defer-incrementally to load dependencies incrementally on idle periods.
-;; (use-package! recentf
-;;   :defer-incrementally easymenu tree-widget timer
-;;   :after-call after-find-file)
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; ;; Appending and local hooks
-;; (add-hook! (one-mode second-mode) :append #'enable-something)
-;; (add-hook! (one-mode second-mode) :local #'enable-something)
-;;
-;; ;; With arbitrary forms
-;; (add-hook! (one-mode second-mode) (setq v 5) (setq a 2))
-;; (add-hook! (one-mode second-mode) :append :local (setq v 5) (setq a 2))
-;;
-;; ;; Inline named hook functions
-;; (add-hook! '(one-mode-hook second-mode-hook)
-;;   (defun do-something ()
-;;     ...)
-;;   (defun do-another-thing ()
-;;     ...))
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; (map! :map magit-mode-map
-;;       :m  "C-r" 'do-something           ; C-r in motion state
-;;       :nv "q" 'magit-mode-quit-window   ; q in normal+visual states
-;;       "C-x C-r" 'a-global-keybind
-;;       :g "C-x C-r" 'another-global-keybind  ; same as above
-;;
-;;       (:when IS-MAC
-;;         :n "M-s" 'some-fn
-;;         :i "M-o" (cmd! (message "Hi"))))
-;;
-;; (map! (:when (featurep! :completion company) ; Conditional loading
-;;         :i "C-@" #'+company/complete
-;;         (:prefix "C-x"                       ; Use a prefix key
-;;           :i "C-l" #'+company/whole-lines)))
-;;
-;; (map! (:when (featurep! :lang latex)    ; local conditional
-;;         (:map LaTeX-mode-map
-;;           :localleader                  ; Use local leader
-;;           :desc "View" "v" #'TeX-view)) ; Add which-key description
-;;       :leader                           ; Use leader key from now on
-;;       :desc "Eval expression" ";" #'eval-expression)
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; - `add-load-path!' for adding directories to the `load-path', relative to this file. Emacs searches the `load-path' when you load packages with `require' or `use-package'.
+;; - `use-package!'
+;; - `add-hook!'
+;; - `map!'
 
 ;; Copied from kcsongor/doom-config
 (defmacro defsection (name &optional description &rest body)
@@ -65,23 +15,25 @@
     (warn (concat "Section " (prin1-to-string name) " has no docstring.")))
   `(progn ,@body))
 
-
 (defsection general
   "General configuration."
 
   (setq user-full-name "Arnau Abella"
         user-mail-address "arnauabella@gmail.com")
 
-  ;; `doom-font'
-  ;; `doom-variable-pitch-font'
-  ;; `doom-big-font' -- used for `doom-big-font-mode'; use this for presentations or streaming.
-  (setq doom-font (font-spec :family "mononoki" :size 14 :weight 'medium )
-        doom-variable-pitch-font (font-spec :family "mononoki" :size 14 :weight 'regular))
+  ; font
+  (setq doom-font (font-spec :family "Iosevka" :size 15 :weight 'medium )
+        doom-variable-pitch-font (font-spec :family "Iosevka" :size 14 :weight 'regular) ;; e.g. neotree font
+        doom-big-font (font-spec :family "Iosevka" :size 20 :weight 'regular)) ; doom-big-font-mode
 
+  ; theme
   (setq doom-theme 'doom-dracula)
+
   (setq display-line-numbers-type t)
   (setq-default line-spacing 1)
-  (setq fancy-splash-image "~/wallpapers/megumin_2.png") ; Change doom-dashboard wallpaper
+
+  ; doom-dashboard
+  (setq fancy-splash-image "~/wallpapers/megumin_2.png") ;
 
   ; Keychain saves the agents' environment variables to files inside ~/.keychain/, so that subsequent shells can source these files.
   ; When Emacs is started under X11 and not directly from a terminal these variables are not set.
@@ -95,7 +47,8 @@
   ;;         (append
   ;;          (split-string-and-unquote path ":")
   ;;          exec-path)))
-  ;;
+
+  ; add missing paths to PATH
   (defun string-trim-final-newline (string)
     (let ((len (length string)))
       (cond
@@ -116,6 +69,7 @@
                       ((numberp (cadr alpha)) (cadr alpha)))
                 100)
            '(98 . 50) '(100 . 100)))))
+
   (map! :leader
         (:prefix-map ("t" . "toggle")
          :desc "transparency"
@@ -149,39 +103,18 @@
     (setq which-key-idle-secondary-delay 0.05)
     (setq which-key-show-transient-maps t))
 
-  ;; Latex
-  (setq +latex-viewers '(pdf-tools))
-  (map! (:when (featurep! :lang latex)
-         (:map LaTeX-mode-map
-            :localleader
-              :n "p" #'preview-at-point
-              :n "d" #'preview-document
-              :n "m" #'latex-preview-pane-mode
-            )))
-  (when (featurep! :lang latex)
-    (customize-set-variable 'shell-escape-mode "-shell-escape"))
-  (after! latex
-    (setf (nth 1 (assoc "LaTeX" TeX-command-list))
-      "%`%l -interaction=nonstopmode -shell-escape %(mode)%' %t"))
+  ; hl-line-mode overrides the color highlighting of `rainbow-mode'.
+  (add-hook! 'rainbow-mode-hook
+    (hl-line-mode (if rainbow-mode -1 +1)))
 
-  ;; Projectile
+  ; Default directory for projectile
   (setq projectile-project-search-path '("~")))
-
-(defsection git
-  "Git/Magic settings."
-
-   (after! git-gutter
-      (map! :n "M-j" 'git-gutter:next-hunk
-            :n "M-k" 'git-gutter:previous-hunk
-            :n "M-h" 'git-gutter:revert-hunk
-            :n "M-l" 'git-gutter:stage-hunk))
-
-   (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
 
 (defsection keybinds
   "All my custom keybindings."
 
   (map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
+  (map! :nm "C-z" nil) ;; Remove when I stop using C-z to disable highlight star.
   (map! :n "M-]" 'evil-window-increase-width
         :n "M-[" 'evil-window-decrease-width
         :n "M-=" 'evil-window-decrease-height
@@ -217,13 +150,41 @@
          "t" (cmd! (+workspace/new "vterm" nil)
                    (+vterm/here nil))))
 
-  ;; (map! (:when (executable-find "firefox") :map evil-normal-state-map "g b" 'browse-url-firefox))
-  ;; (when (executable-find "firefox") (map! :map evil-normal-state-map "g b" 'browse-url-firefox))
   (map! :map evil-normal-state-map "g b" #'browse-url))
+
+(defsection git
+  "Git/Magic settings."
+
+   (after! git-gutter
+      (map! :n "M-j" 'git-gutter:next-hunk
+            :n "M-k" 'git-gutter:previous-hunk
+            :n "M-h" 'git-gutter:revert-hunk
+            :n "M-l" 'git-gutter:stage-hunk))
+
+   (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
+
+(defsection latex
+  "LaTeX settings."
+
+  (setq +latex-viewers '(pdf-tools))
+  (map! (:when (featurep! :lang latex)
+         (:map LaTeX-mode-map
+            :localleader
+              :n "p" #'preview-at-point
+              :n "d" #'preview-document
+              :n "m" #'latex-preview-pane-mode
+            )))
+  (when (featurep! :lang latex)
+    (customize-set-variable 'shell-escape-mode "-shell-escape"))
+  (after! latex
+    (setf (nth 1 (assoc "LaTeX" TeX-command-list))
+      "%`%l -interaction=nonstopmode -shell-escape %(mode)%' %t")))
 
 (defsection haskell-mode
   "Haskell settings."
 
+  ;; It's bad because the replaced unicodes cannot be use in substitution of the original word.
+  ;; For example, `map1 ∪ map2' won't compile
   ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method) ;; unicode support
 
   (remove-hook 'haskell-mode-hook 'interactive-haskell-mode)
@@ -236,6 +197,7 @@
     (require 'smartparens-haskell))
 
   (use-package! ormolu
+    ;; FIXME
     ;; :demand t
     ;; :hook (haskell-mode . ormolu-format-on-save-mode)
     ;; :bind

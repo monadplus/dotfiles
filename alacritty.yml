@@ -100,19 +100,19 @@ env:
 # Font configuration
 font:
   normal:
-    family: mononoki
-    style: Bold
+    family: Iosevka
+    style: Regular
 
   bold:
-    family: mononoki
+    family: Iosevka
     style: Bold
 
   italic:
-    family: mononoki
+    family: Iosevka
     style: Italic
 
   bold_italic:
-    family: mononoki
+    family: Iosevka
     style: Bold Italic
 
   # Point size

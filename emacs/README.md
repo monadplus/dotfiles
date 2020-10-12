@@ -70,7 +70,10 @@ Change leader:
 
 ### Everything you need to install
 
-markdown: [+grip](https://github.com/seagle0128/grip-mode)
+Markdown: 
+
+- Linting: [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)
+- [+grip](https://github.com/seagle0128/grip-mode)
 
 ### Issues
 

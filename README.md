@@ -1,5 +1,4 @@
-Dotfiles
-========
+# Dotfiles
 
 The following dotfiles were tested on Arch Linux.
 
@@ -281,6 +280,24 @@ install llvm clang lld lldb libc++
 ```
 
 Seems to be installed at `/usr/include/llvm`
+
+### NPM
+
+To see the list of intalled packages: `npm list` or `npm -g list`
+
+Check npm directory: `npm root` or `npm -g root`
+
+#### issue after installing npm
+
+After installing npm (`sudo pacman -Syy npm`), the `node_modules` was created at `~/dotfiles` (WTF!).
+
+I had to manually move the `node_modules` directory to `$HOME` and change the default configuration:
+
+``` bash
+$ npm config list
+# add cwd
+$ vim ~/.npmrc # You can also use $ npm config set cwd ""
+```
 
 ### Issues and Solutions
 

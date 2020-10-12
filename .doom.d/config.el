@@ -87,34 +87,39 @@
   (keychain-refresh-environment)
 
   ;; force emacs to use ~/.zshrc path and aliases
+  ;; FIXME the path is not property splited (adds garbage)
   ;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
   ;;   (setenv "PATH" path)
   ;;   (setq exec-path
   ;;         (append
   ;;          (split-string-and-unquote path ":")
   ;;          exec-path)))
-  ;;         
-  ;; (add-to-list 'exec-path
-  ;;   "/usr/local/bin"
-  ;; )
+  ;;
+  (defun string-trim-final-newline (string)
+    (let ((len (length string)))
+      (cond
+       ((and (> len 0) (eql (aref string (- len 1)) ?\n))
+        (substring string 0 (- len 1)))
+       (t string))))
+  (add-to-list 'exec-path (string-trim-final-newline (shell-command-to-string "npm bin")))
 
   ;; Transparency
-  ;; (set-frame-parameter (selected-frame) 'alpha '(95 . 50))
-  ;; (add-to-list 'default-frame-alist '(alpha . (95 . 50)))
-  ;; (defun toggle-transparency ()
-  ;;   (interactive)
-  ;;   (let ((alpha (frame-parameter nil 'alpha)))
-  ;;     (set-frame-parameter
-  ;;      nil 'alpha
-  ;;      (if (eql (cond ((numberp alpha) alpha)
-  ;;                     ((numberp (cdr alpha)) (cdr alpha))
-  ;;                     ;; Also handle undocumented (<active> <inactive>) form.
-  ;;                     ((numberp (cadr alpha)) (cadr alpha)))
-  ;;               100)
-  ;;          '(85 . 50) '(100 . 100)))))
-  ;; (global-set-key (kbd "C-c t") 'toggle-transparency)
+  (defun toggle-transparency ()
+    (interactive)
+    (let ((alpha (frame-parameter nil 'alpha)))
+      (set-frame-parameter
+       nil 'alpha
+       (if (eql (cond ((numberp alpha) alpha)
+                      ((numberp (cdr alpha)) (cdr alpha))
+                      ;; Also handle undocumented (<active> <inactive>) form.
+                      ((numberp (cadr alpha)) (cadr alpha)))
+                100)
+           '(98 . 50) '(100 . 100)))))
+  (map! :leader
+        (:prefix-map ("t" . "toggle")
+         :desc "transparency"
+         "t" #'toggle-transparency))
 
-  ;; Set transparency of emacs
   (defun transparency (value)
     "Sets the transparency of the frame window. 0=transparent/100=opaque"
     (interactive "nTransparency Value 0 - 100 opaque:")
@@ -159,10 +164,18 @@
       "%`%l -interaction=nonstopmode -shell-escape %(mode)%' %t"))
 
   ;; Projectile
-  (setq projectile-project-search-path '("~"))
+  (setq projectile-project-search-path '("~")))
 
-  ;; Magit
-  (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
+(defsection git
+  "Git/Magic settings."
+
+   (after! git-gutter
+      (map! :n "M-j" 'git-gutter:next-hunk
+            :n "M-k" 'git-gutter:previous-hunk
+            :n "M-h" 'git-gutter:revert-hunk
+            :n "M-l" 'git-gutter:stage-hunk))
+
+   (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
 
 (defsection keybinds
   "All my custom keybindings."
@@ -191,6 +204,17 @@
   ; https://github.com/redguardtoo/evil-nerd-commenter
   (map! :nv "gc" #'evilnc-comment-or-uncomment-lines)
   (map! :nv "gC" #'evilnc-copy-and-comment-lines)
+
+  ;; FIXME Not working
+  ;; (defadvice! prompt-for-buffer (&rest _)
+  ;;   :after 'evil-window-vsplit (switch-to-buffer))
+
+  ; https://github.com/hlissner/doom-emacs/blob/8284f1035bb9366cfa050ab787ca794008f263bc/modules/config/default/%2Bemacs-bindings.el#L22
+  (map! :leader
+        (:prefix-map ("o" . "open")
+         :desc "vterm in a new workspace"
+         "t" (cmd! (+workspace/new "vterm" nil)
+                   (+vterm/here nil))))
 
   ;; (map! (:when (executable-find "firefox") :map evil-normal-state-map "g b" 'browse-url-firefox))
   ;; (when (executable-find "firefox") (map! :map evil-normal-state-map "g b" 'browse-url-firefox))

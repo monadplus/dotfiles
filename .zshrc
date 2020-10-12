@@ -131,6 +131,11 @@ if [ -d "$HOME/.emacs.d/bin" ] ;
   then PATH="$HOME/.emacs.d/bin:$PATH"
 fi
 
+# Local npm modules
+if [ -d $(npm bin) ] ;
+  then PATH=$(npm bin):$PATH
+fi
+
 export DOOMDIR=$HOME/.doom.d
 
 #fix obvious typo's

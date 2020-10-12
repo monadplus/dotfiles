@@ -28,7 +28,6 @@
        :ui
        ;;deft              ; notational velocity for Emacs
        doom                ; what makes DOOM look the way it does
-       ;; TODO can be customized
        doom-dashboard      ; a nifty splash screen for Emacs
        doom-quit           ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column       ; a `fill-column' indicator
@@ -45,7 +44,6 @@
        ;;tabs              ; a tab bar for Emacs
        ;;treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
-       ;; TODO
        vc-gutter           ; vcs diff in the fringe
        ;; vi-tilde-fringe  ; fringe tildes to mark beyond EOB https://github.com/syl20bnr/vi-tilde-fringe
        (window-select +switch-window)     ; visually switch windows
@@ -71,7 +69,6 @@
        electric          ; smarter, keyword-based electric-indent
        ibuffer           ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
-       ;; TODO
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
@@ -146,13 +143,11 @@
        ;;factor
        ;;ledger            ; an accounting system in Emacs
        ;;lua               ; one-based indices? one-based indices
-       ;; TODO (markdown +grip) grip not found in PATH
-       ;;      Probably because not seeing the same path as the user.
        markdown            ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        nix                 ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       ;; TODO see flags
+       ;; TODO
        org                 ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
@@ -182,6 +177,7 @@
        ;;(wanderlust +gmail)
 
        :app
+       ; TODO (https://www.youtube.com/watch?v=vO_RF2dK7M0&feature=emb_title)
        ;;calendar
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader

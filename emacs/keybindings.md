@@ -55,12 +55,34 @@ Word motions:
 
 1. Go to a scratch buffer, swap to emacs-lisp-mode and `SPC m e b`
 2. Eval using `SPC ;`
+3. Place the cursor on the last parenthesis of an s-expr and `C-x C-e`
 
 ## [emacs-evil](https://github.com/emacs-evil/evil)
+### [evil-exchange](https://github.com/Dewdrops/evil-exchange) 
+### [evil-indent-plus](https://github.com/TheBB/evil-indent-plus)
+### [evil-numbers](https://github.com/cofi/evil-numbers) 
+
+Increment/decrement numbers: `g-` and `g=`
+
+### [evil-lion](https://github.com/edkolev/evil-lion)
+
+Align: :v `gl`
+Align: :n `gl`
+Right-align: :n `gL`
+
+Example: `glip=` and `glip,`
+
+one = 1
+three = 3
+fifteen = 15
+
+one, two, three,
+four, sixteen, seventeen,
 
 ### [evil-nerd-commenter](https://github.com/redguardtoo/evil-nerd-commenter)
 
-
+- Comment :nv `gc`
+- Copy and comment  :nv `gC`
 
 ### [evil-surround](https://github.com/emacs-evil/evil-surround)
 
@@ -81,7 +103,11 @@ Move forward `;` and backwards `,`
 
 After editing, the search is remembered, so you can press `; or ,` again.
 
-### multiple-cursors (collection of packages)
+### [evil-visualstar](https://github.com/bling/evil-visualstar)
+
+Make a visual selection `v` or `V`, and then hit `*`
+
+## multiple-cursors
 
 - [evil-mc](https://github.com/gabesoft/evil-mc)
 
@@ -192,14 +218,22 @@ Tips:
 
 - You can stage/unstage some region by VISUALly selecting it and `s`(stage)/`x`(discard).
 
-### +forge
+### git-gutter/git-gutter-fringe
 
+- Next hunk: `SPC g ]`
+- Previous hunk: `SPC g [`
+- Revert hunk: `SPC g r`
+- Stage hunk: `SPC g s`
+
+More at `M-x git-gutter:`
+
+### +forge
 
 First you need to generate a github token with permissions: repo, user and read:org.
 
 Then you need to create the file `~/.authinfo.gpg` (opening the file with emacs will automatically allow you to edit it, and once saved, it will encrypt it!) with the following line: 
 
-```
+```txt
 machine api.github.com login monadplus^forge password **********
 ```
 
@@ -227,7 +261,7 @@ git config --global github.oauth-token <your-personal-access-token-with-gist-sco
 
 Keybindings:
 
-- `M-x gist-list`: to show your gists.
+- List: `SPC g l g` or `M-x +gist/list`
 - `c` to create a gist from a buffer (alternative `M-x gist-buffer-private`)
 - `d` delete a gist
 - `e` edit description
@@ -245,15 +279,27 @@ Open current file in neotree: `C-s`
 
 ## Markdown
 
-`SPC <localleader>`
+Before you need to install:
+
+- Linting: 
+  - [markdownlint](https://github.com/DavidAnson/markdownlint): the readme contains all errors explained.
+  - [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) (not sure if you need the client)
+
+- Preview: 
+  - pandoc: `sudo pacman -S pandoc`. Pandoc preview is better than +grip.
+  - (optional +grip) [grip-mode](https://github.com/seagle0128/grip-mode): github preview render
+
+Keybindings:
+
+- `SPC <localleader>`
+- More [here](https://github.com/hlissner/doom-emacs/blob/fdbf68cf3cfa57837a2d7288e14261cb3ae881e8/modules/lang/markdown/config.el#L96) 
 
 ## [Avy](https://github.com/abo-abo/avy)
 
 Search (jump to word): `gs SPC`
+kk
 
-There is an option to search in all windows (nil by default).
-
-There are more commands not mapped:
+THERE ARE more commands not mapped:
 - avy-goto-char
 - avy-goto-char-2
 - avy-goto-char-timer

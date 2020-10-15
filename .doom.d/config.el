@@ -120,6 +120,7 @@
   "All my custom keybindings."
 
   (map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
+  (map! :map pdf-view-mode-map :n "C-f" nil)     ;; Remove previous keybinding
   (map! :nm "C-z" nil) ;; Remove when I stop using C-z to disable highlight star.
   (map! :n "M-]" 'evil-window-increase-width
         :n "M-[" 'evil-window-decrease-width
@@ -158,14 +159,16 @@
 
   (map! :map evil-normal-state-map "g b" #'browse-url))
 
-(defsection git
-  "Git/Magic settings."
+(defsection magit
+  "Git settings."
 
    (after! git-gutter
       (map! :n "M-j" 'git-gutter:next-hunk
             :n "M-k" 'git-gutter:previous-hunk
             :n "M-h" 'git-gutter:revert-hunk
-            :n "M-l" 'git-gutter:stage-hunk))
+            :n "M-l" 'git-gutter:stage-hunk
+            :n "M-i" 'git-gutter:popup-hunk
+            :leader :n "g p" 'git-gutter:popup-hunk))
 
    (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
 

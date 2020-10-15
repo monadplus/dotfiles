@@ -123,7 +123,8 @@
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
-       ;;erlang            ; an elegant language for a more civilized age
+       ; TODO sourcer lsp is not installed
+       (erlang +lsp)       ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
        ;;fsharp            ; ML stands for Microsoft's Language
@@ -148,7 +149,21 @@
        nix                 ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        ;; TODO +pandoc, +present
-       org                 ; organize your plain life in plain text
+       (org                ; organize your plain life in plain text
+        ;+brain
+        ;+gnuplot
+        ;+hugo
+        ;+ipython
+        ;+journal
+        ;+jupyter
+        ;+pretty
+        ;+roam
+        +dragndrop         ; drag & drop files/images into org buffers
+        +pandoc            ; export with pandoc support
+        ; +pomodoro          ; pomodoro timer for clocking time on tasks
+        +noter             ; org-noter integration. Keep notes in sync with a document
+        +presenter         ; integration with reveal.js, beamer and org-tree-slide
+       )
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional

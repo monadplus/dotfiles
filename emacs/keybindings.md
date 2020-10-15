@@ -142,16 +142,84 @@ In :v mode:
 
 ## org
 
+Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
+
 - Change to `org-mode`
 - `Tab` to fold/unfold
 - `Shift + Tab` cycle fold/unfold
 - `M j or M k` to move section up/down
 - `M h or M l` to move section left/right (promote/demote)
 - `C-RET`: new section
-- Create a link manually: [[heading-name]]
-- Create a link (heading/file/url): org-store-link + org-insert-link [[heading-name]]
+- Create a link manually: [[heading-name]] or [[file:filename.txt::section_1]] or [[file:filename.txt::44]]
+- Create/Edit a link: `SPC m l l`
 
-More: keep watching https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&index=10
+### +presenter
+
+TODO
+
+### +noter
+
+Create notes
+
+- [org-noter](https://github.com/weirdNox/org-noter)
+
+### +pomodoro
+
+[org-pomodoro](https://github.com/marcinkoziej/org-pomodoro)
+
+### +pandoc
+
+`M-x org-pandoc-export-as-xxxx` (buffer)
+`M-x org-pandoc-export-to-xxxx` (file)
+`M-x org-pandoc-export-to-xxxx-and-open` (file and open)
+
+- There's a lot of customizing option: [ox-pandoc](https://github.com/kawabata/ox-pandoc)
+
+### [htmlize](https://github.com/hniksic/emacs-htmlize)
+
+- `M-x htmlize-buffer` and `M-x htmlize-file`
+- `M-x htmlize-many-files`
+- `M-x htmlize-many-files-dired` marked on dired
+
+Customize variable `htmlize-output-type` (css, inline-css, font)
+
+### [ob-async](https://github.com/astahlman/ob-async)
+
+Async execution of snippets
+
+```org
+#+BEGIN_SRC sh :async
+sleep 3s && echo 'Done!'
+#+END_SRC
+```
+
+### [org-cliplink](https://github.com/rexim/org-cliplink)
+
+- Copy an url to the clipboard and then `M-x org-cliplink`.
+
+### [orgit](https://github.com/magit/orgit)
+
+Link to Magic buffers from Org docs.
+
+### [org-yt](https://github.com/TobiasZawada/org-yt)
+
+Youtube links in org-mode.
+
+### [ox-clip](https://github.com/jkitchin/ox-clip)
+
+This module copies selected regions in org-mode as formatted text on the clipboard that can be pasted into other applications. When not in org-mode, the htmlize library is used instead.
+
+### [toc-org](https://github.com/snosov1/toc-org)
+
+TODO: not working :-(
+
+After the installation, every time you’ll be saving an org file, the first headline with a :TOC: tag will be updated with the current table of contents.
+
+Add `:TOC:` at the headline of the document
+
+### [org-pdftools](https://github.com/fuxialexander/org-pdftools)
+
+TODO
 
 ## ivy
 
@@ -248,6 +316,7 @@ Tips:
 - Previous hunk: `SPC g [`
 - Revert hunk: `SPC g r`
 - Stage hunk: `SPC g s`
+- Preview hunk: `SPC g p`
 
 More at `M-x git-gutter:`
 

@@ -322,6 +322,8 @@ To see the list of intalled packages: `npm list` or `npm -g list`
 
 Check npm directory: `npm root` or `npm -g root`
 
+To install a package `npm install package-name` (-g)
+
 #### issue after installing npm
 
 After installing npm (`sudo pacman -Syy npm`), the `node_modules` was created at `~/dotfiles` (WTF!).

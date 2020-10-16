@@ -288,6 +288,15 @@ If the pdf was produced with LaTeX you can jump to the source location
 
 - `C-c !`
 
+### sh 
+
+There was a conflict: `shellcheck: error while loading shared libraries: libHSaeson-1.5.4.0-FhBZDiEN0KrGTSW2AlZ5Kj-ghc8.10.2.so: cannot open shared object file: No such file or directory` so I installed it through nix `nix-env -i shellcheck`
+
+LSP:
+
+- install [bash-language-server](https://github.com/bash-lsp/bash-language-server)
+- add flag (sh +lsp)
+
 ## grammar
 
 (Disabled) Too much errors. It may be useful for writing a document or a book but not for org/markdown files.

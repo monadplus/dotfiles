@@ -185,6 +185,10 @@
             )))
   (when (featurep! :lang latex)
     (customize-set-variable 'shell-escape-mode "-shell-escape"))
+
+  ;; FIXME The command is called with call-process and arguments are not accepted
+  ;; (setq pdf-latex-command "\"pdflatex --synctex=1\"") ; --synctex=1 to be able to jump to sources
+
   (after! latex
     (setf (nth 1 (assoc "LaTeX" TeX-command-list))
       "%`%l -interaction=nonstopmode -shell-escape %(mode)%' %t")))

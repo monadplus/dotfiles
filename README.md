@@ -30,6 +30,25 @@ sudo ln -s ~/dotfiles/70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 sudo ln -s ~/dotfiles/99-killX.conf /etc/X11/xorg.conf.d/99-killX.conf
 ```
 
+### TLP
+
+Install:
+
+``` bash
+sudo pacman -Syy tlp
+sudo systemctl enable tlp.service
+sudo systemctl start tlp.service
+```
+
+Add configuration file:
+
+``` bash
+sudo rm /etc/tlp.conf
+sudo ln -s ~/dotfiles/tlp.conf /etc/tlp.conf
+```
+
+Configuration options: https://linrunner.de/tlp/settings/
+
 ### Terminal Emulator
 
 There are two options (I recommend alacritty):
@@ -58,7 +77,7 @@ I recommend using `keychain` (sudo pacman -S keychain) which reuses ssh-agents f
 
 ### Font
 
-Fonts are installed at 
+Fonts are installed at
 
 - system-wide `/usr/share/fonts/`
 - single user `~/.local/share/fonts/`
@@ -360,6 +379,24 @@ When installing xmonad with pacman, it will also install the newest ghc.
 If you install a new ghc (i.e. nix-env -iA ghcXXX), calling `xmonad --recompile` will fail.
 
 You need to remove the installed ghc
+
+#### Bluetooth: can't connect/remove device
+
+This happens after waking your pc from hibernate.
+
+The [issue](https://github.com/linrunner/TLP/issues/180) is solved here.
+
+You can check it this way:
+
+```bash
+# check the bluetooth status
+rfkill list
+
+# If the status is blocked on
+# rfkill unblock bluetooth
+```
+
+This is adding `RESTORE_DEVICE_STATE_ON_STARTUP=1` in `etc/tlp.conff`.
 
 #### Pacman: can't update because of corrupted pgp
 

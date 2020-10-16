@@ -273,7 +273,16 @@ Once `pdf` is added to `init.el`, [pdf-tools](https://github.com/politza/pdf-too
 
 (optional) `sudo pacman -Syy imagemagick`
 
-TODO change keybindings: https://github.com/politza/pdf-tools#some-keybindings
+Keybindings:
+- next/previous page: `j` and `k`
+- quit: `q`
+- outline: `TAB`
+- dar-mode: `z m`
+- enlarge/shrink: `=` and `-`
+- fit page: `P`
+- reset: `=`
+
+If the pdf was produced with LaTeX you can jump to the source location
 
 ## flycheck
 

@@ -41,10 +41,17 @@
 (package! ghcid
   :recipe (:local-repo "~/elisp/ghcid/"))
 
+
 (package! hlint
   :recipe (:local-repo "~/elisp/hs-lint/"))
 
 (package! ormolu)
 (package! keychain-environment) ; Fix the bug with keychain not found https://github.com/tarsius/keychain-environment
 
-;; (package! magithub)
+(package! magithub)
+
+;; https://github.com/daichirata/emacs-rotate
+
+;; https://github.com/Mstrodl/elcord
+
+;; https://github.com/dandavison/delta/

@@ -42,14 +42,19 @@ Word motions:
 
 ### Windows
 
-- Split vertical: `C-w s`
+- Split vertical: `C-w v`
 - Split horizontal: `C-w s`
+
 - Move: `C-w h/j/k/l`
 - Move next: `C-w C-w`
+
+- Rotate: `C-w r` and `C-w R`
+
 - Close: `C-w q`
-- Close others: `C-w C-o` or `SPC w O`
-- Horizontal Increase/Decrease: `C-w < >`
-- Vertical Increase/Decrease: `C-w + -`
+- Close others: `C-w C-o`
+
+- Resize vertical: `M =` and `M '`
+- Resize horizontal: `M [` and `M ]`
 
 ### Evaluating emacs lisp
 
@@ -135,12 +140,14 @@ In :v mode:
 
 `M d`: upwards
 `M D`: downwards
-`C n` and `C p` to navigate and `RET` to select/unselect entry
+`C n` and `C p` to navigate and `RET** to select/unselect entry
 (Same for :v)
 
-- [iedit](https://github.com/victorhge/iedit) 
+- [iedit](https://github.com/victorhge/iedit** 
 
 ## org
+
+**TODO executing haskell is broken***
 
 Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
 
@@ -151,7 +158,16 @@ Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
 - `M h or M l` to move section left/right (promote/demote)
 - `C-RET`: new section
 - Create a link manually: [[heading-name]] or [[file:filename.txt::section_1]] or [[file:filename.txt::44]]
+- Store link: `SPC m l s`
 - Create/Edit a link: `SPC m l l`
+
+- Start a code snippet: `<s` and hit return (or manually write the following). You can edit the code in its own buffer by `SPC m '`
+
+```org
+#+BEGIN_SRC elisp
+(+ 2 2)
+#+END_SRC
+```
 
 ### +presenter
 
@@ -359,6 +375,12 @@ Keybindings:
 
 - How to merge a pull request? Create a local branch `b y` from the pull-request and then `m i` (merge into)
 
+### [magithub](https://github.com/vermiculus/magithub/blob/master/magithub.org#faq)
+
+TODO
+
+`M-x magithub-clone` (FIXME https://github.com/vermiculus/magithub/issues/406)
+
 ## [gist](https://github.com/defunkt/gist.el)
 
 Configuration:
@@ -385,8 +407,17 @@ More here https://github.com/hlissner/doom-emacs/blob/develop/modules/tools/gist
 
 ## Neotree
 
-Toggle neotree: `C-f`
-Open current file in neotree: `C-s`
+- Toggle neotree: `C-f`
+- Open current file in neotree: `C-s`
+
+In the neotree buffer:
+
+- exit: `q`
+- create/delete/rename: `c`/`d`/`r`
+- copy node: `y`
+- Change root to current node: `R`
+- Up: `U`
+- toggle hidden files: `H`
 
 ## Markdown
 

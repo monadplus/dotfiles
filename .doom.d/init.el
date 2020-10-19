@@ -34,7 +34,7 @@
        hl-todo             ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra             ; bind commands together
        ;;indent-guides     ; highlighted indent columns
-       (ligatures +iosevka)         ; ligatures and symbols to make your code pretty again
+       ;; (ligatures +iosevka)         ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
        modeline            ; snazzy, Atom-inspired modeline, plus API
        nav-flash           ; blink cursor line after big motions
@@ -68,7 +68,7 @@
        :emacs
        (dired +icons)    ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       ibuffer           ; interactive buffer management
+       (ibuffer +icons)  ; interactive buffer management
        undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
@@ -92,7 +92,10 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        gist                ; interacting with github gists
-       (lookup +docset)    ; (Dash.app...) navigate your code and its documentation
+       (lookup
+          ; +dictionary ; dictionary/thesaurus is nice
+          ; +offline    ; prefer offlines dictionary/thesaurus
+          +docset)    ; (Dash.app...) navigate your code and its documentation
        lsp
        (magit +forge)      ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs

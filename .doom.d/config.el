@@ -18,6 +18,7 @@
 (defsection general
   "General configuration."
 
+  ; Used by gpg and others.
   (setq user-full-name "Arnau Abella"
         user-mail-address "arnauabella@gmail.com")
 
@@ -26,14 +27,50 @@
         doom-variable-pitch-font (font-spec :family "Iosevka" :size 14 :weight 'regular) ;; e.g. neotree font
         doom-big-font (font-spec :family "Iosevka" :size 20 :weight 'regular)) ; doom-big-font-mode
 
+  (setq-default line-spacing 1
+                major-mode 'org-mode) ; default major mode
+
+  (setq evil-want-fine-undo t         ; Be more granular with changes (don't aggregate).
+        truncate-string-ellipsis "…"  ; Unicode ellipsis > "..."
+        display-line-numbers-type t)
+
+  (defun doom-modeline-conditional-buffer-encoding ()
+    "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
+    (setq-local doom-modeline-buffer-encoding
+                (unless (or (eq buffer-file-coding-system 'utf-8-unix)
+                            (eq buffer-file-coding-system 'utf-8)))))
+
+  (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
+
+  ; default buffer name
+  (setq doom-fallback-buffer-name "► Doom"
+        +doom-dashboard-name "► Doom")
+
+  ;; (display-time-mode 1)
+  ;; (unless (equal "Battery status not available"
+  ;;                (battery))
+  ;;   (display-battery-mode 1))
+
   ; theme
   (setq doom-theme 'doom-dracula)
 
-  (setq display-line-numbers-type t)
-  (setq-default line-spacing 1)
+  ; windows
+  (setq evil-vsplit-window-right t
+        evil-split-window-below t) ; when split, move to the window
+
+  ; After split, prompt for buffer
+  (defadvice! prompt-for-buffer (&rest _)
+    :after '(evil-window-split evil-window-vsplit)
+    (+ivy/switch-buffer))
+
+  (setq +ivy-buffer-preview t) ; preview buffer before jump
 
   ; doom-dashboard
   (setq fancy-splash-image "~/wallpapers/megumin_2.png") ;
+
+  ;; (map! :n [mouse-8] #'better-jumper-jump-backward
+  ;;       :n [mouse-9] #'better-jumper-jump-forward)
+
 
   ; Keychain saves the agents' environment variables to files inside ~/.keychain/, so that subsequent shells can source these files.
   ; When Emacs is started under X11 and not directly from a terminal these variables are not set.
@@ -98,7 +135,7 @@
   (add-hook 'pre-command-hook 'show-workspaces) ;; Adding this will prevent the workspaces from hiding
 
   (after! which-key
-    (which-key-setup-side-window-bottom)
+    (which-key-setup-minibuffer)
     (setq which-key-idle-delay 0.5)
     (setq which-key-idle-secondary-delay 0.05)
     (setq which-key-show-transient-maps t))
@@ -122,6 +159,7 @@
   (map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
   (map! :map pdf-view-mode-map :n "C-f" nil)     ;; Remove previous keybinding
   (map! :nm "C-z" nil) ;; Remove when I stop using C-z to disable highlight star.
+  (map! :map global-map "C-z" nil) ;; Remove when I stop using C-z to disable highlight star.
   (map! :n "M-]" 'evil-window-increase-width
         :n "M-[" 'evil-window-decrease-width
         :n "M-=" 'evil-window-decrease-height
@@ -169,6 +207,12 @@
             :n "M-l" 'git-gutter:stage-hunk
             :n "M-i" 'git-gutter:popup-hunk
             :leader :n "g p" 'git-gutter:popup-hunk))
+
+   (use-package! magithub
+     :after magit
+     :config
+     (magithub-feature-autoinject t))
+     (setq magithub-clone-default-directory "~/haskell/"))
 
    (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
 
@@ -256,7 +300,6 @@
 
   ; lsp
   (use-package! lsp-haskell
-    :ensure t
     :config
     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
   (after! lsp-mode
@@ -288,6 +331,14 @@
 
 (defsection org-mode
   "Org."
+
+  ;; Example of creating your own links
+  ;; (defun make-youtube-link (youtube_id)
+  ;;   (browse-url (concat "https://www.youtube.com/embed/" youtube_id)))
+  ;; (org-add-link-type "my-yt" #'make-youtube-link)
+
+  ;; Allow links to non-headlines parts of your document
+  ;; (setq org-link-search-must-match-exact-headline nil)
 
   ;; This is just a default location to look for Org files.  There is no need
   ;; at all to put your files into this directory.  It is used in the

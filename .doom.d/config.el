@@ -18,11 +18,11 @@
 (defsection general
   "General configuration."
 
-  ; Used by gpg and others.
-  (setq user-full-name "Arnau Abella"
-        user-mail-address "arnauabella@gmail.com")
+  (setq user-full-name "Arnau Abella"               ; Used by gpg and others.
+        user-mail-address "arnauabella@gmail.com"
+        auth-sources '("~/.authinfo.gpg")
+        auth-source-cache-expiry nil)               ; default is 7200 (2h)
 
-  ; font
   (setq doom-font (font-spec :family "Iosevka" :size 15 :weight 'medium )
         doom-variable-pitch-font (font-spec :family "Iosevka" :size 14 :weight 'regular) ;; e.g. neotree font
         doom-big-font (font-spec :family "Iosevka" :size 20 :weight 'regular)) ; doom-big-font-mode
@@ -157,7 +157,11 @@
   "All my custom keybindings."
 
   (map! :map evil-motion-state-map "C-f" nil) ;; Remove previous keybinding
-  (map! :map pdf-view-mode-map :n "C-f" nil)     ;; Remove previous keybinding
+
+  (defun my-pdf-view-hook ()
+    (map! :map pdf-view-mode-map :n "C-f" nil))
+  (add-hook! 'pdf-view-mode-hook 'my-pdf-view-hook)
+
   (map! :nm "C-z" nil) ;; Remove when I stop using C-z to disable highlight star.
   (map! :map global-map "C-z" nil) ;; Remove when I stop using C-z to disable highlight star.
   (map! :n "M-]" 'evil-window-increase-width
@@ -211,7 +215,7 @@
    (use-package! magithub
      :after magit
      :config
-     (magithub-feature-autoinject t))
+     (magithub-feature-autoinject t)
      (setq magithub-clone-default-directory "~/haskell/"))
 
    (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))

@@ -478,3 +478,21 @@ THERE ARE more commands not mapped:
 ## zen-mode
 
 - Active/Deactivate: `SPC t z`
+## Calendar
+
+- [calfw and calfw-org](https://github.com/kiwanami/emacs-calfw)
+- [org-gcal](https://github.com/kidd/org-gcal.el)
+
+Keybindings:
+
+- `r` refresh
+- `t` Today
+- `g` go to date
+- `TAB` next item in day
+- `SPC` pop-up detail buffer
+- `RET` jump
+- `q` quit
+
+- `M` month view
+- `W` week view
+- `D` day view

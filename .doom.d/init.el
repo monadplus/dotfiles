@@ -195,8 +195,7 @@
        ;;(wanderlust +gmail)
 
        :app
-       ; TODO (https://www.youtube.com/watch?v=vO_RF2dK7M0&feature=emb_title)
-       ;;calendar
+       calendar            ; org-gcal
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought

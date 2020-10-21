@@ -143,11 +143,11 @@ In :v mode:
 `C n` and `C p` to navigate and `RET** to select/unselect entry
 (Same for :v)
 
-- [iedit](https://github.com/victorhge/iedit** 
+- [iedit](https://github.com/victorhge/iedit)
 
-## org
+## Org-mode
 
-**TODO executing haskell is broken***
+Recommended [video tutorial series](https://www.youtube.com/watch?v=sQS06Qjnkcc&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&index=1)
 
 Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
 
@@ -163,11 +163,80 @@ Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
 
 - Start a code snippet: `<s` and hit return (or manually write the following). You can edit the code in its own buffer by `SPC m '`
 
+**TODO executing haskell is broken***
+
 ```org
 #+BEGIN_SRC elisp
 (+ 2 2)
 #+END_SRC
 ```
+
+### calendar
+
+#### [calfw and calfw-org](https://github.com/kiwanami/emacs-calfw)
+
+Keybindings:
+
+- `r` refresh
+- `t` Today
+- `g` go to date
+- `TAB` next item in day
+- `SPC` pop-up detail buffer
+- `RET` jump
+- `q` quit
+
+- `M` month view
+- `W` week view
+- `D` day view
+
+**Creating timestamps**
+
+`M-m-d`: org-time-stamp, org-time-stamp-inactive, org-schedule, org-deadline
+
+```org
+<2006-11-01 Wed 19:15>
+<2007-05-16 Wed 12:30 +1w> # Repeater interval
+<2006-11-01 Wed 19:15-19:30> # Range
+<2004-08-23 Mon>--<2004-08-26 Thu> # Range
+[2006-11-01 Wed]  # Inactive (do not trigger an entry to show up in the agenda)
+```
+
+`S-Left/Right/Up/Down` on a date to change the date.
+
+
+#### [org-gcal](https://github.com/kidd/org-gcal.el)
+
+- Fetch calendars: `M-x org-gcal-fetch`
+- Sync `M-x org-gcal-sync` (org-gcal-fetch + org-gcal-post-at-point)
+
+- Add/Update entry: `M-x org-gcal-post-at-point`
+
+Let the prompt guide you:
+
+```org
+* Event title
+```
+
+Manually:
+
+```org
+* Event title
+:PROPERTIES:
+:calendar-id: arnauabella@gmail.com
+:END:
+:org-gcal:
+<2020-07-15 wed 09:15-09:30>
+
+Line 1
+Line 2
+:END:
+```
+
+- Delete entry: `M-x org-gcal-delete-at-point`
+
+#### [org-mode capture](https://orgmode.org/manual/Capture.html)
+
+`SPC X`
 
 ### +presenter
 
@@ -475,24 +544,8 @@ THERE ARE more commands not mapped:
 - Recent files `SPC f r`
 - Recent files (project) `SPC f R`
 
+- Remove deleted files from the cache: `SPC p i` or `M-x projectile-invalidate-cache` from the project
+
 ## zen-mode
 
 - Active/Deactivate: `SPC t z`
-## Calendar
-
-- [calfw and calfw-org](https://github.com/kiwanami/emacs-calfw)
-- [org-gcal](https://github.com/kidd/org-gcal.el)
-
-Keybindings:
-
-- `r` refresh
-- `t` Today
-- `g` go to date
-- `TAB` next item in day
-- `SPC` pop-up detail buffer
-- `RET` jump
-- `q` quit
-
-- `M` month view
-- `W` week view
-- `D` day view

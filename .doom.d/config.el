@@ -201,6 +201,14 @@
 
   (map! :map evil-normal-state-map "g b" #'browse-url))
 
+(defsection flycheck
+  "Syntax checker on esteroids."
+
+  ; All available checkers: `flycheck-checkers'
+  (after! flycheck
+    ; append is also ok (concat is only for strings)
+    (add-to-list 'flycheck-disabled-checkers '( markdown-markdownlint-cli markdown-mdl ))))
+
 (defsection magit
   "Git settings."
 
@@ -259,7 +267,7 @@
   ; (setq haskell-compile-cabal-build-command "stack build")
   (setq haskell-interactive-popup-errors nil)
   (setq haskell-process-suggest-language-pragmas nil) ; haskell-interactive-mode only
-  (setq lsp-lens-enable t)
+  (setq lsp-lens-enable nil) ; bothersome after a while.
 
   (after! smartparens
     (require 'smartparens-haskell))
@@ -322,7 +330,7 @@
 
   ; flycheck
   (after! flycheck
-    (setq-default flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc haskell-hlint)))
+    (add-to-list 'flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc haskell-hlint)))
   ;; TODO
   ;; https://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-chains
   ;; (flycheck-add-next-checker 'lsp 'haskell-hlint)
@@ -344,14 +352,21 @@
   ;; Allow links to non-headlines parts of your document
   ;; (setq org-link-search-must-match-exact-headline nil)
 
-  ;; This is just a default location to look for Org files.  There is no need
-  ;; at all to put your files into this directory.  It is used in the
-  ;; following situations:
-  ;;
-  ;; 1. When a capture template specifies a target file that is not an
-  ;;    absolute path.  The path will then be interpreted relative to
-  ;;    org-directory
-  ;; 2. When the value of variable org-agenda-files is a single file, any
-  ;;    relative paths in this file will be taken as relative to
-  ;;    org-directory.
-  (setq org-directory "/home/arnau/dotfiles/org/"))
+  (after! org-gcal
+    (setq org-gcal-client-id "476287550487-e5gdqkh7cbbvpc62f3rogq9dup63d98u.apps.googleusercontent.com"
+          org-gcal-client-secret "AxH42LSZyd64bEKeHW_g-_RU"
+          org-gcal-fetch-file-alist '( ("arnauabella@gmail.com" .  "~/Dropbox/org/schedule.org")
+                                       ("uf9i2quiq9c81mrvpts2ftgu5i71e71p@import.calendar.google.com" . "~/Dropbox/org/schedule-master.org"))
+          ))
+
+  (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+  (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+
+  (add-to-list 'org-capture-templates
+        '("a" "Appointment" entry (file  "~/Dropbox/org/schedule.org" )
+           "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))
+
+  ;; I prefer to pick all ~/Dropbox/org files
+  ;; (setq org-agenda-files (list "~/Dropbox/org/schedule.org" "~/Dropbox/org/schedule-master.org"))
+
+  (setq org-directory "/home/arnau/Dropbox/org/"))

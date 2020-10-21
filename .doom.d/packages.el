@@ -46,9 +46,9 @@
   :recipe (:local-repo "~/elisp/hs-lint/"))
 
 (package! ormolu)
-(package! keychain-environment) ; Fix the bug with keychain not found https://github.com/tarsius/keychain-environment
-
+(package! keychain-environment) ; FIX the bug with keychain not found https://github.com/tarsius/keychain-environment
 (package! magithub)
+;; (package! iedit) ; included with multi-cursor
 
 ;; https://github.com/daichirata/emacs-rotate
 

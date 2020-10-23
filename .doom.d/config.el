@@ -20,7 +20,7 @@
 
   (setq user-full-name "Arnau Abella"               ; Used by gpg and others.
         user-mail-address "arnauabella@gmail.com"
-        auth-sources '("~/.authinfo.gpg")
+        auth-sources '("~/.authinfo.gpg" "~/.emacs.d/.local/cache/org-gcal/tolen.gpg")
         auth-source-cache-expiry nil)               ; default is 7200 (2h)
 
   (setq doom-font (font-spec :family "Iosevka" :size 15 :weight 'medium )
@@ -352,6 +352,15 @@
   ;; Allow links to non-headlines parts of your document
   ;; (setq org-link-search-must-match-exact-headline nil)
 
+  ; change priority labels colors
+  ;; (setq org-priority-faces '( (65 :foreground "#E45649")
+  ;;                             (66 :foreground "#da8548")
+  ;;                             (67 :foreground "#0098dd")))
+
+  (if (featurep! :ui workspaces)
+      (map! :leader
+            :desc "calendar" "o c" #'=calendar))
+
   (after! org-gcal
     (setq org-gcal-client-id "476287550487-e5gdqkh7cbbvpc62f3rogq9dup63d98u.apps.googleusercontent.com"
           org-gcal-client-secret "AxH42LSZyd64bEKeHW_g-_RU"
@@ -362,9 +371,10 @@
   (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
   (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
-  (add-to-list 'org-capture-templates
-        '("a" "Appointment" entry (file  "~/Dropbox/org/schedule.org" )
-           "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n"))
+  (after! org-capture
+    (add-to-list 'org-capture-templates
+          '("a" "Appointment" entry (file  "~/Dropbox/org/schedule.org" )
+             "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
 
   ;; I prefer to pick all ~/Dropbox/org files
   ;; (setq org-agenda-files (list "~/Dropbox/org/schedule.org" "~/Dropbox/org/schedule-master.org"))

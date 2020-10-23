@@ -163,13 +163,22 @@ Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
 
 - Start a code snippet: `<s` and hit return (or manually write the following). You can edit the code in its own buffer by `SPC m '`
 
-**TODO executing haskell is broken***
-
 ```org
 #+BEGIN_SRC elisp
 (+ 2 2)
 #+END_SRC
 ```
+
+- Tags: `SPC m t` or `S <Left>/<Right>`
+- Priorities: `S <Up>/<Down>`
+- Tags: `SPC m q` (recall they are hierarchical)
+- In an org-file, display only items that match the criterion: `SPC m s s` (`M-x org-sparse-tree`)
+- Checkbox: `[ ]`, `[-]` (in progress), `[X]` (done). 
+  - Press `Return` to mark them as done.
+  - You can nest them and it will automatically set the top one to `[X]` when the children are done.
+  - Counter: add `[/]` or `[%]` at the top item and then `C-c C-c` and it will change it to `[0/N]` or `[0%]`
+
+- Unordered list to list: change the first `-` to `1.` and then `C-c C-c`
 
 ### calendar
 

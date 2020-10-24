@@ -55,3 +55,7 @@
 ;; https://github.com/Mstrodl/elcord
 
 ;; https://github.com/dandavison/delta/
+
+;; TODO Not working
+;; (package! doom-snippets :disable t)
+(package! yasnippet-snippets)

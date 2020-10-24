@@ -61,7 +61,6 @@
        ;;objed             ; (evil is better) text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
        ;;rotate-text       ; (what?) cycle region at point between text candidates
-       ;; TODO
        snippets            ; my elves. They type so I don't have to
        ;;word-wrap         ; soft wrapping with language-aware indent
 
@@ -159,7 +158,7 @@
         ;+ipython
         ;+journal
         ;+jupyter
-        ;+pretty
+        +pretty
         ;+roam
         +dragndrop         ; drag & drop files/images into org buffers
         +pandoc            ; export with pandoc support

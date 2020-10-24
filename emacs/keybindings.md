@@ -558,3 +558,30 @@ THERE ARE more commands not mapped:
 ## zen-mode
 
 - Active/Deactivate: `SPC t z`
+
+## Snippets
+
+### [yasnippet](https://github.com/joaotavora/yasnippet)
+
+- Next/Previous in snippet: `TAB` and `S-TAB`
+
+Yasnippet snippet collections:
+
+- https://github.com/AndreaCrotti/yasnippet-snippets
+- https://github.com/hlissner/doom-snippets
+
+### [auto-yasnippet](https://github.com/abo-abo/auto-yasnippet)
+
+Create snippets on the go.
+
+Suppose we want to write:
+
+```
+count_of_red = get_total("red");
+count_of_blue = get_total("blue");
+count_of_green = get_total("green");
+```
+
+1. Write a template on your code `count_of_~red = get_total("~red");`
+2. Put your cursor over the template and `M-x aya-create`
+3. On a new line, call `M-x aya-expand` and complete the template.

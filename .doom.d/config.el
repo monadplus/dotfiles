@@ -201,6 +201,24 @@
 
   (map! :map evil-normal-state-map "g b" #'browse-url))
 
+(defsection yasnippets
+  "Snippets."
+
+  (after! yasnippet
+    (setq +snippets-dir "/home/arnau/dotfiles/snippets/"))
+
+  (map! :leader
+        (:when (featurep! :editor snippets)
+         (:prefix-map ("s" . "snippets")
+          :desc "new" "n" #'+snippets/new
+          :desc "edit" "e" #'+snippets/edit
+          :desc "file" "f" #'yas/visit-snippet-file
+          :desc "abort" "a" #'+snippet--abort
+          :desc "insert" "i" #'yas-insert-snippet
+          :desc "auto create" "c" #'aya-create
+          :desc "auto expand" "C" #'aya-expand
+          :desc "describe table" "t" #'yas/describe-tables))))
+
 (defsection flycheck
   "Syntax checker on esteroids."
 
@@ -353,13 +371,18 @@
   ;; (setq org-link-search-must-match-exact-headline nil)
 
   ; change priority labels colors
-  ;; (setq org-priority-faces '( (65 :foreground "#E45649")
-  ;;                             (66 :foreground "#da8548")
-  ;;                             (67 :foreground "#0098dd")))
+  ;; (setq org-priority-faces '( (?A :foreground "#E45649")
+  ;;                             (?B :foreground "#da8548")
+  ;;                             (?C :foreground "#0098dd")))
 
   (if (featurep! :ui workspaces)
       (map! :leader
             :desc "calendar" "o c" #'=calendar))
+
+  (after! org-fancy-priorities
+    (setq org-fancy-priorities-list '((?A . "⚡")
+                                      (?B . "⚡")
+                                      (?C . "⚡"))))
 
   (after! org-gcal
     (setq org-gcal-client-id "476287550487-e5gdqkh7cbbvpc62f3rogq9dup63d98u.apps.googleusercontent.com"

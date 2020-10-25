@@ -133,7 +133,12 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-       (haskell +lsp +ghcide) ; a language that's lazier than I am
+
+       ;; FIXME there's a fucking bug that errors disappears on save
+       ;; https://github.com/hlissner/doom-emacs/issues/2060
+       ;; (haskell +lsp +ghcide) ; a language that's lazier than I am
+       (haskell)
+
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;;json              ; At least it ain't XML

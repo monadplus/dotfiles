@@ -62,6 +62,10 @@ Word motions:
 2. Eval using `SPC ;`
 3. Place the cursor on the last parenthesis of an s-expr and `C-x C-e`
 
+### [drag-stuff](https://github.com/mkhl/drag-stuff)
+
+- Drag word, line or region around: `M-up/down/left/right`
+
 ## [emacs-evil](https://github.com/emacs-evil/evil)
 ### [evil-exchange](https://github.com/Dewdrops/evil-exchange) 
 ### [evil-indent-plus](https://github.com/TheBB/evil-indent-plus)

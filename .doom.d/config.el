@@ -188,6 +188,10 @@
   (map! :nv "gc" #'evilnc-comment-or-uncomment-lines)
   (map! :nv "gC" #'evilnc-copy-and-comment-lines)
 
+  ;; FIXME https://github.com/hlissner/doom-emacs/issues/2060
+  (after! lsp-ui
+    (setq lsp-prefer-flymake :none))
+
   ;; FIXME Not working
   ;; (defadvice! prompt-for-buffer (&rest _)
   ;;   :after 'evil-window-vsplit (switch-to-buffer))
@@ -303,13 +307,16 @@
   (map! :map haskell-mode-map :localleader :desc "format" "f" #'ormolu-format-buffer)
 
   ; ghcid
-  (use-package! ghcid :after compile)
+  (use-package! ghcid
+    :after compile)
   (after! ghcid
     (map! :localleader
-          :map haskell-mode-map
-          :map haskell-cabal-mode-map
-          :desc "ghcid: start" "g" #'ghcid
-          :desc "ghcid: stop" "G" #'ghcid-stop))
+          (:map haskell-mode-map
+           :desc "ghcid: start" "g" #'ghcid
+           :desc "ghcid: stop" "G" #'ghcid-stop)
+          (:map haskell-cabal-mode-map
+           :desc "ghcid: start" "g" #'ghcid
+           :desc "ghcid: stop" "G" #'ghcid-stop)))
 
   ; haskell-mode
   (map! (:after haskell-mode
@@ -322,7 +329,9 @@
           :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
           ; :desc "doc" "?" 'lsp-ui-doc-glance
           ; :desc "type" "t" 'haskell-process-do-type
-          :desc "show doc" "t" '+lookup/documentation
+          ; :desc "show doc" "t" '+lookup/documentation
+          ; :desc "type" "t" 'haskell-process-do-type
+          :desc "info" "t" 'haskell-process-do-info
           :desc "ghc: compile" "B" #'haskell-compile ; override
           ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
           ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
@@ -330,9 +339,11 @@
           :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local))
 
   ; lsp
-  (use-package! lsp-haskell
-    :config
-    (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+  ; TODO
+  ;; (use-package! lsp-haskell
+  ;;   :config
+  ;;   (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+
   (after! lsp-mode
     (map! :map haskell-mode-map
           :localleader
@@ -347,12 +358,13 @@
          :localleader
            :desc "hlint" "?" #'hs-lint))
 
-  ; flycheck
-  (after! flycheck
-    (add-to-list 'flycheck-disabled-checkers '(haskell-ghc haskell-stack-ghc haskell-hlint)))
+  ;; TODO stack-ghc has priority over ghc (see variable flycheck-checkers)
+  (setq-default flycheck-disabled-checkers '(haskell-stack-ghc)) ; haskell-ghc haskell-hlint
+
   ;; TODO
   ;; https://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-chains
   ;; (flycheck-add-next-checker 'lsp 'haskell-hlint)
+
   (map! :map haskell-mode-map
         :n "C-j" 'flycheck-next-error
         :n "C-k" 'flycheck-previous-error

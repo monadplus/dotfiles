@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: example
-# key: example
-# condition: t
-# --
-This is an {$1:example}.

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Type Family
+# key: typef
+# condition: t                                      
+# --
+type family ${1:Name} (${2:k} :: ${3:*}) :: ${4:Type}$0

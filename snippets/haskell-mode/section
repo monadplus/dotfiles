@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: section
+# key: section
+# condition: t
+# --
+---${1:$(make-string (string-width yas-text) ?\-)}
+-- ${1:Section}
+---${1:$(make-string (string-width yas-text) ?\-)}
+
+$0

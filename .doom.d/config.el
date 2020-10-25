@@ -215,9 +215,10 @@
           :desc "file" "f" #'yas/visit-snippet-file
           :desc "abort" "a" #'+snippet--abort
           :desc "insert" "i" #'yas-insert-snippet
-          :desc "auto create" "c" #'aya-create
-          :desc "auto expand" "C" #'aya-expand
-          :desc "describe table" "t" #'yas/describe-tables))))
+          :desc "aya-create" "c" #'aya-create
+          :desc "aya-expand" "C" #'aya-expand
+          :desc "describe table" "t" #'yas/describe-tables
+          :desc "tryout snippet" "T" #'yas/tryout-snippet))))
 
 (defsection flycheck
   "Syntax checker on esteroids."
@@ -369,6 +370,11 @@
 
   ;; Allow links to non-headlines parts of your document
   ;; (setq org-link-search-must-match-exact-headline nil)
+
+  ;; (setq org-todo-keywords
+  ;;     '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
+
+  (setq org-tag-alist '(("master" . ?m) ("personal" . ?p)))
 
   ; change priority labels colors
   ;; (setq org-priority-faces '( (?A :foreground "#E45649")

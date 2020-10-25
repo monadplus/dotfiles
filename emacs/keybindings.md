@@ -161,14 +161,6 @@ Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
 - Store link: `SPC m l s`
 - Create/Edit a link: `SPC m l l`
 
-- Start a code snippet: `<s` and hit return (or manually write the following). You can edit the code in its own buffer by `SPC m '`
-
-```org
-#+BEGIN_SRC elisp
-(+ 2 2)
-#+END_SRC
-```
-
 - Tags: `SPC m t` or `S <Left>/<Right>`
 - Priorities: `S <Up>/<Down>`
 - Tags: `SPC m q` (recall they are hierarchical)
@@ -179,6 +171,90 @@ Keybindings: [evil-org-mode](https://github.com/Somelauw/evil-org-mode)
   - Counter: add `[/]` or `[%]` at the top item and then `C-c C-c` and it will change it to `[0/N]` or `[0%]`
 
 - Unordered list to list: change the first `-` to `1.` and then `C-c C-c`
+- Add a note `C-c C-z`
+
+Table commands: `SPC m b`:
+
+- Create table: `M-x org-table-create` (tables are aligned automatically)
+
+Properties
+
+```org
+:PROPERTIES:
+:DESCRIPTION: Foo
+:END:
+```
+
+Paragraphs:
+
+```org
+#+BEGIN_VERSE
+...
+#+END_VERSE
+
+#+BEGIN_QUOTE
+...
+#+END_QUOTE
+
+#+BEGIN_CENTER
+...
+#+END_CENTER
+```
+
+- Emphasis words: *bold*, /italic/, _underlined_, =verbatim=, ~code~, +strike-through+
+
+- Latex: $a^2$ or \begin{equation} a^2  \end{equation}
+
+- Start a code snippet: `<s` and hit return (or manually write the following). You can edit the code in its own buffer by `SPC m '`
+
+```org
+#+BEGIN_SRC elisp
+(+ 2 2)
+#+END_SRC
+```
+
+Images:
+
+```org
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:SED-HR4049
+[[./img/a.jpg]]
+```
+
+Footnote: `SPC m f`
+
+### Clock
+
+On a task: 
+
+- Start: `SPC m c i` (`org-clock-in`)
+- Go to current clock: `SPC n o` (`org-clock-goto`)
+- Stop: `SPC m c o` (`org-clock-out`)
+- Re-clock last task: `SPC m c l` (`org-clock-in-last`)
+- Display time summaries: `org-clock-display`
+
+When a clock is started, on the status line a clock will appear with the associated task.
+
+### Export 
+
+Export: `SPC m e`
+
+```org
+#+TITLE: 
+#+AUTHOR: 
+#+DATE: 
+#+EMAIL: 
+#+LANGUAGE: 
+```
+
+TOC: includes all headlines in the document.
+
+```org
+#+OPTIONS: toc:2          (only include two levels in TOC)
+#+OPTIONS: toc:nil        (no default TOC at all)
+```
+
+Including Files: `#+INCLUDE: "~/.emacs" src emacs-lisp`
 
 ### calendar
 
@@ -204,7 +280,9 @@ Keybindings:
 
 ```org
 <2006-11-01 Wed 19:15>
-<2007-05-16 Wed 12:30 +1w> # Repeater interval
+<2007-05-16 Wed 12:30 +1w> # Repeat task every week
+<2007-05-16 Wed 12:30 ++1w> # Repeat task every week starting from this week (not in the past).
+<2007-05-16 Wed 12:30 .+1w> # Whenever this task is going to be finish, schedule the next task in 1 week.
 <2006-11-01 Wed 19:15-19:30> # Range
 <2004-08-23 Mon>--<2004-08-26 Thu> # Range
 [2006-11-01 Wed]  # Inactive (do not trigger an entry to show up in the agenda)
@@ -212,6 +290,7 @@ Keybindings:
 
 `S-Left/Right/Up/Down` on a date to change the date.
 
+Periodic tasks i.e. +1w can be set to done `SPC m t` and will only be set done for the next day. You can do it multiple times to mark them as done on multiple days.
 
 #### [org-gcal](https://github.com/kidd/org-gcal.el)
 
@@ -261,14 +340,16 @@ Create notes
 
 [org-pomodoro](https://github.com/marcinkoziej/org-pomodoro)
 
-### +pandoc
+### [ox-pandoc](https://github.com/kawabata/ox-pandoc)
+
+(org +pandoc)
 
 `M-x org-pandoc-export-as-xxxx` (buffer)
 `M-x org-pandoc-export-to-xxxx` (file)
 `M-x org-pandoc-export-to-xxxx-and-open` (file and open)
 
 - There's a lot of customizing option: [ox-pandoc](https://github.com/kawabata/ox-pandoc)
-
+        
 ### [htmlize](https://github.com/hniksic/emacs-htmlize)
 
 - `M-x htmlize-buffer` and `M-x htmlize-file`
@@ -569,7 +650,7 @@ Yasnippet snippet collections:
 
 - https://github.com/AndreaCrotti/yasnippet-snippets
 - https://github.com/hlissner/doom-snippets
-
+  
 ### [auto-yasnippet](https://github.com/abo-abo/auto-yasnippet)
 
 Create snippets on the go.

@@ -39,8 +39,11 @@
 ;(package! builtin-package :disable t)
 
 (package! ghcid
-  :recipe (:local-repo "~/elisp/ghcid/"))
+  :recipe (:host github :repo "monadplus/ghcid"))
 
+;; FIXME local is not updating WTF
+;; (package! ghcid
+;;   :recipe (:local-repo "~/elisp/ghcid/"))
 
 (package! hlint
   :recipe (:local-repo "~/elisp/hs-lint/"))

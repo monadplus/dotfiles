@@ -109,6 +109,7 @@
 
   (map! :leader
         (:prefix-map ("t" . "toggle")
+         :desc "truncate lines" "L" #'toggle-truncate-lines
          :desc "transparency"
          "t" #'toggle-transparency))
 
@@ -213,7 +214,7 @@
 
   (map! :leader
         (:when (featurep! :editor snippets)
-         (:prefix-map ("s" . "snippets")
+         (:prefix-map ("y" . "yasnippets")
           :desc "new" "n" #'+snippets/new
           :desc "edit" "e" #'+snippets/edit
           :desc "file" "f" #'yas/visit-snippet-file
@@ -318,6 +319,9 @@
            :desc "ghcid: start" "g" #'ghcid
            :desc "ghcid: stop" "G" #'ghcid-stop)))
 
+  ; hoogle
+  ; If the search doesn't output anything, you may need to run $ google generate
+
   ; haskell-mode
   (map! (:after haskell-mode
          :map haskell-mode-map
@@ -328,28 +332,25 @@
           :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
           :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
           ; :desc "doc" "?" 'lsp-ui-doc-glance
-          ; :desc "type" "t" 'haskell-process-do-type
           ; :desc "show doc" "t" '+lookup/documentation
-          ; :desc "type" "t" 'haskell-process-do-type
-          :desc "info" "t" 'haskell-process-do-info
+          :desc "type" "t" 'haskell-process-do-type
+          ; :desc "info" "t" 'haskell-process-do-info
           :desc "ghc: compile" "B" #'haskell-compile ; override
           ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
           ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
           :desc "hoogle" "h" #'haskell-hoogle
           :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local))
 
-  ; lsp
-  ; TODO
+  ; FIXME after save, all errors disappear from flycheck
   ;; (use-package! lsp-haskell
   ;;   :config
   ;;   (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
-  (after! lsp-mode
-    (map! :map haskell-mode-map
-          :localleader
-            :desc "definition" "d" 'lsp-find-definition
-            :desc "restart lsp" "r" 'lsp-restart-workspace)
-    (setq lsp-ui-sideline-enable nil))
+  ;; (after! lsp-mode
+  ;;   (map! :map haskell-mode-map
+  ;;         :localleader
+  ;;           :desc "restart lsp" "r" 'lsp-restart-workspace)
+  ;;   (setq lsp-ui-sideline-enable nil))
 
   ; hlint
   (use-package! hs-lint)
@@ -358,8 +359,13 @@
          :localleader
            :desc "hlint" "?" #'hs-lint))
 
-  ;; TODO stack-ghc has priority over ghc (see variable flycheck-checkers)
-  (setq-default flycheck-disabled-checkers '(haskell-stack-ghc)) ; haskell-ghc haskell-hlint
+  ;;  * stack-ghc (because it only works on stack projects and has priority over haskell-ghc)
+  ;;  * lsp (because https://github.com/hlissner/doom-emacs/issues/2060)
+  (add-hook 'haskell-mode-hook ( lambda () (setq-default flycheck-disabled-checkers '(haskell-stack-ghc haskell-hlint)) ))
+  (defun haskell-mode-leave ()
+    (when (eq major-mode 'haskell-mode)
+      (setq-default flycheck-disabled-checkers '())))
+  (add-hook 'change-major-mode-hook #'haskell-mode-leave)
 
   ;; TODO
   ;; https://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-chains
@@ -395,7 +401,7 @@
 
   (if (featurep! :ui workspaces)
       (map! :leader
-            :desc "calendar" "o c" #'=calendar))
+            :desc "calendar" "o c" (lambda () (interactive) (org-gcal-sync) (=calendar))))
 
   (after! org-fancy-priorities
     (setq org-fancy-priorities-list '((?A . "⚡")
@@ -408,6 +414,9 @@
           org-gcal-fetch-file-alist '( ("arnauabella@gmail.com" .  "~/Dropbox/org/schedule.org")
                                        ("uf9i2quiq9c81mrvpts2ftgu5i71e71p@import.calendar.google.com" . "~/Dropbox/org/schedule-master.org"))
           ))
+
+  (setq org-gcal-up-days 60  ; fetch all events up to 5 months
+        org-gcal-down-days 150)
 
   (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
   (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))

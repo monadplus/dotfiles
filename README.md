@@ -114,7 +114,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Oppen the shell and follow the powerlevel10k wizard
 ```
 
-### GPG
+### [GPG](https://wiki.archlinux.org/index.php/GnuPG)
 
 ```bash
 # Install
@@ -125,6 +125,19 @@ gpg -c filename  # Insert your password in the prompt
 
 # Decrypt
 gpg filename.gpg  # Insert your password in the prompt
+```
+
+#### gpg-agent
+
+gpg-agent is mostly used as daemon to request and cache the password for the keychain. 
+
+Configuration file: `~/.gnupg/gpg-agent.conf`
+
+To reload configuration:
+
+``` bash
+$ gpg-connect-agent reloadagent /bye
+OK
 ```
 
 ### Zathura

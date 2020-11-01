@@ -5,6 +5,7 @@ Useful commands:
 ```bash
 doom help COMMAND
 doom sync # synchronize your config with Doom Emacs
+doom sync -u # update packages
 doom upgrade (--packages)
 doom env
 doom doctor # diagnose common issues

@@ -49,6 +49,6 @@ Plug 'sdiehl/vim-ormolu'                                           " Opinionated
 Plug 'rhysd/vim-llvm'                                              " Syntax for LLVM
 
 Plug 'ycm-core/YouCompleteMe'                                      " Completition engine. Requires additional completition steps!
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}                    " LSP
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                    " LSP
 
 call plug#end()

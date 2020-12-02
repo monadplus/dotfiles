@@ -54,5 +54,9 @@
         self.haskell.packages.${compilerVersion}.haskell-language-server;
 
       ghcide = ghcide-nix;
+
+      myAgda = self.agda.withPackages (p: [ p.standard-library
+                                            # p.iowa-stdlib # COMPILE-ERROR
+                                          ]);
     };
 }

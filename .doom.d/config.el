@@ -297,12 +297,6 @@
     (require 'smartparens-haskell))
 
   (use-package! ormolu
-    ;; FIXME
-    ;; :demand t
-    ;; :hook (haskell-mode . ormolu-format-on-save-mode)
-    ;; :bind
-    ;; (:map haskell-mode-map
-    ;;  ("C-c f" . ormolu-format-buffer))
     :config
     (setq ormolu-process-path "ormolu"))
   (map! :map haskell-mode-map :localleader :desc "format" "f" #'ormolu-format-buffer)
@@ -319,6 +313,7 @@
            :desc "ghcid: start" "g" #'ghcid
            :desc "ghcid: stop" "G" #'ghcid-stop)))
 
+  ; FIXME hoogle should query remote server, not local
   ; hoogle
   ; If the search doesn't output anything, you may need to run $ google generate
 
@@ -326,15 +321,17 @@
   (map! (:after haskell-mode
          :map haskell-mode-map
           :localleader
-          :desc "ghci: load file" "l" #'haskell-process-load-or-reload
+          :desc "ghci: load file" "l" #'haskell-process-load-file
           :desc "ghci: clear" "k" #'haskell-interactive-mode-clear
           :desc "ghci" "i" #'haskell-interactive-bring
           :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
           :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
+          :desc "ghci process" "1" (lambda () (interactive) (setq haskell-process-type 'auto) (haskell-process-restart))
+          :desc "cabal process" "2" (lambda () (interactive) (setq haskell-process-type 'cabal-repl) (haskell-process-restart))
+          :desc "stack process" "3" (lambda () (interactive) (setq haskell-process-type 'stack-repl) (haskell-process-restart))
           ; :desc "doc" "?" 'lsp-ui-doc-glance
-          ; :desc "show doc" "t" '+lookup/documentation
-          :desc "type" "t" 'haskell-process-do-type
-          ; :desc "info" "t" 'haskell-process-do-info
+          :desc "show doc" "t" '+lookup/documentation
+          ;; :desc "type" "t" 'haskell-process-do-type
           :desc "ghc: compile" "B" #'haskell-compile ; override
           ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
           ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
@@ -342,15 +339,15 @@
           :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local))
 
   ; FIXME after save, all errors disappear from flycheck
-  ;; (use-package! lsp-haskell
-  ;;   :config
-  ;;   (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+  (use-package! lsp-haskell
+    :config
+    (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
-  ;; (after! lsp-mode
-  ;;   (map! :map haskell-mode-map
-  ;;         :localleader
-  ;;           :desc "restart lsp" "r" 'lsp-restart-workspace)
-  ;;   (setq lsp-ui-sideline-enable nil))
+  (after! lsp-mode
+    (map! :map haskell-mode-map
+          :localleader
+            :desc "restart lsp" "r" 'lsp-restart-workspace)
+    (setq lsp-ui-sideline-enable nil))
 
   ; hlint
   (use-package! hs-lint)
@@ -361,7 +358,7 @@
 
   ;;  * stack-ghc (because it only works on stack projects and has priority over haskell-ghc)
   ;;  * lsp (because https://github.com/hlissner/doom-emacs/issues/2060)
-  (add-hook 'haskell-mode-hook ( lambda () (setq-default flycheck-disabled-checkers '(haskell-stack-ghc haskell-hlint)) ))
+  (add-hook 'haskell-mode-hook ( lambda () (setq-default flycheck-disabled-checkers '(haskell-stack-ghc haskell-ghc haskell-hlint)) ))
   (defun haskell-mode-leave ()
     (when (eq major-mode 'haskell-mode)
       (setq-default flycheck-disabled-checkers '())))

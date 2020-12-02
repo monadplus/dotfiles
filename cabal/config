@@ -9,8 +9,6 @@
 --
 -- This config file was generated using the following versions
 -- of Cabal and cabal-install:
-program-default-options
-  ghc-options: -haddock
 -- Cabal library version: 3.0.0.0
 -- cabal-install version: 3.0.0.0
 
@@ -49,7 +47,7 @@ world-file: /home/arnau/.cabal/world
 -- executable-profiling:
 -- profiling-detail:
 -- library-profiling-detail:
--- optimization: True
+optimization: True
 -- debug-info: False
 -- library-for-ghci:
 -- split-sections: False
@@ -214,7 +212,7 @@ program-default-options
   -- cpphs-options:
   -- doctest-options:
   -- gcc-options:
-  ghc-options: -haddock
+  -- ghc-options: -haddock -- Disable to have always haddock
   -- ghc-pkg-options:
   -- ghcjs-options:
   -- ghcjs-pkg-options:

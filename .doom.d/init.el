@@ -136,8 +136,7 @@
 
        ;; FIXME there's a fucking bug that errors disappears on save
        ;; https://github.com/hlissner/doom-emacs/issues/2060
-       ;; (haskell +lsp +ghcide) ; a language that's lazier than I am
-       (haskell)
+       (haskell +lsp +ghcide) ; a language that's lazier than I am
 
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
@@ -146,7 +145,7 @@
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       (latex +lsp +fold)  ; writing papers in Emacs has never been so fun
+       (latex +fold)  ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
        ;;ledger            ; an accounting system in Emacs
@@ -181,7 +180,7 @@
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
        (sh +lsp)           ; she sells {ba,z,fi}sh shells on the C xor

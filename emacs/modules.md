@@ -1,4 +1,4 @@
-# Keybindings for emacs
+# Modules and keybindings
 
 ## General
 
@@ -592,7 +592,6 @@ Before you need to install:
 
 - Preview: 
   - pandoc: `sudo pacman -S pandoc`. Pandoc preview is better than +grip.
-  - (optional +grip) [grip-mode](https://github.com/seagle0128/grip-mode): github preview render
 
 Keybindings:
 

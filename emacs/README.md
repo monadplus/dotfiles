@@ -46,8 +46,6 @@ This will expose `doom` cli:
 
 ### Configure
 
-Doom expects
-
 You can configure Doom by tweaking the files found in your DOOMDIR. Doom expects this directory to be found in one of:
 
 - `~/.config/doom` (respects $XDG_CONFIG_HOME)
@@ -71,10 +69,7 @@ Change leader:
 
 ### Everything you need to install
 
-Markdown: 
-
-- Linting: [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)
-- [+grip](https://github.com/seagle0128/grip-mode)
+Each modules has its own installation requisites, just check them [here](./modules.md)
 
 ### Issues
 

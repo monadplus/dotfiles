@@ -30,6 +30,50 @@ sudo ln -s ~/dotfiles/70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 sudo ln -s ~/dotfiles/99-killX.conf /etc/X11/xorg.conf.d/99-killX.conf
 ```
 
+### [Multihead](https://wiki.archlinux.org/index.php/Multihead)
+
+#### RandR
+
+Is an extension of X Window System. Example:
+
+``` bash
+xrandr --output VGA1 --auto --output HDMI1 --auto --right-of VGA1
+```
+
+You can create virtual display combining multiple screens.
+
+You can configured it through `xorg.conf`:
+
+``` bash
+# /etc/X11/xorg.conf.d/10-monitor.conf
+Section "Monitor"
+    Identifier  "VGA1"
+    Option      "Primary" "true"
+EndSection
+
+Section "Monitor"
+    Identifier  "HDMI1"
+    Option      "LeftOf" "VGA1"
+EndSection
+```
+
+To get the ids: `$ xrandr -q`
+
+#### [Autorandr](https://github.com/phillipberndt/autorandr)
+
+Allows you to easily configure xrandr "profiles" that will activate automatically when you connect/disconnect displays
+
+``` bash
+# 1.
+autorandr --save mobile
+# 2. Plug your external monitor
+autorandr --save docked
+# 3. Reload your setup
+autorandr --change
+# 4. Manual
+autorandr <profile>
+```
+
 ### TLP
 
 Install:
@@ -129,7 +173,7 @@ gpg filename.gpg  # Insert your password in the prompt
 
 #### gpg-agent
 
-gpg-agent is mostly used as daemon to request and cache the password for the keychain. 
+gpg-agent is mostly used as daemon to request and cache the password for the keychain.
 
 Configuration file: `~/.gnupg/gpg-agent.conf`
 
@@ -347,6 +391,39 @@ I had to manually move the `node_modules` directory to `$HOME` and change the de
 $ npm config list
 # add cwd
 $ vim ~/.npmrc # You can also use $ npm config set cwd ""
+```
+
+### Python
+
+It is not recommended to installing packages using `sudo pip install`.
+
+Let `pacman` manage the packages for you.
+
+Check which packages where not installed using `pacman`.
+
+``` bash
+pacman -Qo /usr/lib/python3.8/site-packages/* >/dev/null
+```
+
+To check which packages depend on a package:
+
+``` bash
+pip show <package> # See Required section
+```
+
+Uninstall packages from `pip`:
+
+``` bash
+# User     .local/lib/python...
+pip uninstall
+# Global   /usr/lib/python3.8/site-packages/...
+sudo pip uninstall
+```
+
+## Gif Recorder
+
+``` bash
+yay -S peek
 ```
 
 ### Issues and Solutions

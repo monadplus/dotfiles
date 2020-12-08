@@ -136,7 +136,8 @@
   (add-hook 'pre-command-hook 'show-workspaces) ;; Adding this will prevent the workspaces from hiding
 
   (after! which-key
-    (which-key-setup-minibuffer)
+    ;; (which-key-setup-minibuffer)
+    (which-key-setup-side-window-bottom)
     (setq which-key-idle-delay 0.5)
     (setq which-key-idle-secondary-delay 0.05)
     (setq which-key-show-transient-maps t))
@@ -206,6 +207,12 @@
 
   (map! :map evil-normal-state-map "g b" #'browse-url))
 
+(defsection company-mode
+  "Completition."
+
+  (after! haskell-mode
+    (set-company-backend! 'haskell-mode '(company-capf :with company-yasnippet))))
+
 (defsection yasnippets
   "Snippets."
 
@@ -230,6 +237,9 @@
 
   ; All available checkers: `flycheck-checkers'
   (after! flycheck
+    (setq global-flycheck-mode nil)
+    (setq flycheck-global-modes nil)
+    (setq flycheck-check-syntax-automatically '(mode-enabled idle-change)) ;; save idle-change))
     ; append is also ok (concat is only for strings)
     (add-to-list 'flycheck-disabled-checkers '( markdown-markdownlint-cli markdown-mdl ))))
 
@@ -272,6 +282,22 @@
   (after! latex
     (setf (nth 1 (assoc "LaTeX" TeX-command-list))
       "%`%l -interaction=nonstopmode -shell-escape %(mode)%' %t")))
+
+(defsection lsp
+  "Language Server Protocol."
+
+  ;; Otherwise it does not update the errors..
+  ;; (after! lsp-mode
+  ;;   (setq lsp-document-sync-method 'full))
+
+  (after! lsp-ui
+    (setq lsp-ui-sideline-enable         nil
+            lsp-ui-doc-include-signature   t
+            lsp-ui-doc-max-height          15
+            lsp-ui-doc-max-width           150
+            lsp-ui-doc-position            'at-point
+            lsp-ui-peek-always-show        t
+            lsp-ui-peek-fontify            'always)))
 
 (defsection haskell-mode
   "Haskell settings."
@@ -324,13 +350,14 @@
           :desc "ghci: load file" "l" #'haskell-process-load-file
           :desc "ghci: clear" "k" #'haskell-interactive-mode-clear
           :desc "ghci" "i" #'haskell-interactive-bring
+          ;; :desc "find reference" "r" #'lsp-ui-peek-find-references ;; TODO not implemented in the LSP yet
           :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
           :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
           :desc "ghci process" "1" (lambda () (interactive) (setq haskell-process-type 'auto) (haskell-process-restart))
-          :desc "cabal process" "2" (lambda () (interactive) (setq haskell-process-type 'cabal-repl) (haskell-process-restart))
-          :desc "stack process" "3" (lambda () (interactive) (setq haskell-process-type 'stack-repl) (haskell-process-restart))
-          ; :desc "doc" "?" 'lsp-ui-doc-glance
-          :desc "show doc" "t" '+lookup/documentation
+          :desc "cabal process" "2" (lambda () (interactive) (setq haskell-process-type 'cabal-new-repl) (haskell-process-restart))
+          :desc "stack process" "3" (lambda () (interactive) (setq haskell-process-type 'stack-ghci) (haskell-process-restart))
+          :desc "doc" "t" 'lsp-ui-doc-glance
+          ;; :desc "show doc" "t" '+lookup/documentation
           ;; :desc "type" "t" 'haskell-process-do-type
           :desc "ghc: compile" "B" #'haskell-compile ; override
           ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
@@ -346,8 +373,7 @@
   (after! lsp-mode
     (map! :map haskell-mode-map
           :localleader
-            :desc "restart lsp" "r" 'lsp-restart-workspace)
-    (setq lsp-ui-sideline-enable nil))
+            :desc "restart lsp" "R" 'lsp-restart-workspace))
 
   ; hlint
   (use-package! hs-lint)

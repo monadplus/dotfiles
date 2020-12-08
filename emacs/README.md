@@ -80,3 +80,5 @@ Each modules has its own installation requisites, just check them [here](./modul
 2. vterm very slow: the problem was related to `exa ... --icons`. Removing `--icons` worked.
 
 3. Projectile not working: I somehow introduced a bad route which couldn't be parsed. I had to manually edit the file `~/.emacs.d/.local/cache/projectile.projects`
+
+4. `Company: backend company-capf error "Symbol’s function definition is void: :interrupted"`. The error was fixed by commenting `lsp` on `init.el` and running `doom sync && doom purge` and installing again.

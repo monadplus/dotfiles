@@ -62,3 +62,18 @@
 ;; TODO Not working
 ;; (package! doom-snippets :disable t)
 (package! yasnippet-snippets)
+
+;; requires +local
+(package! agda-input
+  :recipe (:host github
+           :repo "agda/agda"
+           :branch "release-2.6.1.2"
+           :files ("src/data/emacs-mode/agda-input.el")
+           :nonrecursive t))
+
+(package! agda2-mode
+  :recipe (:host github
+           :repo "agda/agda"
+           :branch "release-2.6.1.2"
+           :files ("src/data/emacs-mode/*.el" (:exclude "agda-input.el"))
+           :nonrecursive t))

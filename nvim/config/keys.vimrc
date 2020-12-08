@@ -1,6 +1,10 @@
-" map leader
 let mapleader=','
 
+nnoremap <leader>o :only<CR>
+
+nnoremap Y y$
+
+" Search using vimgrep
 :nnoremap ff :vimgrep <cword> **/*.hs<CR>
 :nnoremap <leader>ff :vimgrep <cword> **/*.sql<CR>
 
@@ -8,10 +12,7 @@ let mapleader=','
 :nnoremap gf :G<CR>
 :nnoremap gv :Gvdiff<CR>
 
-" Quit
-:nnoremap qq :q<CR>
-
-" Rename
+" Rename variable
 function! Rnvar()
   let word_to_replace = expand("<cword>")
   "let replacement = input("New name: " . word_to_replace)
@@ -22,16 +23,6 @@ endfunction
 
 " Replace tabs with spaces
 :nnoremap <leader>tt :%s/\t/  /g<CR>
-
-nnoremap <Esc><Esc> :w<CR>
-nnoremap <leader>W :wa<CR>
-
-nnoremap Y y$
-
-" Delete without copying
-"nnoremap <leader>d "_d
-"xnoremap <leader>d "_d
-"xnoremap <leader>p "_dP
 
 " Switching buffer
 nnoremap <M-h> <C-w>h
@@ -99,7 +90,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-"    Nerdtree
+" Nerdtree
 map <C-F> :NERDTreeToggle<CR>
 map <C-S> :NERDTreeFind<CR>
 
@@ -107,7 +98,6 @@ map <C-S> :NERDTreeFind<CR>
 nnoremap <leader>l :set list!<CR>
 
 " Help on current word
-" Vimscript
 augroup vimscript_augroup
   autocmd!
   autocmd FileType vim nnoremap <buffer> <M-z> :execute "help" expand("<cword>")<CR>
@@ -117,24 +107,57 @@ augroup END
 nnoremap <C-p> :FZF<CR>
 let $FZF_DEFAULT_COMMAND='rg --hidden --files'
 
-" Dash
-" :nmap <silent> <leader>d <Plug>DashSearch
-
 " Hoogle
-"au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
 nnoremap <leader>1 :Hoogle<CR>
 nnoremap <leader>2 :HoogleClose<CR>
 nnoremap <leader>3 :SyntasticToggleMode<CR>
 nnoremap <leader>5 :LLPStartPreview<CR>
-
-nnoremap <leader>o :only<CR>
+"au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
 
 " Unicode Characters
-"
-" Already included in agda-vim plugin
 "imap <buffer> \forall ∀
 "imap <buffer> \to →
 "imap <buffer> \lambda λ
 "imap <buffer> \Sigma Σ
 "imap <buffer> \exists ∃
 "imap <buffer> \equiv ≡
+
+" Ormolu
+nnoremap <M-f> :call RunOrmolu()<CR>
+
+" Coc
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Symbol renaming.
+" nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
+
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>

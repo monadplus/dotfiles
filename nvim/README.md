@@ -4,6 +4,13 @@
 
 See [keybindings](./keybindings.md)
 
+### Vimscript
+
+### Plugins
+
+- https://github.com/fannheyward/coc-rust-analyzer
+- https://github.com/fannheyward/coc-pyright
+
 ### Installation
 
 Execute the following commands:
@@ -27,20 +34,21 @@ sudo apt install nodejs yarn python -y
 # Install Nix
 sudo curl -L https://nixos.org/nix/install | sh
 
+# Not needed anymore
 # Install fast-tags (for ctags in neovim)
-nix-env -iA nixpkgs.haskellPackages.fast-tags
+# nix-env -iA nixpkgs.haskellPackages.fast-tags
 
 # Enter Neovim and install plugins
 nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall' # will take some minutes
 
 # Some plugins require additional configuration
 
-# YouCompleteMe
-cd ~/.local/share/nvim/plugged/YouCompleteMe
-sudo pacman -Syy cmake
-# Installing autocomplete for rust:
+# Coc: install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # Install Rustup
-./install.py --rust-completer --cland-completer # This only enables support for rust (and python by default)
+rustup component add rust-analyzer
+## Inside vim
+:CocInstall coc-rust-analyzer
+:CocInstall coc-pyright
 
 # direnv
 sudo yay -Syy direnv

@@ -5,9 +5,6 @@ filetype off                " required
 " Highlighting for jsonc filetype
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" Latex
-let g:tex_flavor = 'latex'
-
 " Better Unix support
 set viewoptions=folds,options,cursor,unix,slash
 set encoding=utf-8
@@ -37,11 +34,12 @@ let maplocalleader = ','
 
 set backspace=2
 
-" Solarized dark looks shit (not sure why)
 set background=dark
-"Fix https://github.com/dracula/vim/issues/161
-au VimEnter * colorscheme dracula "colorscheme dracula
+au VimEnter * colorscheme dracula "Fix https://github.com/dracula/vim/issues/161
 let g:airline_theme='dracula'
+
+" Transparent background
+au VimEnter * hi Normal guibg=NONE ctermbg=NONE
 
 syntax enable
 syntax on
@@ -94,3 +92,7 @@ set expandtab       " Expand TABs to spaces
 
 " Disable mouse / touchpad (only in vim)
 set mouse=nicr
+
+" Suggested by Coc
+set updatetime=300
+set shortmess+=c

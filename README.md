@@ -126,7 +126,11 @@ Fonts are installed at
 - system-wide `/usr/share/fonts/`
 - single user `~/.local/share/fonts/`
 
+Place `*.otf` at `/usr/share/fonts/opentype`
+
 Use `fc-list` to display all available fonts.
+
+Update the cache: `fc-cache -f -v`
 
 Fonts can be installed from [pacman/AUR](https://wiki.archlinux.org/index.php/Fonts#Font_packages). Example:
 

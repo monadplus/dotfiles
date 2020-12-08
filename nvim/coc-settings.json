@@ -1,4 +1,6 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": ["rust"],
+  "rust-analyzer.serverPath": "~/.cargo/bin/rust-analyzer",
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",

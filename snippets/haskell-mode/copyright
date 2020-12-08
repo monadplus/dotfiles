@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: copyright
+# key: mod
+# condition: t
+# --
+-----------------------------------------------------------------------------
+-- |
+-- Module      :  ${1:Module}
+-- Copyright   :  (C) 2020 Arnau Abella
+-- License     :  MIT (see the file LICENSE)
+-- Maintainer  :  Arnau Abella <arnauabella@gmail.com>
+-- Stability   :  experimental
+-- Portability :  non-portable
+----------------------------------------------------------------------------

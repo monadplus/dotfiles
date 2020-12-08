@@ -112,8 +112,7 @@
        ;;tty                  ; improve the terminal Emacs experience
 
        :lang
-       ;; TODO
-       agda                ; types of types of types of types...
+       (agda +local)                ; types of types of types of types...
        ;; (cc +lsp)        ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
@@ -134,9 +133,7 @@
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
 
-       ;; FIXME there's a fucking bug that errors disappears on save
-       ;; https://github.com/hlissner/doom-emacs/issues/2060
-       (haskell +lsp +ghcide) ; a language that's lazier than I am
+       (haskell +lsp)      ; a language that's lazier than I am
 
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;

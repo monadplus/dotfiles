@@ -1,8 +1,26 @@
 # Keybindings
 
 <M-?> means Meta/Super key
+<C-g>     full file path
 
 ## Plugins
+
+### [vim-buftabline](https://github.com/ap/vim-buftabline)
+
+<M-1>   Go to buffer 1
+<M-2>   Go to buffer 2
+...
+
+### [bufexplorer](https://github.com/jlanzarotta/bufexplorer)
+
+<leader>be    Open buffer menu
+<leader>bt    Toggle buffer menu
+
+On the buffer menu:
+
+<Ret>  to open the buffer
+d      to delete
+v      to open vertical split
 
 ### [vim-surround](https://github.com/tpope/vim-surround)
 
@@ -118,6 +136,10 @@ gaip=
 ,
 Regular expression
 
+### [vim-easymotion](https://github.com/easymotion/vim-easymotion)
+
+<Leader><Leader>w
+
 ### [vim-hoogle](https://github.com/Twinside/vim-hoogle)
 
 :Hoogle            current word
@@ -163,6 +185,10 @@ K             show documentation
 <leader>hs    Format haskell code with Stylish
 <leader>hf    Format haskell code with both
 
+### [UltiSnips](https://github.com/SirVer/ultisnips)
+
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 ### Switch Window
 <M-h>

@@ -206,17 +206,25 @@ To native through the quickfix window: ]q and [q
 
 ### [vim-ctrlspace](https://github.com/vim-ctrlspace/vim-ctrlspace)
 
+5 types of list: buffer, file, tab, workspace, bookmark(project)
+
+Workspace: set of opened windows, tab, buffers. They are bookmark local!
+
 <C-space>     to open ctrlspace
 <?>           help
 
-<h>           buffer list
-<H>           search buffer list
-<o>           buffer list
-<O>           search buffer list
-<h>           buffer list
-<H>           search buffer list
-<h>           buffer list
-<H>           search buffer list
+In ctrlspace:
+b  bookmark list (project .git)
+h  buffer list
+o  file list
+w  workspace list (session)
+l  tab list
+
+Press </> to search in the list.
+
+- Bookmark List:  add <a>, edit <e>, rename <m>
+- File List: <r> refresh
+- Workspace List: <s> to switch between load/save, <m> rename, <d> delete
 
 ### [vim-buftabline](https://github.com/ap/vim-buftabline)
 

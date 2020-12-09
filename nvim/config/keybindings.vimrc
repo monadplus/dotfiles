@@ -1,16 +1,28 @@
-let mapleader=','
+"
+" ██╗░░██╗███████╗██╗░░░██╗██████╗░██╗███╗░░██╗██████╗░██╗███╗░░██╗░██████╗░░██████╗
+" ██║░██╔╝██╔════╝╚██╗░██╔╝██╔══██╗██║████╗░██║██╔══██╗██║████╗░██║██╔════╝░██╔════╝
+" █████═╝░█████╗░░░╚████╔╝░██████╦╝██║██╔██╗██║██║░░██║██║██╔██╗██║██║░░██╗░╚█████╗░
+" ██╔═██╗░██╔══╝░░░░╚██╔╝░░██╔══██╗██║██║╚████║██║░░██║██║██║╚████║██║░░╚██╗░╚═══██╗
+" ██║░╚██╗███████╗░░░██║░░░██████╦╝██║██║░╚███║██████╔╝██║██║░╚███║╚██████╔╝██████╔╝
+" ╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚═════╝░╚═╝╚═╝░░╚══╝╚═════╝░╚═╝╚═╝░░╚══╝░╚═════╝░╚═════╝░
 
+
+"Miscelaneous
 nnoremap <leader>o :only<CR>
-
 nnoremap Y y$
+nnoremap <silent> <leader>b :Buffers<CR>
 
-" Search using vimgrep
-:nnoremap ff :vimgrep <cword> **/*.hs<CR>
-:nnoremap <leader>ff :vimgrep <cword> **/*.sql<CR>
+" vim-fugitive
+nnoremap gf :G<CR>
+nnoremap gv :Gvdiff<CR>
 
-" Git
-:nnoremap gf :G<CR>
-:nnoremap gv :Gvdiff<CR>
+" vim-gitgutter
+nnoremap <leader>gs <Plug>(GitGutterStageHunk)
+nnoremap <leader>gr <Plug>(GitGutterUndoHunk)
+nnoremap <leader>gp <Plug>(GtGutterPreviewHunk)
+
+" vim-easymotion
+nmap <leader>w <Plug>(easymotion-w)
 
 " Rename variable
 function! Rnvar()
@@ -22,7 +34,7 @@ endfunction
 :nnoremap <leader>rn :call Rnvar()<CR>
 
 " Replace tabs with spaces
-:nnoremap <leader>tt :%s/\t/  /g<CR>
+nnoremap <leader>tt :%s/\t/  /g<CR>
 
 " Switching buffer
 nnoremap <M-h> <C-w>h
@@ -82,17 +94,19 @@ inoremap <C-ScrollWheelRight> <nop>
 nnoremap <C-z> :nohlsearch<CR>
 
 " Terminal mode exit shortcut
-:tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
+" vimgrep
+nnoremap ff :vimgrep <cword> **/*.hs<CR>
+nnoremap <leader>ff :vimgrep <cword> **/*.sql<CR>
+
+" vim-easy-align
+nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
 " Nerdtree
-map <C-F> :NERDTreeToggle<CR>
-map <C-S> :NERDTreeFind<CR>
+nnoremap <C-F> :NERDTreeToggle<CR>
+nnoremap <C-S> :NERDTreeFind<CR>
 
 " Toggle display of tabs and EOF
 nnoremap <leader>l :set list!<CR>
@@ -110,9 +124,13 @@ let $FZF_DEFAULT_COMMAND='rg --hidden --files'
 " Hoogle
 nnoremap <leader>1 :Hoogle<CR>
 nnoremap <leader>2 :HoogleClose<CR>
-nnoremap <leader>3 :SyntasticToggleMode<CR>
-nnoremap <leader>5 :LLPStartPreview<CR>
 "au BufNewFile,BufRead *.hs map <buffer> <F1> :Hoogle
+
+" Syntastic
+nnoremap <leader>3 :SyntasticToggleMode<CR>
+
+" Latex preview
+nnoremap <leader>5 :LLPStartPreview<CR>
 
 " Unicode Characters
 "imap <buffer> \forall ∀
@@ -125,7 +143,7 @@ nnoremap <leader>5 :LLPStartPreview<CR>
 " Ormolu
 nnoremap <M-f> :call RunOrmolu()<CR>
 
-" Coc
+" Coc.nvim
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
@@ -158,6 +176,4 @@ nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>

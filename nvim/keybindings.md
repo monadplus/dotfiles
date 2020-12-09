@@ -1,194 +1,12 @@
 # Keybindings
 
-<M-?> means Meta/Super key
-<C-g>     full file path
-
-## Plugins
-
-### [vim-buftabline](https://github.com/ap/vim-buftabline)
-
-<M-1>   Go to buffer 1
-<M-2>   Go to buffer 2
-...
-
-### [bufexplorer](https://github.com/jlanzarotta/bufexplorer)
-
-<leader>be    Open buffer menu
-<leader>bt    Toggle buffer menu
-
-On the buffer menu:
-
-<Ret>  to open the buffer
-d      to delete
-v      to open vertical split
-
-### [vim-surround](https://github.com/tpope/vim-surround)
-
-cs"'  replace surrouding " for '
-ds"   remove surrounding "
-yss"  add surrounding "
-ysiw" add surround " on current word/object
-[visual] S
-
-### [gitgutter](https://github.com/airblade/vim-gitgutter)
-
-<leader>hp           Preview hunk
-<leader>hu           Undo hunk
-<leader>hs           stage hunk
-
-### [vim-fugitive](https://github.com/tpope/vim-fugitive)
-
-gf                  :Gstatus
-gv                  :Gvdiff
-
-:Git command           Raw commands
-:Gwrite                :Git add %
-:Gread                 :Git checkout %
-:Gremove               :Git rm %
-:Gmove [relative/abs]  :Git mv from to
-:Gcommit
-:Gblame
-                        g?    show this help
-                        q     close blame
-                        o     open commit in horizontal
-                        O     open commit in new tab
-
-:Gdiff (:Gvdiff)
-  Left (index file) Right (working copy)
-  :Gwrite (at index file) == :Gread (working copy)
-  :Gread (at index file) == :Gwrie(working copy)
-  :diffget chunk    index -> working
-  :diffput chunk    working -> index
-     You can save the index file => will only stage the modified patches
-     Check it out with $git diff --cached
-  :diffupdate (to update buffer)
-  :do                      :diffget
-  :dp                      :diffput
-  :.diffget                only current line
-  [visual] :`<,`>diffget   only some lines
-
-Merging:
-  :Gmerge
-  After `git merge branch` conflict may arise.
-  open the conflict file and then :Gvdiff
-  Left (target = our branch), middle (working copy), right (merge branch)
-  :diffget buffer (from the middle) (:ls for buffer, look for //2, //3
-  :diffput buffer (from left or right)
-  Then :on, :w, :Gstatus, stage merged files, cc (commit conflicts)
-  :Gwrite! from left or right if you want to discard the other file.
-
-:Gstatus (press g? to show help)
-  <C-n>, <C-n>          to navigate
-  -                     to stage/unstage
-  X                     discard changes
-  =                     inline diff
-  dd (dv)               diff on file
-
-:Glog  n [--reverse] (current file)
-Load in the buffer all previous revisions
-:copen to show a list of the different versions
-]q    :cnext
-[q    :cprevious
-:Gedit  go back
-
-:Glog -- path [% current]
-:Glog --
-  Then :copen
-  use hjkl to move and enter to see the commit
-:Glog --grep=.. -- <!-- show commit where message includes-->
-
-:Ggrep word
-:copen
-
-:Ggrep 'word' branchName/hash <!--Opens read only buffer-->
-
-<!--Search for a word added or deleted-->
-:Glog -S... --
-
-### [fuzzy-finder](https://github.com/junegunn/fzf/blob/master/README-VIM.md)
-<C-p> fuzzy find current directory. Same as :FZF
-:FZF ~/scala/fs2  Look for files under your home directory
-
-### [nerdtree](https://github.com/scrooloose/nerdtree/blob/master/doc/NERDTree.txt)
-
-<C-f>  :NERDTreeToggle
-<C-s>  :NERDTreeFind [<path>] Find and reveal the current directory or the given path.
-m (on nerdtree menu)           to open fylesystem options
-?  Help, use it !
-
-### [nerdcommenter](https://github.com/scrooloose/nerdcommenter)
-
-<leader>c<space>  toggle comment line; For multiline comments line by line
-<leader>cm        multi-line comment; For multiline comments all lines together
-<leader>cu        multi-line uncomment; <leader>c<space> also works!
-
-<leader>cc        comment line
-<leader>c$        cursor to the end
-<leader>cA        comment end of line and insert
-
-### [vim-easy-align](https://github.com/junegunn/vim-easy-align)
-[Visual] ga<character_to_align>
-gaip=
-    2=  around the 2n occurrences
-    *=  around all occurrences
-    <Enter>  Switching between left/right/center alignment
-<space>
-,
-Regular expression
-
-### [vim-easymotion](https://github.com/easymotion/vim-easymotion)
-
-<Leader><Leader>w
-
-### [vim-hoogle](https://github.com/Twinside/vim-hoogle)
-
-:Hoogle            current word
-:Hoogle <search>
-
-### [multi-cursor](https://github.com/terryma/vim-multiple-cursors)
-<C-n> on a word and then
-  <C-n> select
-  <C-x> skip
-  <C-p> previous
-  Then you can just use A, I, delete word and insert: c or s
-
-<M-n> select all occurences
-<ESC> back to regular
-
-[Visual] Select lines and then <C-n> to add a curson on each line
-         Then, for example, you can move to the end of line A
+- [Basic commands](#basic-commands)
+- [Plugins](#plugins)
 
 ## Basic commands
 
-### Coc
-
-gd            goto definition
-gr            goto references
-<leader>ac    codeAction on current line
-F             format
-K             show documentation
-<leader>rn    rename
-<space>a      diagnostic
-<space>o      outline symbol curent document
-<space>s      search symbol workspace
-<space>j      default action next item
-<space>k      default action previous item
-<space>p      latest coc list
-<leader><ESC> close preview (signature help)
-<M-B>         metals build import
-<M-C>         metals connect
-<M-D>         metals doctor
-<C-j>         snippet next placeholder
-<C-k>         snippet previous placeholder
-;h            haskel import
-<leader>hi    Format haskell code with Hident
-<leader>hs    Format haskell code with Stylish
-<leader>hf    Format haskell code with both
-
-### [UltiSnips](https://github.com/SirVer/ultisnips)
-
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+<M-?> means Meta/Super key
+<C-g>     full file path
 
 ### Switch Window
 <M-h>
@@ -378,7 +196,213 @@ V         line select
    e.g. delete the middle column of a table <c-v>, 3j, w, h and d
 gv       Reselect the last visual selection
 
-### Unimpared
+## Plugins
+
+### [Unimpaired](https://github.com/tpope/vim-unimpaired)
+
 To native through the quickfix window: ]q and [q
 
 <C-a>/<C-x>: increment/decrement a number LOL
+
+### [vim-ctrlspace](https://github.com/vim-ctrlspace/vim-ctrlspace)
+
+<C-space>     to open ctrlspace
+<?>           help
+
+<h>           buffer list
+<H>           search buffer list
+<o>           buffer list
+<O>           search buffer list
+<h>           buffer list
+<H>           search buffer list
+<h>           buffer list
+<H>           search buffer list
+
+### [vim-buftabline](https://github.com/ap/vim-buftabline)
+
+<M-1>   Go to buffer 1
+<M-2>   Go to buffer 2
+...
+
+### [bufexplorer](https://github.com/jlanzarotta/bufexplorer)
+
+<leader>be    Open buffer menu
+<leader>bt    Toggle buffer menu
+
+On the buffer menu:
+
+<Ret>  to open the buffer
+d      to delete
+v      to open vertical split
+
+### [vim-surround](https://github.com/tpope/vim-surround)
+
+cs"'  replace surrouding " for '
+ds"   remove surrounding "
+yss"  add surrounding "
+ysiw" add surround " on current word/object
+[visual] S
+
+### [gitgutter](https://github.com/airblade/vim-gitgutter)
+
+[c                   Prev hunk
+]c                   Next hunk
+
+<leader>hp           Preview hunk
+<leader>hr           Reverse hunk
+<leader>hs           stage hunk
+
+### [vim-fugitive](https://github.com/tpope/vim-fugitive)
+
+gf                  :Gstatus
+gv                  :Gvdiff
+
+:Git command           Raw commands
+:Gwrite                :Git add %
+:Gread                 :Git checkout %
+:Gremove               :Git rm %
+:Gmove [relative/abs]  :Git mv from to
+:Gcommit
+:Gblame
+                        g?    show this help
+                        q     close blame
+                        o     open commit in horizontal
+                        O     open commit in new tab
+
+:Gdiff (:Gvdiff)
+  Left (index file) Right (working copy)
+  :Gwrite (at index file) == :Gread (working copy)
+  :Gread (at index file) == :Gwrie(working copy)
+  :diffget chunk    index -> working
+  :diffput chunk    working -> index
+     You can save the index file => will only stage the modified patches
+     Check it out with $git diff --cached
+  :diffupdate (to update buffer)
+  :do                      :diffget
+  :dp                      :diffput
+  :.diffget                only current line
+  [visual] :`<,`>diffget   only some lines
+
+Merging:
+  :Gmerge
+  After `git merge branch` conflict may arise.
+  open the conflict file and then :Gvdiff
+  Left (target = our branch), middle (working copy), right (merge branch)
+  :diffget buffer (from the middle) (:ls for buffer, look for //2, //3
+  :diffput buffer (from left or right)
+  Then :on, :w, :Gstatus, stage merged files, cc (commit conflicts)
+  :Gwrite! from left or right if you want to discard the other file.
+
+:Gstatus (press g? to show help)
+  <C-n>, <C-n>          to navigate
+  -                     to stage/unstage
+  X                     discard changes
+  =                     inline diff
+  dd (dv)               diff on file
+
+:Glog  n [--reverse] (current file)
+Load in the buffer all previous revisions
+:copen to show a list of the different versions
+]q    :cnext
+[q    :cprevious
+:Gedit  go back
+
+:Glog -- path [% current]
+:Glog --
+  Then :copen
+  use hjkl to move and enter to see the commit
+:Glog --grep=.. -- <!-- show commit where message includes-->
+
+:Ggrep word
+:copen
+
+:Ggrep 'word' branchName/hash <!--Opens read only buffer-->
+
+<!--Search for a word added or deleted-->
+:Glog -S... --
+
+### [fuzzy-finder](https://github.com/junegunn/fzf/blob/master/README-VIM.md)
+
+<C-p>       fuzzy find current directory
+            :FZF
+
+### [nerdtree](https://github.com/scrooloose/nerdtree/blob/master/doc/NERDTree.txt)
+
+<C-f>                      :NERDTreeToggle
+<C-s>                      :NERDTreeFind [<path>] Find and reveal the current directory or the given path.
+
+On nerdtree side bar:
+  m       modify file (add, create, rename, mv)
+  ?       Help
+
+### [nerdcommenter](https://github.com/scrooloose/nerdcommenter)
+
+<leader>c<space>  toggle comment line; For multiline comments line by line
+<leader>cm        multi-line comment; For multiline comments all lines together
+<leader>cu        multi-line uncomment; <leader>c<space> also works!
+
+<leader>cc        comment line
+<leader>c$        cursor to the end
+<leader>cA        comment end of line and insert
+
+### [vim-easy-align](https://github.com/junegunn/vim-easy-align)
+
+[Visual] ga<character_to_align>
+
+gaip=                 Align paragraph by first character '='
+gaip2=                Align paragraph by second character '='
+gaip*=                Align paragraph by all character '='
+
+Alignment (default is [L]):
+
+gaip<Enter>=          Align paragraph by first character to the [R]
+gaip<Enter><Enter>=   Align paragraph by first character to the [C]
+
+### [vim-easymotion](https://github.com/easymotion/vim-easymotion)
+
+<Leader><Leader>w
+
+### [vim-hoogle](https://github.com/Twinside/vim-hoogle)
+
+<leader>1         :Hoogle
+<leader>2         :HoogleClose
+
+### [multi-cursor](https://github.com/terryma/vim-multiple-cursors)
+
+<C-n> on a word and then
+  <C-n> select
+  <C-x> skip
+  <C-p> previous
+  Then you can just use A, I, delete word and insert: c or s
+
+<M-n> select all occurences
+<ESC> back to regular
+
+[Visual] Select lines and then <C-n> to add a curson on each line
+         Then, for example, you can move to the end of line A
+
+
+### [coc.nvim](https://github.com/neoclide/coc.nvim)
+
+gd            goto definition
+gy            goto type
+gr            goto references
+<M-f>         ormoulo format
+K             doc on point
+
+<leader>
+
+[g            prev diagnostic
+g]            next diagnostic
+
+<space>a      diagnostic
+<space>c      commands
+<space>o      outline symbol curent document
+<space>s      search symbol workspace
+<space>p      latest coc list
+<space>e      extensions
+
+### [UltiSnips](https://github.com/SirVer/ultisnips)
+
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"

@@ -1,10 +1,19 @@
+"
+" ██████╗░██╗░░░░░██╗░░░██╗░██████╗░██╗███╗░░██╗░██████╗
+" ██╔══██╗██║░░░░░██║░░░██║██╔════╝░██║████╗░██║██╔════╝
+" ██████╔╝██║░░░░░██║░░░██║██║░░██╗░██║██╔██╗██║╚█████╗░
+" ██╔═══╝░██║░░░░░██║░░░██║██║░░╚██╗██║██║╚████║░╚═══██╗
+" ██║░░░░░███████╗╚██████╔╝╚██████╔╝██║██║░╚███║██████╔╝
+" ╚═╝░░░░░╚══════╝░╚═════╝░░╚═════╝░╚═╝╚═╝░░╚══╝╚═════╝░
+
 filetype plugin on "enable loading the plugin files.
 
 "" Latex
 let g:tex_flavor = 'latex'
 
 """vim-ctrlspace
-let g:CtrlSpaceDefaultMappingKey = "<C-space> "
+let g:CtrlSpaceDefaultMappingKey = "<C-space> " "The last whitespace is intentional
+let g:airline_exclude_preview = 1
 
 """vim-buftabline
 nmap <M-1> <Plug>BufTabLine.Go(1)

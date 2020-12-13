@@ -1,23 +1,13 @@
 :set prompt "\001\ESC[93m\002\001\ESC[34;1m\002>>> \001\ESC[0;48;05;233m\002"
 
-:def hlint const . return $ ":! hlint \"src\""
-:def hoogle \s -> return $ ":! hoogle --color --count=15 " ++ show s
-:def hoogle-all \s -> return $ ":! hoogle search --color " ++ show s
-:def doc \s -> return $ ":! hoogle search --color --info " ++ show s
-
-:def pf \s -> return $ ":! pointfree " ++ show s
-:def pl \s -> return $ ":! pointful " ++ show s
-
-:def paste \_ -> do { paste <- System.Process.readProcess "pbpaste" [] ""; let cmd = if '\n' `elem` paste then ":{\ntype √ñ = ()\n" ++ paste ++ "\n:}" else paste in putStrLn ("\SOH\ESC[33m\STX" ++ paste ++ "\SOH\ESC[0m\STX") >> return (":cmd return " ++ show cmd) }
-:def paste-quiet \_ -> do { paste <- System.Process.readProcess "pbpaste" [] ""; let cmd = if '\n' `elem` paste then ":{\ntype √ñ = ()\n" ++ paste ++ "\n:}" else paste in return (":cmd return " ++ show cmd) }
+-- Miscelaneous
 
 :set -fprint-explicit-foralls
-
 :set +t
-
 :set editor nvim
 
--- Be careful, if you develop using ghcid - a file may compile on repl but not on ghc because you are adding explicit extensions.
+-- Language options
+
 :set -XTypeApplications
 :set -XTypeFamilies
 :set -XOverloadedStrings
@@ -44,3 +34,16 @@
 :set -XTemplateHaskell
 :set -XTupleSections
 :set -XTypeOperators
+
+-- Macros
+
+:def hlint const . return $ ":! hlint \"src\""
+:def hoogle \s -> return $ ":! hoogle --color --count=15 " ++ show s
+:def hoogle-all \s -> return $ ":! hoogle search --color " ++ show s
+:def doc \s -> return $ ":! hoogle search --color --info " ++ show s
+
+:def pf \s -> return $ ":! pointfree " ++ show s
+:def pl \s -> return $ ":! pointful " ++ show s
+
+:def paste \_ -> do { paste <- System.Process.readProcess "pbpaste" [] ""; let cmd = if '\n' `elem` paste then ":{\ntype √ñ = ()\n" ++ paste ++ "\n:}" else paste in putStrLn ("\SOH\ESC[33m\STX" ++ paste ++ "\SOH\ESC[0m\STX") >> return (":cmd return " ++ show cmd) }
+:def paste-quiet \_ -> do { paste <- System.Process.readProcess "pbpaste" [] ""; let cmd = if '\n' `elem` paste then ":{\ntype √ñ = ()\n" ++ paste ++ "\n:}" else paste in return (":cmd return " ++ show cmd) }

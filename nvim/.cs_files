@@ -1,0 +1,12 @@
+vimscript.md
+README.md
+config/plugins.vimrc
+UltiSnips/haskell.snippets
+config/init.vimrc
+UltiSnips/markdown.snippets
+config/general.vimrc
+config/keybindings.vimrc
+init.vim
+coc-settings.json
+keybindings.md
+LICENSE

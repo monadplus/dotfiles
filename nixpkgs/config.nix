@@ -36,11 +36,8 @@
 
             # Tools
             cabal-install
-            stack # Placing ghcid/ghcide here doesn't work :(
-            # stack is not present because it is not currently cached
-            QuickCheck
-            safe-money
-            singletons # 2.6
+            stack
+            # Placing ghcid/ghcide here doesn't work :(
           ]));
 
       # Doesn't work

@@ -177,8 +177,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       -- TODO set screensaver daemon
       --((modMask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off"),
       -- Screenshots
-      ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -q 100 ~/screenshots/$(date +'%Y-%b-%d-%s').png"),
-      ((0, xK_Print), spawn "scrot -q 100 ~/screenshots/$(date +'%Y-%b-%d-%s').png")
+      ((controlMask, xK_Print), spawn "sleep 0.2; maim -s --quality 10 ~/screenshots/$(date +'%Y-%b-%d-%s').png"),
+      ((0, xK_Print), spawn "maim --quality 10 ~/screenshots/$(date +'%Y-%b-%d-%s').png")
     ]
       -- Workspaces
       ++ [ ((m .|. modMask, k), windows $ f i)

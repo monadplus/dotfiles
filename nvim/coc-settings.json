@@ -7,6 +7,25 @@
       "args": ["--lsp"],
       "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
       "filetypes": ["haskell", "lhaskell"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+          "c",
+          "cpp",
+          "objc",
+          "objcpp"
+      ],
+      "rootPatterns": [
+          ".ccls",
+          "compile_commands.json",
+          ".git/"
+      ],
+      "initializationOptions": {
+        "cache": {
+            "directory": "/tmp/ccls"
+        }
+      }
     }
   }
 }

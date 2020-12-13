@@ -373,9 +373,12 @@ This install llvm compiler and (optional) toolchain.
 
 ```bash
 install llvm clang lld lldb libc++
+install llvm-libs # libLLVM.so
 ```
 
-Seems to be installed at `/usr/include/llvm`
+Seems to be installed at `/usr/include/llvm` and `/usr/lib/libLLVM-11.so`
+
+To update just call `install` again.
 
 ### NPM
 
@@ -513,3 +516,13 @@ The files to watch are:
 - /etc/pacman.conf
 - /etc/pacman.d/mirrorXXX
 - /etc/pacman.d/gnupg/gpg.conf
+
+#### Alacritty: libGL error.
+
+Error message
+
+```
+alacrity libGL error: MESA-LOADER: failed to open radeonsi (search paths /usr/lib/dri)
+```
+
+In order to solve this I reinstalled libGL and mesa `sudo pacman -Syy libGL mesa`

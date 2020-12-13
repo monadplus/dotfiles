@@ -16,10 +16,11 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap gf :G<CR>
 nnoremap gv :Gvdiff<CR>
 
+" TODO remap doesnt work
 " vim-gitgutter
-nnoremap <leader>gs <Plug>(GitGutterStageHunk)
-nnoremap <leader>gr <Plug>(GitGutterUndoHunk)
-nnoremap <leader>gp <Plug>(GtGutterPreviewHunk)
+"autocmd VimEnter * nnoremap <leader>gs <Plug>(GitGutterStageHunk)
+"autocmd VimEnter * nnoremap <leader>gr <Plug>(GitGutterUndoHunk)
+"autocmd VimEnter * nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
 
 " vim-easymotion
 nmap <leader>w <Plug>(easymotion-w)
@@ -144,8 +145,8 @@ nnoremap <leader>5 :LLPStartPreview<CR>
 nnoremap <M-f> :call RunOrmolu()<CR>
 
 " Coc.nvim
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [e <Plug>(coc-diagnostic-prev)
+nmap <silent> ]e <Plug>(coc-diagnostic-next)
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

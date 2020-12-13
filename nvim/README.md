@@ -74,3 +74,9 @@ hoogle generate # this takes some minutes
 # ghcid
 nix-env -iA nixpkgs.haskellPackages.ghcid
 ```
+
+#### c/c++
+
+Requires installing [ccls](https://github.com/MaskRay/ccls/wiki).
+
+Arch linux includes a pacman package `sudo pacman -Syy ccls`.

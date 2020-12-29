@@ -526,3 +526,15 @@ alacrity libGL error: MESA-LOADER: failed to open radeonsi (search paths /usr/li
 ```
 
 In order to solve this I reinstalled libGL and mesa `sudo pacman -Syy libGL mesa`
+
+#### stack build error
+
+```bash
+/usr/bin/ld.lld: error while loading shared libraries: libLLVM-10.so: cannot open shared object file: No such file or directory
+collect2: error: ld returned 127 exit status
+`gcc' failed in phase `Linker'. (Exit code: 1)
+```
+
+The problem: I forgot to update `lld` after upgrading `llvm` from version 10 to 11.
+
+The fix: upgrade `lld` by `sudo pacman -Syy ldd`.

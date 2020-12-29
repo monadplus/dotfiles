@@ -145,8 +145,8 @@ nnoremap <leader>5 :LLPStartPreview<CR>
 nnoremap <M-f> :call RunOrmolu()<CR>
 
 " Coc.nvim
-nmap <silent> [e <Plug>(coc-diagnostic-prev)
-nmap <silent> ]e <Plug>(coc-diagnostic-next)
+nmap <silent> e[ <Plug>(coc-diagnostic-prev)
+nmap <silent> e] <Plug>(coc-diagnostic-next)
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

@@ -131,6 +131,10 @@ if [ -d "$HOME/.emacs.d/bin" ] ;
   then PATH="$HOME/.emacs.d/bin:$PATH"
 fi
 
+if [ -d "$HOME/.cabal/bin" ] ;
+  then PATH="$HOME/.cabal/bin:$PATH"
+fi
+
 # Local npm modules
 if [ -d $(npm bin) ] ;
   then PATH=$(npm bin):$PATH

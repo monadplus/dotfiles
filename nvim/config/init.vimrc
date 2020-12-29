@@ -25,7 +25,7 @@ Plug 'scrooloose/nerdcommenter'                                   " code comment
 Plug 'junegunn/vim-easy-align'                                    " alignment plugin
 Plug 'tpope/vim-surround'                                         " quickly edit surroundings (brackets, html tags, etc)
 Plug 'easymotion/vim-easymotion'                                  " Vim motion on speed!
-Plug 'terryma/vim-multiple-cursors'                               " Multiple cursors selection, etc
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}               " Multiple cursors selection, etc
 Plug 'tpope/vim-unimpaired'                                       " better navigation
 Plug 'jiangmiao/auto-pairs'                                       "Auto pair parens, brackets, etc.
 Plug 'vim-ctrlspace/vim-ctrlspace'

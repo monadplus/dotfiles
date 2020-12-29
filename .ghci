@@ -5,6 +5,9 @@
 :set -fprint-explicit-foralls
 :set +t
 :set editor nvim
+:set stop :list -- list source location on breakpoint
+-- :set -fbreak-on-exception -- breakpoint on exception
+-- :set -fbreak-on-error
 
 -- Language options
 

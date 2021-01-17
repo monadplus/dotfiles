@@ -22,9 +22,12 @@
         };
 
       # This ghcide version takes advantage of cachix.
-      ghcide-nix = (import (githubTarball "cachix" "ghcide-nix" "master")
-        { })."ghcide-${compilerVersion}";
+      #ghcide-nix = (import (githubTarball "cachix" "ghcide-nix" "master")
+        #{ })."ghcide-${compilerVersion}";
       # nb. The new ghc version may not be supported. Check the repo (link on top)
+
+      iowa-stdlib = self.callPackage ./iowa-stdlib { inherit (self.stdenv) mkDerivation; inherit (self.fetchFromGitHub); };
+
     in {
       myHaskellEnv = (self.haskell.packages.${compilerVersion}.ghcWithHoogle
         (haskellPackages:
@@ -50,10 +53,11 @@
       haskell-language-server =
         self.haskell.packages.${compilerVersion}.haskell-language-server;
 
-      ghcide = ghcide-nix;
+      #ghcide = ghcide-nix;
 
       myAgda = self.agda.withPackages (p: [ p.standard-library
                                             # p.iowa-stdlib # COMPILE-ERROR
+                                            #iowa-stdlib
                                           ]);
     };
 }

@@ -11,7 +11,11 @@ filetype plugin on "enable loading the plugin files.
 "" Latex
 let g:tex_flavor = 'latex'
 
-"""vim-ctrlspace
+"" Agda
+au BufNewFile,BufRead *.agda setf agda
+let g:agda_extraincpaths = ["/home/arnau/projects/agda/ial"]
+
+""vim-ctrlspace
 let g:CtrlSpaceDefaultMappingKey = "<C-space> " "The last whitespace is intentional
 let g:airline_exclude_preview = 1
 

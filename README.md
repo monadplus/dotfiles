@@ -301,6 +301,12 @@ There is an environment prepared to install ghc, cabal, stack and ghcide.
 nix-env -f '<nixpkgs>' -iA myHaskellEnv
 ```
 
+### Agda
+
+Libraries are installed like `ial` (see `.agda/`).
+
+Recall to `ln -s ~/dotfiles/.agda  ~/.agda`
+
 ### Latex
 
 ```bash
@@ -431,6 +437,18 @@ sudo pip uninstall
 
 ``` bash
 yay -S peek
+```
+
+## Downgrading a package
+
+See https://wiki.archlinux.org/index.php/Downgrading_packages#Automation
+
+There's the tool `downgrade` that searches on your local pacman cache `/var/cache/pacman/pkg/` and on the [Arch Linux Archive](https://wiki.archlinux.org/index.php/Arch_Linux_Archive).
+
+To use this tool:
+
+```bash
+downgrade <lib name>
 ```
 
 ### Issues and Solutions

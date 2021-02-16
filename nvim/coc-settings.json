@@ -8,6 +8,10 @@
       "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
       "filetypes": ["haskell", "lhaskell"]
     },
+    "python": {
+      "command": "jedi-language-server",
+      "filetypes": ["python"]
+    },
     "ccls": {
       "command": "ccls",
       "filetypes": [

@@ -42,17 +42,17 @@ Plug 'jlanzarotta/bufexplorer'                                     " Better buff
 
 " Vim as IDE
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                    " LSP
+Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build' }
 Plug 'vim-syntastic/syntastic'                                     " Linter (e.g. hlint integration)
 
 " Snippets
-Plug 'SirVer/ultisnips'                                            " Snippets plugin
-Plug 'honza/vim-snippets'                                          " Collection of snippets for several languages
+" Plug 'SirVer/ultisnips'                                            " Snippets plugin
+" Plug 'honza/vim-snippets'                                          " Collection of snippets for several languages
 
 " Programming Languages
 Plug 'rhysd/vim-llvm'                                              " Syntax for LLVM
 Plug 'derekelkins/agda-vim'                                        " Agda-mode port
 Plug 'rust-lang/rust.vim'                                          " Rust syntax and syntastic integration
-Plug 'davidhalter/jedi-vim'                                        " Python auto-completition
 Plug 'ekalinin/Dockerfile.vim'                                     " Syntax for Dockerfile
 Plug 'LnL7/vim-nix'                                                " Nix expressions in vim
 Plug 'plasticboy/vim-markdown'                                     " Markdown utilities

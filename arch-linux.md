@@ -70,19 +70,21 @@ reboot
 
 Disconnect the usb and reboot! You should have a running bare Arch Linux system.
 
+## yay
+
+```bash
+git clone https://aur.archlinux.org/yay-git.git
+cd yay-git
+makepkg -si # install
+```
+
 ## Fonts
 
 https://wiki.archlinux.org/index.php/Fonts
 
 ```bash
-# Pacman
-sudo pacman -Syy fontconfig ttf-inconsolata
-
-# Install ttf-mononoki from AUR
-mkdir ~/builds && cd ~/builds
-git clone https://aur.archlinux.org/ttf-mononoki.git
-cd ttf-mononoki
-makepkg -si # Install font at /usr/share/fonts/
+sudo pacman -Syy fontconfig ttf-inconsolata ttf-iosevka
+yay -Syu ttf-mononoki
 
 # List fonts
 fc-list | less
@@ -94,28 +96,23 @@ fc-list | less
 # Already installed in #Installation
 # pacman -S networkmanager
 # systemctl enable NetworkManager
-sudo pacman -Syy network-manager-applet
-vim ~/.xprofile
-> nm-applet &
-# You can alternatively use a Desktop Entry (see wiki)
+sudo pacman -Syu network-manager-applet
+# autostart.sh will run nm-applet &
 ```
 
 ## Display Manager and Window Manager
 
 ```bash
-sudo pacman -Syy xorg lightdm lightdm-gtk-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen terminator # xmonad-extras  is missing (xmonad-extras-git is in AUR)
+# You may need to install your video drivers: https://wiki.archlinux.org/index.php/Xorg#Driver_installation
+sudo pacman -Syy xorg lightdm lightdm-gtk-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen alacritty # xmonad-extras  is missing (xmonad-extras-git is in AUR)
+                   # picom is a compositor for xorg.
 sudo systemctl enable ligthdm
-vim ~/.xprofile
-> setxkbmap us &
-> nitrogen --restore &
-> picom -f &
-mkdir ~/.xmonad && ~/.xmonad
-git clone https://github.com/monadplus/dotfiles ~/
-mv ~/dotfiles/xmonad/xmonad.hs ~/xmonad/
-mv ~/dotfiles/xmonad/.stalonetrayrc ~/.
-vim ~/.xprofile
-> stalonetray & # Systemd ?
-mv ~/dotfiles/xmonad/.xmobarrc ~/.
+
+You will need to check /etc/lightdm and copy it
+
+
+# git clone https://github.com/monadplus/dotfiles ~/
+You need to do lot of softlinks and check everything is installed
 
 # Setup wallpaper
 nitrogen # and pick a wallpaper

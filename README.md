@@ -4,6 +4,104 @@ The following dotfiles were tested on Arch Linux.
 
 For a basic good on how to install Arc Linux: [here](./arch-linux.md).
 
+## Package Managers on Arch Linux
+
+Pacman has an official repository.
+
+AUR is a community-driven repository for Arch users.
+Package contains a description (PKGBUILD) that allow you to compile
+a package from source with `makepkg` and then install it via `pacman`
+
+### Pacman
+
+Pacman configuration can be found at: `/etc/pacman.conf`
+
+Keeps the system up to date by synchronizing package lists with the master server.
+
+Pacman includes several tools: `makepkg`, `pactree` (dependency viewer) and `checkupdates`
+
+`checkupdates` is very useful.
+
+Some packages may have optional dependencies which are listed on installation.
+
+__Do not run `pacman -Sy package_name` instead of `pacman -Syu package_name`, as this could lead to dependency issues__
+
+Don't skip packages (i.e. IgnorePkg=linux)
+Don't skip package group (i.e. IgnoreGroup=gnome)
+
+Pacman will not remove configurations that the application itself creates (dotfiles).
+
+```bash
+# Install specific package
+pacman -S package_name1 package_name2
+# Install package groups
+pacman -S gnome # prompt you to select the packages you wish to install
+
+# Remove package
+pacman -Rs package_name # removes unused dependencies
+
+# List installed packages and version
+pacman -Q
+# List AUR packages
+pacman -Qm
+
+# Search already installed packages
+pacman -Qs string1 string2
+# Search in database
+pacman -Ss string1 string2
+pacman -Ss '^vim-'
+# Search in remote
+pacman -F string1 string2
+
+# Install a 'local' package (e.g. AUR)
+pacman -U /path/to/package/package-name-version.pkg.tar.zst
+```
+
+
+Cleaning the package cache. Pacman stores its downloaded packages in `/var/cache/pacman/pkg/` and does not remove the old or uninstalled versions automatically. This has some advantages. Run
+
+- `paccache -r`: deletes all cached versions of installed and uninstalled packages, except for the most recent 3
+- `pacman -Sc`: to remove all cached packages not currently installed.
+
+#### Upgrading the System
+
+Do fully system upgrades.
+
+Have a Linux "live" usb in case you need to rescue your system.
+
+Avoid certain pacman commands: `pacman -Sy`, `--overwrite`, `-d`
+
+Partial upgrades are unsupported. Arch Linux is a rolling release. Always update (`pacman -Syu`) before installing a package. Be carefull with `IgnorePkg` and `IgnoreGroup`. Do not fix the problem simply by symlinking. Use `pacman -Syu`
+
+Reboot after an upgrade.
+
+Orphan packages `pacman -Qtd`.
+
+Always check for PKGBUILD in AUR packages.
+
+Clean package cache `/var/cache/pacman/pkg/` ( I have like 3.5GB of pkgs there...)
+
+### Yay
+
+Arch Linux AUR helper tool. It helps you to install package from PKGBUILD.
+
+Does not require sudo privileges.
+
+```bash
+# Install a package
+yay -S package
+# Remove a package (and its dependencies)
+yay -Rns package
+# Search package
+yay rstu # returns all entries that start with rstu
+# Upgrade all package
+yay -Syu
+# Clean unnedded dependencies
+yay -Yc
+# System statistics
+yay -Ps
+```
+
 ## Configuration
 
 The list of configurations directories/files that must be placed in ~/.config are:
@@ -257,6 +355,22 @@ kill -9 -1
 docker info # should work
 ```
 
+I recommend using `lazydocker`.
+
+### R and RStudio IDE
+
+FIXME: I had to install an older version of `R` due to the `icu` issue.
+
+Install:
+
+```bash
+pacman -Syu r
+yay -Syu rstudio-desktop-bin
+pacman -Syu tk # required by rstudio
+```
+
+Alternative, use `nix` (see `nixpkgs/config.nix`)
+
 ### BitTorrent Clients
 
 Install `Deluge` bittorrent client:
@@ -451,6 +565,12 @@ To use this tool:
 downgrade <lib name>
 ```
 
+To upgrade multiple packages at once (e.g. dependencies):
+
+```bash
+downgrade gcc gcc-libs
+```
+
 ### Issues and Solutions
 
 #### Left click on the touchpad is not working properly
@@ -556,3 +676,12 @@ collect2: error: ld returned 127 exit status
 The problem: I forgot to update `lld` after upgrading `llvm` from version 10 to 11.
 
 The fix: upgrade `lld` by `sudo pacman -Syy ldd`.
+
+#### ipython autocomplete doesn't works
+
+Solved by
+
+```bash
+pip install -U ipython
+pip install -U jedi
+```

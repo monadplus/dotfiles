@@ -26,6 +26,8 @@
         #{ })."ghcide-${compilerVersion}";
       # nb. The new ghc version may not be supported. Check the repo (link on top)
 
+      #oldPkgs = import (githubTarball "NixOS" "nixpkgs" "nixos-19.03") {};
+
       iowa-stdlib = self.callPackage ./iowa-stdlib { inherit (self.stdenv) mkDerivation; inherit (self.fetchFromGitHub); };
 
     in {
@@ -59,5 +61,8 @@
                                             # p.iowa-stdlib # COMPILE-ERROR
                                             #iowa-stdlib
                                           ]);
+
+      # BROKEN
+      #myR = oldPkgs.rstudioWrapper.override { packages = with oldPkgs.rPackages; [ aplpack ]; };
     };
 }

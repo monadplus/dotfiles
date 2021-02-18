@@ -145,8 +145,8 @@ export DOOMDIR=$HOME/.doom.d
 #fix obvious typo's
 alias cd..='cd ..'
 alias pdw="pwd"
-alias upate='sudo pacman -Syyu'
-alias install='sudo pacman -Syy'
+alias install='sudo pacman -Syu'
+alias install-unsafe='sudo pacman -Sy'
 
 #readable output
 alias df='df -h'

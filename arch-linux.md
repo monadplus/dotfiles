@@ -4,7 +4,7 @@ These is a step-by-step installation guide for **my** arch linux main system.
 
 **All steps after installing the display/window manager are missing**
 
-!!! I am currently using Arcolinux were all these steps are not automated.
+!!! I am currently using Arcolinux were all these steps are automated.
 
 ## Installation
 

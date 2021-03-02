@@ -1,35 +1,19 @@
 {
   allowBroken = true;
 
-  # $ nix-env -iA cachix -f https://cachix.org/api/v1/install
-  # $ cachix use ghc-nix, ghcide-nix, all-hies, iohk
-
-  # Cached HIE: https://github.com/Infinisil/all-hies/
-  # Cached ghcide: https://github.com/cachix/ghcide-nix
-
   # To install this: $ nix-env -f '<nixpkgs>' -iA myHaskellEnv
 
   packageOverrides = super:
     let
       self = super.pkgs;
 
-      # TODO Upgrade when cached
+      # TODO
       compilerVersion = "ghc884"; # "ghc8102";
 
       githubTarball = owner: repo: rev:
         builtins.fetchTarball {
           url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
         };
-
-      # This ghcide version takes advantage of cachix.
-      #ghcide-nix = (import (githubTarball "cachix" "ghcide-nix" "master")
-        #{ })."ghcide-${compilerVersion}";
-      # nb. The new ghc version may not be supported. Check the repo (link on top)
-
-      #oldPkgs = import (githubTarball "NixOS" "nixpkgs" "nixos-19.03") {};
-
-      iowa-stdlib = self.callPackage ./iowa-stdlib { inherit (self.stdenv) mkDerivation; inherit (self.fetchFromGitHub); };
-
     in {
       myHaskellEnv = (self.haskell.packages.${compilerVersion}.ghcWithHoogle
         (haskellPackages:
@@ -45,24 +29,13 @@
             # Placing ghcid/ghcide here doesn't work :(
           ]));
 
-      # Doesn't work
-      #.overrideAttrs (oldAttrs: rec {
-      #buildInputs = [ self.haskellPackages.ghcid ];
-      #});
-
       ghcid = self.haskell.packages.${compilerVersion}.ghcid;
 
-      haskell-language-server =
-        self.haskell.packages.${compilerVersion}.haskell-language-server;
-
-      #ghcide = ghcide-nix;
+      myHLS = self.haskell-language-server.override { supportedGhcVersions = [ "884" ]; };
 
       myAgda = self.agda.withPackages (p: [ p.standard-library
-                                            # p.iowa-stdlib # COMPILE-ERROR
+                                            # TODO
                                             #iowa-stdlib
                                           ]);
-
-      # BROKEN
-      #myR = oldPkgs.rstudioWrapper.override { packages = with oldPkgs.rPackages; [ aplpack ]; };
     };
 }

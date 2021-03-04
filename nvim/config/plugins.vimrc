@@ -70,7 +70,8 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 """ Markdown
 let g:vim_markdown_folding_disabled = 1
 
-""" Syntastic Configuration
+""" Syntastic
+
 " A syntactic checker like hlint should be installed in your PATH
 " Run :SyntasticInfo to see what syntactic checkers are supported and enabled.
 set statusline+=%#warningmsg#
@@ -80,10 +81,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0 " closed on open, not displayed until the file is saved
 let g:syntastic_check_on_wq = 0
-"""" Ignore hs - annoying
+" Do not run syntastic (probably there is an lsp with syntaxi check)
 let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["haskell", "hs", "rust", "rs"] }
 
-""" Pointfree Configuration (:help pointfree)
+let g:syntastic_python_pylint_quiet_messages = { "level" : ["warning"] }
+
+""" Pointfree (:help pointfree)
 au BufNewFile,BufRead *.hs nmap pf <Plug>Pointfree
 
 """" jedi-vim

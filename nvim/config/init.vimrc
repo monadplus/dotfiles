@@ -26,10 +26,10 @@ Plug 'junegunn/vim-easy-align'                                    " alignment pl
 Plug 'tpope/vim-surround'                                         " quickly edit surroundings (brackets, html tags, etc)
 Plug 'easymotion/vim-easymotion'                                  " Vim motion on speed!
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}               " Multiple cursors selection, etc
-Plug 'tpope/vim-unimpaired'                                       " better navigation
-Plug 'jiangmiao/auto-pairs'                                       "Auto pair parens, brackets, etc.
-Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'scrooloose/nerdtree'                                        " folders tree
+Plug 'tpope/vim-unimpaired'                                       " Better navigation
+Plug 'jiangmiao/auto-pairs'                                       " Auto pair parens, brackets, etc.
+Plug 'vim-ctrlspace/vim-ctrlspace'                                " Workspaces
+Plug 'scrooloose/nerdtree'                                        " Directory as a tree
 Plug 'Xuyuanp/nerdtree-git-plugin'                                " Shows files git status on the NerdTree
 
 " Miscelaneous
@@ -46,8 +46,8 @@ Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build'
 Plug 'vim-syntastic/syntastic'                                     " Linter (e.g. hlint integration)
 
 " Snippets
-" Plug 'SirVer/ultisnips'                                            " Snippets plugin
-" Plug 'honza/vim-snippets'                                          " Collection of snippets for several languages
+Plug 'SirVer/ultisnips'                                            " Snippets plugin
+Plug 'honza/vim-snippets'                                          " Collection of snippets for several languages
 
 " Programming Languages
 Plug 'rhysd/vim-llvm'                                              " Syntax for LLVM

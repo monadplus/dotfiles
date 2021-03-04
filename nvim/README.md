@@ -41,6 +41,15 @@ sudo yay -Syy direnv
 echo 'eval "$(direnv hook bash)"' >> ~/.bashrc # echo 'eval "$(direnv hook zsh)"' >> ~/.bashrc
 ```
 
+#### python
+
+- LSP: [coc-jedi](https://github.com/pappasam/coc-jedi) (can also lint with an extra tool).
+- Linter: [syntastic](https://github.com/vim-syntastic/syntastic) + `pylint`.
+
+`coc-jedi` is automatically installed through vim-plug (no need to run anything like in rust). Same for `syntastic`.
+
+`pylint` has to be installed: `$ pipenv install pylint` (or globally although it won't have access to the per-project libraries).
+
 #### rust
 
 ```bash
@@ -80,3 +89,9 @@ nix-env -iA nixpkgs.haskellPackages.ghcid
 Requires installing [ccls](https://github.com/MaskRay/ccls/wiki).
 
 Arch linux includes a pacman package `sudo pacman -Syy ccls`.
+
+#### Troubleshooting
+
+__Duplicates entries on `coc`__
+
+Try `:CocList services` and see if only one service is running. In my case, multiple servers where running. I fixed it by removing `python` from `coc-settings.json` since `coc-jedi` was somehow registered (coc-rust-analyzer does the same)

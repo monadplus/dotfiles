@@ -19,7 +19,7 @@ Documentation [here](https://github.com/hlissner/doom-emacs/blob/develop/docs/ge
 First install `emacs` (current version 27.1), `git`, `ripgrep` and `find` (or `fd`):
 
 ```bash
-sudo pacman -Syy emacs git find ripgrep fd shellcheck
+sudo pacman -Syu emacs git find ripgrep fd shellcheck
 ```
 
 Then, install `Doom Emacs`:

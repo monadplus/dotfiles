@@ -305,6 +305,11 @@ if [ "$(command -v bat)" ]; then
   alias cat='bat -pp --theme="Dracula"'
 fi
 
+if [ "$(command -v pdf)" ]; then
+  unalias -m 'pdf'
+  alias pdf='zathura'
+fi
+
 eval "$(direnv hook zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

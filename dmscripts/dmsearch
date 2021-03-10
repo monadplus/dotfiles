@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+DMBROWSER="firefox"
+
+declare -a options=(
+"amazon - https://www.amazon.com/s?k="
+"archaur - https://aur.archlinux.org/packages/?O=0&K="
+"archpkg - https://archlinux.org/packages/?sort=&q="
+"archwiki - https://wiki.archlinux.org/index.php?search="
+"arxiv - https://arxiv.org/search/?searchtype=all&source=header&query="
+"duckduckgo - https://duckduckgo.com/?q="
+"github - https://github.com/search?q="
+"gitlab - https://gitlab.com/search?search="
+"google - https://www.google.com/search?q="
+"googleimages - https://www.google.com/search?hl=en&tbm=isch&q="
+"imdb - https://www.imdb.com/find?q="
+"reddit - https://www.reddit.com/search/?q="
+"translate - https://translate.google.com/?sl=auto&tl=en&text="
+"wikipedia - https://en.wikipedia.org/wiki/"
+"wolfram - https://www.wolframalpha.com/input/?i="
+"youtube - https://www.youtube.com/results?search_query="
+"hackage - https://hackage.haskell.org/packages/search?terms="
+"quit"
+)
+
+while [ -z "$engine" ]; do
+enginelist=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p 'Choose search engine:') || exit
+engineurl=$(echo "$enginelist" | awk '{print $NF}')
+engine=$(echo "$enginelist" | awk '{print $1}')
+done
+
+while [ -z "$query" ]; do
+query=$(echo "$engine" | dmenu -p 'Enter search query:') || exit
+done
+
+$DMBROWSER "$engineurl""$query"

@@ -4,6 +4,7 @@
 # When you have the time, remove the old ones and use this method.
 {
   allowBroken = true;
+  allowUnfree = true;
 
   # $ nix-env -iA cachix -f https://cachix.org/api/v1/install
   # $ cachix use ghc-nix, ghcide-nix, all-hies, iohk

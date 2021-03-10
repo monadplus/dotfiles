@@ -121,9 +121,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((modMask, xK_p), spawn $ "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'Noto Sans:bold:pixelsize=14'"),
       ((controlMask .|. shiftMask, xK_v), spawn $ "clipmenu"),
       ((modMask .|. shiftMask, xK_r), spawn $ "xmonad --recompile && xmonad --restart"),
-      ((modMask, xK_o), spawn $ "$HOME/.xmonad/scripts/picom-toggle.sh"),
       ((modMask .|. shiftMask, xK_p), spawn $ "pamac-manager"),
       ((modMask, xK_c), spawn $ "conky-toggle"),
+      -- dmscripts
+      ((modMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmconf"),
+      ((modMask .|. shiftMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmsearch"),
+      ((modMask, xK_i), spawn $ "bash $HOME/dotfiles/dmscripts/dman"),
       -- Focus
       ((modMask, xK_j), windows W.focusDown),
       ((modMask, xK_k), windows W.focusUp),

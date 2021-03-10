@@ -95,3 +95,9 @@ Arch linux includes a pacman package `sudo pacman -Syy ccls`.
 __Duplicates entries on `coc`__
 
 Try `:CocList services` and see if only one service is running. In my case, multiple servers where running. I fixed it by removing `python` from `coc-settings.json` since `coc-jedi` was somehow registered (coc-rust-analyzer does the same)
+
+__pipenv + ultisnippets__
+
+Ultisnippets uses python3 which is not found in the correct folder inside the pipenv shell.
+
+Solution: `pipenv install pynvim`

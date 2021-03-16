@@ -2,6 +2,7 @@
 
 #DMEDITOR="emacsclient -c -a emacs"
 DMEDITOR="alacritty -e nvim"
+DMOPEN="alacritty --working-directory"
 
 declare -a options=(
 "alacritty - $HOME/.config/alacritty/alacritty.yml"
@@ -15,7 +16,9 @@ declare -a options=(
 "picom - $HOME/.xmonad/scripts/picom.conf"
 "polybar - $HOME/.config/polybar/config"
 "xmonad - $HOME/.xmonad/xmonad.hs"
+"xmonad - $HOME/.xmonad/xmonad.hs"
 "zsh - $HOME/.zshrc"
+"master"
 "quit"
 )
 
@@ -23,6 +26,20 @@ choice=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p 'Edit config:')
 
 if [[ "$choice" == "quit" ]]; then
     echo "Program terminated." && exit 0
+elif [[ "$choice" == "master" ]]; then
+    declare -a options=(
+    "BDM - $HOME/master/BDM"
+    "ML - $HOME/master/ML"
+    "OD - $HOME/master/OD"
+    "TOML - $HOME/master/TOML"
+    )
+    choice=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p 'Open:')
+    if [ "$choice" ]; then
+      dir=$(printf '%s\n' "${choice}" | awk '{print $NF}')
+      $DMOPEN "$dir"
+    else
+        echo "Program terminated." && exit 0
+    fi
 elif [ "$choice" ]; then
 	cfg=$(printf '%s\n' "${choice}" | awk '{print $NF}')
 	$DMEDITOR "$cfg"

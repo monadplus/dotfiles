@@ -104,8 +104,10 @@ sudo pacman -Syu network-manager-applet
 
 ```bash
 # You may need to install your video drivers: https://wiki.archlinux.org/index.php/Xorg#Driver_installation
-sudo pacman -Syy xorg lightdm lightdm-gtk-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen alacritty # xmonad-extras  is missing (xmonad-extras-git is in AUR)
-                   # picom is a compositor for xorg.
+sudo pacman -Syu xorg lightdm lightdm-gtk-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen alacritty # xmonad-extras  is missing (xmonad-extras-git is in AUR)
+# Warning: you may want to get xmonad from nixpkgs not from aur
+See nixpkgs.nix
+
 sudo systemctl enable ligthdm
 
 You will need to check /etc/lightdm and copy it

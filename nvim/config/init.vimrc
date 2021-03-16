@@ -20,6 +20,11 @@ Plug 'luochen1990/rainbow'                                        " Colored pare
 Plug 'tpope/vim-fugitive'                                         " Git porcelain
 Plug 'airblade/vim-gitgutter'                                     " Show file git status
 
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 " Better nvim
 Plug 'scrooloose/nerdcommenter'                                   " code commenter
 Plug 'junegunn/vim-easy-align'                                    " alignment plugin

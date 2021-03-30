@@ -106,6 +106,10 @@ yay -Yc
 yay -Ps
 ```
 
+### Paru
+
+TODO (similar to yay)
+
 ## Configuration
 
 The list of configurations directories/files that must be placed in ~/.config are:
@@ -253,7 +257,7 @@ There are two options (I recommend alacritty):
 
 ```bash
 # Everything configured
-ln -s ~/dotfiles/alacritty.yml ~/.config/alacritty.yml
+ln -s ~/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 ```
 
 - Konsole
@@ -670,6 +674,9 @@ When installing xmonad with pacman, it will also install the newest ghc.
 If you install a new ghc (i.e. nix-env -iA ghcXXX), calling `xmonad --recompile` will fail.
 
 You need to remove the installed ghc
+
+> Remove xmonad and ghc from arcolinux installation. Use the one from the nix script
+> The default xmonad captures Ctrl+w for screen swapping.
 
 #### Bluetooth: can't connect/remove device
 

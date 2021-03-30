@@ -16,7 +16,7 @@ sudo pacman -Syy neovim python-pynvim
 :python3 import sys; print(sys.version) # Should print python version
 
 # Link this directory to neovim's init.vim directory
-ln -s ~/dotfiles/nvim ~/.config/nvim/
+ln -s ~/dotfiles/nvim ~/.config
 
 # Install vim-plug plugin manager
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -59,7 +59,6 @@ rustup component add rust-analyzer
 
 # Execute inside neovim
 :CocInstall coc-rust-analyzer
-:CocInstall coc-pyright
 ```
 
 #### haskell

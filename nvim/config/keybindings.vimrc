@@ -15,6 +15,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 " vim-fugitive
 nnoremap gf :G<CR>
 nnoremap gv :Gvdiff<CR>
+command W :w
 
 " TODO remap doesnt work
 " vim-gitgutter
@@ -165,6 +166,9 @@ endfunction
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
 " Symbol renaming.
 " nmap <leader>rn <Plug>(coc-rename)
 
@@ -178,3 +182,4 @@ nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+

@@ -140,6 +140,10 @@ if [ -d $(npm bin) ] ;
   then PATH=$(npm bin):$PATH
 fi
 
+if [ -d "$HOME/Intellij/bin" ] ;
+  then PATH="$HOME/Intellij/bin:$PATH"
+fi
+
 export DOOMDIR=$HOME/.doom.d
 
 #fix obvious typo's

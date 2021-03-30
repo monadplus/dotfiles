@@ -82,7 +82,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0 " closed on open, not displayed until the file is saved
 let g:syntastic_check_on_wq = 0
 " Do not run syntastic (probably there is an lsp with syntaxi check)
-let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["haskell", "hs", "rust", "rs"] }
+let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["haskell", "hs", "rust", "rs", "tex"] }
 
 let g:syntastic_python_pylint_quiet_messages = { "level" : ["warning"] }
 

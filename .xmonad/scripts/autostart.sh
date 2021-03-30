@@ -38,8 +38,9 @@ feh --bg-fill /home/arnau/wallpapers/megumin_purple.png &
 #run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 #(conky -c $HOME/.xmonad/scripts/system-overview) & #start the conky to learn the shortcuts
 
+# run variety &
 run nm-applet & # NetworkManager systray
-# run pamac-tray & # Package Manager at Tray
+run pamac-tray & # Package Manager at Tray
 run clipmenud & # Clipboard Manager
 blueberry-tray & # Bluetooth
 picom --config $HOME/.xmonad/scripts/picom.conf & # Window Composer

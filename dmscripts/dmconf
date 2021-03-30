@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #DMEDITOR="emacsclient -c -a emacs"
-DMEDITOR="alacritty -e nvim"
+DMEDITOR="konsole -e nvim"
 DMOPEN="alacritty --working-directory"
 
 declare -a options=(
@@ -9,10 +9,10 @@ declare -a options=(
 "doom emacs config.el - $HOME/.doom.d/config.el"
 "doom emacs init.el - $HOM/.doom.d/init.el"
 "doom emacs packages.el - $HOME/.doom.d/packages.el"
-"dotfiles - $HOME/dotfiles"
+"dotfiles - $HOME/dotfiles/README.md"
 "emacs README.md - $HOME/dotfiles/emacs/README.md"
 "nixpkgs - $HOME/dotfiles/nixpkgs/config.nix"
-"neovim - $HOME/.config/nvim"
+"neovim - $HOME/.config/nvim/README.md"
 "picom - $HOME/.xmonad/scripts/picom.conf"
 "polybar - $HOME/.config/polybar/config"
 "xmonad - $HOME/.xmonad/xmonad.hs"

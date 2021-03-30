@@ -39,9 +39,10 @@
         (haskellPackages:
           with haskellPackages; [
             # Libs
+            xmonad
             xmonad-extras
             xmonad-contrib
-            dbus # Required to compile xmonad (pacman:xmonad install it's own ghc version...)
+            xmonad-utils
 
             # Tools
             cabal-install

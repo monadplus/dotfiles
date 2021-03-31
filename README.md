@@ -478,6 +478,12 @@ nix-env -iA nixpkgs.haskellPackages.hoogle
 hoogle generate # this takes some minutes
 ```
 
+```bash
+cabal configure
+ln -s ~/dotfiles/cabal/config ~/.cabal
+ln -s ~/dotfiles/.stack/config.yaml ~/.stack/
+ln -s ~/dotfiles/.ghci ~/.ghci
+```
 
 ### Agda
 

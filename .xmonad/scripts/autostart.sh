@@ -42,7 +42,10 @@ feh --bg-fill /home/arnau/wallpapers/megumin_purple.png &
 run nm-applet & # NetworkManager systray
 run pamac-tray & # Package Manager at Tray
 run clipmenud & # Clipboard Manager
-blueberry-tray & # Bluetooth
+hostname=$(cat /proc/sys/kernel/hostname)
+if [ $hostname = "laptop" ]; then
+  blueberry-tray & # Bluetooth
+fi
 picom --config $HOME/.xmonad/scripts/picom.conf & # Window Composer
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # TODO
 /usr/lib/xfce4/notifyd/xfce4-notifyd & # Notifications as pop-ups - xfce4-notifyd-config

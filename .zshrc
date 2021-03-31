@@ -147,6 +147,7 @@ alias cd..='cd ..'
 alias pdw="pwd"
 alias install='sudo pacman -Syu'
 alias install-unsafe='sudo pacman -Sy'
+alias uninstall='sudo pacman -Rs'
 
 #readable output
 alias df='df -h'
@@ -197,17 +198,17 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-alias elightdm="sudo emacs /etc/lightdm/lightdm.conf"
-alias epacman="sudo emacs /etc/pacman.conf"
-alias egrub="sudo emacs /etc/default/grub"
-alias emkinitcpio="sudo emacs /etc/mkinitcpio.conf"
-alias eslim="sudo emacs /etc/slim.conf"
-alias eoblogout="sudo emacs /etc/oblogout.conf"
-alias emirrorlist="sudo emacs /etc/pacman.d/mirrorlist"
-alias econfgrub="sudo emacs /boot/grub/grub.cfg"
-alias epoly="emacs $HOME/dotfiles/polybar/config"
-alias ezshrc="emacs $HOME/dotfiles/.zshrc"
-alias exmonad="emacs $HOME/dotfiles/.xmonad/xmonad.hs"
+alias elightdm="sudo $EDITOR /etc/lightdm/lightdm.conf"
+alias epacman="sudo $EDITOR /etc/pacman.conf"
+alias egrub="sudo $EDITOR /etc/default/grub"
+alias emkinitcpio="sudo $EDITOR /etc/mkinitcpio.conf"
+alias eslim="sudo $EDITOR /etc/slim.conf"
+alias eoblogout="sudo $EDITOR /etc/oblogout.conf"
+alias emirrorlist="sudo $EDITOR /etc/pacman.d/mirrorlist"
+alias econfgrub="sudo $EDITOR /boot/grub/grub.cfg"
+alias epoly="$EDITOR $HOME/dotfiles/polybar/config"
+alias ezshrc="$EDITOR $HOME/dotfiles/.zshrc"
+alias exmonad="$EDITOR $HOME/dotfiles/.xmonad/xmonad.hs"
 
 #gpg
 #verify signature for isos
@@ -216,13 +217,13 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 #shutdown or reboot
-alias shutdownNow="sudo shutdown now"
-alias shutdownReboot="sudo reboot"
+alias shutdown="systemctl poweroff"
+alias reboot="systemctl reboot"
 alias suspend="systemctl suspend"
 alias hibernate="systemctl hibernate"
 
-# Kills all users programs and brings you to lightdm
-alias logout-ligthdm="kill -9 -1"
+# Kills all users programs and brings you to Display/Login Manager
+alias logout-sddm="kill -9 -1"
 
 #editor
 alias vim="nvim"
@@ -305,7 +306,7 @@ if [ "$(command -v bat)" ]; then
   alias cat='bat -pp --theme="Dracula"'
 fi
 
-if [ "$(command -v pdf)" ]; then
+if [ "$(command -v zathura)" ]; then
   unalias -m 'pdf'
   alias pdf='zathura'
 fi

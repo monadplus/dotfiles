@@ -11,6 +11,7 @@
       # TODO
       compilerVersion = "ghc884"; # "ghc8102";
 
+      # TODO not pinned
       githubTarball = owner: repo: rev:
         builtins.fetchTarball {
           url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
@@ -39,10 +40,10 @@
         (haskellPackages:
           with haskellPackages; [
             # Libs
-            xmonad
             xmonad-extras
             xmonad-contrib
             xmonad-utils
+            dbus
 
             # Tools
             cabal-install
@@ -50,7 +51,7 @@
             # Placing ghcid/ghcide here doesn't work :(
           ]));
 
-      ghcid = self.haskell.packages.${compilerVersion}.ghcid;
+      myGhcid = self.haskell.packages.${compilerVersion}.ghcid;
 
       myHLS = self.haskell-language-server.override { supportedGhcVersions = [ "884" ]; };
 
@@ -59,8 +60,9 @@
                                             #iowa-stdlib
                                           ]);
 
-      myVscode = self.vscode-with-extensions.override {
-                    vscodeExtensions = vsExtensions;
-                 };
+      # Using the one from pacman
+      #myVscode = self.vscode-with-extensions.override {
+                    #vscodeExtensions = vsExtensions;
+                 #};
     };
 }

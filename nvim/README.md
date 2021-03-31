@@ -83,9 +83,6 @@ nix-env -iA nixpkgs.haskellPackages.stack
 # hoogle
 nix-env -iA nixpkgs.haskellPackages.hoogle
 hoogle generate # this takes some minutes
-
-# ghcid
-nix-env -iA nixpkgs.haskellPackages.ghcid
 ```
 
 #### c/c++

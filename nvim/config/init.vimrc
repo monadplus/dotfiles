@@ -48,6 +48,7 @@ Plug 'jlanzarotta/bufexplorer'                                     " Better buff
 " Vim as IDE
 Plug 'neoclide/coc.nvim', {'branch': 'release'}                    " LSP
 Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build' }
+Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 Plug 'vim-syntastic/syntastic'                                     " Linter (e.g. hlint integration)
 
 " Snippets

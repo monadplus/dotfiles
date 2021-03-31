@@ -2,7 +2,7 @@
 
 The following dotfiles were tested on Arch Linux.
 
-For a basic good on how to install Arc Linux: [here](./arch-linux.md).
+How to install Arc Linux: [here](./arch-linux.md).
 
 ## Package Managers on Arch Linux
 
@@ -87,6 +87,8 @@ Clean package cache `/var/cache/pacman/pkg/` ( I have like 3.5GB of pkgs there..
 
 ### Yay
 
+> DEPRECATED (use paru instead)
+
 Arch Linux AUR helper tool. It helps you to install package from PKGBUILD.
 
 Does not require sudo privileges.
@@ -111,18 +113,6 @@ yay -Ps
 TODO (similar to yay)
 
 ## Configuration
-
-The list of configurations directories/files that must be placed in ~/.config are:
-
-- alacritty.yml
-- autostart
-- htop
-- neofetch
-- nvim
-- polybar
-- redshift
-- nixpkgs (the directory)
-- ... TODO
 
 ### systemd
 
@@ -181,9 +171,9 @@ Touchpad is managed through [Touchpad Synaptics](https://wiki.archlinux.org/inde
 You need to install the drivers xf86-input-synpatics and add your configuration at /etc/X11/xorg.conf.d/70-synaptics.conf
 
 ```bash
-sudo ln -s ~/dotfiles/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
-sudo ln -s ~/dotfiles/70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
-sudo ln -s ~/dotfiles/99-killX.conf /etc/X11/xorg.conf.d/99-killX.conf
+sudo ln -s ~/dotfiles/00-keyboard.conf /etc/X11/xorg.conf.d
+sudo ln -s ~/dotfiles/70-synaptics.conf /etc/X11/xorg.conf.d
+sudo ln -s ~/dotfiles/99-killX.conf /etc/X11/xorg.conf.d
 ```
 
 ### [Multihead](https://wiki.archlinux.org/index.php/Multihead)
@@ -215,9 +205,15 @@ EndSection
 
 To get the ids: `$ xrandr -q`
 
+#### Arandr
+
+`arandr` is a GUI for `xrandr`.
+
 #### [Autorandr](https://github.com/phillipberndt/autorandr)
 
-Allows you to easily configure xrandr "profiles" that will activate automatically when you connect/disconnect displays
+Allows you to easily configure xrandr "profiles" that will activate automatically when you connect/disconnect displays.
+
+Install: `sudo pacman -Syu autorandr`
 
 ``` bash
 # 1.
@@ -230,12 +226,13 @@ autorandr --change
 autorandr <profile>
 ```
 
+
 ### TLP
 
 Install:
 
 ``` bash
-sudo pacman -Syy tlp
+sudo pacman -Syu tlp
 sudo systemctl enable tlp.service
 sudo systemctl start tlp.service
 ```
@@ -251,13 +248,11 @@ Configuration options: https://linrunner.de/tlp/settings/
 
 ### Terminal Emulator
 
-There are two options (I recommend alacritty):
-
 - Alacritty
 
 ```bash
 # Everything configured
-ln -s ~/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+ln -s ~/dotfiles/alacritty ~/.config
 ```
 
 - Konsole
@@ -290,7 +285,7 @@ Update the cache: `fc-cache -f -v`
 
 Fonts can be installed from [pacman/AUR](https://wiki.archlinux.org/index.php/Fonts#Font_packages). Example:
 
-- `yay -S ttf-iosevka`
+- `paru -Syu ttf-iosevka`
 
 A list of available fonts
 
@@ -300,8 +295,6 @@ I am currently using doom-emacs as my editor
 
 - vim (nvim): follow [instructions](./nvim/README.md)
 - emacs (doom-emacs): follow [instructions](./emacs/README.md)
-
-The directory `org` contains org files. And should be `ln -s ~/dotfiles/org ~/org`
 
 ### ZSH and oh-my-zsh
 
@@ -320,7 +313,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/themes/pow
 
 ```bash
 # Install
-sudo pacman -Syy gnupg
+sudo pacman -Syu gnupg
 
 # Encrypt
 gpg -c filename  # Insert your password in the prompt
@@ -333,11 +326,11 @@ gpg filename.gpg  # Insert your password in the prompt
 
 gpg-agent is mostly used as daemon to request and cache the password for the keychain.
 
-Configuration file: `~/.gnupg/gpg-agent.conf`
+```bash
+mkdir ~/.gnupg
+ln -s ~/dotfiles/gpg-agent.conf ~/.gnupg
 
-To reload configuration:
-
-``` bash
+# reload and ceck
 $ gpg-connect-agent reloadagent /bye
 OK
 ```
@@ -345,7 +338,7 @@ OK
 ### Zathura
 
 ```bash
-sudo pacman -Syy zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-cb
+sudo pacman -Syu zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-cb
 ```
 
 ### Printers
@@ -354,19 +347,14 @@ sudo pacman -Syy zathura zathura-djvu zathura-pdf-mupdf zathura-ps zathura-cb
 - [Avahi](https://wiki.archlinux.org/index.php/Avahi) (local hostname resolution)
 
 ```bash
-sudo pacman -Syy cups cups-pdf avahi system-config-printer
-sudo systemctl enable org.cups.cupsd.service
-sudo systemctl start org.cups.cupsd.service
+sudo pacman -Syu cups cups-pdf avahi system-config-printer
+sudo systemctl enable cups.service
+sudo systemctl start cups.service
 sudo systemctl enable avahi-daemon.service
 sudo systemctl start avahi-daemon.service
 ```
 
-Show network printers: `avahi-discover` or `avahi-browse --all --ignore-local --resolve --terminate`
-
-`system-config-printer` is a gui manager.
-It automatically discovered the printer and installed the drivers.
-Set the printer as default,
-Allows to see ink levels
+Run `system-config-printer` (gui config tool). It automatically discovered the printer and installed the drivers. Set the printer as default, Allows to see ink levels
 
 List devices: `lpinfo -v`
 
@@ -383,7 +371,7 @@ clipmenu and clipmenud
 ### Redshift
 
 ```bash
-ln -s ~/dotfiles/redshift ~/.config/redshift
+ln -s ~/dotfiles/redshift ~/.config
 ```
 
 ### Java
@@ -391,18 +379,29 @@ ln -s ~/dotfiles/redshift ~/.config/redshift
 See [wiki](https://wiki.archlinux.org/index.php/Java)
 
 ```bash
-sudo pacman -Syy jre-openjdk
-#sudo pacman -Syy jdk-openjdk # For development
-
-# Common packages
-sudo pacman -Syy java-runtime-common
-sudo pacman -Syy java-environment-common
+sudo pacman -Syu jdk8-openjdk
+sudo pacman -Syu jdk11-openjdk
 ```
+
+Use `archlinux-java` to switch between version:
+
+```
+archlinux-java status
+sudo archlinux-java set jdk-8-openjdk
+```
+
+### Scala
+
+```bash
+sudo pacman- Syu scala scala-docs scala-sources sbt maven ammonite
+```
+
+[coc-metals](https://github.com/scalameta/coc-metals) will be automatically installed by vim-plug.
 
 ### Docker
 
 ```bash
-sudo pacman -Syy docker
+sudo pacman -Syu docker
 sudo usermod -aG docker $USER # add user to docker group
 systemctl enable docker.service
 systemctl start docker.service
@@ -421,7 +420,7 @@ Install:
 
 ```bash
 pacman -Syu r
-yay -Syu rstudio-desktop-bin
+paru -Syu rstudio-desktop-bin
 pacman -Syu tk # required by rstudio
 ```
 
@@ -432,7 +431,7 @@ Alternative, use `nix` (see `nixpkgs/config.nix`)
 Install `Deluge` bittorrent client:
 
 ```bash
-sudo pacman -Syy  deluge deluge-gtk
+sudo pacman -Syu  deluge deluge-gtk
 systemctl enable deluged.service
 systemctl start deluged.service
 ```
@@ -448,10 +447,13 @@ systemctl start deluged.service
 - pgcli: better psql
 - lazydocker: terminal ui for docker (be careful, the PKGBUILD uninstall go :rofl:)
 - autorandr
+- maim
+- brightnessctl
+- nomacs
 
 ```bash
-sudo pacman -Syy macho fd obs-studio ncdu aws-cli docker-compose pandoc
-yay -S pgcli lazydocker
+sudo pacman -Syu macho fd obs-studio ncdu aws-cli docker-compose pandoc
+paru -S pgcli lazydocker
 nix-env -iA nixpkgs.haskellPackages.pandoc
 nix-env -iA nixpkgs.haskellPackages.hlint
 ```
@@ -469,7 +471,13 @@ There is an environment prepared to install ghc, cabal, stack and ghcide.
 
 ```bash
 nix-env -f '<nixpkgs>' -iA myHaskellEnv
+nix-env -f '<nixpkgs>' -iA myGhcid
+nix-env -f '<nixpkgs>' -iA myHLS
+
+nix-env -iA nixpkgs.haskellPackages.hoogle
+hoogle generate # this takes some minutes
 ```
+
 
 ### Agda
 
@@ -477,11 +485,19 @@ Libraries are installed like `ial` (see `.agda/`).
 
 Recall to `ln -s ~/dotfiles/.agda  ~/.agda`
 
+```bash
+nix-env -f '<nixpkgs>' -iA myAgda
+```
+
+### psql
+
+`ln -s ~/dotfiles/.psqlrc ~`
+
 ### Latex
 
 ```bash
 # This takes a looooooooong time
-sudo pacman -Syy texlive-most texlive-lang biber
+sudo pacman -Syu texlive-most texlive-lang biber
 ```
 
 To determine which CTAN packages are included in each texlive- package, look up the files `/var/lib/texmf/arch/installedpkgs/<package>_<revnr>.pkgs.`
@@ -535,7 +551,7 @@ There is a lot of free media players.
 I am currently using [vlc](https://wiki.archlinux.org/index.php/VLC_media_player)
 
 ```bash
-sudo pacman -Syy vlc playerctl
+sudo pacman -Syu vlc playerctl
 
 # playerctl provices command line tool to send commands to MPRIS clients (VLC)
 playerctl play-pause --player=vlc
@@ -566,7 +582,7 @@ To install a package `npm install package-name` (-g)
 
 #### issue after installing npm
 
-After installing npm (`sudo pacman -Syy npm`), the `node_modules` was created at `~/dotfiles` (WTF!).
+After installing npm (`sudo pacman -Syu npm`), the `node_modules` was created at `~/dotfiles` (WTF!).
 
 I had to manually move the `node_modules` directory to `$HOME` and change the default configuration:
 
@@ -606,7 +622,7 @@ sudo pip uninstall
 ## Gif Recorder
 
 ``` bash
-yay -S peek
+paru -S peek
 ```
 
 ## Downgrading a package
@@ -669,11 +685,10 @@ sudo grub-mkconfig
 
 When installing xmonad with pacman, it will also install the newest ghc.
 
-If you install a new ghc (i.e. nix-env -iA ghcXXX), calling `xmonad --recompile` will fail.
+If you install a new ghc (i.e. nix-env -iA ghcXXX), calling `xmonad --recompile` will fail because xmonad falls to the new installed ghc without the xmonad libraries. For this reason the `~/.nixpkgs/config.nix` has xmonad libraries installed.
 
-You need to remove the installed ghc
+**Do NOT remove the installed GHC from pacman** since the one installed from nix cannot be found by the root and the computer will not boot. It would be possible to remove it and sourcing nix from root but not sure how to do it.
 
-> Remove xmonad and ghc from arcolinux installation. Use the one from the nix script
 > The default xmonad captures Ctrl+w for screen swapping.
 
 #### Bluetooth: can't connect/remove device
@@ -722,7 +737,7 @@ Error message
 alacrity libGL error: MESA-LOADER: failed to open radeonsi (search paths /usr/lib/dri)
 ```
 
-In order to solve this I reinstalled libGL and mesa `sudo pacman -Syy libGL mesa`
+In order to solve this I reinstalled libGL and mesa `sudo pacman -Syu libGL mesa`
 
 #### stack build error
 
@@ -734,7 +749,7 @@ collect2: error: ld returned 127 exit status
 
 The problem: I forgot to update `lld` after upgrading `llvm` from version 10 to 11.
 
-The fix: upgrade `lld` by `sudo pacman -Syy ldd`.
+The fix: upgrade `lld` by `sudo pacman -Syu ldd`.
 
 #### ipython autocomplete doesn't works
 

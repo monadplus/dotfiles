@@ -5,6 +5,7 @@ DMTERM="alacritty -e"
 keyword=$(man -k . | awk '{$3="-"; print $0}' | dmenu -i -l 20 -p 'Search for:')
 
 if [ "$keyword" ]; then
+  # will automatically exit if the word does not match a man entry
   printf '%s\n' "${keyword}" | awk '{print $2, $1}' | tr -d '()' | xargs $DMTERM man && exit 0
 else
   echo "Program terminated." && exit 0

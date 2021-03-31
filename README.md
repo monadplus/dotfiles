@@ -224,14 +224,11 @@ sudo pacman- Syu scala scala-docs scala-sources sbt maven ammonite
 
 ### R and RStudio IDE
 
-FIXME: I had to install an older version of `R` due to the `icu` issue.
-
 Install:
 
 ```bash
-pacman -Syu r
-paru -Syu rstudio-desktop-bin
-pacman -Syu tk # required by rstudio
+pacman -Syu r gcc-fortran tk # gcc-fortran and tk to install packages.
+paru rstudio-desktop-bin
 ```
 
 Alternative, use `nix` (see `nixpkgs/config.nix`)
@@ -239,7 +236,7 @@ Alternative, use `nix` (see `nixpkgs/config.nix`)
 ### Latex
 
 ```bash
-# This takes a looooooooong time
+# This takes a long time
 sudo pacman -Syu texlive-most texlive-lang biber
 ```
 
@@ -312,7 +309,7 @@ sudo pip uninstall
 <!--****************************************************-->
 <!--****************************************************-->
 
-## Esential Software
+## Essential Software
 
 ### SSH
 
@@ -440,12 +437,6 @@ playerctl play-pause --player=vlc
 
 VLC can stream to chromecast!
 
-## Gif Recorder
-
-``` bash
-paru -S peek
-```
-
 <!--****************************************************-->
 <!--****************************************************-->
 <!--************  Software Miscelaneous ****************-->
@@ -463,6 +454,12 @@ paru -Syu pgcli lazydocker zeal
 
 # nix
 nix-env -iA nixpkgs.haskellPackages.hlint
+```
+
+## Gif Recorder
+
+``` bash
+paru peek
 ```
 
 ### AWS

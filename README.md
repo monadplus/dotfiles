@@ -37,6 +37,8 @@ sudo ln -s ~/dotfiles/70-synaptics.conf /etc/X11/xorg.conf.d
 sudo ln -s ~/dotfiles/99-killX.conf /etc/X11/xorg.conf.d
 ```
 
+I tried to fix mouse speed on powerstation with 50-mouse.conf but it doesn't work.
+
 ### [Multihead](https://wiki.archlinux.org/index.php/Multihead)
 
 #### RandR
@@ -168,6 +170,16 @@ A list of available fonts
 
 ## Programming Languages
 
+### Nix
+
+```bash
+# Install nix for some dependency management
+sudo curl -L https://nixos.org/nix/install | sh
+
+# Global config
+ln -s ~/dotfiles/nixpkgs/ ~/.config/
+```
+
 ### Haskell
 
 There is an environment prepared to install ghc, cabal, stack and ghcide.
@@ -177,12 +189,15 @@ nix-env -f '<nixpkgs>' -iA myHaskellEnv
 nix-env -f '<nixpkgs>' -iA myGhcid
 nix-env -f '<nixpkgs>' -iA myHLS
 
-nix-env -iA nixpkgs.haskellPackages.hoogle
-hoogle generate # this takes some minutes
+nix-env -iA nixpkgs.haskellPackages.hlint
+# hoogle is already installed by myHaskellEnv
+# hoogle is already generated
 ```
 
 ```bash
 cabal configure
+mv ~/.cabal/config ~/.cabal/config-old
+mkdir ~/.stack
 ln -s ~/dotfiles/cabal/config ~/.cabal
 ln -s ~/dotfiles/.stack/config.yaml ~/.stack/
 ln -s ~/dotfiles/.ghci ~/.ghci
@@ -211,13 +226,13 @@ Use `archlinux-java` to switch between version:
 
 ```
 archlinux-java status
-sudo archlinux-java set jdk-8-openjdk
+sudo archlinux-java set java-8-openjdk
 ```
 
 ### Scala
 
 ```bash
-sudo pacman- Syu scala scala-docs scala-sources sbt maven ammonite
+sudo pacman -Syu scala scala-docs scala-sources sbt maven ammonite
 ```
 
 [coc-metals](https://github.com/scalameta/coc-metals) will be automatically installed by vim-plug.
@@ -227,7 +242,7 @@ sudo pacman- Syu scala scala-docs scala-sources sbt maven ammonite
 Install:
 
 ```bash
-pacman -Syu r gcc-fortran tk # gcc-fortran and tk to install packages.
+sudo pacman -Syu r gcc-fortran tk # gcc-fortran and tk to install packages.
 paru rstudio-desktop-bin
 ```
 
@@ -260,6 +275,10 @@ To update just call `install` again.
 
 ### NPM
 
+```bash
+ln -s ~/dotfiles/.npmrc ~
+```
+
 To see the list of intalled packages: `npm list` or `npm -g list`
 
 Check npm directory: `npm root` or `npm -g root`
@@ -278,14 +297,15 @@ $ vim ~/.npmrc # You can also use $ npm config set cwd ""
 
 ### Python
 
+```bash
+sudo pacman -Syu python jedi-language-server python-pandas python-matplotlib python-scikit-learn python-requests python-statsmodels python-scipy python-pycuda python-pylint
+```
+
 It is not recommended to installing packages using `sudo pip install`.
-
-Let `pacman` manage the packages for you. For example: `sudo pacman -Syu python-pandas`
-
 Check which packages where not installed using `pacman`.
 
 ``` bash
-pacman -Qo /usr/lib/python3.8/site-packages/* >/dev/null
+pacman -Qo /usr/lib/pythonXXX/site-packages/* >/dev/null
 ```
 
 To check which packages depend on a package:
@@ -311,11 +331,21 @@ sudo pip uninstall
 
 ## Essential Software
 
+### Git
+
+```bash
+ln -s ~/dotfiles/.gitconfig ~
+```
+
 ### SSH
 
 All information here https://wiki.archlinux.org/index.php/SSH_keys
 
-I recommend using `keychain` (sudo pacman -S keychain) which reuses ssh-agents for all connections. `keychain` is configured in `.bashrc`/`.zshrc`
+I recommend using `keychain` (sudo pacman -S keychain) which reuses ssh-agents for all connections. `keychain` is configured in `.bashrc`/`.zshrc`.
+
+```bash
+ln ~/dotfiles/.ssh/config ~/.ssh
+```
 
 ### [GPG](https://wiki.archlinux.org/index.php/GnuPG)
 
@@ -451,9 +481,6 @@ sudo pacman -Syu fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl aut
 
 # AUR
 paru -Syu pgcli lazydocker zeal
-
-# nix
-nix-env -iA nixpkgs.haskellPackages.hlint
 ```
 
 ## Gif Recorder
@@ -486,7 +513,7 @@ sudo usermod -aG docker $USER # add user to docker group
 systemctl enable docker.service
 systemctl start docker.service
 # (optional) logout and login to reload your permissions
-kill -9 -1
+systemctl restart sddm
 docker info # should work
 ```
 
@@ -512,10 +539,13 @@ ln -s ~/dotfiles/htop/htoprc ~/.config/htop
 ### Cachix
 
 ```bash
-$ nix-env -iA cachix -f https://cachix.org/api/v1/install
-$ cachix use ghcide-nix
+nix-env -iA cachix -f https://cachix.org/api/v1/install
+cachix use monadplus
+cachix authtoken # visit website to generate the token
 ```
 
 ### Psql
 
-`ln -s ~/dotfiles/.psqlrc ~`
+```bash
+ln -s ~/dotfiles/.psqlrc ~
+```

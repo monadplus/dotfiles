@@ -232,5 +232,8 @@ neofetch
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-source "$HOME/.cargo/env"
+if [ -d "$HOME/.cargo" ] ; then
+  source "$HOME/.cargo/env"
+fi
+
 eval "$(direnv hook bash)"

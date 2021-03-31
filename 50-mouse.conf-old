@@ -1,0 +1,13 @@
+Section "InputDevice"
+    Identifier  "Mouse 1"
+    Driver      "mouse"
+    Option      "CorePointer"
+    Option      "ExpectedRate"          "500"
+    Option      "AccelerationScheme"    "none"
+    Option      "AccelerationProfile"   "6"
+    Option      "Protocol"          "Auto"
+    Option      "Resolution"        "1600"
+    Option      "SampleRate"        "500"
+    Option      "SendCoreEvents"    "true"
+    Option      "Sensitivity"       "0.24"
+EndSection

@@ -4,8 +4,8 @@ Index:
 
 - [Configuration](#configuration)
 - [Programming Languages](#programming-languages)
-- [Software: Essential](#software:-essential)
-- [Software: Miscelaneous](#software:-miscelaneous)
+- [Software: Essential](#essential-software)
+- [Software: Miscelaneous](#miscelaneous-software)
 
 The following dotfiles were tested on Arcolinux.
 
@@ -312,7 +312,7 @@ sudo pip uninstall
 <!--****************************************************-->
 <!--****************************************************-->
 
-## Software: Essential
+## Esential Software
 
 ### SSH
 
@@ -452,7 +452,7 @@ paru -S peek
 <!--****************************************************-->
 <!--****************************************************-->
 
-## Software: Miscelaneous
+## Miscelaneous Software
 
 ```bash
 # Official

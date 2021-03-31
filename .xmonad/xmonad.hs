@@ -114,6 +114,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) =
 myKeys conf@(XConfig {XMonad.modMask = modMask}) =
   M.fromList $
     [ ((modMask, xK_g), spawn $ "alacritty -e htop"),
+      ((modMask .|. shiftMask, xK_g), spawn $ "alacritty -e gtop"),
       ((modMask, xK_v), spawn $ "pavucontrol"),
       ((modMask, xK_Return), spawn $ "alacritty"),
       ((modMask .|. shiftMask, xK_Return), spawn $ "thunar"),

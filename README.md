@@ -270,6 +270,14 @@ All information here https://wiki.archlinux.org/index.php/SSH_keys
 
 I recommend using `keychain` (sudo pacman -S keychain) which reuses ssh-agents for all connections. `keychain` is configured in `.bashrc`/`.zshrc`
 
+### AWS
+
+```bash
+ln -s ~/dotfiles/.aws ~
+# The first time may block since it is creating gpg
+cd ~/.aws && gpg credentials.gpg
+```
+
 ### Font
 
 Fonts are installed at
@@ -445,18 +453,26 @@ systemctl start deluged.service
 - rtv: reddit from terminal
 - youtube-dl: youtube download video/audio
 - pgcli: better psql
-- lazydocker: terminal ui for docker (be careful, the PKGBUILD uninstall go :rofl:)
+- lazydocker: terminal ui for docker
 - autorandr
 - maim
 - brightnessctl
+- gtop
 - nomacs
 
 ```bash
 sudo pacman -Syu macho fd obs-studio ncdu aws-cli docker-compose pandoc
 paru -S pgcli lazydocker
-nix-env -iA nixpkgs.haskellPackages.pandoc
 nix-env -iA nixpkgs.haskellPackages.hlint
 ```
+
+### htop
+
+```bash
+rm ~/.config/htop/htoprc
+ln -s ~/dotfiles/htop/htoprc ~/.config/htop
+```
+
 
 ### Cachix
 

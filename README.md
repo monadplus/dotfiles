@@ -1,5 +1,12 @@
 # Arch Linux: Dotfiles
 
+Index:
+
+- [Configuration](#configuration)
+- [Programming Languages](#programming-languages)
+- [Software: Essential](#software:-essential)
+- [Software: Miscelaneous](#software:-miscelaneous)
+
 The following dotfiles were tested on Arcolinux.
 
 - Issues & Solutions: [here](./issuesAndSolutions.md)
@@ -8,6 +15,7 @@ The following dotfiles were tested on Arcolinux.
 - Pacman: [here](./pacman.md)
 - Systemd: [here](./systemd.md)
 - Ripgrep: [here](./ripgrep.md)
+
 
 <!--****************************************************-->
 <!--****************************************************-->

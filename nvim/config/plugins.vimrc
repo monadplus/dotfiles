@@ -13,7 +13,7 @@ let g:tex_flavor = 'latex'
 
 "" Agda
 au BufNewFile,BufRead *.agda setf agda
-let g:agda_extraincpaths = ["/home/arnau/projects/agda/ial"]
+"let g:agda_extraincpaths = ["/home/arnau/projects/agda/ial"]
 
 ""vim-ctrlspace
 let g:CtrlSpaceDefaultMappingKey = "<C-space> " "The last whitespace is intentional

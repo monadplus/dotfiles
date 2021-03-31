@@ -124,7 +124,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((modMask, xK_r), spawn $ "polybar-msg cmd restart"),
       ((modMask .|. shiftMask, xK_r), spawn $ "xmonad --recompile && xmonad --restart"),
       ((modMask .|. shiftMask, xK_p), spawn $ "pamac-manager"),
-      ((modMask, xK_c), spawn $ "conky-toggle"),
+      ((modMask, xK_c), spawn $ "conky"),
+      ((modMask .|. shiftMask, xK_c), spawn $ "conky-toggle"),
       -- dmscripts
       ((modMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmconf"),
       ((modMask .|. shiftMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmsearch"),

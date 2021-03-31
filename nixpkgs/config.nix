@@ -56,8 +56,8 @@
       myHLS = self.haskell-language-server.override { supportedGhcVersions = [ "884" ]; };
 
       myAgda = self.agda.withPackages (p: [ p.standard-library
-                                            # TODO
-                                            #iowa-stdlib
+                                            # TODO still broken on 31/03/2021
+                                            #p.iowa-stdlib
                                           ]);
 
       # Using the one from pacman

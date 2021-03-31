@@ -1062,6 +1062,8 @@ label = %output:0:150%
 
 ################################################################################
 
+# $ sensors for sensors temperature
+
 [module/temperature1]
 ;https://github.com/jaagr/polybar/wiki/Module:-temperature
 type = internal/temperature
@@ -1069,7 +1071,7 @@ type = internal/temperature
 ; To list all the zone types, run
 ; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
 ; Default:80
-interval=3
+interval=5
 thermal-zone = 0
 
 ; Full path of temperature sysfs path
@@ -1077,7 +1079,8 @@ thermal-zone = 0
 ; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
 ; to find path to desired file
 ; Default reverts to thermal zone setting
-hwmon-path = /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon3/temp1_input
+; The problem is that the path changes after each boot.
+;hwmon-path = /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon3/temp1_input
 
 base-temperature = 50
 warn-temperature = 80

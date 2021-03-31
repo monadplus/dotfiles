@@ -15,9 +15,9 @@ fi
 
 # Path to your oh-my-zsh installation.
 #installation via script from github
-#export ZSH="/home/$USER/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 #installation via yay -S oh-my-zsh-git
-export ZSH=/usr/share/oh-my-zsh
+#export ZSH=/usr/share/oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -96,9 +96,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='emacs -nw'
+  export EDITOR='nvim -nw'
 else
-  export EDITOR='emacs'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -138,10 +138,6 @@ fi
 # Local npm modules
 if [ -d $(npm bin) ] ;
   then PATH=$(npm bin):$PATH
-fi
-
-if [ -d "$HOME/Intellij/bin" ] ;
-  then PATH="$HOME/Intellij/bin:$PATH"
 fi
 
 export DOOMDIR=$HOME/.doom.d

@@ -120,8 +120,8 @@ font-1 = "FontAwesome:size=13;0"
 ;font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh date weather
-modules-center = wired-network wireless-network networkspeeddown networkspeedup
-modules-right = pavolume backlight battery battery_left memory2 cpu2
+modules-center = wired-network networkspeeddown networkspeedup
+modules-right = pavolume memory2 cpu2
 ; temperature2 (removed because it has a bug in the bash script)
 ; Not enough bash knowledge to fix it
 

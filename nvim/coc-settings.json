@@ -1,6 +1,6 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["rust"],
-  "rust-analyzer.serverPath": "~/.cargo/bin/rust-analyzer",
+  "jedi.executable.command": "/usr/bin/jedi-language-server",
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",

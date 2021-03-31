@@ -55,7 +55,12 @@ echo 'eval "$(direnv hook bash)"' >> ~/.bashrc # echo 'eval "$(direnv hook zsh)"
 ```bash
 # Install rustup toolchain
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup component add rust-analyzer
+
+# rustup +nightly component add rust-analyzer-preview
+# Since the only option is from nightly, I just do not install it
+# and let coc install it by itself.
+
+# Alternative you could install it via pacman
 
 # Execute inside neovim
 :CocInstall coc-rust-analyzer

@@ -312,9 +312,7 @@ echo $SHELL # check shell is zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" # Install oh-my-zsh
 # Install a powerline font: https://github.com/powerline/fonts
 ln -s ~/dotfiles/.zshrc ~/.zshrc # link
-sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-# ~/.zshrc
-ZSH_THEME="powerlevel10k/powerlevel10k"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/themes/powerlevel10k
 # Oppen the shell and follow the powerlevel10k wizard
 ```
 

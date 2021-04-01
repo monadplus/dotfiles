@@ -240,6 +240,9 @@ alias find="fd"
 
 alias libs="ldconfig -p"
 
+# ssh (X11 forward)
+alias ssh-home="ssh -Y arnau@81.40.34.158"
+
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()

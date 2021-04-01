@@ -86,7 +86,7 @@ height = 30
 radius = 0.0
 fixed-center = true
 bottom = false
-separator = |
+separator =
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -104,8 +104,8 @@ border-color = #00000000
 padding-left = 0
 padding-right = 1
 
-module-margin-left = 3
-module-margin-right = 3
+module-margin-left = 2
+module-margin-right = 2
 
 ; Enable support for inter-process messaging
 ; See the Messaging wiki page for more details.
@@ -121,9 +121,7 @@ font-1 = "FontAwesome:size=13;0"
 
 modules-left = ewmh date weather
 modules-center = wired-network wireless-network networkspeeddown networkspeedup
-modules-right = pavolume backlight temperature1 battery battery_left memory2  cpu2
-; temperature2 (removed because it has a bug in the bash script)
-; Not enough bash knowledge to fix it
+modules-right = pavolume backlight temperature1 battery battery_left memory2  cpu2 powermenu
 
 tray-detached = false
 tray-offset-x = 0
@@ -1331,10 +1329,10 @@ format-background = ${colors.background}
 
 [module/powermenu]
 type = custom/text
-content = 
-content-padding = 2
-content-background = ${color.acolor}
-content-foreground = ${color.fg}
+content =  Power
+content-padding = 1
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
 click-left = $HOME/.config/polybar/scripts/sysmenu.sh
 click-right = $HOME/.config/polybar/scripts/sysmenu.sh
 tail = true

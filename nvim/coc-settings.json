@@ -1,6 +1,7 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["rust"],
+  "coc.preferences.formatOnSaveFiletypes": ["rust", "scala"],
   "jedi.executable.command": "/usr/bin/jedi-language-server",
+  "metals.statusBarEnabled": true,
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",

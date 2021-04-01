@@ -166,15 +166,11 @@ endfunction
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
 " Symbol renaming.
 " nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-"xmap <leader>f  <Plug>(coc-format-selected)
-"nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
 
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
@@ -183,3 +179,22 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" Notify coc.nvim that <enter> has been pressed.
+" Currently used for the formatOnType feature.
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Toggle panel with Tree Views
+"nnoremap <silent> <space>t :<C-u>CocCommand metals.tvp<CR>
+"
+" Toggle Tree View 'metalsPackages'
+"nnoremap <silent> <space>tp :<C-u>CocCommand metals.tvp metalsPackages<CR>
+"
+" Toggle Tree View 'metalsCompile'
+"nnoremap <silent> <space>tc :<C-u>CocCommand metals.tvp metalsCompile<CR>
+"
+" Toggle Tree View 'metalsBuild'
+"nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
+" Reveal current current class (trait or object) in Tree View 'metalsPackages'
+"
+"nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsPackages<CR>

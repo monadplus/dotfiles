@@ -278,7 +278,12 @@ paru -Syu bloop bloop-systemd
 systemctl --user enable bloop
 systemctl --user start bloop
 systemctl --user status bloop
+
+# At 04/2021 the bloop server from AUR is outdated
+systemctl --user stop bloop
+systemctl --user disable bloop
 ```
+
 
 [coc-metals](https://github.com/scalameta/coc-metals) will be automatically installed by vim-plug.
 

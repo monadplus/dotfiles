@@ -82,7 +82,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0 " closed on open, not displayed until the file is saved
 let g:syntastic_check_on_wq = 0
 " Do not run syntastic (probably there is an lsp with syntaxi check)
-let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["haskell", "hs", "rust", "rs", "tex"] }
+let g:syntastic_mode_map = { "mode": "active", "passive_filetypes": ["haskell", "hs", "rust", "rs", "tex", "scala", "sc"] }
 
 let g:syntastic_python_pylint_quiet_messages = { "level" : ["warning"] }
 
@@ -122,6 +122,8 @@ let g:ormolu_options=["-o -XTypeApplications"]
 let g:ormolu_disable=1 "Don't format on save
 
 """" COC
+au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
+
 "Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -141,7 +143,9 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
+" :Format current buffer
 command! -nargs=0 Format :call CocAction('format')
+" Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 

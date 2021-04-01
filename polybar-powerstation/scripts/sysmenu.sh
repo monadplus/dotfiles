@@ -37,12 +37,12 @@ LIGHT_GREEN="#7cb342"
 MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System :' \
 -hide-scrollbar true \
 -bw 0 \
--lines 4 \
+-lines 6 \
 -line-padding 10 \
 -padding 20 \
 -width 15 \
--xoffset -68 -yoffset -70 \
--location 5 \
+-xoffset 0 -yoffset -70 \
+-location 0 \
 -columns 1 \
 -show-icons -icon-theme "Papirus" \
 -font "Fantasque Sans Mono 10" \
@@ -51,12 +51,14 @@ MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System :' \
 -color-normal "$BACKGROUND_ALT,$FOREGROUND,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 -color-active "$BACKGROUND,$MAGENTA,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 -color-urgent "$BACKGROUND,$YELLOW,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
-<<< "  Lock|  Logout|  Reboot|  Shutdown")"
+<<< "🔒 Lock|  Logout|😴  Suspend|😴  Hibernate|⏻  Reboot|⏻  Shutdown")"
 case "$MENU" in
   *Lock) i3lock ;;
-  *Logout) openbox --exit;;
+  *Logout) systemctl restart sddm ;;
+  *Suspend) systemctl suspend ;;
+  *Hibernate) systemctl hibernate ;;
   *Reboot) systemctl reboot ;;
-  *Shutdown) systemctl -i poweroff
+  *Shutdown) systemctl poweroff
 esac
 
 # More Options

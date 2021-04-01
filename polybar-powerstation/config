@@ -86,7 +86,7 @@ height = 30
 radius = 0.0
 fixed-center = true
 bottom = false
-separator = |
+separator =
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -102,10 +102,10 @@ line-color = #f00
 border-color = #00000000
 
 padding-left = 0
-padding-right = 1
+padding-right = 0
 
-module-margin-left = 3
-module-margin-right = 3
+module-margin-left = 2
+module-margin-right = 2
 
 ; Enable support for inter-process messaging
 ; See the Messaging wiki page for more details.
@@ -113,20 +113,20 @@ enable-ipc = true
 
 ; https://github.com/polybar/polybar/wiki/Fonts
 ; Mononoki and Iosevka look like shit.
-font-0 = "Noto Sans:size=10;0"
 font-1 = "FontAwesome:size=13;0"
-;font-2 = "Noto Sans:size=10;0"
-;font-3 = "Noto Sans Mono:size=10;0"
-;font-4 = "FontAwesome5Brands:size=13;0"
+font-0 = "Noto Sans:size=10;0"
+font-2 = "Noto Sans:size=10;0"
+font-3 = "Noto Sans Mono:size=10;0"
+font-4 = "FontAwesome5Brands:size=13;0"
 
 modules-left = ewmh date weather
-modules-center = wired-network networkspeeddown networkspeedup
-modules-right = pavolume memory2 cpu2 system-cpu-temppercore  
+modules-center = wired-network networkspeeddown networkspeedup pub-ip
+modules-right = pavolume memory2 cpu2 system-cpu-temppercore powermenu
 
 tray-detached = false
 tray-offset-x = 0
 tray-offset-y = 0
-tray-padding = 2
+tray-padding = 5
 tray-maxsize = 20
 tray-scale = 1.0
 tray-position = right
@@ -1332,10 +1332,10 @@ format-background = ${colors.background}
 
 [module/powermenu]
 type = custom/text
-content = 
-content-padding = 2
-content-background = ${color.acolor}
-content-foreground = ${color.fg}
+content =  Power
+content-padding = 1
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
 click-left = $HOME/.config/polybar/scripts/sysmenu.sh
 click-right = $HOME/.config/polybar/scripts/sysmenu.sh
 tail = true

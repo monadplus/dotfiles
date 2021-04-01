@@ -557,7 +557,7 @@ VLC can stream to chromecast!
 
 ```bash
 # Official
-sudo pacman -Syu fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl autorandr maim brightnessctl gtop nomacs
+sudo pacman -Syu exa ripgrep fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl autorandr maim brightnessctl gtop nomacs
 
 # AUR
 paru -Syu pgcli lazydocker zeal
@@ -607,6 +607,12 @@ Install `Deluge` bittorrent client:
 sudo pacman -Syu  deluge deluge-gtk
 systemctl enable deluged.service
 systemctl start deluged.service
+```
+
+### Conky
+
+```bash
+ln -s ~/dotfiles/.conkyrc ~
 ```
 
 ### Htop

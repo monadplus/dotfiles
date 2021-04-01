@@ -143,6 +143,45 @@ For example, to disable beep (laptop I guess):
 > blacklist pcspkr
 ```
 
+### Display Manager
+
+I have used in the past `lightdm` and I am currenty using `sddm`.
+
+```bash
+sudo ln -s ~/dotfiles/sddm/sddm.conf /etc/
+sudo ln -s ~/dotfiles/sddm/archlinux-simplyblack /usr/share/sddm/themes
+```
+
+### Window Manager
+
+- `xmonad`:
+
+```bash
+mv ~/.xmonad ~/.xmonad-old
+ln -s ~/dotfiles/.xmonad ~
+
+# Check if xmonad compiles, otherwise you would have to edit ~/.xmonad/xmonad.hs
+xmonad --recompile
+
+# Check ~/.xmonad/scripts/autostart.sh
+
+# This script must not exit otherwise xmonad will fail to run.
+# This script is responsible for running all userspace programs and polybar
+```
+
+### Status Bar
+
+- `polybar`:
+
+```bash
+mv ~/.config/polybar ~/.config/polybar-old
+ln -s ~/dotfiles/polybar ~/.config/
+
+# Check ~/.config/polybar/launch.sh
+# Run it and check if it works.
+# Otherwise, fix it by editing ~/.config/polybar/config
+```
+
 ### Font
 
 Fonts are installed at

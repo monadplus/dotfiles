@@ -274,6 +274,10 @@ sudo archlinux-java set java-8-openjdk
 
 ```bash
 sudo pacman -Syu scala scala-docs scala-sources sbt maven ammonite
+paru -Syu bloop bloop-systemd
+systemctl --user enable bloop
+systemctl --user start bloop
+systemctl --user status bloop
 ```
 
 [coc-metals](https://github.com/scalameta/coc-metals) will be automatically installed by vim-plug.

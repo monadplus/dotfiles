@@ -179,7 +179,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl set +10%"),
       ((0, xF86XK_MonBrightnessDown), spawn "brightnessctl set 10%-"),
       -- Session Lock
-      ((modMask .|. shiftMask, xK_s), spawn "kill -9 -1"),
+      ((modMask .|. shiftMask, xK_s), spawn "systemctl restart sddm"),
       -- TODO set screensaver daemon
       --((modMask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off"),
       -- Screenshots

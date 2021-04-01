@@ -388,6 +388,42 @@ I recommend using `keychain` (sudo pacman -S keychain) which reuses ssh-agents f
 ln ~/dotfiles/.ssh/config ~/.ssh
 ```
 
+### OpenSSH
+
+SSH server.
+
+- private_ip = `ifconfig`
+- public_ip = https://www.whatsmyip.org/
+
+```bash
+sudo pacman -Syu ssh openssh
+systemctl enable sshd.service
+systemctl start sshd.service
+systemctl status sshd.service
+# check if working
+ssh localhost
+
+# copy configuration
+sudo ln -s ~/dotfiles/sshd_config /etc/ssh/
+```
+
+Now, access to your router and add port forwarding (TPC, port=22, ip=private_ip).
+
+Now, you should be able to ssh from outside your network by `ssh arnau@public ip` (the public ip can be retrieved from any website).
+
+Adding ssh keys. On the **client**:
+
+```bash
+cd ~/.ssh
+ssh-keygen -t rsa -b 4096
+ssh-copy-id -i id_rsa.pub arnau@private_ip
+
+# now ssh connection should use public/private key
+ssh arnau@private_ip
+```
+
+You can forward X11 (not done yet): https://wiki.archlinux.org/index.php/OpenSSH#X11_forwarding
+
 ### [GPG](https://wiki.archlinux.org/index.php/GnuPG)
 
 ```bash

@@ -148,8 +148,10 @@ For example, to disable beep (laptop I guess):
 I have used in the past `lightdm` and I am currenty using `sddm`.
 
 ```bash
+sudo rm /etc/sddm.conf
 sudo ln -s ~/dotfiles/sddm/sddm.conf /etc/
 sudo ln -s ~/dotfiles/sddm/archlinux-simplyblack /usr/share/sddm/themes
+sudo ln -s ~/dotfiles/sddm/faces/arnau.face.icon /usr/share/sddm/faces
 ```
 
 ### Window Manager
@@ -417,8 +419,11 @@ OK
 - Alacritty
 
 ```bash
-# Everything configured
+# powerstation
 ln -s ~/dotfiles/alacritty ~/.config
+# laptop
+mkdir ~/.config/alacritty
+ln -s ~/dotfiles/alacritty/alacritty-laptop.yml ~/.config/alacritty/alacritty.yml
 ```
 
 - Konsole

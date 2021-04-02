@@ -16,11 +16,8 @@ The following dotfiles were tested on Arcolinux.
 - Systemd: [here](./systemd.md)
 - Ripgrep: [here](./ripgrep.md)
 
-
-<!--****************************************************-->
 <!--****************************************************-->
 <!--**************** Configuration *********************-->
-<!--****************************************************-->
 <!--****************************************************-->
 
 ## Configuration
@@ -204,13 +201,10 @@ Fonts can be installed from [pacman/AUR](https://wiki.archlinux.org/index.php/Fo
 A list of available fonts
 
 <!--****************************************************-->
-<!--****************************************************-->
 <!--************  Programming Languages ****************-->
-<!--****************************************************-->
 <!--****************************************************-->
 
 ## Programming Languages
-
 ### Nix
 
 ```bash
@@ -247,12 +241,21 @@ ln -s ~/dotfiles/.ghci ~/.ghci
 ### Agda
 
 Libraries are installed like `ial` (see `.agda/`).
+Recall to `ln -s ~/dotfiles/.agda  ~/.agda`.
 
-Recall to `ln -s ~/dotfiles/.agda  ~/.agda`
+I am currently using the one from nix since I also use the ghc from nix.
+With the one from pacman, it fails to compile on emacs due to an IEE error.
 
 ```bash
-nix-env -f '<nixpkgs>' -iA myAgda
+# Pacman
+sudo pacman -Syu agda agda-stdlib
+
+# Nix
+nix-env -f '<nixpkgs>' -iA myAgda # IAL is broken
+# Uninstall
+nix-env -f '<nixpkgs>' -e '.*agda.*'
 ```
+
 
 ### Java
 
@@ -287,7 +290,7 @@ systemctl --user disable bloop
 
 [coc-metals](https://github.com/scalameta/coc-metals) will be automatically installed by vim-plug.
 
-### R and RStudio IDE
+### R
 
 Install:
 
@@ -323,7 +326,7 @@ Seems to be installed at `/usr/include/llvm` and `/usr/lib/libLLVM-11.so`
 
 To update just call `install` again.
 
-### NPM
+### Node
 
 ```bash
 ln -s ~/dotfiles/.npmrc ~
@@ -374,10 +377,31 @@ sudo pip uninstall
 ```
 
 <!--****************************************************-->
-<!--****************************************************-->
 <!--*************  Software Essential ******************-->
 <!--****************************************************-->
-<!--****************************************************-->
+
+### Rust
+
+```bash
+# Install rustup toolchain
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup component add rustfmt-preview
+
+# The handicap of this is that +nightly is not added to the env.
+rustup +nightly component add rust-analyzer-preview
+
+# I recommend to install it manually
+mkdir -p ~/.local/bin/
+curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o ~/.local/bin/rust-analyzer
+chmod +x ~/.local/bin/rust-analyzer
+
+# Alternative you could install it via pacman
+sudo pacman -Syu rust rust-analyzer
+```
+
+### C
+
+Neovim requires installing [ccls](https://github.com/MaskRay/ccls/wiki):`sudo pacman -Syu ccls`.
 
 ## Essential Software
 
@@ -557,25 +581,17 @@ playerctl play-pause --player=vlc
 VLC can stream to chromecast!
 
 <!--****************************************************-->
-<!--****************************************************-->
-<!--************  Software Miscelaneous ****************-->
-<!--****************************************************-->
+<!--************  Software Miscellaneous ****************-->
 <!--****************************************************-->
 
-## Miscelaneous Software
+## Miscellaneous Software
 
 ```bash
 # Official
 sudo pacman -Syu exa ripgrep fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl autorandr maim brightnessctl gtop nomacs
 
 # AUR
-paru -Syu pgcli lazydocker zeal
-```
-
-## Gif Recorder
-
-``` bash
-paru peek
+paru -Syu pgcli lazydocker direnv
 ```
 
 ### AWS
@@ -644,3 +660,9 @@ cachix authtoken # visit website to generate the token
 ```bash
 ln -s ~/dotfiles/.psqlrc ~
 ```
+### Gif Recorder
+
+``` bash
+paru peek
+```
+

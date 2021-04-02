@@ -23,9 +23,9 @@
         auth-sources '("~/.authinfo.gpg" "~/.emacs.d/.local/cache/org-gcal/tolen.gpg")
         auth-source-cache-expiry nil)               ; default is 7200 (2h)
 
-  (setq doom-font (font-spec :family "Iosevka" :size 15 :weight 'medium )
-        doom-variable-pitch-font (font-spec :family "Iosevka" :size 14 :weight 'regular) ;; e.g. neotree font
-        doom-big-font (font-spec :family "Iosevka" :size 20 :weight 'regular)) ; doom-big-font-mode
+  (setq doom-font (font-spec :family "hasklig" :size 15 :weight 'medium )
+        doom-variable-pitch-font (font-spec :family "hasklig" :size 14 :weight 'regular) ;; e.g. neotree font
+        doom-big-font (font-spec :family "hasklig" :size 20 :weight 'regular)) ; doom-big-font-mode
 
   (setq-default line-spacing 1
                 major-mode 'org-mode) ; default major mode
@@ -76,16 +76,11 @@
   ; When Emacs is started under X11 and not directly from a terminal these variables are not set.
   (keychain-refresh-environment)
 
-  ;; force emacs to use ~/.zshrc path and aliases
-  ;; FIXME the path is not property splited (adds garbage)
-  ;; (let ((path (shell-command-to-string ". ~/.zshrc; echo -n $PATH")))
-  ;;   (setenv "PATH" path)
-  ;;   (setq exec-path
-  ;;         (append
-  ;;          (split-string-and-unquote path ":")
-  ;;          exec-path)))
+  ; This sets $MANPATH, $PATH and exec-path from your shell, but only when executed in a GUI frame on OS X and Linux.
+  (when (memq window-system '(mac ns x))
+        (exec-path-from-shell-initialize))
 
-  ; add missing paths to PATH
+  ; Adds `npm bin' to exec-path
   (defun string-trim-final-newline (string)
     (let ((len (length string)))
       (cond
@@ -93,6 +88,7 @@
         (substring string 0 (- len 1)))
        (t string))))
   (add-to-list 'exec-path (string-trim-final-newline (shell-command-to-string "npm bin")))
+
 
   ;; Transparency
   (defun toggle-transparency ()
@@ -136,8 +132,8 @@
   (add-hook 'pre-command-hook 'show-workspaces) ;; Adding this will prevent the workspaces from hiding
 
   (after! which-key
-    ;; (which-key-setup-minibuffer)
-    (which-key-setup-side-window-bottom)
+    (which-key-setup-minibuffer)
+    (setq which-key-show-early-on-C-h nil)
     (setq which-key-idle-delay 0.5)
     (setq which-key-idle-secondary-delay 0.05)
     (setq which-key-show-transient-maps t))
@@ -204,6 +200,8 @@
          :desc "vterm in a new workspace"
          "t" (cmd! (+workspace/new "vterm" nil)
                    (+vterm/here nil))))
+  (after! vterm
+    (map! :map vterm-mode-map :i "C-v" #'vterm-yank))
 
   (map! :map evil-normal-state-map "g b" #'browse-url))
 
@@ -374,6 +372,8 @@
           :localleader
             :desc "restart lsp" "R" 'lsp-restart-workspace))
 
+  ; ligatures are automatically activated
+
   ; hlint
   ;(use-package! hs-lint)
   ;(map! (:after hs-lint
@@ -381,17 +381,11 @@
          ;:localleader
            ;:desc "hlint" "?" #'hs-lint))
 
-  ;;  * stack-ghc (because it only works on stack projects and has priority over haskell-ghc)
-  ;;  * lsp (because https://github.com/hlissner/doom-emacs/issues/2060)
   (add-hook 'haskell-mode-hook ( lambda () (setq-default flycheck-disabled-checkers '(haskell-stack-ghc haskell-ghc haskell-hlint)) ))
   (defun haskell-mode-leave ()
     (when (eq major-mode 'haskell-mode)
       (setq-default flycheck-disabled-checkers '())))
   (add-hook 'change-major-mode-hook #'haskell-mode-leave)
-
-  ;; TODO
-  ;; https://www.flycheck.org/en/latest/user/syntax-checkers.html#flycheck-checker-chains
-  ;; (flycheck-add-next-checker 'lsp 'haskell-hlint)
 
   (map! :map haskell-mode-map
         :n "C-j" 'flycheck-next-error
@@ -399,6 +393,28 @@
         :n "M-n" 'next-error
         :n "M-p" 'previous-error
         :n "M-RET" 'flycheck-buffer))
+
+(defsection rust-mode
+  "Rust."
+        (after! rustic
+        (setq rustic-lsp-server 'rust-analyzer)))
+
+
+(defsection python-mode
+  "Python."
+
+  ;; NOTE If you find yourself using a lot of pipenv, just uncomment these lines.
+  ;;
+  ;; (defun pipenv-projectile-lsp ()
+  ;;   "Projectile will call pipenv-activate automatically."
+  ;;   (pipenv-projectile-after-switch-default)
+  ;;   (run-at-time 1.5 nil #'lsp-restart-workspace))
+  ;; (setq pipenv-with-projectile t)
+  ;; (setq pipenv-projectile-after-switch-function #'pipenv-projectile-lsp)
+
+  (map! :map python-mode-map
+        :localleader
+        :desc "restart lsp" "r" 'lsp-restart-workspace))
 
 (defsection org-mode
   "Org."

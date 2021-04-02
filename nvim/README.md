@@ -1,10 +1,10 @@
 # Neovim
 
-### Keybindings
+## Keybindings
 
 See [keybindings](./keybindings.md)
 
-### Installation
+## Installation
 
 After this steps everything should work out of the box except some languages that require external tooling.
 
@@ -28,52 +28,31 @@ nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall' # Go for a coffee or
 echo "alias vim='nvim'" >> ~/.bashrc
 ```
 
+## Coc (LSP)
+
 The following steps are optional and only needed for specific languages.
 
-#### direnv
+### Rust
 
-```bash
-# direnv
-paru direnv
-echo 'eval "$(direnv hook bash)"' >> ~/.bashrc # echo 'eval "$(direnv hook zsh)"' >> ~/.bashrc
-```
-
-#### python
-
-- LSP: [coc-jedi](https://github.com/pappasam/coc-jedi) (can also lint with an extra tool).
-- Linter: [syntastic](https://github.com/vim-syntastic/syntastic) + `pylint`.
-
-`coc-jedi` is automatically installed through vim-plug (no need to run anything like in rust). Same for `syntastic`.
-
-#### rust
-
-```bash
-# Install rustup toolchain
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# rustup +nightly component add rust-analyzer-preview
-# Since the only option is from nightly, I just do not install it
-# and let coc install it by itself.
-
-# Alternative you could install it via pacman
-sudo pacman -Syu rust rust-analyzer
-
+``` bash
 # Execute inside neovim
 :CocInstall coc-rust-analyzer
 ```
 
-#### haskell
+### Python
 
-There are several alternatives to install `ghc`/`cabal`/`stack`. The recommended one is [ghcup](https://www.haskell.org/ghcup/).
-I use [nix](https://nixos.org/) because it is not haskell's specific.
+`coc-jedi` is automatically installed through vim-plug (no need to run anything like in rust). 
+Same for `syntastic`.
 
-#### c/c++
+### Haskell
 
-Requires installing [ccls](https://github.com/MaskRay/ccls/wiki).
+Automatically installed.
 
-Arch linux includes a pacman package `sudo pacman -Syu ccls`.
+### c/c++
 
-#### Troubleshooting
+Automatically installed.
+
+## Troubleshooting
 
 __Duplicates entries on `coc`__
 

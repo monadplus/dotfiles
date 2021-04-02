@@ -49,7 +49,7 @@ fi
 picom --config $HOME/.xmonad/scripts/picom.conf & # Window Composer
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # TODO
 /usr/lib/xfce4/notifyd/xfce4-notifyd & # Notifications as pop-ups - xfce4-notifyd-config
-redshift & # Screen color warm
+# redshift & # Screen color warm
 udiskie & # Auto-mount disk
 # run xfce4-power-manager & # xfce4-power-manager-settings
 # run volumeicon & # There is already the polybar icon
@@ -63,3 +63,5 @@ run dropbox &
 run enpass &
 run thunderbird &
 run firefox &
+
+xset r rate 265 40

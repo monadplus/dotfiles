@@ -8,8 +8,8 @@
     let
       self = super.pkgs;
 
-      # TODO
-      compilerVersion = "ghc884"; # "ghc8102";
+      # TODO ghc901 fails..
+      compilerVersion = "ghc884";
 
       # TODO not pinned
       githubTarball = owner: repo: rev:

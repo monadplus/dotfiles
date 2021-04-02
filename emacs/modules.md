@@ -24,7 +24,7 @@ Word motions:
 
 - word: `aw` or `iw`
 - sentence: `as` or `is`
-- paragraph: `as` or `is`
+- paragraph: `ap` or `ip`
 - single/double quote: `a"`/`a'`/`a\``
 - [] block: `a]` or `i]`
 - () block: `a)` or `i)`
@@ -116,13 +116,13 @@ After editing, the search is remembered, so you can press `; or ,` again.
 
 Make a visual selection `v` or `V`, and then hit `*`
 
+## nix
+
+install nixfmt: `nix-env -iA nixpkgs.nixfmt`
+
 ## haskell
 
-- Ormolu format: `C-c f`
-- Hlint: `C-c l`
-- doc: `g ?`
-- goto definition: `g ]`
-- restart lsp: `g r`
+TODO
 
 ## rgb
 
@@ -469,14 +469,11 @@ If the pdf was produced with LaTeX you can jump to the source location
 
 ### sh 
 
-There was a conflict: `shellcheck: error while loading shared libraries: libHSaeson-1.5.4.0-FhBZDiEN0KrGTSW2AlZ5Kj-ghc8.10.2.so: cannot open shared object file: No such file or directory` so I installed it through nix `nix-env -i shellcheck`
-
 LSP:
 
-- install [bash-language-server](https://github.com/bash-lsp/bash-language-server)
-- add flag (sh +lsp)
+- install [bash-language-server](https://github.com/bash-lsp/bash-language-server): `sudo pacman -Syu bash-language-server`
 
-## grammar
+## Grammar
 
 (Disabled) Too much errors. It may be useful for writing a document or a book but not for org/markdown files.
 

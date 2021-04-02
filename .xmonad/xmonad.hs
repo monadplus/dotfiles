@@ -125,6 +125,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((modMask .|. shiftMask, xK_p), spawn $ "pamac-manager"),
       ((modMask, xK_c), spawn $ "conky"),
       ((modMask .|. shiftMask, xK_c), spawn $ "conky-toggle"),
+      ((modMask, xK_l), spawn $ "$HOME/dotfiles/i3lock.sh"),
       -- dmscripts
       ((modMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmconf"),
       ((modMask .|. shiftMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmsearch"),

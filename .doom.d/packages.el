@@ -41,23 +41,17 @@
 (package! ghcid
   :recipe (:host github :repo "monadplus/ghcid"))
 
-;; FIXME local is not updating WTF
-;; (package! ghcid
-;;   :recipe (:local-repo "~/elisp/ghcid/"))
+(package! exec-path-from-shell
+  :recipe (:host github :repo "purcell/exec-path-from-shell"))
 
 ;(package! hlint
   ;:recipe (:local-repo "~/elisp/hs-lint/"))
 
 (package! ormolu)
+
 (package! keychain-environment) ; FIX the bug with keychain not found https://github.com/tarsius/keychain-environment
-;(package! magithub)
+
 ;;(package! iedit) ; included with multi-cursor
-
-;; https://github.com/daichirata/emacs-rotate
-
-;; https://github.com/Mstrodl/elcord
-
-;; https://github.com/dandavison/delta/
 
 ;; TODO Not working
 ;; (package! doom-snippets :disable t)
@@ -67,13 +61,13 @@
 (package! agda-input
   :recipe (:host github
            :repo "agda/agda"
-           :branch "release-2.6.1.2"
+           :branch "release-2.6.1.3"
            :files ("src/data/emacs-mode/agda-input.el")
            :nonrecursive t))
 
 (package! agda2-mode
   :recipe (:host github
            :repo "agda/agda"
-           :branch "release-2.6.1.2"
+           :branch "release-2.6.1.3"
            :files ("src/data/emacs-mode/*.el" (:exclude "agda-input.el"))
            :nonrecursive t))

@@ -26,14 +26,13 @@ Then, install `Doom Emacs`:
 
 ```bash
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-# accept all-the-incon's fonts
+~/.emacs.d/bin/doom install # accept all-the-incon's fonts
 
-# Verify everything went well
+# Verify everything went well and still everything that is missing!
 doom doctor
 ```
 
-This will expose `doom` cli:
+This will expose `doom` command:
 
 ```bash
 # .zshrc
@@ -53,9 +52,9 @@ You can configure Doom by tweaking the files found in your DOOMDIR. Doom expects
 
 Configuration files:
 
-- `init.el`: `doom!` block that controls what Doom modules are enabled.
-- `packages.el`: package management is done from this file (don't do it manually!)
-- `config.el`: configuration. Evaluated after all the modules have loaded.
+- `init.el`: modules
+- `packages.el`: extra modules
+- `config.el`: configuration
 
 Macros can be found [here](https://github.com/hlissner/doom-emacs/blob/develop/docs/api.org#map)
 

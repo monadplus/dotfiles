@@ -90,13 +90,14 @@
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
-       gist                ; interacting with github gists
+       ;; gist                ; interacting with github gists
        (lookup
-          ; +dictionary ; dictionary/thesaurus is nice
-          ; +offline    ; prefer offlines dictionary/thesaurus
-          +docset)    ; (Dash.app...) navigate your code and its documentation
+          ; +dictionary    ; dictionary/thesaurus is nice
+          ; +offline       ; prefer offlines dictionary/thesaurus
+          ; +docset        ; (Dash.app...) navigate your code and its documentation
+       )
        lsp
-       (magit +forge)      ; a git porcelain for Emacs
+       magit               ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf                 ; pdf-tools
@@ -124,17 +125,14 @@
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
-       ; TODO sourcer lsp is not installed
-       (erlang +lsp)       ; an elegant language for a more civilized age
+       ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-
        (haskell +lsp)      ; a language that's lazier than I am
-
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;;json              ; At least it ain't XML
@@ -163,7 +161,7 @@
         ;+roam
         +dragndrop         ; drag & drop files/images into org buffers
         +pandoc            ; export with pandoc support
-        ; +pomodoro          ; pomodoro timer for clocking time on tasks
+        ;+pomodoro         ; pomodoro timer for clocking time on tasks
         +noter             ; org-noter integration. Keep notes in sync with a document
         +presenter         ; integration with reveal.js, beamer and org-tree-slide
        )
@@ -189,7 +187,6 @@
        yaml                ; JSON, but readable
 
        :email
-       ;; TODO
        ;;(mu4e +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)

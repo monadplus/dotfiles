@@ -222,13 +222,13 @@
   (map! :leader
         (:when (featurep! :editor snippets)
          (:prefix-map ("y" . "yasnippets")
-          :desc "new" "n" #'+snippets/new
-          :desc "edit" "e" #'+snippets/edit
-          :desc "file" "f" #'yas/visit-snippet-file
-          :desc "abort" "a" #'+snippet--abort
-          :desc "insert" "i" #'yas-insert-snippet
-          :desc "aya-create" "c" #'aya-create
-          :desc "aya-expand" "C" #'aya-expand
+          :desc "new"            "n" #'+snippets/new
+          :desc "edit"           "e" #'+snippets/edit
+          :desc "file"           "f" #'yas/visit-snippet-file
+          :desc "abort"          "a" #'+snippet--abort
+          :desc "insert"         "i" #'yas-insert-snippet
+          :desc "aya-create"     "c" #'aya-create
+          :desc "aya-expand"     "C" #'aya-expand
           :desc "describe table" "t" #'yas/describe-tables
           :desc "tryout snippet" "T" #'yas/tryout-snippet))))
 
@@ -254,11 +254,11 @@
             :n "M-i" 'git-gutter:popup-hunk
             :leader :n "g p" 'git-gutter:popup-hunk))
 
-   (use-package! magithub
-     :after magit
-     :config
-     (magithub-feature-autoinject t)
-     (setq magithub-clone-default-directory "~/haskell/"))
+   ;(use-package! magithub
+     ;:after magit
+     ;:config
+     ;(magithub-feature-autoinject t)
+     ;(setq magithub-clone-default-directory "~/haskell/"))
 
    (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")))
 
@@ -365,7 +365,6 @@
           :desc "hoogle" "h" #'haskell-hoogle
           :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local))
 
-  ; FIXME after save, all errors disappear from flycheck
   (use-package! lsp-haskell
     :config
     (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))

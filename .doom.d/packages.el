@@ -50,8 +50,8 @@
 
 (package! ormolu)
 (package! keychain-environment) ; FIX the bug with keychain not found https://github.com/tarsius/keychain-environment
-(package! magithub)
-;; (package! iedit) ; included with multi-cursor
+;(package! magithub)
+;;(package! iedit) ; included with multi-cursor
 
 ;; https://github.com/daichirata/emacs-rotate
 

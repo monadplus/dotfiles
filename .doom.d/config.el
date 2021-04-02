@@ -375,11 +375,11 @@
             :desc "restart lsp" "R" 'lsp-restart-workspace))
 
   ; hlint
-  (use-package! hs-lint)
-  (map! (:after hs-lint
-         :map haskell-mode-map
-         :localleader
-           :desc "hlint" "?" #'hs-lint))
+  ;(use-package! hs-lint)
+  ;(map! (:after hs-lint
+         ;:map haskell-mode-map
+         ;:localleader
+           ;:desc "hlint" "?" #'hs-lint))
 
   ;;  * stack-ghc (because it only works on stack projects and has priority over haskell-ghc)
   ;;  * lsp (because https://github.com/hlissner/doom-emacs/issues/2060)

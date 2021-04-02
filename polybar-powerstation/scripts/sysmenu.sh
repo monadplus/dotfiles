@@ -53,7 +53,7 @@ MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System :' \
 -color-urgent "$BACKGROUND,$YELLOW,$BACKGROUND_ALT,$HIGHLIGHT_BACKGROUND,$HIGHLIGHT_FOREGROUND" \
 <<< "🔒 Lock|  Logout|😴  Suspend|😴  Hibernate|⏻  Reboot|⏻  Shutdown")"
 case "$MENU" in
-  *Lock) i3lock ;;
+  *Lock) ~/dotfiles/i3lock.sh ;;
   *Logout) systemctl restart sddm ;;
   *Suspend) systemctl suspend ;;
   *Hibernate) systemctl hibernate ;;

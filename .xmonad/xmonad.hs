@@ -42,7 +42,6 @@ myStartupHook = do
   setWMName "LG3D"
 
 normBord = "#46394E"
-
 focdBord = "#896F9A"
 
 --mod4Mask= super key
@@ -56,7 +55,8 @@ encodeCChar = map fromIntegral . B.unpack
 myBorderWidth = 2
 
 --              edit       file      globe     file      envelope
-myWorkspaces = ["\61508", "\61897", "\61612", "\61788", "\61664"]
+-- myWorkspaces = ["\61508", "\61897", "\61612", "\61788", "\61664"]
+myWorkspaces = ["DEV", "DEV2", "WWW", "CHAT", "MAIL", "TMP"]
 
 myBaseConfig = desktopConfig
 
@@ -113,23 +113,23 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) =
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) =
   M.fromList $
-    [ ((modMask, xK_g), spawn $ "alacritty -e htop"),
-      ((modMask .|. shiftMask, xK_g), spawn $ "alacritty -e gtop"),
-      ((modMask, xK_Return), spawn $ "alacritty"),
-      ((modMask .|. shiftMask, xK_Return), spawn $ "emacs"),
-      ((modMask .|. mod1Mask, xK_Return), spawn $ "code"),
-      ((modMask, xK_p), spawn $ "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'Noto Sans:bold:pixelsize=14'"),
-      ((controlMask .|. shiftMask, xK_v), spawn $ "clipmenu"),
+    [ ((modMask, xK_g), spawn "alacritty -e htop"),
+      ((modMask .|. shiftMask, xK_g), spawn "alacritty -e gtop"),
+      ((modMask, xK_Return), spawn "alacritty"),
+      ((modMask .|. shiftMask, xK_Return), spawn "emacs"),
+      ((modMask .|. mod1Mask, xK_Return), spawn "code"),
+      ((modMask, xK_p), spawn "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'Noto Sans:bold:pixelsize=14'"),
+      ((controlMask .|. shiftMask, xK_v), spawn "clipmenu"),
       ((modMask, xK_r), spawn $ "polybar-msg cmd restart"),
-      ((modMask .|. shiftMask, xK_r), spawn $ "xmonad --recompile && xmonad --restart"),
-      ((modMask .|. shiftMask, xK_p), spawn $ "pamac-manager"),
-      ((modMask, xK_c), spawn $ "conky"),
-      ((modMask .|. shiftMask, xK_c), spawn $ "conky-toggle"),
-      ((modMask, xK_l), spawn $ "$HOME/dotfiles/i3lock.sh"),
+      ((modMask .|. shiftMask, xK_r), spawn "xmonad --recompile && xmonad --restart"),
+      ((modMask .|. shiftMask, xK_p), spawn "pamac-manager"),
+      ((modMask, xK_c), spawn "conky"),
+      ((modMask .|. shiftMask, xK_c), spawn "conky-toggle"),
+      ((modMask, xK_l), spawn "$HOME/dotfiles/i3lock.sh"),
       -- dmscripts
-      ((modMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmconf"),
-      ((modMask .|. shiftMask, xK_o), spawn $ "bash $HOME/dotfiles/dmscripts/dmsearch"),
-      ((modMask, xK_i), spawn $ "bash $HOME/dotfiles/dmscripts/dman"),
+      ((modMask, xK_o), spawn "bash $HOME/dotfiles/dmscripts/dmconf"),
+      ((modMask .|. shiftMask, xK_o), spawn "bash $HOME/dotfiles/dmscripts/dmsearch"),
+      ((modMask, xK_i), spawn "bash $HOME/dotfiles/dmscripts/dman"),
       -- Focus
       ((modMask, xK_j), windows W.focusDown),
       ((modMask, xK_k), windows W.focusUp),
@@ -169,10 +169,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       -- ((controlMask .|. shiftMask, xK_m), withFocused $ keysResizeWindow (0, -15) (0, 0)),
       -- ((controlMask .|. shiftMask, xK_comma), withFocused $ keysResizeWindow (0, 15) (0, 0)),
       -- Volume Control
-      ((0, xF86XK_AudioMute), spawn $ "amixer -q set Master toggle"),
-      ((0, xF86XK_AudioMicMute), spawn $ "amixer -q set Capture toggle"),
-      ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master 5%-"),
-      ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master 5%+"),
+      ((0, xF86XK_AudioMute), spawn "amixer -q set Master toggle"),
+      ((0, xF86XK_AudioMicMute), spawn "amixer -q set Capture toggle"),
+      ((0, xF86XK_AudioLowerVolume), spawn "amixer -q set Master 5%-"),
+      ((0, xF86XK_AudioRaiseVolume), spawn "amixer -q set Master 5%+"),
       ((modMask, xK_a), spawn "playerctl play-pause --player=vlc"),
       ((modMask .|. shiftMask, xK_a), spawn "playerctl next --player=vlc"),
       -- Backlight Control
@@ -188,7 +188,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
     ]
       -- Workspaces
       ++ [ ((m .|. modMask, k), windows $ f i)
-           | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_5],
+           | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6],
              (f, m) <-
                [ (W.greedyView, 0),
                  (W.shift, shiftMask),

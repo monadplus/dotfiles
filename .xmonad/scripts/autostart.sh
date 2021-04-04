@@ -30,30 +30,19 @@ xsetroot -cursor_name left_ptr & #cursor active at boot
 # Starting utility at boot time #
 #################################
 
-# Wallpaper: feh, nitrogen, variety
-feh --bg-fill /home/arnau/wallpapers/megumin_purple.png &
-#nitrogen --restore &
-#run variety &
-
-#run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
-#(conky -c $HOME/.xmonad/scripts/system-overview) & #start the conky to learn the shortcuts
-
-# run variety &
-run nm-applet & # NetworkManager systray
-run pamac-tray & # Package Manager at Tray
-run clipmenud & # Clipboard Manager
+run variety & # wallpaper
+run nm-applet & # networkManager systray
+run pamac-tray & # package manager at tray
+run clipmenud & # clipboard manager
 hostname=$(cat /proc/sys/kernel/hostname)
 if [ $hostname = "laptop" ]; then
-  blueberry-tray & # Bluetooth
+  blueberry-tray & # bluetooth
 fi
-picom --config $HOME/.xmonad/scripts/picom.conf & # Window Composer
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # TODO
+picom --config $HOME/.xmonad/scripts/picom.conf & # window composer
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd & # Notifications as pop-ups - xfce4-notifyd-config
+udiskie & # automount disk
 # redshift & # Screen color warm
-udiskie & # Auto-mount disk
-# run xfce4-power-manager & # xfce4-power-manager-settings
-# run volumeicon & # There is already the polybar icon
-# numlockx on &
 
 ###########################################
 # Starting user applications at boot time #

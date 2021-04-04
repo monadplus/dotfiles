@@ -12,7 +12,7 @@ doom doctor # diagnose common issues
 doo mpurge # delte old, orphaned packages
 ```
 
-### Installation
+## Installation
 
 Documentation [here](https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#configure)
 
@@ -43,7 +43,7 @@ This will expose `doom` command:
 > export DOOMDIR=$HOME/.doom.d
 ```
 
-### Configure
+## Configure
 
 You can configure Doom by tweaking the files found in your DOOMDIR. Doom expects this directory to be found in one of:
 
@@ -66,18 +66,13 @@ Change leader:
       doom-localleader-key "\\")
 ```
 
-### Everything you need to install
+## Everything you need to install
 
 Each modules has its own installation requisites, just check them [here](./modules.md)
 
-### Issues
+## Issues
 
-1. When Emacs is started under X11 and not directly from a terminal some variables are not set:
-   - keychain
-   - some PATH directories
-
+1. When Emacs is started under X11 and not directly from a terminal some variables are not set. Solved by `exec-path-from-shell` module.
 2. vterm very slow: the problem was related to `exa ... --icons`. Removing `--icons` worked.
-
 3. Projectile not working: I somehow introduced a bad route which couldn't be parsed. I had to manually edit the file `~/.emacs.d/.local/cache/projectile.projects`
-
 4. `Company: backend company-capf error "Symbol’s function definition is void: :interrupted"`. The error was fixed by commenting `lsp` on `init.el` and running `doom sync && doom purge` and installing again.

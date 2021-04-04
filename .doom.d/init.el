@@ -20,6 +20,7 @@
        doom                ; what makes DOOM look the way it does
        doom-dashboard      ; a nifty splash screen for Emacs
        doom-quit           ; DOOM quit-message prompts when you quit Emacs
+       (emoji +unicode)    ; 🙂
        ;;fill-column       ; a `fill-column' indicator
        hl-todo             ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra             ; bind commands together
@@ -78,6 +79,7 @@
        direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
+       ;; TODO
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;; gist                ; interacting with github gists
@@ -104,7 +106,7 @@
 
        :lang
        (agda +local)       ; types of types of types of types...
-       ;; (cc +lsp)        ; C/C++/Obj-C madness
+       (cc +lsp)           ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
@@ -130,7 +132,7 @@
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       (latex +fold)  ; writing papers in Emacs has never been so fun
+       (latex +fold)       ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
        ;;ledger            ; an accounting system in Emacs
@@ -139,8 +141,9 @@
        ;;nim               ; python + lisp at the speed of c
        nix                 ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       ;; TODO +pandoc, +present
        (org                ; organize your plain life in plain text
+        ;TODO +pandoc
+        ;     +present
         ;+brain
         ;+gnuplot
         ;+hugo
@@ -184,6 +187,7 @@
        :app
        calendar            ; org-gcal
        ;;irc               ; how neckbeards socialize
+       ;; TODO
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 

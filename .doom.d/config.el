@@ -23,8 +23,9 @@
         auth-sources '("~/.authinfo.gpg" "~/.emacs.d/.local/cache/org-gcal/tolen.gpg")
         auth-source-cache-expiry nil)               ; default is 7200 (2h)
 
-  (setq doom-font (font-spec :family "hasklig" :size 15 :weight 'medium )
+  (setq doom-font (font-spec :family "hasklig" :size 14 :weight 'regular )
         doom-variable-pitch-font (font-spec :family "hasklig" :size 14 :weight 'regular) ;; e.g. neotree font
+        doom-unicode-font (font-spec :family "hasklig" :size 14)
         doom-big-font (font-spec :family "hasklig" :size 20 :weight 'regular)) ; doom-big-font-mode
 
   (setq-default line-spacing 1
@@ -53,6 +54,7 @@
 
   ; theme
   (setq doom-theme 'doom-dracula)
+  ;;(setq doom-theme 'doom-solarized-light)
 
   ; windows
   (setq evil-vsplit-window-right t
@@ -78,7 +80,7 @@
 
   ; This sets $MANPATH, $PATH and exec-path from your shell, but only when executed in a GUI frame on OS X and Linux.
   (when (memq window-system '(mac ns x))
-        (exec-path-from-shell-initialize))
+        (exec-path-from-shell-initialize)) ; module exec-path-from-shell
 
   ; Adds `npm bin' to exec-path
   (defun string-trim-final-newline (string)
@@ -166,13 +168,6 @@
         :n "M-[" 'evil-window-decrease-width
         :n "M-=" 'evil-window-decrease-height
         :n "M-'" 'evil-window-increase-height)
-
-  ;; (map! :n "..." '+workspace/swap-left
-  ;;       :n "..." '+workspace/swap-right
-  ;;       :n "..." '+workspace/switch-left
-  ;;       :n "..." '+workspace/switch-right
-  ;;       :n "..." (lambda () (interactive) (+workspace/new (concat (+workspace-current-name) "-copy") t))
-  ;;       :n "..." '+workspace/rename)
 
   (map! :map pdf-view-mode-map
         :n "TAB" 'pdf-outline)
@@ -349,19 +344,20 @@
           :desc "ghci: clear" "k" #'haskell-interactive-mode-clear
           :desc "ghci" "i" #'haskell-interactive-bring
           ;; :desc "find reference" "r" #'lsp-ui-peek-find-references ;; TODO not implemented in the LSP yet
-          :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
+          ;; :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
           :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
-          :desc "ghci process" "1" (lambda () (interactive) (setq haskell-process-type 'auto) (haskell-process-restart))
-          :desc "cabal process" "2" (lambda () (interactive) (setq haskell-process-type 'cabal-new-repl) (haskell-process-restart))
-          :desc "stack process" "3" (lambda () (interactive) (setq haskell-process-type 'stack-ghci) (haskell-process-restart))
-          :desc "doc" "t" 'lsp-ui-doc-glance
+          ;; :desc "ghci process" "1" (lambda () (interactive) (setq haskell-process-type 'auto) (haskell-process-restart))
+          :desc "cabal process" "1" (lambda () (interactive) (setq haskell-process-type 'cabal-repl) (haskell-process-restart))
+          :desc "stack process" "2" (lambda () (interactive) (setq haskell-process-type 'stack-ghci) (haskell-process-restart))
+          ;; :desc "doc" "t" 'lsp-ui-doc-glance
           ;; :desc "show doc" "t" '+lookup/documentation
           ;; :desc "type" "t" 'haskell-process-do-type
-          :desc "ghc: compile" "B" #'haskell-compile ; override
+          ;; :desc "ghc: compile" "B" #'haskell-compile ; override
           ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
           ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
-          :desc "hoogle" "h" #'haskell-hoogle
-          :desc "local hoogle" "H" #'haskell-hoogle-lookup-from-local))
+          :desc "hoogle (local)" "h" #'haskell-hoogle
+          :desc "hoogle (web)" "H" #'haskell-hoogle-lookup-from-website)
+        )
 
   (use-package! lsp-haskell
     :config
@@ -399,6 +395,12 @@
         (after! rustic
         (setq rustic-lsp-server 'rust-analyzer)))
 
+(defsection cc-mode
+  "C/C++."
+  (after! ccls
+    (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
+    ; optional as ccls is the default in Doom
+    (set-lsp-priority! 'ccls 2)))
 
 (defsection python-mode
   "Python."

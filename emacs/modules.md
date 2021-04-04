@@ -1,7 +1,6 @@
 # Modules and keybindings
 
 ## General
-
 ### [Motions](https://vimhelp.org/motion.txt.html)
 
 - change: `c`
@@ -46,20 +45,20 @@ Word motions:
 - Split horizontal: `C-w s`
 
 - Move: `C-w h/j/k/l`
-- Move next: `C-w C-w`
+- Move next (recommended): `C-w C-w`
 
 - Rotate: `C-w r` and `C-w R`
 
 - Close: `C-w q`
-- Close others: `C-w C-o`
+- Close others: `C-w o`
 
 - Resize vertical: `M =` and `M '`
 - Resize horizontal: `M [` and `M ]`
 
 ### Evaluating emacs lisp
 
-1. Go to a scratch buffer, swap to emacs-lisp-mode and `SPC m e b`
-2. Eval using `SPC ;`
+1. Eval using `SPC ;`
+2. Go to a scratch buffer, swap to emacs-lisp-mode and `SPC m e b`
 3. Place the cursor on the last parenthesis of an s-expr and `C-x C-e`
 
 ### [drag-stuff](https://github.com/mkhl/drag-stuff)
@@ -75,9 +74,8 @@ Increment/decrement numbers: `g-` and `g=`
 
 ### [evil-lion](https://github.com/edkolev/evil-lion)
 
-Align: :v `gl`
-Align: :n `gl`
-Right-align: :n `gL`
+Align: `gl MOTION CHAR`
+Right-align: :n `gL MOTION CHAR`
 
 Example: `glip=` and `glip,`
 
@@ -118,22 +116,20 @@ Make a visual selection `v` or `V`, and then hit `*`
 
 ## nix
 
-install nixfmt: `nix-env -iA nixpkgs.nixfmt`
+Install nixfmt: `nix-env -iA nixpkgs.nixfmt`
 
 ## haskell
 
-TODO
+Follow `dotfiles/README.md`
 
 ## rgb
 
 - [rainbow-mode](https://elpa.gnu.org/packages/rainbow-mode.html)
-- [kurecolor](https://github.com/alphapapa/kurecolor) - Why is this so complicated?
+- [kurecolor](https://github.com/alphapapa/kurecolor)
 
 ## multiple-cursors
 
 - [evil-mc](https://github.com/gabesoft/evil-mc)
-
-`g z`
 
 In :v mode:
 
@@ -141,6 +137,8 @@ In :v mode:
 `g z A`: evil-mc-make-cursor-in-visual-selection-end
 
 - [evil-multiedit](https://github.com/hlissner/evil-multiedit):
+
+This is more for words
 
 `M d`: upwards
 `M D`: downwards
@@ -554,6 +552,7 @@ git config --global github.oauth-token <your-personal-access-token-with-gist-sco
 
 Keybindings:
 
+
 - List: `SPC g l g` or `M-x +gist/list`
 - `c` to create a gist from a buffer (alternative `M-x gist-buffer-private`)
 - `d` delete a gist
@@ -594,6 +593,9 @@ Keybindings:
 
 - `SPC <localleader>`
 - More [here](https://github.com/hlissner/doom-emacs/blob/fdbf68cf3cfa57837a2d7288e14261cb3ae881e8/modules/lang/markdown/config.el#L96) 
+
+```haskell
+```
 
 ## [Avy](https://github.com/abo-abo/avy)
 

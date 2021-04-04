@@ -16,10 +16,6 @@ The following dotfiles were tested on Arcolinux.
 - Systemd: [here](./systemd.md)
 - Ripgrep: [here](./ripgrep.md)
 
-<!--****************************************************-->
-<!--**************** Configuration *********************-->
-<!--****************************************************-->
-
 ## Configuration
 
 ### Touchpad (Synaptic)
@@ -200,10 +196,6 @@ Fonts can be installed from [pacman/AUR](https://wiki.archlinux.org/index.php/Fo
 
 A list of available fonts
 
-<!--****************************************************-->
-<!--************  Programming Languages ****************-->
-<!--****************************************************-->
-
 ## Programming Languages
 ### Nix
 
@@ -375,10 +367,6 @@ pip uninstall
 # Global   /usr/lib/python3.8/site-packages/...
 sudo pip uninstall
 ```
-
-<!--****************************************************-->
-<!--*************  Software Essential ******************-->
-<!--****************************************************-->
 
 ### Rust
 
@@ -580,15 +568,11 @@ playerctl play-pause --player=vlc
 
 VLC can stream to chromecast!
 
-<!--****************************************************-->
-<!--************  Software Miscellaneous ****************-->
-<!--****************************************************-->
-
 ## Miscellaneous Software
 
 ```bash
 # Official
-sudo pacman -Syu exa ripgrep fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl autorandr maim brightnessctl gtop nomacs
+sudo pacman -Syu exa ripgrep fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl autorandr maim brightnessctl gtop nomacs kcolorchooser tldr tokei procs
 
 # AUR
 paru -Syu pgcli lazydocker direnv

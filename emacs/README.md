@@ -70,6 +70,8 @@ Change leader:
 
 Each modules has its own installation requisites, just check them [here](./modules.md)
 
+[Ligatures](https://github.com/hlissner/doom-emacs/blob/develop/modules/ui/ligatures/README.org) require M-x +ligatures/install-patched-font
+
 ## Issues
 
 1. When Emacs is started under X11 and not directly from a terminal some variables are not set. Solved by `exec-path-from-shell` module.

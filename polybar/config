@@ -114,7 +114,7 @@ font-4 = "Font Awesome 5 Brands:pixelsize=10;1"
 
 modules-left = powermenu arrow4 ewmh xwindow
 modules-center =
-modules-right = arrow1 network-traffic arrow3 backlight arrow2 pavolume arrow3 cpu2 temperature1 arrow2 memory2 arrow3 battery block-purple battery_left arrow2 weather arrow3 date
+modules-right = arrow1 network-traffic arrow3 backlight arrow2 pavolume arrow3 cpu2 system-cpu-temppercore arrow2 memory2 arrow3 battery block-purple battery_left arrow2 weather arrow3 date
 
 tray-position = center
 tray-detached = true
@@ -620,9 +620,36 @@ type = internal/cpu
 interval = 3
 format-foreground = ${colors.foreground}
 format-background = ${colors.background-purple}
-format = <label>
+format = "<label> <ramp-coreload>  "
 format-padding = 0
-label = "Cpu  %percentage-cores%  "
+;label = "Cpu  %percentage-cores%  "
+label = "  Cpu "
+
+ramp-coreload-spacing = 0
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 3
+ramp-coreload-0-foreground = ${colors.foreground}
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 3
+ramp-coreload-1-foreground = ${colors.foreground}
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 3
+ramp-coreload-2-foreground = ${colors.foreground}
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 3
+ramp-coreload-3-foreground = ${colors.foreground}
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 3
+ramp-coreload-4-foreground = ${colors.foreground}
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 3
+ramp-coreload-5-foreground = ${colors.foreground}
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 3
+ramp-coreload-6-foreground = ${colors.foreground}
+ramp-coreload-7 = █
+ramp-coreload-7-font = 3
+ramp-coreload-7-foreground = ${colors.foreground}
 
 ################################################################################
 
@@ -1326,3 +1353,15 @@ interval = 60
 type = custom/script
 exec = ~/.config/polybar/scripts/notification-reddit.sh
 interval = 60
+
+################################################################################
+
+[module/system-cpu-temppercore]
+type = custom/script
+exec = ~/.config/polybar/scripts/system-cpu-temppercore.sh
+interval = 5
+
+format-padding = 1
+format-foreground = ${colors.foreground}
+format-background = ${colors.background-purple}
+label = "%output%"

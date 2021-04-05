@@ -28,6 +28,10 @@ print_bit() {
 
 INTERVAL=1
 INTERFACES="enp4s0 wlp1s0"
+hostname=$(cat /proc/sys/kernel/hostname)
+if [ $hostname = "powerstation" ]; then
+  INTERFACES="eno1"
+fi
 
 declare -A bytes
 

@@ -486,7 +486,7 @@ card = amdgpu_bl0
 ;   <bar>
 format = <label>
 format-foreground = ${colors.foreground}
-format-background = ${colors.background-purple}
+format-background = ${colors.background-blue}
 format-prefix = "  "
 
 ; Available tokens:

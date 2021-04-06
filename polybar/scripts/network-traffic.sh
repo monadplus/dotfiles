@@ -60,7 +60,7 @@ while true; do
 
     # echo "Download: $(print_bytes $down) / Upload: $(print_bytes $up)"
     # echo "Download: $(print_bit $down) / Upload: $(print_bit $up)"
-    echo "$(print_bytes $down)   $(print_bytes $up)"
+    echo "  $(print_bytes $down)   $(print_bytes $up)"
 
     sleep $INTERVAL
 done

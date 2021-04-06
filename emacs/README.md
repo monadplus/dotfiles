@@ -79,3 +79,4 @@ Each modules has its own installation requisites, just check them [here](./modul
 3. Projectile not working: I somehow introduced a bad route which couldn't be parsed. I had to manually edit the file `~/.emacs.d/.local/cache/projectile.projects`
 4. `Company: backend company-capf error "Symbol’s function definition is void: :interrupted"`. The error was fixed by commenting `lsp` on `init.el` and running `doom sync && doom purge` and installing again.
 5. Spell-fu all words marked as error. Solution: remove cache`rm ~/.emacs.d/.local/etc/spell-fu/*`
+6. When loading a pdf `epdfinfo` failed with a missing shared library `libpoppler.so`. This happens after updating the library from pacman (expected). You need to rebuild the binary of epdfinfo by calling `M-x pdf-tools-installs`

@@ -217,6 +217,44 @@ sudo ddcutil getvcp 10
 sudo ddcutil setvcp 10 70
 ```
 
+### Fan Control & Led Control
+
+**Fan Control**
+
+```bash
+# Install lm_sensors
+sudo pacman -Syu lm_sensors
+
+# Check sensors
+sensors
+
+# run configuration (will write on /etc/fancontrol)
+sudo pwmconfig
+# alternatively
+sudo ln -s ~/dotfiles/fancontrol /etc/fancontrol
+
+# test fancontrol is working
+sudo fancontrol
+
+# Enable systemd service
+sudo systemctl enable fancontrol.service
+sudo systemctl start fancontrol.service
+```
+
+**Led Control**
+
+
+[liquidctl](https://github.com/liquidctl/liquidctl) (can also interact with fan control but it does not interact with the temp_cpu).
+
+```bash
+sudo pacman -Syu liquidctl
+sudo ln -s ~/dotfiles/liquidcfg.service /etc/systemd/system/liquidcfg.service
+sudo systemctl enable liquidcfg.service
+sudo systemctl start liquidcfg.service
+```
+
+Documentation at: https://github.com/liquidctl/liquidctl/blob/master/docs/corsair-commander-guide.md
+
 ## Programming Languages
 ### Nix
 

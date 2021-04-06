@@ -1,0 +1,9 @@
+[Unit]
+Description=Corsair Command Pro Leds
+
+[Service]
+Type=oneshot
+ExecStart=liquidctl set sync color off
+
+[Install]
+WantedBy=default.target

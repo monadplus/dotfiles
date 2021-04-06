@@ -32,6 +32,14 @@ sudo ln -s ~/dotfiles/99-killX.conf /etc/X11/xorg.conf.d
 
 I tried to fix mouse speed on powerstation with 50-mouse.conf but it doesn't work.
 
+### Razer (mouse)
+
+Follow instructions from https://wiki.archlinux.org/index.php/Razer_peripherals
+
+`razercfg` didn't work (mouse not detected)
+
+`openrazer` + `polychromatic` works perfect!
+
 ### [Multihead](https://wiki.archlinux.org/index.php/Multihead)
 
 #### RandR
@@ -196,6 +204,19 @@ Fonts can be installed from [pacman/AUR](https://wiki.archlinux.org/index.php/Fo
 
 A list of available fonts
 
+### [Backlight](https://wiki.archlinux.org/index.php/Backlight)
+
+**monitor**
+
+``` bash
+# Add kernel module
+sudo modprobe i2c_dev
+sudo pacman -Syu ddcutil
+sudo ddcutil capabilities | grep "Feature: 10"
+sudo ddcutil getvcp 10
+sudo ddcutil setvcp 10 70
+```
+
 ## Programming Languages
 ### Nix
 
@@ -324,7 +345,7 @@ To update just call `install` again.
 ln -s ~/dotfiles/.npmrc ~
 ```
 
-To see the list of intalled packages: `npm list` or `npm -g list`
+To see the list of installed packages: `npm list` or `npm -g list`
 
 Check npm directory: `npm root` or `npm -g root`
 
@@ -343,7 +364,8 @@ $ vim ~/.npmrc # You can also use $ npm config set cwd ""
 ### Python
 
 ```bash
-sudo pacman -Syu python jedi-language-server python-pandas python-matplotlib python-scikit-learn python-requests python-statsmodels python-scipy python-pycuda python-pylint
+sudo pacman -Syu python jedi-language-server python-pandas python-matplotlib python-scikit-learn python-requests python-statsmodels python-scipy python-pycuda python-pylint python-black python-pyflakes python-isort
+sudo pacman -Syu python-language-server
 ```
 
 It is not recommended to installing packages using `sudo pip install`.
@@ -572,7 +594,7 @@ VLC can stream to chromecast!
 
 ```bash
 # Official
-sudo pacman -Syu exa ripgrep fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl autorandr maim brightnessctl gtop nomacs kcolorchooser tldr tokei procs
+sudo pacman -Syu exa ripgrep fd obs-studio ncdu aws-cli docker-compose pandoc youtube-dl autorandr maim brightnessctl gtop nomacs kcolorchooser tldr tokei procs bat
 
 # AUR
 paru -Syu pgcli lazydocker direnv
@@ -650,3 +672,16 @@ ln -s ~/dotfiles/.psqlrc ~
 paru peek
 ```
 
+## Gaming
+
+Install `wine` and `lutris`.
+
+Please check everything from [wine](https://wiki.archlinux.org/index.php/Wine) since it requires a lot of extra dependencies
+
+### World of warcraft
+
+You need to install extra things apart from wine/lutris.
+
+I followed this tutorial: https://www.addictivetips.com/ubuntu-linux-tips/play-world-of-warcraft-on-linux/
+
+Read everything from https://lutris.net/games/world-of-warcraft/

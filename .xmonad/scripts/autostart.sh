@@ -37,6 +37,10 @@ run clipmenud & # clipboard manager
 hostname=$(cat /proc/sys/kernel/hostname)
 if [ $hostname = "laptop" ]; then
   blueberry-tray & # bluetooth
+else
+  run polychromatic-tray-applet &
+  run lutris &
+  run vlc &
 fi
 picom --config $HOME/.xmonad/scripts/picom.conf & # window composer
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

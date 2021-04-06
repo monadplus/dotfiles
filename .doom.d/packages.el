@@ -47,6 +47,8 @@
 ;(package! hlint
   ;:recipe (:local-repo "~/elisp/hs-lint/"))
 
+;(package! vlf) ; works but freezes on large files
+
 (package! ormolu)
 
 (package! keychain-environment) ; FIX the bug with keychain not found https://github.com/tarsius/keychain-environment

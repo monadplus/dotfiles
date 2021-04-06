@@ -114,11 +114,11 @@ font-4 = "Font Awesome 5 Brands:pixelsize=10;1"
 
 modules-left = powermenu arrow4 ewmh xwindow
 modules-center =
-modules-right = arrow1 network-traffic arrow3 backlight arrow2 pavolume arrow3 cpu2 system-cpu-temppercore arrow2 memory2 arrow3 battery block-purple battery_left arrow2 weather arrow3 date
+modules-right = arrow0 network-traffic arrow2 backlight arrow3 pavolume arrow2 cpu2 system-cpu-temppercore arrow3 system-nvidia-smi arrow2 memory2 arrow3 battery block-purple battery_left arrow2 weather arrow3 date
 
 tray-position = center
 tray-detached = true
-tray-offset-x = -180
+tray-offset-x = -250
 tray-offset-y = 0
 tray-padding = 3
 tray-maxsize = 30
@@ -384,6 +384,13 @@ format-background = ${colors.background}
 
 ################################################################################
 
+[module/arrow0]
+type = custom/text
+content = "%{T2} %{T-}"
+content-font = 2
+content-foreground = ${colors.background-purple}
+content-background = ${colors.background}
+
 [module/arrow1]
 type = custom/text
 content = "%{T2} %{T-}"
@@ -619,11 +626,11 @@ ramp-coreload-7-foreground = #ff5555
 type = internal/cpu
 interval = 3
 format-foreground = ${colors.foreground}
-format-background = ${colors.background-purple}
+format-background = ${colors.background-blue}
 format = "<label> <ramp-coreload>  "
 format-padding = 0
 ;label = "Cpu  %percentage-cores%  "
-label = "  Cpu "
+label = "  CPU "
 
 ramp-coreload-spacing = 0
 ramp-coreload-0 = ▁
@@ -927,7 +934,7 @@ type = custom/script
 exec = ~/.config/polybar/scripts/network-traffic.sh
 tail = true
 format-foreground = ${colors.foreground}
-format-background = ${colors.background-blue}
+format-background = ${colors.background-purple}
 
 ################################################################################
 
@@ -1000,7 +1007,7 @@ scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
 scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
 ;format-underline = #3EC13F
 format-foreground = ${colors.foreground}
-format-background = ${colors.background-blue}
+format-background = ${colors.background-purple}
 
 
 
@@ -1363,5 +1370,26 @@ interval = 5
 
 format-padding = 1
 format-foreground = ${colors.foreground}
+format-background = ${colors.background-blue}
+label = "%output%"
+
+################################################################################
+
+[module/player-simple]
+type = custom/script
+exec = ~/.config/polybar/scripts/player-simple.sh
+interval = 3
+click-left = playerctl previous &
+click-right = playerctl next &
+click-middle = playerctl play-pause &
+
+################################################################################
+
+[module/system-nvidia-smi]
+type = custom/script
+exec = ~/.config/polybar/scripts/system-nvidia-smi.sh
+interval = 5
+format-foreground = ${colors.foreground}
 format-background = ${colors.background-purple}
+format-padding = 2
 label = "%output%"

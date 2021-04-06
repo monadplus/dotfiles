@@ -486,11 +486,15 @@ Check:
 
 Spellcheck is automatically loaded in many text-mode derivatives, which includes org-mode, markdown-mode, the Git Commit buffer (from magit), mu4e-compose-mode, and others.
 
-First install the back-end `sudo pacman -Syy aspell aspell-en`
+```bash
+sudo pacman -Syu aspell aspell-en`
+```
 
-Uses the package [emacs-spell-flu](https://gitlab.com/ideasman42/emacs-spell-fu) 
-
-Fix a word: `z =`
+- Next spell error `] s`
+- Previous spell error `[ s`
+- Fix a word: `z =`
+- Add word: `z g`
+- Remove word: `z w`
 
 ## magit
 

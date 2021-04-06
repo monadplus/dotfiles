@@ -95,7 +95,7 @@ myManageHook =
     my2Shifts = []
     my3Shifts = ["Firefox", "Chromium-browser"]
     my4Shifts = ["Discord", "Slack", "zoom", "obs"]
-    my5Shifts = ["Mail"] -- i.e. thunderbird
+    my5Shifts = ["Mail", "Lutris"] -- i.e. thunderbird
     myShifts = [my1Shifts, my2Shifts, my3Shifts, my4Shifts, my5Shifts]
 
 myMouseBindings (XConfig {XMonad.modMask = modMask}) =

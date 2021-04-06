@@ -38,6 +38,11 @@ hostname=$(cat /proc/sys/kernel/hostname)
 if [ $hostname = "laptop" ]; then
   blueberry-tray & # bluetooth
 else
+  # TODO does weird things
+  #source ~/dotfiles/.xmonad/scripts/password
+  #echo $PASS | sudo -S bash -c 'fancontrol &'
+  liquidctl initialize
+  liquidctl set sync speed 30
   run polychromatic-tray-applet &
   run lutris &
   run vlc &

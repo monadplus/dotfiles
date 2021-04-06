@@ -219,6 +219,10 @@ sudo ddcutil setvcp 10 70
 
 ### Fan Control & Led Control
 
+> Neither fancontrol.service nor liquidcfg.service work.
+> The fancontrol problem is stated [here](https://wiki.archlinux.org/index.php/Fan_speed_control#Device_Paths_have_Changed_in_/etc/fancontrol).
+> There is a workaround at `.xmonad/scripts/autostart.sh` (a very ugly one).
+
 **Fan Control**
 
 ```bash

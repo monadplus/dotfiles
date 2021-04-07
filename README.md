@@ -714,6 +714,25 @@ ln -s ~/dotfiles/.psqlrc ~
 paru peek
 ```
 
+### Twitch
+
+You can use firefox like a regular folk.
+
+Or you can go all command-line hacker:
+
+``` bash
+# I use mpv since vlc is buggy (stream doesn't display)
+sudo pacman -Syu vlc mpv
+sudo pacman -Syu streamlink
+
+# streamlink -p player twitch.tv/name_of_channel quality
+streamlink -p mpv twitch.tv/shadesofreality best
+
+# GUI from streamlink (twitch only)
+# It has a nice tray icon
+paru -Syu streamlink-twitch-gui
+```
+
 ## Gaming
 
 Install `wine` and `lutris`.

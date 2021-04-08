@@ -90,7 +90,7 @@
        )
        lsp
        magit               ; a git porcelain for Emacs
-       ;;make              ; run make tasks from Emacs
+       make                ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
        pdf                 ; pdf-tools
        ;;prodigy           ; FIXME managing external services & code builders

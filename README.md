@@ -407,6 +407,7 @@ $ vim ~/.npmrc # You can also use $ npm config set cwd ""
 
 ```bash
 sudo pacman -Syu python jedi-language-server python-pandas python-matplotlib python-scikit-learn python-requests python-statsmodels python-scipy python-pycuda python-pylint python-black python-pyflakes python-isort
+sudo pacman -Syu python-tensorflow python-tensorboard_plugin_wit
 sudo pacman -Syu python-language-server
 ```
 

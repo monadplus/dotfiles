@@ -44,7 +44,8 @@ else
   #(sleep 5; echo $MYPASS | sudo -S bash -c 'fancontrol &') &
   (sleep 5; liquidctl initialize; liquidctl set sync speed 30; liquidctl set sync color off) &
   run polychromatic-tray-applet &
-  run lutris &
+  # run streamlink-twitch-gui &
+  # run lutris &
 fi
 picom --config $HOME/.xmonad/scripts/picom.conf & # window composer
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

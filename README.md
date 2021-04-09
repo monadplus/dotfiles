@@ -144,6 +144,22 @@ For example, to disable beep (laptop I guess):
 > blacklist pcspkr
 ```
 
+### [GRUB](https://wiki.archlinux.org/index.php/GRUB)
+
+_Arcolinux_ have already installed and configured it for you. Otherwise:
+
+``` bash
+sudo pacman -Syu grub efibootmgr os-prober
+
+TODO
+```
+
+GRUB loads `/boot/grub/grub.cfg` which can be configured by `grub-mkconfig -o /boot/grub/grub.cfg` (it's automagic).
+
+MS Windows can be automatically detected by `os-prober`. 
+Just run `grub-mkconfig -o /boot/grub/grub.cfg` and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg`).
+Reboot and you should see the Windows bootloader on the grub.
+
 ### Display Manager
 
 I have used in the past `lightdm` and I am currenty using `sddm`.

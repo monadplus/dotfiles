@@ -156,9 +156,42 @@ TODO
 
 GRUB loads `/boot/grub/grub.cfg` which can be configured by `grub-mkconfig -o /boot/grub/grub.cfg` (it's automagic).
 
-MS Windows can be automatically detected by `os-prober`. 
-Just run `grub-mkconfig -o /boot/grub/grub.cfg` and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg`).
+MS Windows can be automatically detected by `os-prober**. 
+Just run `grub-mkconfig -o /boot/grub/grub.cfg** and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg**).
 Reboot and you should see the Windows bootloader on the grub.
+
+### [System time](https://wiki.archlinux.org/index.php/System_time)
+
+**Hardware clock**
+
+``` bash
+# show
+sudo hwclock --show
+
+# Synchronize System clock with hardware clock
+sudo hwclock --systohc
+```
+
+**System/Software clock**
+
+``` bash
+# show
+timedatectl
+# show timezone
+timedatectl status
+```
+
+After installing _Windows 10_ the clock may be set to _localtime_ (instead of _UTC_):
+
+``` bash
+# On Windows 10 run
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
+
+# On Linux run:
+timedatectl set-local-rtc 0 # Set time to UTC
+sudo hwclock --systohc # Sync system-hardware clock
+# reboot
+```
 
 ### Display Manager
 

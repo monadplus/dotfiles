@@ -499,6 +499,15 @@ Doom uses [emacs-ipython-notebook](https://github.com/millejoh/emacs-ipython-not
 
 There is an extension for jupyter that adds [vim keybindings](https://github.com/lambdalisue/jupyter-vim-binding).
 
+### Lua
+
+``` bash
+sudo pacman -Syu lua
+paru lua-language-server
+```
+
+Emacs is already configured to read from the right directories for the lsp.
+
 ### Rust
 
 ```bash

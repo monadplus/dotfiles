@@ -416,7 +416,9 @@
 
   (map! :map python-mode-map
         :localleader
-        :desc "restart lsp" "r" 'lsp-restart-workspace))
+        :desc "restart lsp" "r" 'lsp-restart-workspace)
+
+  (customize-set-variable 'ein:output-area-inlined-images t))
 
 (defsection org-mode
   "Org."

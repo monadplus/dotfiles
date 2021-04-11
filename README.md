@@ -156,7 +156,7 @@ TODO
 
 GRUB loads `/boot/grub/grub.cfg` which can be configured by `grub-mkconfig -o /boot/grub/grub.cfg` (it's automagic).
 
-MS Windows can be automatically detected by `os-prober**. 
+MS Windows can be automatically detected by `os-prober**.
 Just run `grub-mkconfig -o /boot/grub/grub.cfg** and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg**).
 Reboot and you should see the Windows bootloader on the grub.
 
@@ -481,6 +481,23 @@ pip uninstall
 # Global   /usr/lib/python3.8/site-packages/...
 sudo pip uninstall
 ```
+
+#### Jupyter
+
+**Emacs**
+
+Doom uses [emacs-ipython-notebook](https://github.com/millejoh/emacs-ipython-notebook) which is pretty good.
+
+``` emacs-lisp
+(customize-set-variable 'ein:output-area-inlined-images t)
+```
+
+- Run the jupyter notebook: `ein:run`
+- [keybindings](http://millejoh.github.io/emacs-ipython-notebook/#notebook) 
+
+**Jupyter**
+
+There is an extension for jupyter that adds [vim keybindings](https://github.com/lambdalisue/jupyter-vim-binding).
 
 ### Rust
 

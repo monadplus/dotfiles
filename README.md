@@ -172,6 +172,12 @@ xmonad --recompile
 # This script is responsible for running all userspace programs and polybar
 ```
 
+### Network
+
+Using `Network Manager`.
+
+Eduroam: https://serveistic.upc.edu/ca/wifiupc/documentacio/eduroam-configuration-guide
+
 ### Status Bar
 
 - `polybar`:

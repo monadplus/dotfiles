@@ -144,6 +144,76 @@ For example, to disable beep (laptop I guess):
 > blacklist pcspkr
 ```
 
+### [GRUB](https://wiki.archlinux.org/index.php/GRUB)
+
+_Arcolinux_ have already installed and configured it for you. Otherwise:
+
+``` bash
+sudo pacman -Syu grub efibootmgr os-prober
+
+TODO
+```
+
+GRUB loads `/boot/grub/grub.cfg` which can be configured by `grub-mkconfig -o /boot/grub/grub.cfg`.
+
+MS Windows can be automatically detected by **os-prober**.
+Just run `grub-mkconfig -o /boot/grub/grub.cfg` and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg`).
+Reboot and you should see the Windows bootloader on the grub.
+
+GRUB options can be modified at /etc/default/grub. 
+After the file has been modified, run `grub-mkconfig` again.
+For more options see [here](https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html).
+
+``` bash
+# /etc/default/grub
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=-1
+GRUB_DISTRIBUTOR="ArcoLinux"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet resume=UUID=180ddf00-aa0e-4b19-b651-3b0c89fd66ff loglevel=3 audit=0"
+GRUB_CMDLINE_LINUX=""
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TERMINAL_INPUT=console
+GRUB_GFXMODE=auto
+GRUB_GFXPAYLOAD_LINUX=keep
+GRUB_DISABLE_RECOVERY=true
+GRUB_THEME="/boot/grub/themes/Vimix/theme.txt"
+```
+
+
+### [System time](https://wiki.archlinux.org/index.php/System_time)
+
+**Hardware clock**
+
+``` bash
+# show
+sudo hwclock --show
+
+# Synchronize System clock with hardware clock
+sudo hwclock --systohc
+```
+
+**System/Software clock**
+
+``` bash
+# show
+timedatectl
+# show timezone
+timedatectl status
+```
+
+After installing _Windows 10_ the clock may be set to _localtime_ (instead of _UTC_):
+
+``` bash
+# On Windows 10 run
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
+
+# On Linux run:
+timedatectl set-local-rtc 0 # Set time to UTC
+sudo hwclock --systohc # Sync system-hardware clock
+# reboot
+```
+
 ### Display Manager
 
 I have used in the past `lightdm` and I am currenty using `sddm`.
@@ -413,6 +483,7 @@ $ vim ~/.npmrc # You can also use $ npm config set cwd ""
 
 ```bash
 sudo pacman -Syu python jedi-language-server python-pandas python-matplotlib python-scikit-learn python-requests python-statsmodels python-scipy python-pycuda python-pylint python-black python-pyflakes python-isort
+sudo pacman -Syu python-tensorflow python-tensorboard_plugin_wit
 sudo pacman -Syu python-language-server
 ```
 
@@ -437,6 +508,32 @@ pip uninstall
 # Global   /usr/lib/python3.8/site-packages/...
 sudo pip uninstall
 ```
+
+#### Jupyter
+
+**Emacs**
+
+Doom uses [emacs-ipython-notebook](https://github.com/millejoh/emacs-ipython-notebook) which is pretty good.
+
+``` emacs-lisp
+(customize-set-variable 'ein:output-area-inlined-images t)
+```
+
+- Run the jupyter notebook: `ein:run`
+- [keybindings](http://millejoh.github.io/emacs-ipython-notebook/#notebook) 
+
+**Jupyter**
+
+There is an extension for jupyter that adds [vim keybindings](https://github.com/lambdalisue/jupyter-vim-binding).
+
+### Lua
+
+``` bash
+sudo pacman -Syu lua
+paru lua-language-server
+```
+
+Emacs is already configured to read from the right directories for the lsp.
 
 ### Rust
 
@@ -718,6 +815,25 @@ ln -s ~/dotfiles/.psqlrc ~
 
 ``` bash
 paru peek
+```
+
+### Twitch
+
+You can use firefox like a regular folk.
+
+Or you can go all command-line hacker:
+
+``` bash
+# I use mpv since vlc is buggy (stream doesn't display)
+sudo pacman -Syu vlc mpv
+sudo pacman -Syu streamlink
+
+# streamlink -p player twitch.tv/name_of_channel quality
+streamlink -p mpv twitch.tv/shadesofreality best
+
+# GUI from streamlink (twitch only)
+# It has a nice tray icon
+paru -Syu streamlink-twitch-gui
 ```
 
 ## Gaming

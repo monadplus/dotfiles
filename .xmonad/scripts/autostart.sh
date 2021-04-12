@@ -36,16 +36,16 @@ run pamac-tray & # package manager at tray
 run clipmenud & # clipboard manager
 hostname=$(cat /proc/sys/kernel/hostname)
 if [ $hostname = "laptop" ]; then
-  blueberry-tray & # bluetooth
+  run blueberry-tray & # bluetooth
+  echo 'nothing to execute yet'
 else
-  # TODO does weird things
-  #source ~/dotfiles/.xmonad/scripts/password
-  #echo $PASS | sudo -S bash -c 'fancontrol &'
-  liquidctl initialize
-  liquidctl set sync speed 30
+  # FIXME
+  #source $HOME/.xmonad/scripts/password
+  #(sleep 5; echo $MYPASS | sudo -S bash -c 'fancontrol &') &
+  (sleep 5; liquidctl initialize; liquidctl set sync speed 30; liquidctl set sync color off) &
   run polychromatic-tray-applet &
-  run lutris &
-  run vlc &
+  # run streamlink-twitch-gui &
+  # run lutris &
 fi
 picom --config $HOME/.xmonad/scripts/picom.conf & # window composer
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

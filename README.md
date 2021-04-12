@@ -154,11 +154,32 @@ sudo pacman -Syu grub efibootmgr os-prober
 TODO
 ```
 
-GRUB loads `/boot/grub/grub.cfg` which can be configured by `grub-mkconfig -o /boot/grub/grub.cfg` (it's automagic).
+GRUB loads `/boot/grub/grub.cfg` which can be configured by `grub-mkconfig -o /boot/grub/grub.cfg`.
 
-MS Windows can be automatically detected by `os-prober**.
-Just run `grub-mkconfig -o /boot/grub/grub.cfg** and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg**).
+MS Windows can be automatically detected by **os-prober**.
+Just run `grub-mkconfig -o /boot/grub/grub.cfg` and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg`).
 Reboot and you should see the Windows bootloader on the grub.
+
+GRUB options can be modified at /etc/default/grub. 
+After the file has been modified, run `grub-mkconfig` again.
+For more options see [here](https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html).
+
+``` bash
+# /etc/default/grub
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=-1
+GRUB_DISTRIBUTOR="ArcoLinux"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet resume=UUID=180ddf00-aa0e-4b19-b651-3b0c89fd66ff loglevel=3 audit=0"
+GRUB_CMDLINE_LINUX=""
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TERMINAL_INPUT=console
+GRUB_GFXMODE=auto
+GRUB_GFXPAYLOAD_LINUX=keep
+GRUB_DISABLE_RECOVERY=true
+GRUB_THEME="/boot/grub/themes/Vimix/theme.txt"
+```
+
 
 ### [System time](https://wiki.archlinux.org/index.php/System_time)
 

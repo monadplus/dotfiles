@@ -295,8 +295,6 @@
 (defsection haskell-mode
   "Haskell settings."
 
-  ; https://github.com/projectional-haskell/structured-haskell-mode
-  (remove-hook 'haskell-mode-hook 'structured-haskell-mode)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
   (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
   ; http://haskell.github.io/haskell-mode/manual/latest/Interactive-Haskell.html#Interactive-Haskell
@@ -358,10 +356,6 @@
           :desc "hoogle (local)" "h" #'haskell-hoogle
           :desc "hoogle (web)" "H" #'haskell-hoogle-lookup-from-website)
         )
-
-  (use-package! lsp-haskell
-    :config
-    (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
   (after! lsp-mode
     (map! :map haskell-mode-map

@@ -15,7 +15,8 @@ let
   overrideHask = ghc: hpkgs:
     hpkgs.override {
       overrides = haskellSelf: haskellSuper: {
-        hasktags = haskellSuper.lib.dontCheck haskellSelf.hasktags;
+        # This affects package agda.
+        Agda = super.haskell.lib.dontHaddock haskellSuper.Agda;
       };
     };
 in {

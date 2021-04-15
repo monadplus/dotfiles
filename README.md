@@ -368,8 +368,8 @@ ln -s ~/dotfiles/.ghci ~/.ghci
 Libraries are installed like `ial` (see `.agda/`).
 Recall to `ln -s ~/dotfiles/.agda  ~/.agda`.
 
-I am currently using the one from nix since I also use the ghc from nix.
-With the one from pacman, it fails to compile on emacs due to an IEE error.
+I am currently using the one from nix. 
+The one from pacman, it fails to compile on emacs due to an IEE error.
 
 ```bash
 # Pacman

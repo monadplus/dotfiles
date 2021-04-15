@@ -122,6 +122,22 @@ Install nixfmt: `nix-env -iA nixpkgs.nixfmt`
 
 Follow `dotfiles/README.md`
 
+## python
+### jupyter notebook
+
+Doom uses [emacs-ipython-notebook](https://github.com/millejoh/emacs-ipython-notebook) which is pretty good.
+
+- Open: `M-x ein:run` 
+- Execute cell: `C-c C-c` 
+- Execute cell and go to next: `M-RET` 
+- Toggle output: `C-c C-e`
+- Create cell above/bellow: `C-c C-a/C-b` 
+- Move cell up/down: `C-c up/down` 
+- Kill cell: `C-c C-k` 
+- Copy cell: `C-c C-w` 
+- Yank cell: `C-c C-y` 
+- Execute all cells: `ein:workseet-execute-all-cell` 
+
 ## rgb
 
 - [rainbow-mode](https://elpa.gnu.org/packages/rainbow-mode.html)
@@ -140,8 +156,8 @@ In :v mode:
 
 This is more for words
 
-`M d`: upwards
-`M D`: downwards
+`M d`: next
+`M D`: previous
 `C n` and `C p` to navigate and `RET** to select/unselect entry
 (Same for :v)
 

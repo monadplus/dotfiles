@@ -418,6 +418,7 @@
         :localleader
         :desc "restart lsp" "r" 'lsp-restart-workspace)
 
+  (setq ein:worksheet-enable-undo t)
   (customize-set-variable 'ein:output-area-inlined-images t))
 
 (defsection lua-mode

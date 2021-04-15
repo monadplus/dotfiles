@@ -111,7 +111,7 @@
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
-       data                ; (.csv only) config/data formats
+       ;;data              ; (.csv only) config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
@@ -141,8 +141,7 @@
        nix                 ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
-        ;TODO +pandoc
-        ;     +present
+        ;+present
         ;+brain
         ;+gnuplot
         ;+hugo
@@ -184,9 +183,8 @@
        ;;(wanderlust +gmail)
 
        :app
-       calendar            ; org-gcal
+       ;;calendar          ; org-gcal
        ;;irc               ; how neckbeards socialize
-       ;; TODO
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 

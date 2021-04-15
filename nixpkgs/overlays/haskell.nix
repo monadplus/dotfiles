@@ -15,8 +15,9 @@ let
   overrideHask = ghc: hpkgs:
     hpkgs.override {
       overrides = haskellSelf: haskellSuper: {
-        # This affects package agda.
-        Agda = super.haskell.lib.dontHaddock haskellSuper.Agda;
+        # TODO this makes Agda's compilation faster but it makes **you** compile it which is a A LOT of compilation.
+        #      meanwhile, let's take advantage of nixos server cache.
+        # Agda = super.haskell.lib.dontHaddock haskellSuper.Agda;
       };
     };
 in {

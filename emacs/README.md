@@ -72,6 +72,22 @@ Each modules has its own installation requisites, just check them [here](./modul
 
 [Ligatures](https://github.com/hlissner/doom-emacs/blob/develop/modules/ui/ligatures/README.org) require M-x +ligatures/install-patched-font
 
+## Running emacs as a server
+
+``` bash
+systemctl --user enable --now emacs
+systemctl status emacs
+```
+
+Now, you can run:
+
+``` bash
+# Reuse frame
+emacsclient -n FILE
+# New frame
+emacsclient -cn FILE
+```
+
 ## Issues
 
 1. When Emacs is started under X11 and not directly from a terminal some variables are not set. Solved by `exec-path-from-shell` module.

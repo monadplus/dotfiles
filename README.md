@@ -351,13 +351,12 @@ ln -s ~/dotfiles/nixpkgs/ ~/.config/
 There is an environment prepared to install ghc, cabal, stack and ghcide.
 
 ```bash
-nix-env -f '<nixpkgs>' -iA myHaskellEnv
-nix-env -f '<nixpkgs>' -iA myGhcid
-nix-env -f '<nixpkgs>' -iA myHLS
+nix-env -iA nixpkgs.ghc # with hoogle
+nix-env -iA nixpkgs.ghcid
+nix-env -iA nixpkgs.haskell-language-server
+nix-env -iA nixpkgs.stack
 
 nix-env -iA nixpkgs.haskellPackages.hlint
-# hoogle is already installed by myHaskellEnv
-# hoogle is already generated
 ```
 
 ```bash
@@ -374,17 +373,17 @@ ln -s ~/dotfiles/.ghci ~/.ghci
 Libraries are installed like `ial` (see `.agda/`).
 Recall to `ln -s ~/dotfiles/.agda  ~/.agda`.
 
-I am currently using the one from nix. 
-The one from pacman, it fails to compile on emacs due to an IEE error.
+> I am currently using the one from nix.
+> The one from pacman, it fails to compile on emacs due to an IEE error.
 
 ```bash
 # Pacman
 sudo pacman -Syu agda agda-stdlib
 
 # Nix
-nix-env -f '<nixpkgs>' -iA myAgda # IAL is broken
+nix-env -iA nixpkgs.agda
 # Uninstall
-nix-env -f '<nixpkgs>' -e '.*agda.*'
+nix-env -e '.*agda.*'
 ```
 
 

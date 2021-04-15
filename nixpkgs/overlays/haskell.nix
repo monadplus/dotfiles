@@ -29,7 +29,7 @@ in {
   haskellPackages_8_10 = self.haskell.packages.ghc8104;
   haskellPackages_9_0 = self.haskell.packages.ghc901;
 
-  ghc = self.haskellPackages.ghcWithPackages (p:
+  ghc = self.haskellPackages.ghcWithHoogle (p:
     with p; [
       cabal-install
       # For my arch xmonad

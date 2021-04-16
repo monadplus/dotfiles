@@ -279,9 +279,11 @@
 (defsection lsp
   "Language Server Protocol."
 
-  ;; Otherwise it does not update the errors..
-  ;; (after! lsp-mode
-  ;;   (setq lsp-document-sync-method 'full))
+  ; FIXME this is a workaround for +lookup/documentation poping two windows.
+  (after! lsp-mode
+    (map! :map lsp-mode-map
+          :n "K" #'lsp-describe-thing-at-point
+          ))
 
   (after! lsp-ui
     (setq lsp-ui-sideline-enable         nil
@@ -347,7 +349,7 @@
           ;; :desc "ghci process" "1" (lambda () (interactive) (setq haskell-process-type 'auto) (haskell-process-restart))
           :desc "cabal process" "1" (lambda () (interactive) (setq haskell-process-type 'cabal-repl) (haskell-process-restart))
           :desc "stack process" "2" (lambda () (interactive) (setq haskell-process-type 'stack-ghci) (haskell-process-restart))
-          ;; :desc "doc" "t" 'lsp-ui-doc-glance
+          :desc "doc" "t" 'lsp-ui-doc-glance
           ;; :desc "show doc" "t" '+lookup/documentation
           ;; :desc "type" "t" 'haskell-process-do-type
           ;; :desc "ghc: compile" "B" #'haskell-compile ; override
@@ -361,15 +363,6 @@
     (map! :map haskell-mode-map
           :localleader
             :desc "restart lsp" "R" 'lsp-restart-workspace))
-
-  ; ligatures are automatically activated
-
-  ; hlint
-  ;(use-package! hs-lint)
-  ;(map! (:after hs-lint
-         ;:map haskell-mode-map
-         ;:localleader
-           ;:desc "hlint" "?" #'hs-lint))
 
   (add-hook 'haskell-mode-hook ( lambda () (setq-default flycheck-disabled-checkers '(haskell-stack-ghc haskell-ghc haskell-hlint)) ))
   (defun haskell-mode-leave ()

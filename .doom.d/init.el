@@ -148,13 +148,12 @@
         ;+ipython
         ;+journal
         ;+jupyter
-        +pretty
         ;+roam
+        ;+pomodoro         ; pomodoro timer for clocking time on tasks
+        +pretty
         +dragndrop         ; drag & drop files/images into org buffers
         +pandoc            ; export with pandoc support
-        ;+pomodoro         ; pomodoro timer for clocking time on tasks
         +noter             ; org-noter integration. Keep notes in sync with a document
-        +presenter         ; integration with reveal.js, beamer and org-tree-slide
        )
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more

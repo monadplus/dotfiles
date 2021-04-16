@@ -435,6 +435,29 @@
   ;;                             (?B :foreground "#da8548")
   ;;                             (?C :foreground "#0098dd")))
 
+  (defun org-insert-src-block (src-code-type)
+        "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
+        (interactive
+        (let ((src-code-types
+                '("emacs-lisp" "python" "C" "sh" "java" "js" "clojure" "C++" "css"
+                "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond" "mscgen"
+                "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk" "ditaa"
+                "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
+                "scheme" "sqlite")))
+        (list (ido-completing-read "Source code type: " src-code-types))))
+        (progn
+        (newline-and-indent)
+        (insert (format "#+BEGIN_SRC %s\n" src-code-type))
+        (newline-and-indent)
+        (insert "#+END_SRC\n")
+        (previous-line 2)
+        (org-edit-src-code)))
+
+  ; org is loaded after this overriding all keybindings
+  (map! (:map org-mode-map
+         :localleader
+         :n "C" #'org-insert-src-block))
+
   (if (featurep! :ui workspaces)
       (map! :leader
             :desc "calendar" "o c" (lambda () (interactive) (org-gcal-sync) (=calendar))))

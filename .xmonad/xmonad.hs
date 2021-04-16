@@ -115,7 +115,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
   M.fromList $
     [ ((modMask, xK_g), spawn "alacritty -e htop"),
       ((modMask .|. shiftMask, xK_g), spawn "alacritty -e gtop"),
-      ((modMask, xK_Return), spawn "emacsclient -cn"),
+      ((modMask, xK_Return), spawn "emacs"),
       -- ((modMask .|. shiftMask, xK_Return), spawn "alacritty"),
       ((modMask .|. mod1Mask, xK_Return), spawn "code"),
       ((modMask, xK_p), spawn "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'Noto Sans:bold:pixelsize=14'"),

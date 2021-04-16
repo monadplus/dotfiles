@@ -14,11 +14,12 @@ self: super:
 let
   overrideHask = ghc: hpkgs:
     hpkgs.override {
-      overrides = haskellSelf: haskellSuper: {
-        # TODO this makes Agda's compilation faster but it makes **you** compile it which is a A LOT of compilation.
-        #      meanwhile, let's take advantage of nixos server cache.
-        # Agda = super.haskell.lib.dontHaddock haskellSuper.Agda;
-      };
+      overrides = haskellSelf: haskellSuper:
+        {
+          # TODO this makes Agda's compilation faster but it makes **you** compile it which is a A LOT of compilation.
+          #      meanwhile, let's take advantage of nixos server cache.
+          # Agda = super.haskell.lib.dontHaddock haskellSuper.Agda;
+        };
     };
 in {
   # I can install ghc901 alone but it fails with any dependency.
@@ -34,12 +35,12 @@ in {
   ghc = self.haskellPackages.ghcWithHoogle (p:
     with p; [
       cabal-install
-      # For my arch xmonad
       xmonad-extras
       xmonad-contrib
       dbus
     ]);
 
-  haskell-language-server =
-    super.haskell-language-server.override { supportedGhcVersions = [ (builtins.substring 3 10 self.ghcDefaultVersion) ]; };
+  haskell-language-server = super.haskell-language-server.override {
+    supportedGhcVersions = [ (builtins.substring 3 10 self.ghcDefaultVersion) ];
+  };
 }

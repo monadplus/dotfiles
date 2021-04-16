@@ -1,0 +1,120 @@
+* Nix
+** Concepts
+
+- *Nix expression*
+- *Derivation*: language-independent recipe for how to build a path.
+- *Build product*: anything in =/nix/store= that is not a derivation.
+- =nix-build= combines =nix-instantiate= and =nix-store --realise=.
+
+Instantiation: nix expression to derivation.
+
+#+begin_src sh
+$ nix-instantiate --expr --eval 'let pkgs = import <nixpkgs> {}; in pkgs.hello'
+#+end_src
+
+#+BEGIN_SRC sh
+# Performs two steps:
+# - evaluate the Nix expression to a derivation
+# - creating the derivation file from the Nix expression
+$ nix-instantiate --expr 'let pkgs = import <nixpkgs> { }; in pkgs.hello'
+/nix/store/w3a5xqc8zjamz01qqnziwasalbkzyskc-hello-2.10.drv
+#+END_SRC
+
+Show a derivation:
+
+#+BEGIN_SRC sh
+$ nix show-derivation /nix/store/002dywnjxm4m857ni8wmvrz7d2xy4lx4-autoconf-2.69.drv
+#+END_SRC
+
+Show currently installed packages:
+
+#+BEGIN_SRC sh
+$ nix-env -q
+#+END_SRC
+
+Derivations are composed by:
+
+- Input derivations (inputDrvs)
+- Output derivations (outputs)
+- Build instructions (builder/args/env)
+
+Manual derivation:
+
+#+BEGIN_SRC nix
+derivation {
+$ nix-env -q
+  name = "empty";
+  system = "x86_64-linux"; # builtins.currentSystem;
+  builder = ./exectuble;
+}
+#+END_SRC
+
+Build a derivation:
+
+#+BEGIN_SRC nix
+nix-store --realise /nix/store/foo.drv
+#+END_SRC
+
+Query derivation's dependencies (build-time)
+
+#+BEGIN_SRC nix
+nix-store --query --tree /nix/store/foo.drv
+#+END_SRC
+
+#+BEGIN_SRC sh
+# Not safe
+nix-store --add empty.drv
+nix-store --add foo.txt
+#+END_SRC
+
+** nix-copy-closure
+You can copy derivations, build products (shell.nix products included).
+
+You can copy to/from.
+
+*** shell.nix
+
+The steps are the following:
+
+#+begin_src sh
+nix-build --no-out-link shell.nix -A inputDerivation
+nix-store --query --references \
+    /nix/store/rw6i1wk9iv0286xi2b6kpw4ynk4pldyh-example-shell
+
+# Optional
+scp shell.nix arnau@ip:~
+
+# See issues below
+nix-copy-closure --to arnau@ip \
+    /nix/store/rw6i1wk9iv0286xi2b6kpw4ynk4pldyh-example-shell
+#+end_src
+
+During the =nix-copy-closure= step, we encountered the following errors:
+
+- [[https://superuser.com/questions/1321059/nix-copy-closure-command-not-found-error/1321594][zsh:1: command not found: nix-store]]
+- [[https://github.com/NixOS/nixpkgs/issues/37287][error: serialised integer 7161674624452356180 is too large for type 'j']]
+
+To solve this you need to add the following text before your /ssh-rsa .../ in =~/.ssh/authorized_keys= in the host.
+
+#+BEGIN_SRC sh
+# Make sure .profile exist and references the .profile from ~/dotfiles
+command=". ~/.profile; if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then eval \"$SSH_ORIGINAL_COMMAND\"; else exec \"$SHELL\"; fi"
+#+END_SRC
+
+** nix-diff
+
+https://github.com/Gabriel439/nix-diff
+** nix-delegate
+
+It executes a command on a remote machine (and copies back the results (?))
+
+https://github.com/awakesecurity/nix-delegate
+** nix-deploy
+
+Deploy a NixOS system configuration with nix-deploy system ... to a remote machine and switch the machine to that system configuration. You can also deploy a nix store path with nix-deploy path ... to a remote machine or from a remote machine.
+
+https://github.com/awakesecurity/nix-deploy
+
+** Resources
+
+- https://github.com/Gabriel439/slides/blob/master/nix-internals/slides.md

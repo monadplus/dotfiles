@@ -11,4 +11,4 @@
 set intervalstyle to 'postgres_verbose';
 
 \setenv LESS '-iMFXSx4R'
-\setenv EDITOR 'emacsclient -cn'
+\setenv EDITOR 'emacs'

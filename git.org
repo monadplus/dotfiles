@@ -1,0 +1,161 @@
+* Git: The version control system
+
+** Submodules
+
+Inside your repo call:
+
+#+BEGIN_SRC sh
+git submodule add https://github.com/monadplus/repo
+#+END_SRC
+
+This will create the directory and clone its content.
+And adds a =.gitmodules= on your root directory which must be control-versioned.
+
+*** Cloning
+
+When you clone your root directory, only the root is is cloned. All submodules are empty directories which must be cloned afterwards.
+
+#+BEGIN_SRC sh
+git clone https://github.com/monadplus/repo
+cd submodule
+git submodule init
+git submodule update
+#+END_SRC
+
+You usually will call:
+
+#+BEGIN_SRC sh
+git clone --recurse-submodules https://github.com/monadplus/repo
+#+END_SRC
+
+*** Pulling Upstream Changes from the Project Remote
+
+By default, the =git pull= command recursively fetches submodules changes but it does *not update the submodules*. You need to =git merge= in the submodule or =git submodule update --remote=. Alternatively, you can run =git pull --recurse-submodules=.
+
+By default, submodules are updated from =master=. You can check this behaviour by =git config -f .gitmodules submodule.<name>.branch <branch>=
+
+*** Working on a Project with submodules
+
+Update a submodule: =git fetch= and =git merge= like a regular module. A faster way: =git submodule update --remote --merge/rebase=.
+
+If you forget about =merge/rebase=, will update the submodule but reset your project to a detached HEAD state. To fix this, go to the submodules and checkout your branch again and do merge/rebase manually.
+
+*** Publishing submodule changes
+
+=git push --recurse-submodules=check= will fail if any of the committed submodule changes haven't been pushed.
+
+=git push --recurse-submodules=on-demand= will try to push submodules for you.
+
+Set it by default as =git config push.recurseSubmodules check=.
+
+*** Merging submodule changes
+
+Read docs, is complicated.
+
+** Log
+
+#+BEGIN_SRC sh
+$ git log -2 # Last two commits
+$ git log -p # Show the patches (changes in the code)
+$ git log --stat # lines added, lines removed
+$ git log --shortstat
+$ git log --pretty=oneline # one line per commit history
+$ git log --name-status # name + files changed
+$ git log --pretty=format:""%h - %an, %ar : %s #  # there are several options for the format
+$ git log --graph
+$ git log --since=2.weeks
+$ git log <options> <filename> # Commits involving that file
+$ git log <options> <branch> -- <filename> # Commits involving that file in that branch
+$ git log -S string # Commits that contain the word
+
+# Commits diff between branches
+$ git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative master..branchX
+#+END_SRC
+
+** Cherry-pick
+
+#+BEGIN_SRC sh
+$ git log <branch> --pretty=oneline # show commits from <branch>
+$ git cherry-pick <branch> <commit sha> # Add changes on top and commit
+$ git cherry-pick <branch> <commit sha> --edit # Add changes on top, edit message and commit
+$ git cherry-pick <branch> <commit sha> --no-commit # Add changes but dont commit
+#+END_SRC
+
+** Reset, Revert & Checkout
+
+The parameters that you pass to git reset and git checkout determine their scope. When you don’t include a file path as a parameter, they operate on whole commits.
+
+| Command      | scope        | Common use cases                                                     |
+|--------------+--------------+----------------------------------------------------------------------|
+| git reset    | Commit-level | Discard commits in a private branch or throw away uncommited changes |
+| git reset    | File-level   | Unstage a file                                                       |
+| git checkout | Commit-level | Switch between branches or inspect old snapshots                     |
+| git checkout | File-level   | Discard changes in the working directory                             |
+| git revert   | Commit-level | Undo commits in a public branch                                      |
+| git revert   | File-level   | (N/A)                                                                |
+
+
+*** Checkout
+
+=git checkout=: A checkout is an operation that moves the HEAD ref pointer to a specified commit.  Can be used on commit or file level scope.  A file level checkout will change the file's contents to those of the specific commit. Since this has the potential to overwrite local changes, Git forces you to commit or stash any changes in the working directory that will be lost during the checkout operation.
+
+
+#+BEGIN_SRC sh
+git checkout hotfix
+git checkout HEAD~2 # Move head to commit HEAD - 2
+git checkout HEAD~2 foo.py # Same as `git reset commit file` but on stage.
+#+END_SRC
+
+*** Revert
+
+=git revert=: A revert is an operation that takes a specified commit and creates a new commit which inverses the specified commit. Commit level only. /This is a safe way to undo changes, as it has no chance of re-writing the commit history/.
+
+#+BEGIN_SRC sh
+git revert HEAD~2
+#+END_SRC
+
+*** Reset
+
+=git reset=: A reset is an operation that takes a specified commit and resets the "three trees" to match the state of the repository at that specified commit. /Undo changes that haven’t been shared with anyone else/.
+
+#+BEGIN_SRC sh
+git checkout hotfix
+git reset HEAD~2
+# File scope
+git reset HEAD foo.py # will unstage foo.py
+git reset HEAD~2 foo.py
+#+END_SRC
+
+** Tips & Tricks
+
+More tips on https://github.com/git-tips/tips#everyday-git-in-twenty-commands-or-so
+
+*** merge vs rebase
+
+- When pulling changes from origin/develop onto your local develop use =rebase=.
+- When finishing a feature branch =merge= the changes back to develop.
+
+#+BEGIN_SRC sh
+git fetch origin
+# --preserve-merges (Rebasing Deletes Merge Commits!)
+git rebase -p origin/develop
+#+END_SRC
+
+*** checkout vs reset vs revert
+
+- Local: checkout and reset (revert is also safe but cumbersome).
+- Remote: revert (checkout and reset are going to create divergences in the branch).
+*** Rewrite history
+
+#+begin_quote
+Don't include any commit you have already pushed to the upstream
+#+end_quote
+
+
+#+BEGIN_SRC sh
+# Last commit
+$ git commit --amend
+
+# Last three commits:
+$ git rebase -i HEAD~3
+#+END_SRC

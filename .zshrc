@@ -243,6 +243,9 @@ alias libs="ldconfig -p"
 # ssh (X11 forward)
 alias ssh-home="ssh -Y arnau@81.40.34.158"
 
+# Backlight
+alias backlight='echo -e "enter brightness:\n"; read val; xrandr --output eDP --brightness "${val}"'
+
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()

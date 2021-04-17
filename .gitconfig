@@ -27,6 +27,7 @@
 	untracked = red bold
 [diff]
 	tool = vimdiff
+	submodule = log
 [difftool]
 	prompt = false
 [github]
@@ -34,3 +35,7 @@
 [alias]
 	hist = log --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(red)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --graph --date=short
   recent = for-each-ref --sort=-committerdate refs/heads --format='%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always | column
+[submodule]
+	recurse = true
+[push]
+	recurseSubmodules = check

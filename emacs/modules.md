@@ -512,15 +512,33 @@ sudo pacman -Syu aspell aspell-en`
 - Add word: `z g`
 - Remove word: `z w`
 
-## magit
+## Magit
 
-- status: `SPC g g` (press `?` for help)
-- quit git status: `q`
-- fold/unfold section, file: `TAB`
+- `SPC g /`: magic-dispatch (run a magit-buffer command in a non-magit buffer)
+- `SPC g B`: git blame interleaved
 
-Tips:
+vc commands (`C-x v`):
+- `C-x v g` or `M-x vc-annotate`: git blame column
+- `C-x v ~` or `M-x vc-revision-other-window`: show current file status in remote branch. Useful to see how the current file looks on master.
 
-- You can stage/unstage some region by VISUALly selecting it and `s`(stage)/`x`(discard).
+On magit buffer:
+
+- `_`: Revert (place your curson on the commit)
+- `y`: remote refs (also show branches branches). It is a very complete tool about changes in other branches. For example, you can see how many commits of diff with the rest of branches.
+- `Y`: cherries (commits that are not present yet in the selected branch). Select the branch and thel `A` to apply the cherry commit.
+- `d`: diff file in another buffer
+- `e`: ediff
+- `b s`: create new spin-off (create a new branch with the commits that are not in remote, for example, if you have accidentally worked on a branch).
+- `$`: show what's happening under the hood.
+- `T`: git notes (example: `git notes add -m 'Tested by Arnau' 72a144e2`)
+- `B`: bisect. You need a branch(copy of master) where code worked and you Bisect with current master. You can also do it with master(current) and master-10(good).
+- `W`: create a patch (and more things)
+- `w`: apply a patch
+
+On magit diff:
+
+- `C-c C-t` history of line under cursor.
+- `C-c C-e` or `RET` edit line under cursor.
 
 ### git-gutter/git-gutter-fringe
 
@@ -532,7 +550,9 @@ Tips:
 
 More at `M-x git-gutter:`
 
-### +forge
+### [forge](https://github.com/magit/forge) (previously known as magithub)
+
+Pull requests and issues from github integrated in magit.
 
 First you need to generate a github token with permissions: repo, user and read:org.
 
@@ -553,11 +573,17 @@ Keybindings:
 
 - How to merge a pull request? Create a local branch `b y` from the pull-request and then `m i` (merge into)
 
-### [magithub](https://github.com/vermiculus/magithub/blob/master/magithub.org#faq)
+### [magit-todos](https://github.com/alphapapa/magit-todos)
+
+Add todos in magit buffer.
 
 TODO
 
-`M-x magithub-clone` (FIXME https://github.com/vermiculus/magithub/issues/406)
+### [magit-review](https://github.com/charignon/github-review)
+
+Review Pull Requests from emacs.
+
+I think this overlaps with forge.
 
 ## [gist](https://github.com/defunkt/gist.el)
 

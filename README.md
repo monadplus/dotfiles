@@ -282,7 +282,13 @@ A list of available fonts
 
 ### [Backlight](https://wiki.archlinux.org/index.php/Backlight)
 
-**monitor**
+ACPI: `ls /sys/class/backlight/`
+
+You can artificially change the backlight: `xrandr --output eDP --brightness 1`
+
+There are [tons of backlight utilities](https://wiki.archlinux.org/index.php/Backlight#Backlight_utilities).
+
+External monitor:
 
 ``` bash
 # Add kernel module

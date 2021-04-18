@@ -1,5 +1,214 @@
 * Git: The version control system
 
+** [[https://jwiegley.github.io/git-from-the-bottom-up/][Git from the Bottom Up]]
+
+- *repository*: collection of commits. Defines /HEAD/ which identifies the branch or commit the current working tree departed from. Contains /branches/ and /tags/.
+- *the index* (stage area): changes are registered first here before committing them.
+- *working tree*: any directory in the filesystem that contains a repository (=.git=).
+- *commit*: snapshot of the /working tree/ at some point in time.
+- *branch* (reference): named commit.
+- *tag*: name for a commit, always names the same commit.
+- *HEAD*: what is currently checked out:
+  - If you checkout a branch, /HEAD/ symbolically refers to that branch.
+  - If you checkout a commit, /HEAD/ refers to that commit only (/detached HEAD/).
+- *blob* (unit of work): file's content (similar to i-nodes in UNIX fs). Identified by the SHA1 hash id of its size and contents. Verifies immutability of the content. Allows sharing.
+
+*** The blob
+
+#+BEGIN_SRC sh
+$ git hash-object <file>
+e965047ad7c57865823c7d992b1d046ea66edf78
+
+$ git cat-file -t e965047ad7c57865823c7d992b1d046ea66edf78
+blob
+
+$ git cat-file blob e965047ad7c57865823c7d992b1d046ea66edf78
+<content of file>
+#+END_SRC
+
+Blobs are stored in a tree as node leaf.
+
+#+begin_src sh
+$ git ls-tree HEAD
+100644 blob e965047ad7c57865823c7d992b1d046ea66edf78    greeting
+#           ^^^^^ Hash of the blob
+# HEAD references a commit hash
+
+$ git rev-parse HEAD
+b730f6bc4ea70331273498810aa2d741a26dff5a
+# ^^^^ Hash of the commit
+# A commit references a tree object
+
+$ git cat-file -t HEAD
+commit
+
+$ git cat-file commit HEAD
+tree c7c5b03aea0b8c970c93de3670c28f2108948266
+#      ^^^^ Hash of the tree
+#+end_src
+
+A commit references a tree hash that holds blob hashes.
+
+#+begin_src sh
+$ /usr/bin/find .git/objects -type f | sort
+.git/objects/b7/30f6bc4ea70331273498810aa2d741a26dff5a
+.git/objects/c7/c5b03aea0b8c970c93de3670c28f2108948266
+.git/objects/e9/65047ad7c57865823c7d992b1d046ea66edf78
+
+$ git cat-file -t b730f6b
+commit
+
+$ git cat-file -t c7c5
+tree
+
+$ git cat-file -t e965
+blob
+#+end_src
+*** The tree
+
+Every commit holds a single tree. Trees are made of blobs.
+
+#+BEGIN_SRC sh
+$ git ls-files --stage
+100644 af5626b4a114abcb82d63db7c8082c3c4756e51b 0       greeting
+#+END_SRC
+
+Staged blobs are only referenced by =.git/index=.
+
+#+BEGIN_SRC sh
+# Write a new tree
+$ git write-tree
+0563f77d884e4f79ce95117e2d686d7d6e282887
+
+# Write a commit using the tree
+$ echo 'Initial commit' | git commit-tree 0563f7
+74796eed0ad9084feb2462a117aebceca855d9f3 # includes name and date
+# -p to specify parent commit.
+
+# =git commit= creates both the tree and the commit.
+
+# commit as the new HEAD
+$ git update-ref refs/heads/master 74796e
+# or manually (not recommended)
+$ echo 74796eed0ad9084feb2462a117aebceca855d9f3 > .git/refs/heads/master
+
+# associate master with our working tree.
+$ git symbolic-ref HEAD refs/heads/master
+# ^^^ automatically on a git checkout <branch>
+
+$ git log
+commit 74796eed0ad9084feb2462a117aebceca855d9f3 (HEAD -> master)
+Author: Arnau Abella <arnauabella@gmail.com>
+Date:   Sun Apr 18 16:29:47 2021 +0200
+
+    Initial commit
+#+END_SRC
+
+Unreachable commits (along with tree and blobs) are eventually garbage collected.
+*** The commits
+
+Branches do not exist. Only blobs, trees, and commits.
+
+A branch is a named reference to a commit.
+
+#+begin_src sh
+$ git branch -v
+master 74796ee Initial commit
+#+end_src
+
+=reset --hard= would erase all changes in my working tree. =checkout= will preserve changes.
+
+=reset --hard= would change the current HEAD. =checkout= only changes the current working tree.
+
+#+begin_src sh
+git reset --hard 5fbc85
+git checkout 5fbc85
+#+end_src
+
+/Merge commits/ are regular commits with multiple parents.
+
+A commit with /multiple/ children represents the ancestor of a /branch/.
+
+**** Naming commits
+
+- branchname: the name of a branch is an alias for the most recent commit on that "branch".
+- tagname: same as branchname but it never changes.
+- HEAD: currently checked out commit. If you check out a commit - instead of a branch - then HEAD refers to that commit.
+- <full hash> e.g. 74796eed0ad9084feb2462a117aebceca855d9f3
+- <short hash> e.g. 74796ee
+- name^: parent (first in case of many)
+- name^n: choosing a parent in merge commits.
+- name^^: parent of parent
+- name~n: n-th ancestor (name^^^^...)
+- name:path e.g. =git diff HEAD^1:Makefile HEAD^2:Makefile=
+- name^{tree}: refers to the tree holding the commit
+- name1..name2 (range): if name1 or name2 is omitted, HEAD is used.
+  + master..  =git diff master..=
+  + ..master  =git diff ..master= after a fetch to see which changes have occurred in master.
+- name1...name2: all commits referenced by name1 and name2 but not both i.e. unique commits in your branches.
+
+#+begin_src sh
+$ git log --grep='^FIXME.*' --author='monadplus' --since="1 month ago" master..
+#+end_src
+
+*** Branching and rebase
+
+*base commits*: commits where the branch was born from
+
+#+begin_src sh
+$ git show-branch
+#+end_src
+
+A *merge* just adds a new branch (i.e. named commit) that points to both merged branches with content the work to bring both branches together.
+
+A *rebase* moves the commits of development branch to the latest work in the main branch. Rebase is only for local branches since you are potentially changing every commit in the branch and their branches will point to the old branch. Interactive rebasing is also possible by =git rebase -i <branch>=.
+*** The Index
+
+References to new objects that are not part (yet) of a tree.
+
+The index represents the next state of HEAD.
+
+*** Reset
+
+=reset= is a reference editor, an index editor, and a working tree editor.
+
+**** --mixed (or no option)
+
+Revert parts of your index along with your HEAD reference to match the given commit.
+
+#+begin_src sh
+$ git add foo.c  # add changes to the index as a new blob
+$ git reset HEAD  # delete any changes staged in the index
+$ git add foo.c  # made a mistake, add it back
+#+end_src
+
+**** --soft
+
+Changes HEAD reference.
+
+#+begin_src sh
+$ git reset --soft HEAD^     # backup HEAD to its parent
+#+end_src
+
+If you work on a new HEAD and push those changes. The consumers of HEAD, will automatically merge after a pull.
+
+**** --hard
+
+Erase all changes in your working tree so your files matches the content of HEAD.
+
+#+begin_src sh
+$ git reset --hard HEAD~3  # Go back in time, throwing away changes
+
+# equivalent to
+$ git reset --soft HEAD~3  # Set HEAD to point to an earlier commit
+$ git reset --hard  # Wipe out differences in the working tree
+
+# The changes will be lost.
+# You can achieve the same by (which is more save)
+$ git stash
+$ git checkout -b new-branch HEAD~3
+#+end_src
+
 ** Submodules
 
 Inside your repo call:
@@ -137,7 +346,7 @@ More tips on https://github.com/git-tips/tips#everyday-git-in-twenty-commands-or
 
 #+BEGIN_SRC sh
 git fetch origin
-# --preserve-merges (Rebasing Deletes Merge Commits!)
+# -p/--preserve-merges (Rebasing Deletes Merge Commits!)
 git rebase -p origin/develop
 #+END_SRC
 
@@ -159,3 +368,6 @@ $ git commit --amend
 # Last three commits:
 $ git rebase -i HEAD~3
 #+END_SRC
+** Resources
+
+[[https://jwiegley.github.io/git-from-the-bottom-up/][- Git from the Bottom Up]]

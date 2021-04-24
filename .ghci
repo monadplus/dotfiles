@@ -37,6 +37,8 @@
 :set -XTemplateHaskell
 :set -XTupleSections
 :set -XTypeOperators
+:set -XStandaloneKindSignatures
+import Data.Kind
 
 -- Macros
 

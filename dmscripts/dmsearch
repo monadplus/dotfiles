@@ -15,11 +15,12 @@ declare -a options=(
 "googleimages - https://www.google.com/search?hl=en&tbm=isch&q="
 "imdb - https://www.imdb.com/find?q="
 "reddit - https://www.reddit.com/search/?q="
-"translate - https://translate.google.com/?sl=auto&tl=en&text="
+"translate - https://translate.google.com/?sl=en&tl=es&text="
 "wikipedia - https://en.wikipedia.org/wiki/"
 "wolfram - https://www.wolframalpha.com/input/?i="
 "youtube - https://www.youtube.com/results?search_query="
 "hackage - https://hackage.haskell.org/packages/search?terms="
+"hoogle - https://hoogle.haskell.org/?hoogle="
 "quit"
 )
 

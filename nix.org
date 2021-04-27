@@ -66,7 +66,6 @@ nix-store --query --tree /nix/store/foo.drv
 nix-store --add empty.drv
 nix-store --add foo.txt
 #+END_SRC
-
 ** nix-copy-closure
 You can copy derivations, build products (shell.nix products included).
 
@@ -113,8 +112,107 @@ https://github.com/awakesecurity/nix-delegate
 
 Deploy a NixOS system configuration with nix-deploy system ... to a remote machine and switch the machine to that system configuration. You can also deploy a nix store path with nix-deploy path ... to a remote machine or from a remote machine.
 
-https://github.com/awakesecurity/nix-deploy
+- https://github.com/awakesecurity/nix-deploy
+- [[https://awakesecurity.com/blog/deploy-software-easily-securely-using-nix-deploy/][Deploy software easily and securely using nix-deploy | Awake Security]]
+
+** nixops
+
+[[https://github.com/NixOS/nixops][GitHub - NixOS/nixops: NixOps is a tool for deploying to NixOS machines in a ...]]
+
+** hocker
+
+- [[https://github.com/awakesecurity/hocker][GitHub - awakesecurity/hocker: Utilities for interacting with the docker regi...]]
+- [[http://ixmatus.net/articles/docker-without-docker.html][Hocker, I can't believe it's not docker!]]
+- [[http://ixmatus.net/articles/hocker-nixos-docker.html][Integration woes with docker containers and NixOS]]
+
+** lorri
+
+[[https://github.com/target/lorri][GitHub - target/lorri: Your project's nix-env]]
+
+** niv
+
+[[https://github.com/nmattia/niv][GitHub - nmattia/niv: Easy dependency management for Nix projects]]
+
+** Tips & Tricks
+
+*** Update all packages:
+
+#+begin_src
+nix-channel --update nixpkgs
+nix-env -u '*'
+#+end_src
+
+*** The default script for each phase is defined in the file =pkgs/stdenv/generic/setup.sh=.
+
+*** See the sources of a package:
+
+#+BEGIN_SRC sh
+$ nix edit -f '<nixpkgs>' hello
+#+END_SRC
+
+*** Print runtime dependencies of a closure:
+
+#+BEGIN_SRC sh
+$ nix-store -qR $(which svn)
+#+END_SRC
+
+*** Get a haskell package version:
+
+#+BEGIN_SRC sh
+$ nix-instantiate '<nixpkgs>' --eval --strict --attr haskellPackages.hocker.version
+#+END_SRC
+
+*** =patchShebangs=, =makeWrapper=, etc
+
+https://github.com/NixOS/nixpkgs/tree/master/pkgs/build-support/setup-hooks
+
+** Snippets
+
+*** Custom environment using =packageOverrides=
+
+#+begin_src nix
+# example.nix
+# $ nix-shell <name>.nix -A myPackages
+let config = {
+  packageOverrides = pkgs: with pkgs; {
+      myPackages = pkgs.buildEnv {
+        name = "foo";
+        paths = [
+          nox
+        ];
+        pathsToLink = [ "/share" "/bin" ];
+      };
+    };
+  };
+  pkgs = import <nixpkgs> { inherit config; };
+
+in pkgs
+#+end_src
 
 ** Resources
 
-- https://github.com/Gabriel439/slides/blob/master/nix-internals/slides.md
+- [[https://nixos.org/manual/nix/stable/][Nix (manual)]]
+- [[https://nixos.org/manual/nixos/stable/][NixOS (manual)]]
+- [[https://nixos.org/manual/nixpkgs/stable/][Nixpkgs (manual)]]
+- [[https://hydra.nixos.org/build/141547278/download/1/hydra/][Hydra (manual)]]
+
+*** Nix
+
+- [[https://github.com/Gabriel439/slides/blob/master/nix-internals/slides.md][nix-internals (Gabriel Gonzalez)]]
+
+*** Nixpkgs
+
+- [[https://discourse.nixos.org/t/difference-between-fetchtarball-fetchfromgithub-fetchgit/3279][fetchTarball vs fetchGit vs fetchFromGithub]]
+- [[https://blog.flyingcircus.io/2017/11/07/nixos-the-dos-and-donts-of-nixpkgs-overlays/][The DOs and DON’Ts of nixpkgs overlays]]
+
+**** Tutorials
+
+- [[https://github.com/Gabriel439/haskell-nix][Nix and Haskell in production]] How to develop and build your haskell applications using Nix.
+- [[https://github.com/fghibellini/nix-haskell-monorepo][Nix Haskell Monorepo Tutorial]] Recommended after /Nix and Haskell in production/)
+
+*** NixOS
+
+- [[https://nixos.wiki/wiki/Configuration_Collection][Collection of configurations]]
+- [[https://github.com/nix-community/home-manager][Home Manager]]
+- [[http://www.haskellforall.com/2018/08/nixos-in-production.html][NixOS in production]] short post summarizing what I wish I had known when I first started using NixOS in production
+- [[https://awakesecurity.com/blog/deploy-software-easily-securely-using-nix-deploy/][Deploy software easily and securely using nix-deploy]]

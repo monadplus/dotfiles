@@ -67,7 +67,16 @@ Word motions:
 
 ## [emacs-evil](https://github.com/emacs-evil/evil)
 ### [evil-exchange](https://github.com/Dewdrops/evil-exchange) 
-### [evil-indent-plus](https://github.com/TheBB/evil-indent-plus)
+
+- `gx<motion>` then `gx<motion>`.
+- If you are going to repeat a motion `gx<motion>` then `.`.
+
+Example: place your cursor on "right" `gxiw` then on "the" `.`:
+
+```
+This is right the word.
+```
+
 ### [evil-numbers](https://github.com/cofi/evil-numbers) 
 
 Increment/decrement numbers: `g-` and `g=`

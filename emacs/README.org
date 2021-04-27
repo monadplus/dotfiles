@@ -37,19 +37,22 @@ $ doo mpurge # delte old, orphaned packages
 
 ** Emacs server
 
-``` bash
-systemctl --user enable --now emacs
-systemctl status emacs
-```
+
+#+BEGIN_SRC sh
+$ systemctl --user enable --now emacs
+$ systemctl status emacs
+#+END_SRC
 
 Now, you can run:
 
-``` bash
+#+BEGIN_SRC sh
 # Reuse frame
 emacsclient -n FILE
+
 # New frame
 emacsclient -cn FILE
-```
+#+END_SRC
+
 ** Issues
 
 + When Emacs is started under X11 and not directly from a terminal some variables are not set. Solved by `exec-path-from-shell` module.

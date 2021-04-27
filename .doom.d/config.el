@@ -181,14 +181,6 @@
   (map! :nv "gc" #'evilnc-comment-or-uncomment-lines)
   (map! :nv "gC" #'evilnc-copy-and-comment-lines)
 
-  ;; FIXME https://github.com/hlissner/doom-emacs/issues/2060
-  (after! lsp-ui
-    (setq lsp-prefer-flymake :none))
-
-  ;; FIXME Not working
-  ;; (defadvice! prompt-for-buffer (&rest _)
-  ;;   :after 'evil-window-vsplit (switch-to-buffer))
-
   ; https://github.com/hlissner/doom-emacs/blob/8284f1035bb9366cfa050ab787ca794008f263bc/modules/config/default/%2Bemacs-bindings.el#L22
   (map! :leader
         (:prefix-map ("o" . "open")
@@ -205,6 +197,20 @@
 
   (after! haskell-mode
     (set-company-backend! 'haskell-mode '(company-capf :with company-yasnippet))))
+
+(defsection spelling
+  "spell-fu, ispell, aspell"
+
+  (after! ispell
+    (setq ispell-program-name "aspell")
+    (setq ispell-dictionary "en")))
+
+(defsection atomic-chrome
+  "Edit text areas of the browser in Emacs."
+  ; FIXME
+  ;; (after! atomic-chrome
+  ;;   (atomic-chrome-start-server))
+  (atomic-chrome-start-server))
 
 (defsection yasnippets
   "Snippets."

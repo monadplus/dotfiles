@@ -1,8 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
 ;; You can override the recipe of a built in package without having to specify
 ;; all the properties for `:recipe'. These will inherit the rest of its recipe
 ;; from Doom or MELPA/ELPA/Emacsmirror:
@@ -25,9 +23,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 ;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
@@ -38,28 +33,25 @@
 
 ;(package! builtin-package :disable t)
 
-(package! ghcid
-  :recipe (:host github :repo "monadplus/ghcid"))
-
-(package! exec-path-from-shell
-  :recipe (:host github :repo "purcell/exec-path-from-shell"))
-
-;(package! hlint
-  ;:recipe (:local-repo "~/elisp/hs-lint/"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;(package! vlf) ; works but freezes on large files
+;(package! iedit) ; included with multi-cursor
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(package! ghcid
+  :recipe (:host github :repo "monadplus/ghcid"))
+(package! exec-path-from-shell
+  :recipe (:host github :repo "purcell/exec-path-from-shell"))
+(package! atomic-chrome)
 (package! ormolu)
-
-(package! keychain-environment) ; FIX the bug with keychain not found https://github.com/tarsius/keychain-environment
-
-;;(package! iedit) ; included with multi-cursor
-
-;; TODO Not working
+; FIX the bug with keychain not found https://github.com/tarsius/keychain-environment
+(package! keychain-environment)
 ;; (package! doom-snippets :disable t)
 (package! yasnippet-snippets)
 
-;; requires +local
+;; requires (agda +local)
 (package! agda-input
   :recipe (:host github
            :repo "agda/agda"

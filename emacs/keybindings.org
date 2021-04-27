@@ -1,0 +1,21 @@
+* Ediff
+
+On the Magit buffer press =e= on the merge conflict file.
+
+You press =A= (HEAD) or =B= (master) or =+= (A+B).
+
+When finished, press =q= and you will go to a buffer with the resulting file.
+
+** Commands
+
+- =?=: help
+- =!=: recompute difference regions
+- =|=: toggles horizontal/vertical split
+- =r=: restore hte old content of the region in the merge buffer.
+- =i=: info about current ediff session.
+- ...
+
+** Resources
+
+- [[https://magit.vc/manual/magit/Ediffing.html][Ediffing (Magit User Manual)]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/ediff/index.html#Top][Ediff (GNU Manual)]]

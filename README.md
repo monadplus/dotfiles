@@ -669,7 +669,7 @@ ln -s ~/dotfiles/konsolerc ~/.config/konsolerc
 I am currently using doom-emacs as my editor
 
 - vim (nvim): follow [instructions](./nvim/README.md)
-- emacs (doom-emacs): follow [instructions](./emacs/README.md)
+- emacs (doom-emacs): follow [instructions](./emacs/README.org)
 
 ### ZSH and oh-my-zsh
 

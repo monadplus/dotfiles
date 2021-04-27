@@ -1,0 +1,65 @@
+#+title: GNU Emacs + Doom
+
+* Doom
+
+** Install
+
+Follow the official documentation: [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#install][doom-emacs/getting_started.org at develop · hlissner/doom-emacs · GitHub]]
+
+** Configure
+
+You can configure Doom by tweaking the files found in your DOOMDIR. Doom expects this directory to be found in one of:
+
+- =~/.config/doom= (respects $XDG_CONFIG_HOME)
+- =~/.doom.d=
+
+Configuration files:
+
+- *init.el*: modules
+- *packages.el*: extra modules
+- *config.el*: configuration
+
+Each modules has its own installation requisites, just check [[file:modules.md][modules]].
+
+Usually =doom doctor= will indicate what binaries are missing.
+
+** Useful Commands
+
+#+BEGIN_SRC sh
+$ doom help COMMAND
+$ doom sync # synchronize your config with Doom Emacs
+$ doom sync -u # update packages
+$ doom upgrade (--packages)
+$ doom env
+$ doom doctor # diagnose common issues
+$ doo mpurge # delte old, orphaned packages
+#+END_SRC
+
+** Emacs server
+
+``` bash
+systemctl --user enable --now emacs
+systemctl status emacs
+```
+
+Now, you can run:
+
+``` bash
+# Reuse frame
+emacsclient -n FILE
+# New frame
+emacsclient -cn FILE
+```
+** Issues
+
++ When Emacs is started under X11 and not directly from a terminal some variables are not set. Solved by `exec-path-from-shell` module.
+
++ vterm very slow: the problem was related to `exa ... --icons`. Removing `--icons` worked.
+
++ Projectile not working: I somehow introduced a bad route which couldn't be parsed. I had to manually edit the file `~/.emacs.d/.local/cache/projectile.projects`
+
++ `Company: backend company-capf error "Symbol’s function definition is void: :interrupted"`. The error was fixed by commenting `lsp` on `init.el` and running `doom sync && doom purge` and installing again.
+
++ Spell-fu all words marked as error. Solution: remove cache`rm ~/.emacs.d/.local/etc/spell-fu/*`
+
++ When loading a pdf `epdfinfo` failed with a missing shared library `libpoppler.so`. This happens after updating the library from pacman (expected). You need to rebuild the binary of epdfinfo by calling `M-x pdf-tools-installs`

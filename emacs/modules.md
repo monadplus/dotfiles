@@ -1,69 +1,8 @@
-# Modules and keybindings
-
-## General
-### [Motions](https://vimhelp.org/motion.txt.html)
-
-- change: `c`
-- delete: `d`
-- yank: `y`
-- case: `g~`(swap), `gu` (upper), `gU` (lower)
-- shift: `>` and `<`
-
-Word motions:
-- next word: `w`
-- next WORD: `W`
-- start of word: `b`
-- start of WORD: `B`
-- end of word: `e`
-- end of WORD: `E`
-
-### Text Objects 
-
-`a` includes white spaces or delimiters (e.g. "[]")
-
-- word: `aw` or `iw`
-- sentence: `as` or `is`
-- paragraph: `ap` or `ip`
-- single/double quote: `a"`/`a'`/`a\``
-- [] block: `a]` or `i]`
-- () block: `a)` or `i)`
-- {} block: `a}` or `i}`
-- <> block: `a>` or `i>`
-- tag: `at` or `it` (e.g. <a></a>)
-
-### Buffers
-
-- New buffer: `SPC b N`
-- Save buffer: `SPC b s` or `:w`
-- Switch to workspace buffer: `SPC ,` or `SPC b b`
-- Switch to buffer: `SPC <` or `SPC b B`
-- Close others: `SPC b O`
-
-### Windows
-
-- Split vertical: `C-w v`
-- Split horizontal: `C-w s`
-
-- Move: `C-w h/j/k/l`
-- Move next (recommended): `C-w C-w`
-
-- Rotate: `C-w r` and `C-w R`
-
-- Close: `C-w q`
-- Close others: `C-w o`
-
-- Resize vertical: `M =` and `M '`
-- Resize horizontal: `M [` and `M ]`
-
-### Evaluating emacs lisp
-
-1. Eval using `SPC ;`
-2. Go to a scratch buffer, swap to emacs-lisp-mode and `SPC m e b`
-3. Place the cursor on the last parenthesis of an s-expr and `C-x C-e`
+# Modules
 
 ### [drag-stuff](https://github.com/mkhl/drag-stuff)
 
-- Drag word, line or region around: `M-up/down/left/right`
+- Drag word, line or region around: `M-up/right/down/left`
 
 ## [emacs-evil](https://github.com/emacs-evil/evil)
 ### [evil-exchange](https://github.com/Dewdrops/evil-exchange) 
@@ -130,22 +69,6 @@ Install nixfmt: `nix-env -iA nixpkgs.nixfmt`
 ## haskell
 
 Follow `dotfiles/README.md`
-
-## python
-### jupyter notebook
-
-Doom uses [emacs-ipython-notebook](https://github.com/millejoh/emacs-ipython-notebook) which is pretty good.
-
-- Open: `M-x ein:run` 
-- Execute cell: `C-c C-c` 
-- Execute cell and go to next: `M-RET` 
-- Toggle output: `C-c C-e`
-- Create cell above/bellow: `C-c C-a/C-b` 
-- Move cell up/down: `C-c up/down` 
-- Kill cell: `C-c C-k` 
-- Copy cell: `C-c C-w` 
-- Yank cell: `C-c C-y` 
-- Execute all cells: `ein:workseet-execute-all-cell` 
 
 ## rgb
 

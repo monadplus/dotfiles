@@ -671,17 +671,33 @@ I am currently using doom-emacs as my editor
 - vim (nvim): follow [instructions](./nvim/README.md)
 - emacs (doom-emacs): follow [instructions](./emacs/README.org)
 
-### ZSH and oh-my-zsh
+### ZSH
+
+zsh:
 
 ```bash
 sudo pacman -S zsh zsh-completions
 chsh -s $(which zsh) # change user shell
 echo $SHELL # check shell is zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" # Install oh-my-zsh
+```
+
+oh-my-zsh:
+
+``` bash
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
 # Install a powerline font: https://github.com/powerline/fonts
 ln -s ~/dotfiles/.zshrc ~/.zshrc # link
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/themes/powerlevel10k
-# Oppen the shell and follow the powerlevel10k wizard
+# Finally, open the shell and follow the powerlevel10k wizard
+```
+
+[zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete):
+
+``` bash
+cd $ZSH
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git
+# See github for keybindings
 ```
 
 ### Printers

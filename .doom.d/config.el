@@ -134,7 +134,7 @@
   (add-hook 'pre-command-hook 'show-workspaces) ;; Adding this will prevent the workspaces from hiding
 
   (after! which-key
-    (which-key-setup-minibuffer)
+    (which-key-setup-side-window-bottom)
     (setq which-key-show-early-on-C-h nil)
     (setq which-key-idle-delay 0.5)
     (setq which-key-idle-secondary-delay 0.05)
@@ -150,8 +150,8 @@
     (rainbow-mode 1))
   (add-hook! '(markdown-mode-hook org-mode-hook yaml-mode-hook) 'my-rainbow-mode-hook)
 
-  ; Default directory for projectile
-  (setq projectile-project-search-path '("~")))
+  (setq projectile-auto-discover nil) ; disable auto discover
+  (setq projectile-project-search-path '("~/projects/" )))
 
 (defsection keybinds
   "All my custom keybindings."

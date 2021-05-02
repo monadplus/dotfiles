@@ -141,6 +141,13 @@ Deploy a NixOS system configuration with nix-deploy system ... to a remote machi
 nix-channel --update nixpkgs
 nix-env -u '*'
 #+end_src
+*** nix-shell -I
+
+
+#+BEGIN_SRC sh
+$ nix-shell --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz
+#+END_SRC
+
 
 *** The default script for each phase is defined in the file =pkgs/stdenv/generic/setup.sh=.
 

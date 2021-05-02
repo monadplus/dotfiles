@@ -1,14 +1,5 @@
-# The first argument (self) corresponds to the final package set.
-# You should use this set for the dependencies of all packages specified in your overlay.
-# For example, all the dependencies of rr in the example above come from self,
-# as well as the overridden dependencies used in the boost override.
-
-# The second argument (super) corresponds to the result of the evaluation of
-# the previous stages of Nixpkgs. It does not contain any of the packages added
-# by the current overlay, nor any of the following overlays. This set should be
-# used either to refer to packages you wish to override, or to access functions
-# defined in Nixpkgs. For example, the original recipe of boost in the above example,
-# comes from super, as well as the callPackage function.
+# self = final derivation;
+# super = previous overlay;
 self: super:
 
 let
@@ -16,13 +7,27 @@ let
     hpkgs.override {
       overrides = haskellSelf: haskellSuper:
         {
-          # TODO this makes Agda's compilation faster but it makes **you** compile it which is a A LOT of compilation.
-          #      meanwhile, let's take advantage of nixos server cache.
+          # This makes Agda's compilation faster but it makes **you** compile it which is a A LOT of compilation.
+          #   meanwhile, let's take advantage of nixos server cache.
+          #
           # Agda = super.haskell.lib.dontHaddock haskellSuper.Agda;
         };
     };
 in {
-  # I can install ghc901 alone but it fails with any dependency.
+  /*
+  I can install ghc901 alone but it fails with any dependency.
+
+  Setup: Encountered missing or private dependencies:
+  base >=4.5 && <4.15
+
+  builder for '/nix/store/qhdp4fhkfm88dma5zrfnsj76wlc73hd0-cryptohash-md5-0.11.100.1.drv' failed with exit code 1
+  building '/nix/store/3xhsa8g5yczmvgbv4f67hp3skd3kbss5-cryptohash-sha1-0.11.100.1.drv'...
+  cannot build derivation '/nix/store/npsn83a8p63y2n97g8pkfvgpk6sd9qz1-uuid-1.3.14.drv': 1 dependencies couldn't be built
+  cannot build derivation '/nix/store/wncq6lkrgjh9ksfv8141fmmignp6shwg-lsp-1.1.1.0.drv': 1 dependencies couldn't be built
+  cannot build derivation '/nix/store/n0k056z85i1n0x7laky8hajc49vknrwi-rebase-1.6.1.drv': 1 dependencies couldn't be built
+  building '/nix/store/ljpiyzlzd61010pk5hxcsydm3496dk8v-cryptohash-sha256-0.11.102.0.drv'...
+  cannot build derivation '/nix/store/ycib239ln17783wkvjw1hyvklvkmrwkz-haskell-language-server-1.0.0.0.drv': 1 dependencies couldn't be built
+  */
   ghcDefaultVersion = "ghc8104";
   haskellPackages = overrideHask self.ghcDefaultVersion
     self.haskell.packages.${self.ghcDefaultVersion};
@@ -35,6 +40,8 @@ in {
   ghc = self.haskellPackages.ghcWithHoogle (p:
     with p; [
       cabal-install
+
+      # xmonad requirements
       xmonad-extras
       xmonad-contrib
       dbus

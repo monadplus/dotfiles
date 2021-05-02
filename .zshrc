@@ -86,7 +86,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(sudo git)
 
 source $ZSH/oh-my-zsh.sh
-source $ZSH/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# NOTE compinit will clash with zsh-autocomplete.
+#      recall to comment the other.
+# source $ZSH/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+autoload -Uz compinit
+compinit
+
 
 # User configuration
 
@@ -284,11 +289,6 @@ eval $(keychain --eval --quiet --confhost) # github)
 
 # Key Repetition Rate
 xset r rate 265 40
-
-# NOTE compinit will clash with zsh-autocomplete
-# Autocompletition
-# autoload -Uz compinit
-# compinit
 
 #create a file called .zshrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.

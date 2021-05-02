@@ -1,4 +1,5 @@
 * Nix
+
 ** Concepts
 
 - *Nix expression*
@@ -29,7 +30,7 @@ $ nix show-derivation /nix/store/002dywnjxm4m857ni8wmvrz7d2xy4lx4-autoconf-2.69.
 Show currently installed packages:
 
 #+BEGIN_SRC sh
-$ nix-env -q
+$ nix-env --query
 #+END_SRC
 
 Derivations are composed by:
@@ -103,6 +104,7 @@ command=". ~/.profile; if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then eval \"$SSH_ORI
 ** nix-diff
 
 https://github.com/Gabriel439/nix-diff
+
 ** nix-delegate
 
 It executes a command on a remote machine (and copies back the results (?))
@@ -135,22 +137,41 @@ Deploy a NixOS system configuration with nix-deploy system ... to a remote machi
 
 ** Tips & Tricks
 
+*** Install/Uninstall
+
+Install:
+
+#+BEGIN_SRC
+$ nix-env -iA nixpkgs.myGHC
+$ nix-env -f '<nixpkgs-stable>' -iA myGHC
+#+END_SRC
+
+Uninstall:
+
+#+BEGIN_SRC
+$ nix-env -e '<name of the derivation>'
+$ nix-env -e '.*haskell.*'
+#+END_SRC
+
+
 *** Update all packages:
 
 #+begin_src
 nix-channel --update nixpkgs
 nix-env -u '*'
 #+end_src
-*** nix-shell -I
 
+*** nix-shell script
 
-#+BEGIN_SRC sh
-$ nix-shell --pure -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz
+#+BEGIN_SRC bash
+#! /usr/bin/env nix-shell
+#! nix-shell --pure -i python -p "python38.withPackages (ps: [ ps.django ])"
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/82b5f87fcc710a99c47c5ffe441589807a8202af.tar.gz
+
+...
 #+END_SRC
 
-
 *** The default script for each phase is defined in the file =pkgs/stdenv/generic/setup.sh=.
-
 *** See the sources of a package:
 
 #+BEGIN_SRC sh

@@ -34,16 +34,16 @@ run variety & # wallpaper
 run nm-applet & # networkManager systray
 run pamac-tray & # package manager at tray
 run clipmenud & # clipboard manager
+run blueberry-tray & # bluetooth
 hostname=$(cat /proc/sys/kernel/hostname)
 if [ $hostname = "laptop" ]; then
-  run blueberry-tray & # bluetooth
   echo 'nothing to execute yet'
 else
   # FIXME
   #source $HOME/.xmonad/scripts/password
   #(sleep 5; echo $MYPASS | sudo -S bash -c 'fancontrol &') &
   (sleep 5; liquidctl initialize; liquidctl set sync speed 30; liquidctl set sync color off) &
-  run polychromatic-tray-applet &
+  # run polychromatic-tray-applet &
   # run streamlink-twitch-gui &
   # run lutris &
 fi

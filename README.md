@@ -347,23 +347,26 @@ Documentation at: https://github.com/liquidctl/liquidctl/blob/master/docs/corsai
 ```bash
 # Install nix for some dependency management
 sudo curl -L https://nixos.org/nix/install | sh
+# Defautls to single user, for multi-user read https://nixos.org/manual/nix/stable/#sect-multi-user-installation
+ln -s ~/dotfiles/nixpkgs ~/.config
+```
 
-# Global config
-ln -s ~/dotfiles/nixpkgs/ ~/.config/
+#### [Home manager](https://github.com/nix-community/home-manager)
+
+> Flakes is now supported https://github.com/nix-community/home-manager#nix-flakes
+
+Install:
+
+``` bash
+# Install
+$ nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+$ nix-channel --update
+$ nix-shell '<home-manager>' -A install
 ```
 
 ### Haskell
 
-There is an environment prepared to install ghc, cabal, stack and ghcide.
-
-```bash
-nix-env -iA nixpkgs.ghc # with hoogle
-nix-env -iA nixpkgs.ghcid
-nix-env -iA nixpkgs.haskell-language-server
-nix-env -iA nixpkgs.stack
-
-nix-env -iA nixpkgs.haskellPackages.hlint
-```
+Home manager will install all the packages required for haskell development.
 
 ```bash
 cabal configure
@@ -379,19 +382,7 @@ ln -s ~/dotfiles/.ghci ~/.ghci
 Libraries are installed like `ial` (see `.agda/`).
 Recall to `ln -s ~/dotfiles/.agda  ~/.agda`.
 
-> I am currently using the one from nix.
-> The one from pacman, it fails to compile on emacs due to an IEE error.
-
-```bash
-# Pacman
-sudo pacman -Syu agda agda-stdlib
-
-# Nix
-nix-env -iA nixpkgs.agda
-# Uninstall
-nix-env -e '.*agda.*'
-```
-
+Home manager will install all the packages required for agda development.
 
 ### Java
 
@@ -698,6 +689,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/themes/pow
 cd $ZSH
 git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git
 # See github for keybindings
+# NOTE zhs-autocomplete is disabled since it is too intrusive.
 ```
 
 ### Printers
@@ -822,11 +814,11 @@ ln -s ~/dotfiles/htop/htoprc ~/.config/htop
 ### Cachix
 
 ```bash
-nix-env -iA cachix -f https://cachix.org/api/v1/install
+# Installed via home manager
 cachix use monadplus
 cachix authtoken # visit website to generate the token
 ```
-
+    
 ### Psql
 
 ```bash

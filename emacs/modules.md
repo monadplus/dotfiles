@@ -64,7 +64,7 @@ Make a visual selection `v` or `V`, and then hit `*`
 
 ## nix
 
-Install nixfmt: `nix-env -iA nixpkgs.nixfmt`
+nixfmt is installed via home manager.
 
 ## haskell
 

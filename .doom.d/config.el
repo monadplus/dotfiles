@@ -300,8 +300,16 @@
             lsp-ui-peek-always-show        t
             lsp-ui-peek-fontify            'always)))
 
+(defsection nix-mode
+  "Nix."
+  (after! nix-mode
+    (map! :localleader
+          :map nix-mode-map
+          ; Really slow if pressed by accident nix-update-fetch
+          "f" nil)))
+
 (defsection haskell-mode
-  "Haskell settings."
+  "Haskell."
 
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
   (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)

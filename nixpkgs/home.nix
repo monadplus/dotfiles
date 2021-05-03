@@ -58,6 +58,7 @@ in {
     nixpkgs.cachix # https://docs.cachix.org/
     nixpkgs.niv # https://github.com/nmattia/niv
     nixpkgs.nixfmt
+    nixpkgs.nix-diff # https://github.com/Gabriel439/nix-diff
     nixpkgs.nix-prefetch-git
     nixpkgs.nix-serve # https://github.com/edolstra/nix-serve
     # nixpkgs.rnix-lsp TODO

@@ -43,7 +43,6 @@ Manual derivation:
 
 #+BEGIN_SRC nix
 derivation {
-$ nix-env -q
   name = "empty";
   system = "x86_64-linux"; # builtins.currentSystem;
   builder = ./exectuble;
@@ -62,11 +61,6 @@ Query derivation's dependencies (build-time)
 nix-store --query --tree /nix/store/foo.drv
 #+END_SRC
 
-#+BEGIN_SRC sh
-# Not safe
-nix-store --add empty.drv
-nix-store --add foo.txt
-#+END_SRC
 ** Tools
 *** nix-shell
 
@@ -118,6 +112,8 @@ scp shell.nix arnau@ip:~
 nix-copy-closure --to arnau@ip \
     /nix/store/rw6i1wk9iv0286xi2b6kpw4ynk4pldyh-example-shell
 #+end_src
+
+***** Issues
 
 During the =nix-copy-closure= step, we encountered the following errors:
 
@@ -215,6 +211,7 @@ in
 #+END_SRC
 
 More info at [[https://github.com/hercules-ci/gitignore.nix][GitHub - hercules-ci/gitignore.nix: Nix function for filtering local git sources]]
+
 *** cachix
 
 Docs: [[https://docs.cachix.org/][Welcome to Cachix documentation — Cachix docs documentation]]
@@ -240,13 +237,32 @@ cachix authtoken <TOKEN>
 CACHIX_AUTH_TOKEN=<TOKEN>
 #+END_SRC
 
+This will modify =~/.config/nix/nix.conf=.
+
+#+BEGIN_SRC sh
+$ cat ~/.config/nix/nix.conf
+substituters = https://cache.nixos.org https://monadplus.cachix.org
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= monadplus.cachix.org-1:+XFtvxGut8gfIXJtrA3plN9mZkgIHIDvYPCf+NEVd3c= monadplus.cachix.org-1:6WI9hyUuejM8qPoBAt8Ub29sC7GC2RHgIbLDpjAheCM=
+#+END_SRC
+
+Check cache exists:
+
+#+BEGIN_SRC sh
+$ curl https://monadplus.cachix.org/nix-cache-info
+StoreDir: /nix/store
+WantMassQuery: 1
+Priority: 41
+#+END_SRC
+
 **** Add a per-cache token
 
-TODO
+Per-cache tokens are managed per cache in cachix.org https://app.cachix.org/cache/monadplus/settings/authtokens
 
 **** Sign binaries
 
-TODO
+It is possible to sign binaries before pushing them.
+
+https://docs.cachix.org/getting-started.html#signing-key-optional
 
 **** Pushing binaries
 

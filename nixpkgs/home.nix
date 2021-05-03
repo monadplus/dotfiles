@@ -1,12 +1,11 @@
-/*
-Build and activate
-  $ home-manager switch
+/* Build and activate:
+     $ home-manager switch
 
-Rollback:
-  $ home-manager generations
-  /nix/store/dfg5bj0c1slq78vybdnmll0iz9ddld6l-home-manager-generation
-  ...
-  $ /nix/store/dfg5bj0c1slq78vybdnmll0iz9ddld6l-home-manager-generation/activate
+   Rollback:
+     $ home-manager generations
+     /nix/store/dfg5bj0c1slq78vybdnmll0iz9ddld6l-home-manager-generation
+     ...
+     $ /nix/store/dfg5bj0c1slq78vybdnmll0iz9ddld6l-home-manager-generation/activate
 */
 { config, pkgs, ... }:
 
@@ -19,12 +18,12 @@ let
   # Alternatively, https://nix.dev/tutorials/towards-reproducibility-pinning-nixpkgs.html#dependency-management-with-niv
   src = bootstrap.fetchFromGitHub {
     owner = "NixOS";
-    repo  = "nixpkgs";
+    repo = "nixpkgs";
     inherit (nixpkgsSource) rev sha256;
   };
 
   overlays = map (fileName: import (./overlays + "/${fileName}"))
-                 (builtins.attrNames (builtins.readDir ./overlays));
+    (builtins.attrNames (builtins.readDir ./overlays));
 
   nixpkgs = import src { inherit overlays; };
 
@@ -56,10 +55,11 @@ in {
   # Check dependencies not installed by nix with `$ nix-env --query`
   home.packages = [
     # Nix
-    nixpkgs.nix-prefetch-git
+    nixpkgs.cachix # https://docs.cachix.org/
+    nixpkgs.niv # https://github.com/nmattia/niv
     nixpkgs.nixfmt
-    nixpkgs.nix-serve
-    nixpkgs.cachix
+    nixpkgs.nix-prefetch-git
+    nixpkgs.nix-serve # https://github.com/edolstra/nix-serve
     # nixpkgs.rnix-lsp TODO
 
     # Agda
@@ -71,7 +71,7 @@ in {
     nixpkgs.haskPkgs.alex
     nixpkgs.haskPkgs.happy
     nixpkgs.haskPkgs.BNFC
-    nixpkgs.haskPkgs.ghc
+    nixpkgs.ghc # custom ghc
     nixpkgs.haskPkgs.stack
     nixpkgs.haskPkgs.haskell-language-server
     nixpkgs.haskPkgs.ghcid

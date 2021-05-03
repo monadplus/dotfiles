@@ -306,7 +306,7 @@
     (map! :localleader
           :map nix-mode-map
           ; Really slow if pressed by accident nix-update-fetch
-          "f" nil)))
+          "f" #'nix-format-buffer)))
 
 (defsection haskell-mode
   "Haskell."

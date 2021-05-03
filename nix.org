@@ -1,6 +1,6 @@
 * Nix
 
-** Concepts
+** Core concepts
 
 - *Nix expression*
 - *Derivation*: language-independent recipe for how to build a path.
@@ -67,12 +67,42 @@ nix-store --query --tree /nix/store/foo.drv
 nix-store --add empty.drv
 nix-store --add foo.txt
 #+END_SRC
-** nix-copy-closure
+** Tools
+*** nix-shell
+
+#+BEGIN_SRC nix
+# shell.nix
+{ pkgs ? import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/3590f02e7d5760e52072c1a729ee2250b5560746.tar.gz") {} }:
+
+pkgs.mkShell {
+    buildInputs = [
+        pkgs.which
+        pkgs.htop
+        pkgs.zlib
+    ];
+
+
+    # executed once you enter the nix-shell.
+    shellHook = ''
+        echo hello
+    '';
+
+    MY_ENVIRONMENT_VARIABLE = "world";
+}
+#+END_SRC
+
+I recommend using =direnv= to automatically load your =shell.nix=
+
+#+BEGIN_SRC sh
+$ echo "use nix" > .envrc && direnv allow
+#+END_SRC
+
+*** nix-copy-closure
 You can copy derivations, build products (shell.nix products included).
 
 You can copy to/from.
 
-*** shell.nix
+**** shell.nix
 
 The steps are the following:
 
@@ -101,43 +131,133 @@ To solve this you need to add the following text before your /ssh-rsa .../ in =~
 command=". ~/.profile; if [ -n \"$SSH_ORIGINAL_COMMAND\" ]; then eval \"$SSH_ORIGINAL_COMMAND\"; else exec \"$SHELL\"; fi"
 #+END_SRC
 
-** nix-diff
+*** nix-diff
 
 https://github.com/Gabriel439/nix-diff
 
-** nix-delegate
+*** nixops
+
+[[https://github.com/NixOS/nixops][GitHub - NixOS/nixops: NixOps is a tool for deploying to NixOS machines in a ...]]
+
+*** nix-delegate
 
 It executes a command on a remote machine (and copies back the results (?))
 
 https://github.com/awakesecurity/nix-delegate
-** nix-deploy
+
+*** nix-deploy
 
 Deploy a NixOS system configuration with nix-deploy system ... to a remote machine and switch the machine to that system configuration. You can also deploy a nix store path with nix-deploy path ... to a remote machine or from a remote machine.
 
 - https://github.com/awakesecurity/nix-deploy
 - [[https://awakesecurity.com/blog/deploy-software-easily-securely-using-nix-deploy/][Deploy software easily and securely using nix-deploy | Awake Security]]
 
-** nixops
-
-[[https://github.com/NixOS/nixops][GitHub - NixOS/nixops: NixOps is a tool for deploying to NixOS machines in a ...]]
-
-** hocker
+*** hocker
 
 - [[https://github.com/awakesecurity/hocker][GitHub - awakesecurity/hocker: Utilities for interacting with the docker regi...]]
 - [[http://ixmatus.net/articles/docker-without-docker.html][Hocker, I can't believe it's not docker!]]
 - [[http://ixmatus.net/articles/hocker-nixos-docker.html][Integration woes with docker containers and NixOS]]
 
-** lorri
+*** lorri
 
 [[https://github.com/target/lorri][GitHub - target/lorri: Your project's nix-env]]
 
-** niv
+*** niv
 
 [[https://github.com/nmattia/niv][GitHub - nmattia/niv: Easy dependency management for Nix projects]]
 
+#+BEGIN_SRC sh
+$ niv init # create ./nix/
+$ niv show # pinned dependencies
+
+# add a package
+$ nix add --help
+
+# Change pinned nixpks
+$ niv modify nixpkgs --branch nixos-20.09
+
+# update all dependencies
+$ niv update
+#+END_SRC
+
+Once =niv= is initialized, using it is really simple:
+
+#+BEGIN_SRC nix
+{ sources ? import ./nix/sources.nix
+, pkgs ? import sources.nixpkgs {}
+}:
+
+...
+#+END_SRC
+
+*** gitignore.nix
+
+Automated [[https://github.com/NixOS/nixpkgs/blob/d1bb36d5cb5b78111f799eb26f5f17e5979bc746/lib/sources.nix#L35-L67][cleanSourceWith]].
+
+Filters a source tree removing version control files and directories.
+
+Usage:
+
+#+BEGIN_SRC nix
+let
+  gitignoreSrc = pkgs.fetchFromGitHub {
+    owner = "hercules-ci";
+    repo = "gitignore.nix";
+    rev = "";
+    sha256 = "";
+  };
+  inherit (import gitignoreSrc { inherit (pkgs) lib; }) gitignoreSource;
+in
+  mkDerivation {
+    name = "hello";
+    src = gitignoreSource ./vendored/hello;
+  }
+#+END_SRC
+
+More info at [[https://github.com/hercules-ci/gitignore.nix][GitHub - hercules-ci/gitignore.nix: Nix function for filtering local git sources]]
+*** cachix
+
+Docs: [[https://docs.cachix.org/][Welcome to Cachix documentation — Cachix docs documentation]]
+
+There are *public* and *private* caches.
+
+There are *personal* and *per-cache* auth tokens.
+
+**** Use a cache
+
+#+BEGIN_SRC sh
+cachix use <cache name>
+#+END_SRC
+
+**** Add a personal token
+
+First, create a token https://app.cachix.org/personal-auth-tokens.
+
+Then, add the token to cachix:
+
+#+BEGIN_SRC sh
+cachix authtoken <TOKEN>
+CACHIX_AUTH_TOKEN=<TOKEN>
+#+END_SRC
+
+**** Add a per-cache token
+
+TODO
+
+**** Sign binaries
+
+TODO
+
+**** Pushing binaries
+
+#+BEGIN_SRC sh
+$ nix-build | cachix push <cache name>
+#+END_SRC
+
+
 ** Tips & Tricks
 
-*** Install/Uninstall
+*** Install/Uninstall a package
 
 Install:
 
@@ -153,7 +273,6 @@ $ nix-env -e '<name of the derivation>'
 $ nix-env -e '.*haskell.*'
 #+END_SRC
 
-
 *** Update all packages:
 
 #+begin_src
@@ -161,7 +280,7 @@ nix-channel --update nixpkgs
 nix-env -u '*'
 #+end_src
 
-*** nix-shell script
+*** nix shebangs
 
 #+BEGIN_SRC bash
 #! /usr/bin/env nix-shell
@@ -193,14 +312,19 @@ $ nix-instantiate '<nixpkgs>' --eval --strict --attr haskellPackages.hocker.vers
 *** =patchShebangs=, =makeWrapper=, etc
 
 https://github.com/NixOS/nixpkgs/tree/master/pkgs/build-support/setup-hooks
+*** How <nixpkgs> works (do not use)
 
-** Snippets
+<path> looks for nix expressions specified by =$NIX_PATH= (similar to =$PATH=).
+
+#+BEGIN_SRC sh
+$ echo $NIX_PATH
+/home/arnau/.nix-defexpr/channels:/home/arnau/.nix-defexpr/channels:/home/arnau/.nix-defexpr/channels
+#+END_SRC
 
 *** Custom environment using =packageOverrides=
 
 #+begin_src nix
-# example.nix
-# $ nix-shell <name>.nix -A myPackages
+# $ nix-shell <file> -A myPackages
 let config = {
   packageOverrides = pkgs: with pkgs; {
       myPackages = pkgs.buildEnv {
@@ -216,13 +340,121 @@ let config = {
 
 in pkgs
 #+end_src
+*** Building and running Docker images
+
+#+BEGIN_SRC nix
+{ pkgs ? import <nixpkgs> { system = "x86_64-linux"; } }:
+
+pkgs.dockerTools.buildImage {
+  name = "hello-docker";
+  config = { Cmd = [ "${pkgs.hello}/bin/hello" ]; };
+}
+#+END_SRC
+
+Run the container:
+
+
+#+BEGIN_SRC sh
+$ nix-build
+$ docker load < result # $ docker load < $(nix-build)
+Loaded image: hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
+$ docker run -t hello-docker:y74sb4nrhxr975xs7h83izgm8z75x5fc
+#+END_SRC
+
+More info at:
+
+- [[https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-dockerTools][dockerTools]]
+- [[https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/docker/examples.nix][dockerTools examples]]
+
+*** Deploying NixOS using Terraform
+
+[[https://nix.dev/tutorials/deploying-nixos-using-terraform.html][Deploying NixOS using Terraform — nix.dev documentation]]
+
+
+** Anti-patterns
+
+*** Unquoted URLs are bad
+*** rec can loop, use let ... in
+*** with attrset; .. expression
+
+#+BEGIN_SRC nix
+# instead of:
+with (import <nixpkgs> {});
+
+# try this instead:
+let
+  pkgs = import <nixpkgs> {};
+  inherit (pkgs) curl jq;
+in ...
+#+END_SRC
+
+#+BEGIN_SRC nix
+# instead of:
+buildInputs = with pkgs; [ curl jq ];
+
+# try this instead:
+buildInputs = builtins.attrValues {
+  inherit (pkgs) curl jq;
+};
+
+# or this:
+buildInputs = lib.attrVals ["curl" "jq"] pkgs
+#+END_SRC
+
+*** Pin, do not <nixpkgs>
+*** attr1 // attr2
+
+Does not work on nested attrsets:
+
+#+BEGIN_SRC
+nix-repl> :p { a = { b = 1; }; } // { a = { c = 3; }; }
+{ a = { c = 3; }; }
+#+END_SRC
+
+A better way =pkgs.lib.recursiveUpdate=:
+
+#+BEGIN_SRC
+:p pkgs.lib.recursiveUpdate { a = { b = 1; }; } { a = { c = 3; }; }
+{ a = { b = 1; c = 3; }; }
+#+END_SRC
+
+*** src = ./. is not reproducible
+
+
+#+BEGIN_SRC nix
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.stdenv.mkDerivation {
+   name = "foobar";
+   src = ./.;
+}
+#+END_SRC
+
+The problem is that now your build is *no longer reproducible*, as it depends on the parent directory name.
+
+#+BEGIN_SRC nix
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.stdenv.mkDerivation {
+   name = "foobar";
+   src = builtins.path { path = ./.; name = "myproject"; };
+}
+#+END_SRC
+
 
 ** Resources
+
+Manuals:
 
 - [[https://nixos.org/manual/nix/stable/][Nix (manual)]]
 - [[https://nixos.org/manual/nixos/stable/][NixOS (manual)]]
 - [[https://nixos.org/manual/nixpkgs/stable/][Nixpkgs (manual)]]
 - [[https://hydra.nixos.org/build/141547278/download/1/hydra/][Hydra (manual)]]
+
+Guide:
+
+- https://nix.dev/index.html
+- https://github.com/nix-dot-dev/getting-started-nix-template
 
 *** Nix
 

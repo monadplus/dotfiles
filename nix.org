@@ -90,6 +90,39 @@ I recommend using =direnv= to automatically load your =shell.nix=
 #+BEGIN_SRC sh
 $ echo "use nix" > .envrc && direnv allow
 #+END_SRC
+*** nix repl
+
+Its main use is to inspect values from nixpkgs.
+
+#+BEGIN_SRC sh
+nix repl '<nixpkgs>'
+
+# Display all commands
+nix-repl> :?
+
+# Similar to "with"
+nix-repl> :a builtins
+nix-repl> attrNames { hello = 1; bye = 2; }
+
+# Build a derivation and enter a nix-shell
+nix-repl> :u pkgs.purescript
+nix-shell> which purs
+
+# Output path
+nix-repl> :b pkgs.purescript
+this derivation produced the following outputs:
+  out -> /nix/store/vmwdvr9fcrbvnfdjfrrpb07z8gzbi1q7-purescript-0.13.0
+
+# Install package to profile (not recommended)
+nix-repl> :i pkgs.purescript
+
+# Not very useful to work with individual derivations
+$ nix repl default.nix # what is loaded?
+nix-repl> src
+nix-repl> outPath
+# There isn't much more to do
+nix-repl> :b import ./default.nix {}
+#+END_SRC
 
 *** nix-copy-closure
 You can copy derivations, build products (shell.nix products included).
@@ -385,6 +418,38 @@ More info at:
 *** Deploying NixOS using Terraform
 
 [[https://nix.dev/tutorials/deploying-nixos-using-terraform.html][Deploying NixOS using Terraform — nix.dev documentation]]
+
+*** Nix profile
+
+=~/.nix-profile/bin= is in your PATH
+
+=nix-env= only changes where the ~/.nix-profile softlink points.
+
+#+BEGIN_SRC sh
+$ readlink ~/.nix-profile
+/nix/var/nix/profiles/per-user/arnau/profile
+
+$ readlink -f ~/.nix-profile
+/nix/store/snyws5v4z4cgirj5rnj8b63mhqgx14kp-user-environment
+#+END_SRC
+*** My first derivation
+
+- To build: =$ nix-build default.nix=
+- To install: =$ nix-env -i -f default.nix=
+
+#+BEGIN_SRC nix
+# default.nix
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.stdenv.mkDerivation {
+  name = "test.txt";
+  src = ./test.txt;
+  phases = [ "installPhase" ];
+  installPhase = ''
+    ln -s $src $out
+  '';
+}
+#+END_SRC
 
 
 ** Anti-patterns

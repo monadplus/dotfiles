@@ -106,3 +106,25 @@ EIN has multiple Issues with minified ipynb, Doom, and Spacemacs.
 - Yank cell: C-c C-y
 - Execute all cells M-x ein:workseet-execute-all-cell.
 - Save: C-x C-s
+
+* evil-numbers
+
+https://github.com/cofi/evil-numbers
+
+Increment/decrement numbers: g- and g=
+
+* evil-lion
+
+https://github.com/edkolev/evil-lion
+
+Align: `gl MOTION CHAR`
+Right-align: :n `gL MOTION CHAR`
+
+Example: `glip=` and `glip,`
+
+one = 1
+three = 3
+fifteen = 15
+
+one, two, three,
+four, sixteen, seventeen,

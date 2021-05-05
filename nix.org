@@ -303,6 +303,15 @@ https://docs.cachix.org/getting-started.html#signing-key-optional
 $ nix-build | cachix push <cache name>
 #+END_SRC
 
+** Nix Pills
+
+https://nixos.org/guides/nix-pills/index.html
+
+*** 2 Install on Your Running System
+
+Nix has a database /nix/var/nix/db.
+
+Never change /nix/store manually. If you do, then it will no longer be in sync with the sqlite db, unless you really know what you are doing.
 
 ** Tips & Tricks
 

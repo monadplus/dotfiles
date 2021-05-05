@@ -248,6 +248,8 @@ Using `Network Manager`.
 
 Eduroam: https://serveistic.upc.edu/ca/wifiupc/documentacio/eduroam-configuration-guide
 
+Just download the python script from the website and execute it.
+
 ### Status Bar
 
 - `polybar`:

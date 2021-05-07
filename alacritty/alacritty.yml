@@ -245,34 +245,38 @@ draw_bold_text_with_bright_colors: true
   #
   #indexed_colors: []
 
-# Colors (Dracula)
+# Colors (IR Black)
 colors:
   # Default colors
   primary:
-    background: '0x282a36'
-    foreground: '0xf8f8f2'
+    background: '#000000'
+    foreground: '#ffffff'
+
+  cursor:
+    text: '#ffffff'
+    cursor: '#ffffff'
 
   # Normal colors
   normal:
-    black:   '0x000000'
-    red:     '0xff5555'
-    green:   '0x50fa7b'
-    yellow:  '0xf1fa8c'
-    blue:    '0xbd93f9'
-    magenta: '0xff79c6'
-    cyan:    '0x8be9fd'
-    white:   '0xbbbbbb'
+    black:   '#4e4e4e'
+    red:     '#ff6c60'
+    green:   '#a8ff60'
+    yellow:  '#ffffb6'
+    blue:    '#96cbfe'
+    magenta: '#ff73fd'
+    cyan:    '#c6c5fe'
+    white:   '#eeeeee'
 
   # Bright colors
   bright:
-    black:   '0x555555'
-    red:     '0xff5555'
-    green:   '0x50fa7b'
-    yellow:  '0xf1fa8c'
-    blue:    '0xcaa9fa'
-    magenta: '0xff79c6'
-    cyan:    '0x8be9fd'
-    white:   '0xffffff'
+    black:   '#7c7c7c'
+    red:     '#ffb6b0'
+    green:   '#ceffab'
+    yellow:  '#ffffcb'
+    blue:    '#b5dcfe'
+    magenta: '#ff9cfe'
+    cyan:    '#dfdffe'
+    white:   '#ffffff'
 
 # Bell
 #

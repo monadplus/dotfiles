@@ -47,6 +47,7 @@ else
   # run streamlink-twitch-gui &
   # run lutris &
 fi
+feh --bg-scale ~/dotfiles/wallpapers/manga_black_wallpaper.jpg
 #picom --config $HOME/.xmonad/scripts/picom.conf & # window composer
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd & # Notifications as pop-ups - xfce4-notifyd-config

@@ -41,8 +41,8 @@ myStartupHook = do
   spawn "$HOME/.xmonad/scripts/autostart.sh"
   setWMName "LG3D"
 
-normBord = "#46394E"
-focdBord = "#896F9A"
+normBord = "#000000"
+focdBord = "#fefefe"
 
 --mod4Mask= super key
 --mod1Mask= alt key
@@ -52,7 +52,7 @@ myModMask = mod4Mask
 
 encodeCChar = map fromIntegral . B.unpack
 
-myBorderWidth = 2
+myBorderWidth = 1
 
 --              edit       file      globe     file      envelope
 -- myWorkspaces = ["\61508", "\61897", "\61612", "\61788", "\61664"]
@@ -86,7 +86,7 @@ myManageHook =
     checkAll str = className =? str <||> title =? str <||> resource =? str
     doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
     -- Stuff
-    myCFloats = ["Arandr", "Enpass", "vlc", "feh", "nomacs", "Image Lounge"]
+    myCFloats = ["Arandr", "Enpass", "vlc", "feh", "Image Lounge"]
     myTFloats = ["Downloads", "Save As..."]
     myRFloats = []
     myIgnores = ["desktop_window"]
@@ -118,7 +118,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) =
       ((modMask, xK_Return), spawn "emacs"),
       -- ((modMask .|. shiftMask, xK_Return), spawn "alacritty"),
       ((modMask .|. mod1Mask, xK_Return), spawn "code"),
-      ((modMask, xK_p), spawn "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'Noto Sans:bold:pixelsize=14'"),
+      ((modMask, xK_p), spawn "dmenu_run -i -nb '#000000' -nf '#fefefe' -sb '#fefefe' -sf '#000000' -fn 'Noto Sans:bold:pixelsize=12' -p 'Execute: '"),
       ((controlMask .|. shiftMask, xK_v), spawn "clipmenu"),
       ((modMask, xK_r), spawn "polybar-msg cmd restart"),
       ((modMask .|. shiftMask, xK_r), spawn "xmonad --recompile && xmonad --restart"),

@@ -53,8 +53,7 @@
   ;;   (display-battery-mode 1))
 
   ; theme
-  (setq doom-theme 'doom-dracula)
-  ;;(setq doom-theme 'doom-solarized-light)
+  (setq doom-theme 'monochrome)
 
   ; windows
   (setq evil-vsplit-window-right t
@@ -68,7 +67,7 @@
   (setq +ivy-buffer-preview t) ; preview buffer before jump
 
   ; doom-dashboard
-  (setq fancy-splash-image "~/wallpapers/megumin_2.png") ;
+  (setq fancy-splash-image "~/.doom.d/splash.png") ;
 
   ;; (map! :n [mouse-8] #'better-jumper-jump-backward
   ;;       :n [mouse-9] #'better-jumper-jump-forward)

@@ -5,5 +5,5 @@ battery_left=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E 
 if [ -n "$battery_left" ]; then
     echo "$battery_left"
 else
-    echo ""
+    echo "No battery"
 fi

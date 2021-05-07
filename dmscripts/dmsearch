@@ -25,13 +25,13 @@ declare -a options=(
 )
 
 while [ -z "$engine" ]; do
-enginelist=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p 'Choose search engine:') || exit
+enginelist=$(printf '%s\n' "${options[@]}" | dmenu -i -nb '#000000' -nf '#fefefe' -sb '#fefefe' -sf '#000000' -fn 'Noto Sans:bold:pixelsize=12' -l 20 -p 'Choose search engine:') || exit
 engineurl=$(echo "$enginelist" | awk '{print $NF}')
 engine=$(echo "$enginelist" | awk '{print $1}')
 done
 
 while [ -z "$query" ]; do
-query=$(echo "$engine" | dmenu -p 'Enter search query:') || exit
+query=$(echo "$engine" | dmenu -nb '#000000' -nf '#fefefe' -sb '#fefefe' -sf '#000000' -fn 'Noto Sans:bold:pixelsize=12' -p 'Enter search query:') || exit
 done
 
 $DMBROWSER "$engineurl""$query"

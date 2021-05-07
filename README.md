@@ -683,6 +683,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 ln -s ~/dotfiles/.zshrc ~/.zshrc # link
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH/themes/powerlevel10k
 # Finally, open the shell and follow the powerlevel10k wizard
+p10k configure
 ```
 
 [zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete):

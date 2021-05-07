@@ -16,24 +16,6 @@ Example: place your cursor on "right" `gxiw` then on "the" `.`:
 This is right the word.
 ```
 
-### [evil-numbers](https://github.com/cofi/evil-numbers) 
-
-Increment/decrement numbers: `g-` and `g=`
-
-### [evil-lion](https://github.com/edkolev/evil-lion)
-
-Align: `gl MOTION CHAR`
-Right-align: :n `gL MOTION CHAR`
-
-Example: `glip=` and `glip,`
-
-one = 1
-three = 3
-fifteen = 15
-
-one, two, three,
-four, sixteen, seventeen,
-
 ### [evil-nerd-commenter](https://github.com/redguardtoo/evil-nerd-commenter)
 
 - Comment :nv `gc`

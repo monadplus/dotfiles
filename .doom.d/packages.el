@@ -65,3 +65,6 @@
            :branch "release-2.6.1.3"
            :files ("src/data/emacs-mode/*.el" (:exclude "agda-input.el"))
            :nonrecursive t))
+
+(package! monochrome-theme
+  :recipe (:host github :repo "fxn/monochrome-theme.el"))

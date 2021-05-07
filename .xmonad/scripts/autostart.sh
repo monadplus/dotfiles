@@ -30,7 +30,7 @@ xsetroot -cursor_name left_ptr & #cursor active at boot
 # Starting utility at boot time #
 #################################
 
-run variety & # wallpaper
+# run variety & # wallpaper
 run nm-applet & # networkManager systray
 run pamac-tray & # package manager at tray
 run clipmenud & # clipboard manager
@@ -47,7 +47,8 @@ else
   # run streamlink-twitch-gui &
   # run lutris &
 fi
-picom --config $HOME/.xmonad/scripts/picom.conf & # window composer
+feh --bg-scale ~/dotfiles/wallpapers/manga_black_wallpaper.jpg
+#picom --config $HOME/.xmonad/scripts/picom.conf & # window composer
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd & # Notifications as pop-ups - xfce4-notifyd-config
 udiskie & # automount disk

@@ -326,12 +326,36 @@ $ ldd /nix/store/9ywr69qi622lrmx5nn88gk8jpmihy0dz-bash-4.4-p23/bin/bash
 
 *** Enter the environment
 
+What is adding nix binaries to the path?
+
 #+BEGIN_SRC sh
 # This file is sourced in ~/.profile
 cat /home/arnau/.nix-profile/etc/profile.d/nix.sh
 #+END_SRC
 
+List generations:
 
+#+BEGIN_SRC sh
+$ nix-env --list-generations
+    1   2021-03-31 12:14:49
+    2   2021-03-31 13:38:53
+    3   2021-03-31 14:39:25
+
+$ home-manager generations
+2021-05-03 21:38 : id 1 -> /nix/store/7kw9hbnlcbrckx61vx0cvhryrf7mz7pw-home-manager-generation
+#+END_SRC
+
+List installed derivations with path:
+
+#+BEGIN_SRC sh
+$ nix-env -q --out-path
+#+END_SRC
+
+Runtime dependencies of hello:
+
+#+BEGIN_SRC sh
+nix-store -q --references `which cachix`
+#+END_SRC
 
 *** The Basics of the Language
 *** Functions and Imports
@@ -350,7 +374,6 @@ cat /home/arnau/.nix-profile/etc/profile.d/nix.sh
 *** Nix Store paths
 *** Fundamentals of Stdenv
 *** Basic Dependencies and Hooks
-***
 
 ** Tips & Tricks
 
@@ -437,6 +460,7 @@ let config = {
 
 in pkgs
 #+end_src
+
 *** Building and running Docker images
 
 #+BEGIN_SRC nix
@@ -480,6 +504,7 @@ $ readlink ~/.nix-profile
 $ readlink -f ~/.nix-profile
 /nix/store/snyws5v4z4cgirj5rnj8b63mhqgx14kp-user-environment
 #+END_SRC
+
 *** My first derivation
 
 - To build: =$ nix-build default.nix=

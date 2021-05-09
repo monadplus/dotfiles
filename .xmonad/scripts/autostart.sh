@@ -18,9 +18,6 @@ function run {
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 
 (sleep 2; run $HOME/.config/polybar/launch.sh) &
-# Some modules are not properly placed on the bar until all of them load
-# This is a dirty trick to reload polybar after boot.
-(sleep 40; polybar-msg cmd restart) &
 
 #setxkbmap -layout be #keyboard layout
 xsetroot -cursor_name left_ptr & #cursor active at boot

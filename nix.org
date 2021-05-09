@@ -307,11 +307,74 @@ $ nix-build | cachix push <cache name>
 
 https://nixos.org/guides/nix-pills/index.html
 
-*** 2 Install on Your Running System
+*** Why You Should Give it a Try
+*** Install on Your Running System
 
-Nix has a database /nix/var/nix/db.
+Nix has an sqlite database /nix/var/nix/db (schema = table of valid store path).
 
 Never change /nix/store manually. If you do, then it will no longer be in sync with the sqlite db, unless you really know what you are doing.
+
+If you change the location of the store i.e. /nix/store you won't benefit from nixos.org cache or any other binary cache since the paths will be different:
+
+#+BEGIN_SRC sh
+$ ldd /nix/store/9ywr69qi622lrmx5nn88gk8jpmihy0dz-bash-4.4-p23/bin/bash
+    linux-vdso.so.1 (0x00007ffc9596d000)
+    libdl.so.2 => /nix/store/0c7c96gikmzv87i7lv3vq5s1cmfjd6zf-glibc-2.31-74/lib/libdl.so.2 (0x00007fcc43022000)
+    libc.so.6 => /nix/store/0c7c96gikmzv87i7lv3vq5s1cmfjd6zf-glibc-2.31-74/lib/libc.so.6 (0x00007fcc42e63000)
+    /nix/store/0c7c96gikmzv87i7lv3vq5s1cmfjd6zf-glibc-2.31-74/lib/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007fcc43029000)
+#+END_SRC
+
+*** Enter the environment
+
+What is adding nix binaries to the path?
+
+#+BEGIN_SRC sh
+# This file is sourced in ~/.profile
+cat /home/arnau/.nix-profile/etc/profile.d/nix.sh
+#+END_SRC
+
+List generations:
+
+#+BEGIN_SRC sh
+$ nix-env --list-generations
+    1   2021-03-31 12:14:49
+    2   2021-03-31 13:38:53
+    3   2021-03-31 14:39:25
+
+$ home-manager generations
+2021-05-03 21:38 : id 1 -> /nix/store/7kw9hbnlcbrckx61vx0cvhryrf7mz7pw-home-manager-generation
+#+END_SRC
+
+List installed derivations with path:
+
+#+BEGIN_SRC sh
+$ nix-env -q --out-path
+#+END_SRC
+
+Runtime dependencies of hello:
+
+#+BEGIN_SRC sh
+nix-store -q --references `which cachix`
+#+END_SRC
+
+
+*** The Basics of the Language
+*** Functions and Imports
+*** Our first derivation
+*** Working Derivation
+*** Generic Builders
+*** Automatic Runtime Dependencies
+*** Developing with nix-shell
+*** Garbage Collector
+*** Inputs Design Pattern
+*** Callpackage Design Pattern
+*** Override Design Pattern
+*** Nix Search Paths
+*** Nixpkgs Parameters
+*** Nixpkgs Overriding Packages
+*** Nix Store paths
+*** Fundamentals of Stdenv
+*** Basic Dependencies and Hooks
 
 ** Tips & Tricks
 
@@ -398,6 +461,7 @@ let config = {
 
 in pkgs
 #+end_src
+
 *** Building and running Docker images
 
 #+BEGIN_SRC nix
@@ -441,6 +505,7 @@ $ readlink ~/.nix-profile
 $ readlink -f ~/.nix-profile
 /nix/store/snyws5v4z4cgirj5rnj8b63mhqgx14kp-user-environment
 #+END_SRC
+
 *** My first derivation
 
 - To build: =$ nix-build default.nix=

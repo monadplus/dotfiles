@@ -689,7 +689,7 @@ time-alt = %H:%M
 ;format-underline = #c1941a
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
-label = "%date%  %time%"
+label = "%time% %date%"
 
 #################################################################
 
@@ -1004,7 +1004,7 @@ format-prefix = " "
 [module/pavolume]
 type = custom/script
 tail = true
-label = "  %output%"
+label = "%output%"
 exec = ~/.config/polybar/scripts/pavolume.sh --listen
 click-right = exec pavucontrol
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute

@@ -351,15 +351,53 @@ List installed derivations with path:
 $ nix-env -q --out-path
 #+END_SRC
 
-Runtime dependencies of hello:
 
 #+BEGIN_SRC sh
-nix-store -q --references `which cachix`
+# Dependencies of hello
+nix-store -q --references `which hello`
+/nix/store/v8q6nxyppy1myi3rxni2080bv8s9jxiy-glibc-2.32-40
+/nix/store/544psc5aqpbmyffi7c6pgf8bhkkabkry-hello-2.10
+
+# Reverse dependencies:
+nix-store -q --referrers `which hello`
 #+END_SRC
 
+The =manifest.nix= file contains metadata about the environment, such as which derivations are installed.
+
+The *closures* of a derivation is a list of all its dependencies, recursively, including absolutely everything necessary to use that derivation.
+
+#+BEGIN_SRC sh
+$ nix-store -qR `which hello`
+/nix/store/q5g87xcw06a4cxsgf0bgmhpd8ipnk0nh-libunistring-0.9.10
+/nix/store/jjhjkrll0n60bcczgldc4z6bmn2f24lc-libidn2-2.3.0
+/nix/store/v8q6nxyppy1myi3rxni2080bv8s9jxiy-glibc-2.32-40
+/nix/store/544psc5aqpbmyffi7c6pgf8bhkkabkry-hello-2.10
+
+$ nix-store -q --tree `which man`
+/nix/store/544psc5aqpbmyffi7c6pgf8bhkkabkry-hello-2.10
++---/nix/store/v8q6nxyppy1myi3rxni2080bv8s9jxiy-glibc-2.32-40
+|   +---/nix/store/jjhjkrll0n60bcczgldc4z6bmn2f24lc-libidn2-2.3.0
+|   |   +---/nix/store/q5g87xcw06a4cxsgf0bgmhpd8ipnk0nh-libunistring-0.9.10
+|   |   |   +---/nix/store/q5g87xcw06a4cxsgf0bgmhpd8ipnk0nh-libunistring-0.9.10 [...]
+|   |   +---/nix/store/jjhjkrll0n60bcczgldc4z6bmn2f24lc-libidn2-2.3.0 [...]
+|   +---/nix/store/v8q6nxyppy1myi3rxni2080bv8s9jxiy-glibc-2.32-40 [...]
++---/nix/store/544psc5aqpbmyffi7c6pgf8bhkkabkry-hello-2.10 [...]
+#+END_SRC
+
+Copying all those derivations to the Nix store of another machine makes you able to run =hello= out of the box on that other machine.
+
 *** The Basics of the Language
+
+
+Simple Types: integer, floating point, string, path, boolean and null.
+
+Complex Types: list, sets and functions.
+
 *** Functions and Imports
 *** Our first derivation
+
+TODO
+
 *** Working Derivation
 *** Generic Builders
 *** Automatic Runtime Dependencies
@@ -522,6 +560,13 @@ pkgs.stdenv.mkDerivation {
     ln -s $src $out
   '';
 }
+#+END_SRC
+
+*** Recovering after deleting nix accidentally
+
+#+BEGIN_SRC sh
+$ ls /nix/store/*nix-2.3.10
+$ /nix/store/wixxr1fn5r1jhaw6xyxnm78jcwmsdj5g-nix-2.3.10/bin/nix-env --rollback
 #+END_SRC
 
 

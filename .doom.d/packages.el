@@ -68,3 +68,6 @@
 
 (package! monochrome-theme
   :recipe (:host github :repo "fxn/monochrome-theme.el"))
+
+(package! color-theme-sanityinc-tomorrow
+  :recipe (:host github :repo "purcell/color-theme-sanityinc-tomorrow"))

@@ -53,7 +53,7 @@
   ;;   (display-battery-mode 1))
 
   ; theme
-  (setq doom-theme 'monochrome)
+  (setq doom-theme 'sanityinc-tomorrow-bright)
 
   ; windows
   (setq evil-vsplit-window-right t

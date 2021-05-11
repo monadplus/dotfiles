@@ -84,5 +84,8 @@ in {
     nixpkgs.haskPkgs.ghcid
     nixpkgs.haskPkgs.pointfree
     nixpkgs.haskPkgs.ormolu
+
+    # Scala
+    nixpkgs.metals
   ];
 }

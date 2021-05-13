@@ -52,8 +52,11 @@
   ;;                (battery))
   ;;   (display-battery-mode 1))
 
-  ; theme
-  (setq doom-theme 'sanityinc-tomorrow-bright)
+  (let ((theme
+         (cond ((string= (system-name) "laptop") 'doom-gruvbox-light)
+               (t 'sanityinc-tomorrow-bright))
+         ))
+    (setq doom-theme theme))
 
   ; windows
   (setq evil-vsplit-window-right t

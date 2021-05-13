@@ -144,6 +144,16 @@
   ;; (add-hook! 'rainbow-mode-hook
   ;;   (hl-line-mode (if rainbow-mode -1 +1)))
 
+  ; Fix agda2-mode not making the minibuffer inhering input mode
+  (defun my-inherit-input-method ()
+    "Inherit input method from `minibuffer-selected-window'."
+    (let* ((win (minibuffer-selected-window))
+           (buf (and win (window-buffer win))))
+      (when buf
+        (activate-input-method (buffer-local-value 'evil-input-method buf)))))
+
+  (add-hook 'minibuffer-setup-hook #'my-inherit-input-method)
+
   ;; rainbow-mode hook
   (defun my-rainbow-mode-hook ()
     (rainbow-mode 1))

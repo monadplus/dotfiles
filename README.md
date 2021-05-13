@@ -381,10 +381,11 @@ ln -s ~/dotfiles/.ghci ~/.ghci
 
 ### Agda
 
-Libraries are installed like `ial` (see `.agda/`).
-Recall to `ln -s ~/dotfiles/.agda  ~/.agda`.
+```bash
+ln -s ~/dotfiles/.agda ~
+```
 
-Home manager will install all the packages required for agda development.
+Home manager will install all the packages required for Agda development.
 
 ### Java
 

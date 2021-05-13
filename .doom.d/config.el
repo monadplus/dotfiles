@@ -299,6 +299,14 @@
             lsp-ui-peek-always-show        t
             lsp-ui-peek-fontify            'always)))
 
+(defsection elisp-mode
+  "Emacs lisp."
+
+  (map! :map emacs-lisp-mode-map
+        :localleader
+        :desc "Format region" "F" #'indent-region
+        :desc "Format sexp" "f" #'indent-pp-sexp))
+
 (defsection nix-mode
   "Nix."
   (after! nix-mode
@@ -307,23 +315,32 @@
           ; Really slow if pressed by accident nix-update-fetch
           "f" #'nix-format-buffer)))
 
+(defsection agda2-mode
+  "Agda."
+
+  ;; auto-load agda-mode for .agda and .lagda.md
+  (setq auto-mode-alist
+        (append
+         '( ("\\.lagda.md\\'" . agda2-mode) )
+         auto-mode-alist)))
+
 (defsection haskell-mode
   "Haskell."
 
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
   (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
-  ; http://haskell.github.io/haskell-mode/manual/latest/Interactive-Haskell.html#Interactive-Haskell
+                                        ; http://haskell.github.io/haskell-mode/manual/latest/Interactive-Haskell.html#Interactive-Haskell
   (customize-set-variable 'haskell-process-auto-import-loaded-modules t)
 
   ;; It's bad because the replaced unicodes cannot be use in substitution of the original word.
   ;; For example, `map1 ∪ map2' won't compile
   ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method) ;; unicode support
 
-  ; `haskell-compile' use stack instead of cabal
-  ; (setq haskell-compile-cabal-build-command "stack build")
+                                        ; `haskell-compile' use stack instead of cabal
+                                        ; (setq haskell-compile-cabal-build-command "stack build")
   (setq haskell-interactive-popup-errors nil)
   (setq haskell-process-suggest-language-pragmas nil) ; haskell-interactive-mode only
-  (setq lsp-lens-enable nil) ; bothersome after a while.
+  (setq lsp-lens-enable nil)            ; bothersome after a while.
 
   (after! smartparens
     (require 'smartparens-haskell))
@@ -333,7 +350,7 @@
     (setq ormolu-process-path "ormolu"))
   (map! :map haskell-mode-map :localleader :desc "format" "f" #'ormolu-format-buffer)
 
-  ; ghcid
+                                        ; ghcid
   (use-package! ghcid
     :after compile)
   (after! ghcid
@@ -345,37 +362,37 @@
            :desc "ghcid: start" "g" #'ghcid
            :desc "ghcid: stop" "G" #'ghcid-stop)))
 
-  ; FIXME hoogle should query remote server, not local
-  ; hoogle
-  ; If the search doesn't output anything, you may need to run $ google generate
+                                        ; FIXME hoogle should query remote server, not local
+                                        ; hoogle
+                                        ; If the search doesn't output anything, you may need to run $ google generate
 
-  ; haskell-mode
+                                        ; haskell-mode
   (map! (:after haskell-mode
          :map haskell-mode-map
-          :localleader
-          :desc "ghci: load file" "l" #'haskell-process-load-file
-          :desc "ghci: clear" "k" #'haskell-interactive-mode-clear
-          :desc "ghci" "i" #'haskell-interactive-bring
-          ;; :desc "find reference" "r" #'lsp-ui-peek-find-references ;; TODO not implemented in the LSP yet
-          ;; :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
-          :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
-          ;; :desc "ghci process" "1" (lambda () (interactive) (setq haskell-process-type 'auto) (haskell-process-restart))
-          :desc "cabal process" "1" (lambda () (interactive) (setq haskell-process-type 'cabal-repl) (haskell-process-restart))
-          :desc "stack process" "2" (lambda () (interactive) (setq haskell-process-type 'stack-ghci) (haskell-process-restart))
-          :desc "doc" "t" 'lsp-ui-doc-glance
-          ;; :desc "show doc" "t" '+lookup/documentation
-          ;; :desc "type" "t" 'haskell-process-do-type
-          ;; :desc "ghc: compile" "B" #'haskell-compile ; override
-          ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
-          ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
-          :desc "hoogle (local)" "h" #'haskell-hoogle
-          :desc "hoogle (web)" "H" #'haskell-hoogle-lookup-from-website)
+         :localleader
+         :desc "ghci: load file" "l" #'haskell-process-load-file
+         :desc "ghci: clear" "k" #'haskell-interactive-mode-clear
+         :desc "ghci" "i" #'haskell-interactive-bring
+         ;; :desc "find reference" "r" #'lsp-ui-peek-find-references ;; TODO not implemented in the LSP yet
+         ;; :desc "cabal command" "C" #'haskell-process-cabal ; arbitrary cabal command
+         :desc "cabal: compile" "b" #'haskell-process-cabal-build ; faster than 'haskell-compile
+         ;; :desc "ghci process" "1" (lambda () (interactive) (setq haskell-process-type 'auto) (haskell-process-restart))
+         :desc "cabal process" "1" (lambda () (interactive) (setq haskell-process-type 'cabal-repl) (haskell-process-restart))
+         :desc "stack process" "2" (lambda () (interactive) (setq haskell-process-type 'stack-ghci) (haskell-process-restart))
+         :desc "doc" "t" 'lsp-ui-doc-glance
+         ;; :desc "show doc" "t" '+lookup/documentation
+         ;; :desc "type" "t" 'haskell-process-do-type
+         ;; :desc "ghc: compile" "B" #'haskell-compile ; override
+         ;; :desc "start hoogle" "" #'haskell-hoogle-start-server
+         ;; :desc "stop hoogle" "" #'haskell-hoogle-kill-server
+         :desc "hoogle (local)" "h" #'haskell-hoogle
+         :desc "hoogle (web)" "H" #'haskell-hoogle-lookup-from-website)
         )
 
   (after! lsp-mode
     (map! :map haskell-mode-map
           :localleader
-            :desc "restart lsp" "R" 'lsp-restart-workspace))
+          :desc "restart lsp" "R" 'lsp-restart-workspace))
 
   (add-hook 'haskell-mode-hook ( lambda () (setq-default flycheck-disabled-checkers '(haskell-stack-ghc haskell-ghc haskell-hlint)) ))
   (defun haskell-mode-leave ()
@@ -392,8 +409,8 @@
 
 (defsection rust-mode
   "Rust."
-        (after! rustic
-        (setq rustic-lsp-server 'rust-analyzer)))
+  (after! rustic
+    (setq rustic-lsp-server 'rust-analyzer)))
 
 (defsection cc-mode
   "C/C++."

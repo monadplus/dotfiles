@@ -42,12 +42,17 @@
 
 (package! ghcid
   :recipe (:host github :repo "monadplus/ghcid"))
+
 (package! exec-path-from-shell
   :recipe (:host github :repo "purcell/exec-path-from-shell"))
-(package! atomic-chrome)
+
+(package! atomic-chrome) ; Edit text arenas of the browser
+
 (package! ormolu)
+
 ; FIX the bug with keychain not found https://github.com/tarsius/keychain-environment
 (package! keychain-environment)
+
 ;; (package! doom-snippets :disable t)
 (package! yasnippet-snippets)
 
@@ -65,9 +70,6 @@
            :branch "release-2.6.1.3"
            :files ("src/data/emacs-mode/*.el" (:exclude "agda-input.el"))
            :nonrecursive t))
-
-(package! monochrome-theme
-  :recipe (:host github :repo "fxn/monochrome-theme.el"))
 
 (package! color-theme-sanityinc-tomorrow
   :recipe (:host github :repo "purcell/color-theme-sanityinc-tomorrow"))

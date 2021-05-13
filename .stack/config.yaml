@@ -28,7 +28,7 @@ nix:
   # NixOS where it is enabled by default (see #3938).  You can set set it in your
   # `$HOME/.stack/config.yaml` to enable Nix for all your projects without having
   # to repeat it
-  enable: true
+  enable: false
 
   # true by default. Tells Nix whether to run in a pure shell or not.
   # https://docs.haskellstack.org/en/stable/nix_integration/#the-nix-shell

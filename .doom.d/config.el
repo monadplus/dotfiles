@@ -53,7 +53,7 @@
   ;;   (display-battery-mode 1))
 
   (let ((theme
-         (cond ((string= (system-name) "laptop") 'doom-gruvbox-light)
+         (cond ((string= (system-name) "laptop") 'sanityinc-tomorrow-bright)
                (t 'sanityinc-tomorrow-bright))
          ))
     (setq doom-theme theme))

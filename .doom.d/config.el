@@ -213,9 +213,18 @@
 (defsection spelling
   "spell-fu, ispell, aspell"
 
-  (after! ispell
-    (setq ispell-program-name "aspell")
-    (setq ispell-dictionary "en")))
+  (setq ispell-program-name "aspell")
+  (setq ispell-dictionary "en_GB")
+
+  (setf (alist-get 'markdown-mode +spell-excluded-faces-alist)
+        '(markdown-code-face
+          markdown-reference-face
+          markdown-link-face
+          markdown-url-face
+          markdown-markup-face
+          markdown-html-attr-value-face
+          markdown-html-attr-name-face
+          markdown-html-tag-name-face)))
 
 (defsection atomic-chrome
   "Edit text areas of the browser in Emacs."

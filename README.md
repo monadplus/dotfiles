@@ -368,7 +368,7 @@ $ nix-shell '<home-manager>' -A install
 
 ### Haskell
 
-Home manager will install all the packages required for haskell development.
+Haskell is now installed via nix (home-manager)!
 
 ```bash
 cabal configure
@@ -381,40 +381,15 @@ ln -s ~/dotfiles/.ghci ~/.ghci
 
 ### Agda
 
-```bash
-ln -s ~/dotfiles/.agda ~
-```
+Agda is now installed via nix (home-manager)!
 
-Home manager will install all the packages required for Agda development.
+### Java & Scala
 
-### Java
-
-See [wiki](https://wiki.archlinux.org/index.php/Java)
-
-```bash
-sudo pacman -Syu jdk8-openjdk
-sudo pacman -Syu jdk11-openjdk
-```
-
-Use `archlinux-java` to switch between version:
-
-```
-archlinux-java status
-sudo archlinux-java set java-8-openjdk
-```
+Java is now installed via nix (home-manager)!
 
 ### Scala
 
-```bash
-sudo pacman -Syu scala scala-docs scala-sources sbt maven ammonite
-paru -Syu bloop bloop-systemd
-systemctl --user enable bloop
-systemctl --user start bloop
-systemctl --user status bloop
-
-systemctl --user stop bloop
-systemctl --user disable bloop
-```
+Java is now installed via nix (home-manager)!
 
 
 [coc-metals](https://github.com/scalameta/coc-metals) will be automatically installed by vim-plug.

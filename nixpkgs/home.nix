@@ -15,7 +15,6 @@ let
   nixpkgsSource = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
 
   # Update using `$ update.sh` - Get commit from https://status.nixos.org
-  # Alternatively, https://nix.dev/tutorials/towards-reproducibility-pinning-nixpkgs.html#dependency-management-with-niv
   src = bootstrap.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
@@ -54,6 +53,17 @@ in {
   nixpkgs.config = import ./nixpkgs-config.nix;
   xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
 
+  # dotfiles
+  home.file = {
+    # FIXME
+    ".bloop/_bloop".source = ./bloop-zsh-completions;
+
+    ".agda" = {
+      source = ../.agda;
+      recursive = true;
+    };
+  };
+
   # Check dependencies not installed by nix with `$ nix-env --query`
   home.packages = [
     # Nix
@@ -64,6 +74,9 @@ in {
     nixpkgs.nix-prefetch-git
     nixpkgs.nix-serve # https://github.com/edolstra/nix-serve
     # nixpkgs.rnix-lsp TODO
+
+    # TODO
+    # https://github.com/nix-community/nix-direnv
 
     # Agda
     nixpkgs.agda
@@ -86,7 +99,17 @@ in {
       extensions = [ "rust-src" "rust-analyzer-preview" ];
     }))
 
+    # Java
+    nixpkgs.jdk11_headless
+    nixpkgs.jasmin
+    nixpkgs.maven
+
     # Scala
+    nixpkgs.sbt-with-scala-native
+    nixpkgs.coursier
+    nixpkgs.bloop
     nixpkgs.metals
+    nixpkgs.ammonite
+    nixpkgs.scalafmt
   ];
 }

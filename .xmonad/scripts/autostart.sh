@@ -60,4 +60,6 @@ run enpass &
 run thunderbird &
 run firefox &
 
+bloop server &
+
 xset r rate 265 40

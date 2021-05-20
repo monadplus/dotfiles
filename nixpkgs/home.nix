@@ -22,8 +22,12 @@ let
     inherit (nixpkgsSource) rev sha256;
   };
 
-  overlays = map (fileName: import (./overlays + "/${fileName}"))
+  rust-overlay = import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz");
+
+  other-overlays = map (fileName: import (./overlays + "/${fileName}"))
     (builtins.attrNames (builtins.readDir ./overlays));
+
+  overlays = [rust-overlay] ++ other-overlays;
 
   nixpkgs = import src { inherit overlays; };
 
@@ -47,16 +51,8 @@ in {
   # changes in each release.
   home.stateVersion = "21.05";
 
-  # https://rycee.gitlab.io/home-manager/options.html#opt-nixpkgs.config
-  nixpkgs.config = {
-    allowBroken = true;
-    allowUnfree = true;
-
-    # If set to true (the default), any non-content-addressed path added or copied to the Nix store
-    # (e.g. when substituting from a binary cache) must have a valid signature, that is, be signed
-    # using one of the keys listed in trusted-public-keys or secret-key-files. Set to false to disable signature checking.
-    require-sigs = false;
-  };
+  nixpkgs.config = import ./nixpkgs-config.nix;
+  xdg.configFile."nixpkgs/config.nix".source = ./nixpkgs-config.nix;
 
   # Check dependencies not installed by nix with `$ nix-env --query`
   home.packages = [
@@ -75,15 +71,20 @@ in {
     # Haskell
     nixpkgs.cabal2nix
     nixpkgs.haskPkgs.hlint
-    nixpkgs.haskPkgs.alex
-    nixpkgs.haskPkgs.happy
-    nixpkgs.haskPkgs.BNFC
+    # nixpkgs.haskPkgs.alex
+    # nixpkgs.haskPkgs.happy
+    # nixpkgs.haskPkgs.BNFC
     nixpkgs.ghc # custom ghc
     nixpkgs.haskPkgs.stack
     nixpkgs.haskPkgs.haskell-language-server
     nixpkgs.haskPkgs.ghcid
-    nixpkgs.haskPkgs.pointfree
     nixpkgs.haskPkgs.ormolu
+
+    # Rust
+    # https://github.com/oxalica/rust-overlay
+    (nixpkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+      extensions = [ "rust-src" "rust-analyzer-preview" ];
+    }))
 
     # Scala
     nixpkgs.metals

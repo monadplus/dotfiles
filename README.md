@@ -535,22 +535,7 @@ Emacs is already configured to read from the right directories for the lsp.
 
 ### Rust
 
-```bash
-# Install rustup toolchain
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-rustup component add rustfmt-preview
-
-# The handicap of this is that +nightly is not added to the env.
-rustup +nightly component add rust-analyzer-preview
-
-# I recommend to install it manually
-mkdir -p ~/.local/bin/
-curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o ~/.local/bin/rust-analyzer
-chmod +x ~/.local/bin/rust-analyzer
-
-# Alternative you could install it via pacman
-sudo pacman -Syu rust rust-analyzer
-```
+Rust is now installed via nix (home-manager)!
 
 ### C
 

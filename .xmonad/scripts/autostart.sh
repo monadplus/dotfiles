@@ -59,7 +59,9 @@ run dropbox &
 run enpass &
 run thunderbird &
 run firefox &
+run slack &
 
-bloop server &
+# bloop server &
 
+# Set keyboard repetition rate
 xset r rate 265 40

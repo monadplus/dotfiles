@@ -346,6 +346,13 @@
          '( ("\\.lagda.md\\'" . agda2-mode) )
          auto-mode-alist)))
 
+(defsection scala-mode
+  "Scala."
+  (after! scala-mode
+    (map! :localleader
+          :map scala-mode-map
+          "f" #'lsp-format-buffer)))
+
 (defsection haskell-mode
   "Haskell."
 

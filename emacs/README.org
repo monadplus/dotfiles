@@ -66,3 +66,7 @@ emacsclient -cn FILE
 + Spell-fu all words marked as error. Solution: remove cache`rm ~/.emacs.d/.local/etc/spell-fu/*`
 
 + When loading a pdf `epdfinfo` failed with a missing shared library `libpoppler.so`. This happens after updating the library from pacman (expected). You need to rebuild the binary of epdfinfo by calling `M-x pdf-tools-installs`
+
++ Doom commands e.g. doom doctor/upgrade were not working (error: void-function . straight--process-buffer). I had to =rm -rf .emacs.d/.local/straight/repos/straight.el= and =doom sync -up=.
+
++ Scratch buffer hanging emacs. Solved after =rm -rf .emacs.d/.local/straight/repos/straight.el= and =doom sync -up= (related to doom emacs commands not working).

@@ -59,7 +59,7 @@ run dropbox &
 run enpass &
 run thunderbird &
 run firefox &
-run slack &
+run Gitter &
 
 # bloop server &
 

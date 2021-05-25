@@ -111,5 +111,8 @@ in {
     nixpkgs.metals
     nixpkgs.ammonite
     nixpkgs.scalafmt
+
+    #
+    nixpkgs.gitter
   ];
 }

@@ -63,7 +63,9 @@ emacsclient -cn FILE
 
 + `Company: backend company-capf error "Symbol’s function definition is void: :interrupted"`. The error was fixed by commenting `lsp` on `init.el` and running `doom sync && doom purge` and installing again.
 
-+ Spell-fu all words marked as error. Solution: remove cache`rm ~/.emacs.d/.local/etc/spell-fu/*`
++ Spell-fu all words marked as error. Solution: remove cache =rm ~/.emacs.d/.local/etc/spell-fu/*=
+
++ ispell has problems with opening the dictionary file. Solution: remove cache =~/.emacs.d/.local/etc/spell-fu/*= and =~/.emacs.d/.local/etc/ispell/*=
 
 + When loading a pdf `epdfinfo` failed with a missing shared library `libpoppler.so`. This happens after updating the library from pacman (expected). You need to rebuild the binary of epdfinfo by calling `M-x pdf-tools-installs`
 

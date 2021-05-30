@@ -112,7 +112,7 @@ in {
     nixpkgs.ammonite
     nixpkgs.scalafmt
 
-    #
     nixpkgs.gitter
+    # nixpkgs.fractal # Matrix chat client
   ];
 }

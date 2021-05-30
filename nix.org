@@ -410,6 +410,8 @@ A *derivation* is an attribute set with:
   - builder = ./configure --libdir=$lib/lib --includedir=$headers/include --docdir=$doc/share/doc
 - ... (less used).
 
+The type of a derivation set is derivation e.g. { type = "derivation"; }
+
 *mkDerivation* wrapper around derivation:
 - Default system.
 - "bash" as the builder.
@@ -421,7 +423,7 @@ nix-repl> builtins.currentSystem
 Notice the outpath is based only on the input drv. not the contents of the build product (i.e. content-addressable drv.)
 
 #+BEGIN_SRC sh
-$ nix show-derivation
+$ nix show-derivation /nix/store/z3hhlxbckx4g3n9sw91nnvlkjvyw754p-myname.drv
 {
   "/nix/store/z3hhlxbckx4g3n9sw91nnvlkjvyw754p-myname.drv": {
     "outputs": {
@@ -442,11 +444,210 @@ $ nix show-derivation
     }
   }
 }
+
+# Build the derivation
+$ nix-store -r /nix/store/z3hhlxbckx4g3n9sw91nnvlkjvyw754p-myname.drv
 #+END_SRC
 
+- *Instantiate/Evaluation time*: the Nix expression is parsed, interpreted and finally returns a derivation set. During evaluation, you can refer to other derivations because Nix will create .drv files and we will know out paths beforehand. This is achieved with nix-instantiate.
+- *Realise/Build time*: the .drv from the derivation set is built, first building .drv inputs (build dependencies). This is achieved with nix-store -r.
+
 *** Working Derivation
+
+#+begin_src sh
+# builder.sh
+declare -xp
+echo foo > $out
+
+nix-repl> d = derivation { name = "foo"; builder = "${bash}/bin/bash"; args = [ ./builder.sh ]; system = builtins.currentSystem; }
+nix-repl> :b d
+these derivations will be built:
+  /nix/store/i76pr1cz0za3i9r6xq518bqqvd2raspw-foo.drv
+building '/nix/store/i76pr1cz0za3i9r6xq518bqqvd2raspw-foo.drv'...
+declare -x HOME="/homeless-shelter"
+declare -x NIX_BUILD_CORES="4"
+declare -x NIX_BUILD_TOP="/tmp/nix-build-foo.drv-0"
+declare -x NIX_LOG_FD="2"
+declare -x NIX_STORE="/nix/store"
+declare -x OLDPWD
+declare -x PATH="/path-not-set"
+declare -x PWD="/tmp/nix-build-foo.drv-0"
+declare -x SHLVL="1"
+declare -x TEMP="/tmp/nix-build-foo.drv-0"
+declare -x TEMPDIR="/tmp/nix-build-foo.drv-0"
+declare -x TMP="/tmp/nix-build-foo.drv-0"
+declare -x TMPDIR="/tmp/nix-build-foo.drv-0"
+declare -x builder="/nix/store/q1g0rl8zfmz7r371fp5p42p4acmv297d-bash-4.4-p19/bin/bash"
+declare -x name="foo"
+declare -x out="/nix/store/gczb4qrag22harvv693wwnflqy7lx5pb-foo"
+declare -x system="x86_64-linux"
+warning: you did not specify '--add-root'; the result might be removed by the garbage collector
+/nix/store/gczb4qrag22harvv693wwnflqy7lx5pb-foo
+
+this derivation produced the following outputs:
+  out -> /nix/store/gczb4qrag22harvv693wwnflqy7lx5pb-foo
+
+
+$ nix show-derivation /nix/store/i76pr1cz0za3i9r6xq518bqqvd2raspw-foo.drv
+{
+  "/nix/store/i76pr1cz0za3i9r6xq518bqqvd2raspw-foo.drv": {
+    "outputs": {
+      "out": {
+        "path": "/nix/store/gczb4qrag22harvv693wwnflqy7lx5pb-foo"
+      }
+    },
+    "inputSrcs": [
+      "/nix/store/lb0n38r2b20r8rl1k45a7s4pj6ny22f7-builder.sh"
+    ],
+    "inputDrvs": {
+      "/nix/store/hcgwbx42mcxr7ksnv0i1fg7kw6jvxshb-bash-4.4-p19.drv": [
+        "out"
+      ]
+    },
+    "platform": "x86_64-linux",
+    "builder": "/nix/store/q1g0rl8zfmz7r371fp5p42p4acmv297d-bash-4.4-p19/bin/bash",
+    "args": [
+      "/nix/store/lb0n38r2b20r8rl1k45a7s4pj6ny22f7-builder.sh"
+    ],
+    "env": {
+      "builder": "/nix/store/q1g0rl8zfmz7r371fp5p42p4acmv297d-bash-4.4-p19/bin/bash",
+      "name": "foo",
+      "out": "/nix/store/gczb4qrag22harvv693wwnflqy7lx5pb-foo",
+      "system": "x86_64-linux"
+    }
+  }
+}
+#+end_src
+
+Packaging a simple C program
+
+#+begin_src sh
+# simple.c
+void main() {
+  puts("Simple!");
+}
+
+# simple_builder.sh
+export PATH="$coreutils/bin:$gcc/bin"
+mkdir $out
+gcc -o $out/simple $src
+
+nix-repl> :l <nixpkgs>
+nix-repl> simple = derivation { name = "simple"; builder = "${bash}/bin/bash"; args = [ ./simple_builder.sh ]; gcc = gcc; coreutils = coreutils; src = ./simple.c; system = builtins.currentSystem; }
+nix-repl> :b simple
+this derivation produced the following outputs:
+
+  out -> /nix/store/ni66p4jfqksbmsl616llx3fbs1d232d4-simple
+#+end_src
+
+#+begin_src sh
+# simple.nix
+# nix-build simple.nix  # nix-instantitate + nix-store -r
+with (import <nixpkgs> {});
+derivation {
+  name = "simple";
+  builder = "${bash}/bin/bash";
+  args = [ ./simple_builder.sh ];
+  inherit gcc coreutils;
+  src = ./simple.c;
+  system = builtins.currentSystem;
+}
+#+end_src
+
 *** Generic Builders
+
+[[http://ftp.gnu.org/gnu/hello/hello-2.10.tar.gz][GNU hello world tar]]
+
+#+begin_src sh
+# hello_builder.sh
+export PATH="$gnutar/bin:$gcc/bin:$gnumake/bin:$coreutils/bin:$gawk/bin:$gzip/bin:$gnugrep/bin:$gnused/bin:$binutils/bin"
+tar -xzf $src
+cd hello-2.10
+./configure --prefix=$out
+make
+make install
+
+# hello.nix
+with (import <nixpkgs> {});
+derivation {
+  name = "hello";
+  builder = "${bash}/bin/bash";
+  args = [ ./hello_builder.sh ];
+  inherit gnutar gzip gnumake gcc coreutils gawk gnused gnugrep;
+  binutils = binutils-unwrapped;
+  src = ./hello-2.10.tar.gz;
+  system = builtins.currentSystem;
+}
+#+end_src
+
+Let's create a generic builder.sh for autotools (hello is an example) projects:
+
+#+begin_src sh
+# builder.sh
+
+# Exit on error
+set -e
+unset PATH
+for p in $buildInputs; do
+  export PATH=$p/bin${PATH:+:}$PATH
+done
+
+tar -xf $src
+
+# Find unpacked src directory
+for d in *; do
+  if [ -d "$d" ]; then
+    cd "$d"
+    break
+  fi
+done
+
+./configure --prefix=$out
+make
+make install
+
+# hello.nix
+with (import <nixpkgs> {});
+derivation {
+  name = "hello";
+  builder = "${bash}/bin/bash";
+  args = [ ./builder.sh ];
+  buildInputs = [ gnutar gzip gnumake gcc binutils-unwrapped coreutils gawk gnused gnugrep ];
+  src = ./hello-2.10.tar.gz;
+  system = builtins.currentSystem;
+}
+#+end_src
+
+mkDerivation like:
+
+#+begin_src sh
+# autotools.nix
+pkgs: attrs:
+  with pkgs;
+  let defaultAttrs = {
+    builder = "${bash}/bin/bash";
+    args = [ ./builder.sh ];
+    baseInputs = [ gnutar gzip gnumake gcc binutils-unwrapped coreutils gawk gnused gnugrep ];
+    buildInputs = [];
+    system = builtins.currentSystem;
+  };
+  in
+  derivation (defaultAttrs // attrs)
+
+# hello.nix
+let
+  pkgs = import <nixpkgs> {};
+  mkDerivation = import ./autotools.nix pkgs;
+in mkDerivation {
+  name = "hello";
+  src = ./hello-2.10.tar.gz;
+}
+#+end_src
+
 *** Automatic Runtime Dependencies
+
+TODO https://nixos.org/guides/nix-pills/automatic-runtime-dependencies.html
+
 *** Developing with nix-shell
 *** Garbage Collector
 *** Inputs Design Pattern

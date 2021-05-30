@@ -157,6 +157,16 @@
 
   (add-hook 'minibuffer-setup-hook #'my-inherit-input-method)
 
+  ; irc
+  (after! circe
+    (set-irc-server! "irc.libera.chat"
+      `(:tls t
+        :port 6697
+        :nick "monadplus"
+        :sasl-username "monadplus"
+        :sasl-password "Abellix1995"
+        :channels ("#haskell" "#haskell-beginners"))))
+
   ;; rainbow-mode hook
   (defun my-rainbow-mode-hook ()
     (rainbow-mode 1))

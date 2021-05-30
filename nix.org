@@ -1,5 +1,4 @@
 * Nix
-
 ** Core concepts
 
 - *Nix expression*
@@ -396,7 +395,54 @@ Complex Types: list, sets and functions.
 *** Functions and Imports
 *** Our first derivation
 
-TODO
+A *derivation* is an attribute set with:
+
+- *system*: e.g. "i686-linux"
+- *name*: string
+- *builder*: derivation or source. Every attribute is passed to the builder as an envvar
+  - Strings/Numbers
+  - true as string "1". false and null as "".
+  - Paths referenced file is copied to the store and passed to the builder as a nix store path.
+  - Derivations are built and the output path is put into the environment.
+  - List of previous types are allowed, passed by concatenation with whitespaces between values.
+- *args* (optional): list of command line arguments to be passed to the builder.
+- *outputs* (default "out"): list of symbolic outputs of the derivation e.g. outputs = [ "lib" "headers" "doc" ]; Outputs are build/downloaded separately e.g. pkg.lib, pkg.headers, ...
+  - builder = ./configure --libdir=$lib/lib --includedir=$headers/include --docdir=$doc/share/doc
+- ... (less used).
+
+*mkDerivation* wrapper around derivation:
+- Default system.
+- "bash" as the builder.
+
+#+BEGIN_SRC sh
+nix-repl> builtins.currentSystem
+#+END_SRC
+
+Notice the outpath is based only on the input drv. not the contents of the build product (i.e. content-addressable drv.)
+
+#+BEGIN_SRC sh
+$ nix show-derivation
+{
+  "/nix/store/z3hhlxbckx4g3n9sw91nnvlkjvyw754p-myname.drv": {
+    "outputs": {
+      "out": {
+        "path": "/nix/store/40s0qmrfb45vlh6610rk29ym318dswdr-myname"
+      }
+    },
+    "inputSrcs": [],
+    "inputDrvs": {},
+    "platform": "mysystem",
+    "builder": "mybuilder",
+    "args": [],
+    "env": {
+      "builder": "mybuilder",
+      "name": "myname",
+      "out": "/nix/store/40s0qmrfb45vlh6610rk29ym318dswdr-myname",
+      "system": "mysystem"
+    }
+  }
+}
+#+END_SRC
 
 *** Working Derivation
 *** Generic Builders
@@ -470,7 +516,7 @@ $ nix-instantiate '<nixpkgs>' --eval --strict --attr haskellPackages.hocker.vers
 *** =patchShebangs=, =makeWrapper=, etc
 
 https://github.com/NixOS/nixpkgs/tree/master/pkgs/build-support/setup-hooks
-*** How <nixpkgs> works (do not use)
+*** <nixpkgs>
 
 <path> looks for nix expressions specified by =$NIX_PATH= (similar to =$PATH=).
 
@@ -569,7 +615,6 @@ $ ls /nix/store/*nix-2.3.10
 $ /nix/store/wixxr1fn5r1jhaw6xyxnm78jcwmsdj5g-nix-2.3.10/bin/nix-env --rollback
 #+END_SRC
 
-
 ** Anti-patterns
 
 *** Unquoted URLs are bad
@@ -639,7 +684,6 @@ pkgs.stdenv.mkDerivation {
    src = builtins.path { path = ./.; name = "myproject"; };
 }
 #+END_SRC
-
 
 ** Resources
 

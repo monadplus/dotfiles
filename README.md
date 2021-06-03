@@ -250,6 +250,22 @@ Eduroam: https://serveistic.upc.edu/ca/wifiupc/documentacio/eduroam-configuratio
 
 Just download the python script from the website and execute it.
 
+#### UPC Vpn
+
+``` bash
+$ paru -Syu f5fpc
+```
+
+To establish the connection:
+
+``` bash
+$ f5fpc -s -t https://upclink.upc.edu
+# Check if the connection was established
+$ f5fpc --info
+# To stop it
+$ f5fpc --stop
+```
+
 ### Status Bar
 
 - `polybar`:

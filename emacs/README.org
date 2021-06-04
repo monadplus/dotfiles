@@ -72,3 +72,5 @@ emacsclient -cn FILE
 + Doom commands e.g. doom doctor/upgrade were not working (error: void-function . straight--process-buffer). I had to =rm -rf .emacs.d/.local/straight/repos/straight.el= and =doom sync -up=.
 
 + Scratch buffer hanging emacs. Solved after =rm -rf .emacs.d/.local/straight/repos/straight.el= and =doom sync -up= (related to doom emacs commands not working).
+
++ Can't exit emacs. The problem was an opened remote connection from TRAMP. Solution: =M-x tramp-unload-tramp=.

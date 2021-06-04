@@ -30,6 +30,13 @@ let
 
   nixpkgs = import src { inherit overlays; };
 
+  jdk = nixpkgs.jdk11_headless;
+
+  overrideJDK = module :
+    module.override {
+      jre = jdk;
+    };
+
 in {
 
   # Let Home Manager install and manage itself.
@@ -100,16 +107,19 @@ in {
     }))
 
     # Java
-    nixpkgs.jdk11_headless
+    jdk
     nixpkgs.jasmin
     nixpkgs.maven
 
     # Scala
-    nixpkgs.sbt-with-scala-native
-    nixpkgs.coursier
-    nixpkgs.bloop
+    (overrideJDK nixpkgs.sbt)
+    (overrideJDK nixpkgs.coursier)
+    (nixpkgs.bloop.override {
+      jre = jdk;
+      coursier = (overrideJDK nixpkgs.coursier);
+    })
     nixpkgs.metals
-    nixpkgs.ammonite
+    (overrideJDK nixpkgs.ammonite)
     nixpkgs.scalafmt
 
     nixpkgs.gitter

@@ -132,3 +132,7 @@ Solved by
 pip install -U ipython
 pip install -U jedi
 ```
+
+## After system update, I was redicted to sddm with an error message about a theme. In reality, the problem was related to xmonad not properly starting due to a missing xmonad-contrib.so. 
+
+Solved by `xmonad --recompile` (open a terminal by Ctr+Alt+F3)

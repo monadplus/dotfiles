@@ -28,7 +28,8 @@
         doom-unicode-font (font-spec :family "hasklig" :size 14)
         doom-big-font (font-spec :family "hasklig" :size 20 :weight 'regular)) ; doom-big-font-mode
 
-  (setq-default line-spacing 1
+  (setq-default tab-width 2
+                line-spacing 1
                 major-mode 'org-mode) ; default major mode
 
   (setq evil-want-fine-undo t         ; Be more granular with changes (don't aggregate).

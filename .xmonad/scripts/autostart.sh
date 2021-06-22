@@ -40,7 +40,7 @@ else
   #source $HOME/.xmonad/scripts/password
   #(sleep 5; echo $MYPASS | sudo -S bash -c 'fancontrol &') &
   (sleep 5; liquidctl initialize; liquidctl set sync speed 30; liquidctl set sync color off) &
-  # run polychromatic-tray-applet &
+  run polychromatic-tray-applet &
   # run streamlink-twitch-gui &
   # run lutris &
 fi

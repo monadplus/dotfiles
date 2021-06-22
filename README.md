@@ -156,8 +156,14 @@ TODO
 
 GRUB loads `/boot/grub/grub.cfg` which can be configured by `grub-mkconfig -o /boot/grub/grub.cfg`.
 
-MS Windows can be automatically detected by **os-prober**.
-Just run `grub-mkconfig -o /boot/grub/grub.cfg` and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg`).
+MS Windows can be automatically detected by **os-prober**. Just add:
+
+``` bash
+# /etc/default/grub
+GRUB_DISABLE_OS_PROBER=false
+```
+
+Run `grub-mkconfig -o /boot/grub/grub.cfg` and check if an entry for Windows has been created (`diff grub.cfg /boot/grub/grub.cfg`).
 Reboot and you should see the Windows bootloader on the grub.
 
 GRUB options can be modified at /etc/default/grub. 
@@ -179,7 +185,6 @@ GRUB_GFXPAYLOAD_LINUX=keep
 GRUB_DISABLE_RECOVERY=true
 GRUB_THEME="/boot/grub/themes/Vimix/theme.txt"
 ```
-
 
 ### [System time](https://wiki.archlinux.org/index.php/System_time)
 
